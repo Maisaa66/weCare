@@ -16,3 +16,5 @@ mongoose
   })
   .then(() => console.log("DB connected successfully"));
 app.listen(PORT, () => console.log("localhost:" + PORT));
+
+module.exports = app;
