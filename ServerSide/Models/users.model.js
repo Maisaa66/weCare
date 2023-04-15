@@ -10,8 +10,7 @@ const UserSchema = new mongoose.Schema(
       type: String,
       trim: true,
       validate(value) {
-        if (!isMobilePhone(value, "ar-EG"))
-          throw new Error("Invalid Mobile Number");
+        if (!isMobilePhone(value, "ar-EG")) throw new Error("Invalid Mobile Number");
       },
     },
     email: {
@@ -29,12 +28,12 @@ const UserSchema = new mongoose.Schema(
     isAdmin: { type: Boolean, default: false },
     address: {
       type: {
-        country: String,
-        governate: String,
-        area: String,
-        street: String,
-        buildingNum: Number,
-        apartmentNum: Number,
+        country: { type: String, required: [true, "country is required"] },
+        governate: { type: String, required: [true, "governate is required"] },
+        area: { type: String, required: [true, "area is required"] },
+        street: { type: String, required: [true, "street is required"] },
+        buildingNum: { type: Number, required: [true, "buildingNum is required"] },
+        apartmentNum: { type: Number, required: [true, "apartmentNum is required"] },
       },
     },
     nationalID: { type: String, required: [true, "nationalId is required"] },
@@ -43,6 +42,6 @@ const UserSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const userModel = mongoose.model("User", UserSchema);
+const userModel = mongoose.model("users", UserSchema);
 
 module.exports = userModel;

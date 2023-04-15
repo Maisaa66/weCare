@@ -7,5 +7,16 @@
     "mongoose": "^7.0.3",
     "nodemon": "^2.0.22",
     "validator": "^13.9.0"
-  }
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "name": "serverside",
+  "version": "1.0.0",
+  "main": "app.js",
+  "devDependencies": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
 }

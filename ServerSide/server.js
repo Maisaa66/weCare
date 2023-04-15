@@ -15,6 +15,6 @@ mongoose
     useNewUrlParser: true,
   })
   .then(() => console.log("DB connected successfully"));
-app.listen(PORT, () => console.log("localhost:" + PORT));
+app.listen(PORT, () => console.log("http://localhost:" + PORT));
 
 module.exports = app;
