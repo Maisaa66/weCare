@@ -3,7 +3,8 @@ const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const usersRoutes = require("./Routes/users.routes");
-const cookieParser = require('cookie-parser')
+const providersRoutes = require("./Routes/serviceProviders.routes");
+const cookieParser = require("cookie-parser");
 
 dotenv.config();
 const app = express();
@@ -25,6 +26,7 @@ app.use(cookieParser());
 
 //Routes
 app.use("/api/v1/users", usersRoutes);
+app.use("/api/v1/providers", providersRoutes);
 
 app.listen(PORT, () => console.log("http://localhost:" + PORT));
 
