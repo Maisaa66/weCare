@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const { isEmail, isMobilePhone } = require("validator");
 const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken")
+const jwt = require("jsonwebtoken");
 //& create User schema
 const UserSchema = new mongoose.Schema(
   {
@@ -56,10 +56,18 @@ UserSchema.pre("save", async function (next) {
   this.password = await bcrypt.hash(this.password, salt);
   next();
 });
-
+UserSchema.pre("findOneAndUpdate", async function (next) {
+  console.log("Hashing update");
+  console.log(this._update.password);
+  if (this._update.password) {
+    const salt = await bcrypt.genSalt();
+    this._update.password = await bcrypt.hash(this._update.password, salt);
+  }
+  next();
+});
 //create token
-UserSchema.methods.createToken = async function() {
-  const user =this;
+UserSchema.methods.createToken = async function () {
+  const user = this;
   //generate jwt
   const accessToken = jwt.sign(
     {
@@ -69,7 +77,7 @@ UserSchema.methods.createToken = async function() {
     process.env.JWT_SEC,
     { expiresIn: "2d" }
   );
-  
+
   return accessToken;
 };
 

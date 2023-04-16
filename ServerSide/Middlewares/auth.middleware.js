@@ -4,7 +4,6 @@ class Auth {
   static verifyToken = (req, res, next) => {
     try {
       const token = req.cookies.jwt;
-      console.log(token);
       if (token) {
         jwt.verify(token, process.env.JWT_SEC, (err, userToken) => {
           if (err) {
@@ -21,15 +20,16 @@ class Auth {
     }
   };
   static verifyTokenAndAuthorization = (req, res, next) => {
-   this.verifyToken(req, res, () => {
-      if (req.userToken._id === req.params.id || req.userToken.isAdmin) {
+    this.verifyToken(req, res, () => {
+      console.log(req.userToken.id, req.params.id);
+      if (req.userToken.id === req.params.id || req.userToken.isAdmin) {
         next();
       } else {
-        res.status(403).json("You are not alowed to do that!");
+        res.status(403).json("You need to login!");
       }
     });
   };
-  
+
   static verifyTokenAndAdmin = (req, res, next) => {
     this.verifyToken(req, res, () => {
       if (req.userToken.isAdmin) {
