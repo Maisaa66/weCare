@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const { isEmail, isMobilePhone } = require("validator");
-
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken")
 //& create User schema
 const UserSchema = new mongoose.Schema(
   {
@@ -10,7 +11,8 @@ const UserSchema = new mongoose.Schema(
       type: String,
       trim: true,
       validate(value) {
-        if (!isMobilePhone(value, "ar-EG")) throw new Error("Invalid Mobile Number");
+        if (!isMobilePhone(value, "ar-EG"))
+          throw new Error("Invalid Mobile Number");
       },
     },
     email: {
@@ -32,8 +34,14 @@ const UserSchema = new mongoose.Schema(
         governate: { type: String, required: [true, "governate is required"] },
         area: { type: String, required: [true, "area is required"] },
         street: { type: String, required: [true, "street is required"] },
-        buildingNum: { type: Number, required: [true, "buildingNum is required"] },
-        apartmentNum: { type: Number, required: [true, "apartmentNum is required"] },
+        buildingNum: {
+          type: Number,
+          required: [true, "buildingNum is required"],
+        },
+        apartmentNum: {
+          type: Number,
+          required: [true, "apartmentNum is required"],
+        },
       },
     },
     nationalID: { type: String, required: [true, "nationalId is required"] },
@@ -41,6 +49,29 @@ const UserSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
+//hashing passwords before save
+UserSchema.pre("save", async function (next) {
+  const salt = await bcrypt.genSalt();
+  this.password = await bcrypt.hash(this.password, salt);
+  next();
+});
+
+//create token
+UserSchema.methods.createToken = async function() {
+  const user =this;
+  //generate jwt
+  const accessToken = jwt.sign(
+    {
+      id: user._id,
+      isAdmin: user.isAdmin,
+    },
+    process.env.JWT_SEC,
+    { expiresIn: "2d" }
+  );
+  
+  return accessToken;
+};
 
 const userModel = mongoose.model("users", UserSchema);
 
