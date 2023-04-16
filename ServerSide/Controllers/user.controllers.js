@@ -8,6 +8,7 @@ class User {
     } catch (err) {
       res.status(400).json({ message: err.message });
     }
+
   };
 
   static addNewUser = async (req, res) => {
@@ -23,23 +24,26 @@ class User {
   static login = async (req, res) => {
     const { email, password } = req.body;
     try {
+      const { email, password } = req.body;
       const user = await userModel.findOne({ email });
-      const userToken = await user.createToken();
-      // console.log(userToken)
       if (!user) {
-        throw "Invalid email or password";
+        throw new Error("Invalid email or password");
       }
-
       const auth = await bcrypt.compare(password, user.password);
       if (!auth) {
-        throw "invalid email or password";
+        throw new Error("Invalid email or password");
       }
-      res.cookie('jwt', userToken, {httpOnly:true, maxAge: 2 * 24 * 60 * 60 * 1000});
+      const userToken = await user.createToken();
+      res.cookie("jwt", userToken, { httpOnly: true, maxAge: 2 * 24 * 60 * 60 * 1000 });
       res.status(200).send("hello user");
+      
     } catch (err) {
-      res.status(401).send(err);
+      res.status(401).send(err.message);
     }
   };
+
+
+
 }
 
 module.exports = User;
