@@ -1,63 +1,118 @@
-import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import * as React from "react";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+import Link from "@mui/material/Link";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import classes from "./login.module.css";
 
 function Copyright(props) {
   return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
+    <Typography
+      variant="body2"
+      color="text.secondary"
+      align="center"
+      {...props}
+    >
+      {"Copyright © "}
       <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
+        weCare
+      </Link>{" "}
       {new Date().getFullYear()}
-      {'.'}
+      {"."}
     </Typography>
   );
 }
 
-const theme = createTheme();
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#66b9a6",
+    }
+  },
+  typography:{
+    fontFamily:'var(--textFont)'
+  },
+
+  components: {
+    // Name of the component
+    MuiButton: {
+      styleOverrides: {
+        // Name of the slot
+        root: {
+          // Some CSS
+          backgroundColor: "var(--mainColor)",
+          border: "2px solid var(--mainColor)",
+          fontWeight: 600,
+          borderRadius: "20px",
+          "&:hover": {
+            backgroundColor: "transparent",
+            border: "2px solid var(--mainColor)",
+            color: "var(--mainColor)",
+            fontWeight: 600,
+          },
+        },
+      },
+    },
+  },
+});
 
 export default function SignIn() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
-      email: data.get('email'),
-      password: data.get('password'),
+      email: data.get("email"),
+      password: data.get("password"),
     });
   };
 
   return (
     <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
+      <Container
+        component="main"
+        maxWidth="xs"
+        sx={{
+          boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px;",
+          padding: "5px",
+          borderRadius: "20px",
+          bgcolor:"white",
+          mt:3
+        }}
+        // className={`${classes.container}`}
+        
+      >
         <CssBaseline />
         <Box
           sx={{
             marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <Avatar sx={{ m: 1, bgcolor: "var(--mainColor)" }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Login
           </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <Box
+            component="form"
+            onSubmit={handleSubmit}
+            noValidate
+            sx={{ mt: 1 }}
+          >
             <TextField
+              variant="standard"
               margin="normal"
               required
               fullWidth
@@ -68,6 +123,7 @@ export default function SignIn() {
               autoFocus
             />
             <TextField
+              variant="standard"
               margin="normal"
               required
               fullWidth
@@ -76,19 +132,35 @@ export default function SignIn() {
               type="password"
               id="password"
               autoComplete="current-password"
+              color="primary"
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Sign In
-            </Button>
+            <div>
+                <a href="http://marcel-pirnay.be/" className={`${classes.btn}`}>
+                  <svg width="277" height="62">
+                    <defs>
+                      <linearGradient id="grad1">
+                        <stop offset="0%" stopColor="#66b9a6" />
+                        <stop offset="100%" stopColor="#5fe4c5" />
+                      </linearGradient>
+                    </defs>
+                    <rect
+                      x="5"
+                      y="5"
+                      rx="25"
+                      fill="none"
+                      stroke="url(#grad1)"
+                      width="266"
+                      height="50"
+                    ></rect>
+                  </svg>
+                  <span>Login</span>
+                </a>
+            </div>
+
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">
