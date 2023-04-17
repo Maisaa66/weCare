@@ -34,6 +34,17 @@ class ServiceProvider {
       res.status(400).json({ message: err.message });
     }
   };
+
+  static getProviders= async(req,res)=>{
+    try {
+      const providers = await serviceProviderModel.find({});
+      res.status(200).json(providers);
+    } catch (err) {
+      res.status(400).json({ message: err.message });
+    }
+  }
+  
+  
 }
 
 module.exports = ServiceProvider;
