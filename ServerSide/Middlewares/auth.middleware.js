@@ -21,11 +21,11 @@ class Auth {
   };
   static verifyTokenAndAuthorization = (req, res, next) => {
     this.verifyToken(req, res, () => {
-      console.log(req.userToken.id, req.params.id);
+      // console.log(req.userToken.id, req.params.id);
       if (req.userToken.id === req.params.id || req.userToken.isAdmin) {
         next();
       } else {
-        res.status(403).json("You need to login!");
+        res.status(403).json("You are not Authorized to do that!");
       }
     });
   };
