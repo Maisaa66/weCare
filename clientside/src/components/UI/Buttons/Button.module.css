@@ -1,0 +1,36 @@
+.btn {
+  background: none;
+  border: none;
+  display: block;
+  width: 160px;
+  padding: 10px 20px;
+  border-radius: 25px;
+  color: var(--mainColor);
+  font-size: 18px;
+  cursor: pointer;
+  /* font-family: var(--textFont); */
+}
+
+.btnMainSolid {
+  background-color: var(--mainColor);
+  color: var(--lightText);
+}
+
+.btnMainOutlined {
+  border: 1px solid var(--mainColor);
+  color: var(--mainColor);
+}
+
+.btnSecSolid {
+  background-color: var(--secondaryColor);
+  color: var(--lightText);
+}
+
+.btnSecOutlined {
+  border: 1px solid var(--secondaryColor);
+  color: var(--secondaryColor);
+}
+
+.btn:focus{
+    outline: none;
+}

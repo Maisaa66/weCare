@@ -1,0 +1,33 @@
+@import '~mdb-ui-kit/css/mdb.min.css';
+:root {
+  --mainColor:#66b9a6;
+  --secondaryColor: #71d9c1;
+  --lightText: #ffff;
+  --darkText:#1f1f1f;
+  --headerFont: "Playfair Display", serif;
+  --textFont: "Poppins", sans-serif;
+}
+
+*{
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+
+}
+
+
+body {
+  margin: 0;
+  /* font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif; */
+  font-family: var(--textFont);
+  /* font-family: "Poppins", sans-serif; */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+/* 
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+} */
