@@ -2,7 +2,7 @@
 :root {
   --mainColor:#5ca795;
   --mainDark: #66b9a6;
-  --pinkColor: #f6adac;
+  --mainShade: rgba(255, 255, 255, 0.5);
   --mainColorObacity:rgb(14, 116, 82, .2);
   --secondaryColor: #71d9c1;
   --lightText: #ffff;

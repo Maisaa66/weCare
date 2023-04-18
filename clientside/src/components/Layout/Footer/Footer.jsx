@@ -45,8 +45,8 @@ const Footer = () => {
                 </p>
               </div>
 
-              <div className="col-md-4 mx-auto mb-4">
-                <h6 className="text-uppercase fw-bold mb-4">Useful links</h6>
+              <div className="offset-md-1 col-md-3  mx-auto mb-4">
+                <h6 className="text-uppercase fw-bold ">Useful links</h6>
                 <p>
                   <a href="#!" className=" link-dark">
                     About
@@ -69,22 +69,22 @@ const Footer = () => {
                 </p>
               </div>
 
-              <div className="col-md-4 mx-auto mb-md-0 mb-4 text-dark">
+              <div className="offset-md-1 col-md-3 mx-auto mb-md-0 mb-4 text-dark">
                 <h6 className="text-uppercase fw-bold mb-4">Contact</h6>
                 <p>
-                  <i className="fas fa-home me-3 link-light"></i> 6th October,
+                  <i className="fas fa-home  link-light"></i> 6th October,
                   Giza, Egypt
                 </p>
                 <p>
-                  <i className="fas fa-envelope me-3 link-light"></i>
+                  <i className="fas fa-envelope  link-light"></i>
                   info@example.com
                 </p>
                 <p>
-                  <i className="fas fa-phone me-3 link-light"></i> + 01 234 567
+                  <i className="fas fa-phone  link-light"></i> + 01 234 567
                   88
                 </p>
                 <p>
-                  <i className="fas fa-print me-3 link-light"></i> + 01 234 567
+                  <i className="fas fa-print  link-light"></i> + 01 234 567
                   89
                 </p>
               </div>

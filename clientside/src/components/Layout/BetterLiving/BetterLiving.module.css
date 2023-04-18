@@ -1,6 +1,7 @@
 .betterLivingInfo{
 border-radius: 70px;
 background-image: url('../../../assets/images/patient.jpg') ;
+height: 500px;
 background-position: center;
 background-size: cover;
 }

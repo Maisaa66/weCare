@@ -43,7 +43,7 @@
   .shape{
     width: 230px;
     height: 200px;
-    background: var(--pinkColor);
+    background: var(--mainShade);
   }
   .smallBorder{
     height: 230px;
