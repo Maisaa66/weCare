@@ -109,7 +109,7 @@ export default function SignUp() {
           <CssBaseline />
           <Box
             sx={{
-              marginTop: 6,
+              marginTop: 5,
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
@@ -241,7 +241,7 @@ export default function SignUp() {
               </Grid>
             </Box>
           </Box>
-          <Copyright sx={{ mt: 2, mb: 6 }} />
+          <Copyright sx={{ mt: 2, mb: 5 }} />
         </Container>
       </Box>
     </ThemeProvider>
