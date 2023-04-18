@@ -11,7 +11,8 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import classes from "./login.module.css";
+import classes from "./signup.module.css";
+// import { makeStyles } from "@mui/styles";
 
 function Copyright(props) {
   return (
@@ -63,8 +64,15 @@ const theme = createTheme({
     },
   },
 });
-
-export default function SignIn() {
+// const useStyles = makeStyles((theme) => ({
+//   smallScreenPadding: {
+//     [theme.breakpoints.down("sm")]: {
+//       padding: "16px",
+//     },
+//   },
+// }));
+export default function SignUp() {
+  //   const styles = useStyles();
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -90,17 +98,18 @@ export default function SignIn() {
           maxWidth="xs"
           sx={{
             boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px;",
-            padding: "5px",
             borderRadius: "20px",
             bgcolor: "white",
-            mt: 3,
+            padding: "0px 20px",
+            [theme.breakpoints.down("sm")]: {
+              padding: "30px",
+            },
           }}
-          // className={`${classes.container}`}
         >
           <CssBaseline />
           <Box
             sx={{
-              marginTop: 8,
+              marginTop: 6,
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
@@ -110,7 +119,7 @@ export default function SignIn() {
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Login
+              Sign Up
             </Typography>
             <Box
               component="form"
@@ -118,6 +127,36 @@ export default function SignIn() {
               noValidate
               sx={{ mt: 1 }}
             >
+              <Grid container spacing={2}>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    variant="standard"
+                    margin="normal"
+                    required
+                    fullWidth
+                    id="email"
+                    label="First Name"
+                    name="firstName"
+                    autoComplete="firstName"
+                    autoFocus
+                    sx={{ textAlign: "left" }}
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    variant="standard"
+                    margin="normal"
+                    required
+                    fullWidth
+                    id="email"
+                    label="Last Name"
+                    name="lastName"
+                    autoComplete="lastName"
+                    sx={{ textAlign: "left" }}
+                  />
+                </Grid>
+              </Grid>
+
               <TextField
                 variant="standard"
                 margin="normal"
@@ -142,8 +181,22 @@ export default function SignIn() {
                 color="primary"
                 sx={{ textAlign: "left" }}
               />
+              <TextField
+                variant="standard"
+                margin="normal"
+                required
+                fullWidth
+                name="confpassword"
+                label="Confirm Password"
+                type="password"
+                id="confpassword"
+                autoComplete="current-password"
+                color="primary"
+                sx={{ textAlign: "left" }}
+              />
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
+                sx={{ mt: 2 }}
                 label="Remember me"
               />
               <div>
@@ -165,25 +218,30 @@ export default function SignIn() {
                       height="50"
                     ></rect>
                   </svg>
-                  <span>Login</span>
+                  <span>Sign Up</span>
                 </a>
               </div>
 
               <Grid container>
-                <Grid item xs>
-                  <Link href="#" variant="body2">
-                    Forgot password?
-                  </Link>
-                </Grid>
-                <Grid item>
-                  <Link href="#" variant="body2">
-                    {"Don't have an account? Sign Up"}
-                  </Link>
+                <Grid item xs={12}>
+                  <Typography variant="h4" textAlign="center" fullWidth>
+                    <span style={{ fontSize: "0.9rem" }}>
+                      Already have an account?
+                    </span>
+                    <Link
+                      href="#"
+                      variant="body2"
+                      style={{ color: "var(--mainColor)" }}
+                      sx={{ fontWeight: "bold" }}
+                    >
+                      {" Log In"}
+                    </Link>
+                  </Typography>
                 </Grid>
               </Grid>
             </Box>
           </Box>
-          <Copyright sx={{ mt: 8, mb: 4 }} />
+          <Copyright sx={{ mt: 2, mb: 6 }} />
         </Container>
       </Box>
     </ThemeProvider>

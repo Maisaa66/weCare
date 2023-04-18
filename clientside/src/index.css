@@ -1,20 +1,18 @@
-@import '~mdb-ui-kit/css/mdb.min.css';
+@import "~mdb-ui-kit/css/mdb.min.css";
 :root {
-  --mainColor:#66b9a6;
+  --mainColor: #66b9a6;
   --secondaryColor: #71d9c1;
   --lightText: #ffff;
-  --darkText:#1f1f1f;
+  --darkText: #1f1f1f;
   --headerFont: "Playfair Display", serif;
   --textFont: "Poppins", sans-serif;
 }
 
-*{
-margin: 0;
-padding: 0;
-box-sizing: border-box;
-
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-
 
 body {
   margin: 0;
@@ -25,8 +23,7 @@ body {
   /* font-family: "Poppins", sans-serif; */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-   background-image: url("D:/Github repo/weCare/clientside/public/Images/pattern (2).svg");
-
+  /* background-image: url("../public/Images/pattern\ \(2\).svg"); */
 }
 /* 
 code {
