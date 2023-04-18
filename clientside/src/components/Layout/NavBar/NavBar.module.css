@@ -1,0 +1,30 @@
+.dropDown:hover, .dropDown:focus, .dropDown:active {
+    background-color: var(--mainColor)!important;
+}
+.navLink {
+    color: var(--darkText) !important;
+    font-size: 1.2rem !important;
+}
+.navLink:hover, .navLink:focus, .navLink:active {
+    color: var(--lightText) !important;
+}
+.toggler {
+    font-size: 44px;
+    color: var(--darkText) !important;
+}
+/* .navList {
+
+} */
+@media screen and (max-width: 992px) {
+    .collapsed li{
+        border-bottom: 1px solid var(--lightText);
+        text-align: left;
+    }
+    .dropdownMenu {
+        width: 100%;
+        border-radius: 0;
+    }
+    .dropdownMenu a {
+        border-radius: 0 !important;
+    }
+}
