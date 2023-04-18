@@ -1,24 +1,12 @@
-.btn {
-  background: none;
-  border: none;
-  display: block;
-  width: 160px;
-  padding: 10px 20px;
-  border-radius: 25px;
-  color: var(--mainColor);
-  font-size: 18px;
-  cursor: pointer;
-  /* font-family: var(--textFont); */
-}
-
-.btnMainSolid {
+.mybtnMainSolid {
   background-color: var(--mainColor);
   color: var(--lightText);
 }
 
-.btnMainOutlined {
-  border: 1px solid var(--mainColor);
-  color: var(--mainColor);
+.mybtnLightOutlined {
+  border: 1px solid var(--lightText);
+  background-color: var(--mainColor);
+  color: var(--lightText);
 }
 
 .btnSecSolid {
@@ -26,9 +14,10 @@
   color: var(--lightText);
 }
 
-.btnSecOutlined {
-  border: 1px solid var(--secondaryColor);
-  color: var(--secondaryColor);
+.mybtnMainOutlined {
+  border: 1px solid var(--mainColor);
+  color: var(--mainColor);
+  background-color: var(--lightText);
 }
 
 .btn:focus{
