@@ -1,0 +1,14 @@
+.betterLivingInfo{
+border-radius: 70px;
+background-image: url('../../../assets/images/patient.jpg') ;
+background-position: center;
+background-size: cover;
+}
+.CheckCircle{
+    color:var(--mainColor);
+    padding: 5px;
+}
+.spanHeading{
+display: block;
+color: var(--mainColor);
+}

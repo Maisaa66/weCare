@@ -1,0 +1,8 @@
+.footer{
+    background:#0e74523f ;
+}
+
+.copyRight{
+    background-color: var(--mainDark);
+    color: white;
+}
