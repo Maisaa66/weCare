@@ -18,7 +18,10 @@ class ServiceProvider {
         httpOnly: true,
         maxAge: 2 * 24 * 60 * 60 * 1000,
       });
-      res.status(200).send("hello sProvider");
+      res.status(200).json({
+        status: "success",
+        message: "SProvider Loged in successfuly",
+      });
     } catch (err) {
       res.status(401).send(err.message);
     }
@@ -32,7 +35,14 @@ class ServiceProvider {
         httpOnly: true,
         maxAge: 2 * 24 * 60 * 60 * 1000,
       });
-      res.status(200).json({ response: sProvider, message: "sProvider created" });
+      res.status(200).json({
+        status: "success",
+        results: 1,
+        requestedAt: req.requestTime,
+        data: {
+          sProvider,
+        },
+      });
     } catch (err) {
       res.status(400).json({ message: err.message });
     }
@@ -41,7 +51,14 @@ class ServiceProvider {
   static getProviders = async (req, res) => {
     try {
       const providers = await serviceProviderModel.find({});
-      res.status(200).json(providers);
+      res.status(200).json({
+        status: "success",
+        results: providers.length,
+        requestedAt: req.requestTime,
+        data: {
+          providers,
+        },
+      });
     } catch (err) {
       res.status(400).json({ message: err.message });
     }
@@ -55,6 +72,7 @@ class ServiceProvider {
       }
       res.status(200).json({
         status: "success",
+        results: 1,
         requestedAt: req.requestTime,
         data: {
           provider,
@@ -70,15 +88,21 @@ class ServiceProvider {
 
   static updateProviderById = async (req, res) => {
     try {
-      const provider = await serviceProviderModel.findByIdAndUpdate(req.params.id, req.body, {
-        new: true,
-        runValidators: true,
-      });
+      const provider = await serviceProviderModel.findByIdAndUpdate(
+        req.params.id,
+        req.body,
+        {
+          new: true,
+          runValidators: true,
+        }
+      );
       if (!provider) {
         throw new Error("There is no provider with this ID!");
       }
       res.status(200).json({
         status: "success",
+        results: 1,
+        requestedAt: req.requestTime,
         data: {
           provider,
         },
@@ -93,7 +117,9 @@ class ServiceProvider {
 
   static deleteProviderById = async (req, res) => {
     try {
-      const provider = await serviceProviderModel.findByIdAndDelete(req.params.id);
+      const provider = await serviceProviderModel.findByIdAndDelete(
+        req.params.id
+      );
       if (!provider) {
         throw new Error("There is no provider with this ID!");
       }

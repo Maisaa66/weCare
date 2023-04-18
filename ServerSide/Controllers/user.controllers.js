@@ -5,7 +5,14 @@ class User {
   static getAllUsers = async (req, res) => {
     try {
       const users = await userModel.find({});
-      res.status(200).json(users);
+      res.status(200).json({
+        status: "success",
+        results: users.length,
+        requestedAt: req.requestTime,
+        data: {
+          users,
+        },
+      });
     } catch (err) {
       res.status(400).json({ message: err.message });
     }
@@ -19,7 +26,14 @@ class User {
         httpOnly: true,
         maxAge: 2 * 24 * 60 * 60 * 1000,
       });
-      res.status(200).json({ response: user, message: "User created" });
+      res.status(200).json({
+        status: "success",
+        results: 1,
+        requestedAt: req.requestTime,
+        data: {
+          user,
+        },
+      });
     } catch (err) {
       res.status(400).json({ message: err.message });
     }
@@ -33,6 +47,7 @@ class User {
       }
       res.status(200).json({
         status: "success",
+        results: 1,
         requestedAt: req.requestTime,
         data: {
           user,
@@ -57,6 +72,8 @@ class User {
       }
       res.status(200).json({
         status: "success",
+        results: 1,
+        requestedAt: req.requestTime,
         data: {
           user,
         },
@@ -103,7 +120,10 @@ class User {
         httpOnly: true,
         maxAge: 2 * 24 * 60 * 60 * 1000,
       });
-      res.status(200).send("hello user");
+      res.status(200).json({
+        status: "success",
+        message: "User Loged in successfuly",
+      });
     } catch (err) {
       res.status(401).send(err.message);
     }
