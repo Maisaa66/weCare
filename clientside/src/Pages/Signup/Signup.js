@@ -4,7 +4,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
+import LinkMu from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
@@ -12,7 +12,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import classes from "./signup.module.css";
-// import { makeStyles } from "@mui/styles";
+import { Link } from "react-router-dom";
 
 function Copyright(props) {
   return (
@@ -23,9 +23,11 @@ function Copyright(props) {
       {...props}
     >
       {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        weCare
-      </Link>{" "}
+      <LinkMu color="inherit">
+        <Link to="/" style={{ color: "var(--mainColor)" }}>
+          weCare
+        </Link>
+      </LinkMu>{" "}
       {new Date().getFullYear()}
       {"."}
     </Typography>
@@ -228,14 +230,16 @@ export default function SignUp() {
                     <span style={{ fontSize: "0.9rem" }}>
                       Already have an account?
                     </span>
-                    <Link
+                    <LinkMu
                       href="#"
                       variant="body2"
                       style={{ color: "var(--mainColor)" }}
                       sx={{ fontWeight: "bold" }}
                     >
-                      {" Log In"}
-                    </Link>
+                      <Link to="/login" style={{ color: "var(--mainColor)" }}>
+                        Log In
+                      </Link>
+                    </LinkMu>
                   </Typography>
                 </Grid>
               </Grid>

@@ -4,8 +4,9 @@ import { faHandHoldingHeart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import Grid from "@mui/material/Grid";
-import Link from "@mui/material/Link";
+import LinkMu from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
+import { Link } from "react-router-dom";
 
 export default function CheckUser() {
   const [userType, setUserType] = useState("");
@@ -63,7 +64,7 @@ export default function CheckUser() {
           </div>
         </div>
         <div>
-          <a href="http://marcel-pirnay.be/" className={`${classes.btn}`}>
+          <Link to="/signup/stepone" className={`${classes.btn}`}>
             <svg width="277" height="62">
               <defs>
                 <linearGradient id="grad1">
@@ -82,7 +83,7 @@ export default function CheckUser() {
               ></rect>
             </svg>
             <span>SIGNUP {userType}</span>
-          </a>
+          </Link>
         </div>
         <Grid container>
           <Grid item xs={12}>
@@ -90,14 +91,16 @@ export default function CheckUser() {
               <span style={{ fontSize: "0.9rem" }}>
                 Already have an account?
               </span>
-              <Link
+              <LinkMu
                 href="#"
                 variant="body2"
                 style={{ color: "var(--mainColor)" }}
                 sx={{ fontWeight: "bold" }}
               >
-                {" Log In"}
-              </Link>
+                <Link to="/login" style={{ color: "var(--mainColor)" }}>
+                  Log In
+                </Link>
+              </LinkMu>
             </Typography>
           </Grid>
         </Grid>

@@ -4,7 +4,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
+import LinkMu from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
@@ -12,6 +12,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import classes from "./login.module.css";
+import { Link } from "react-router-dom";
 
 function Copyright(props) {
   return (
@@ -22,9 +23,11 @@ function Copyright(props) {
       {...props}
     >
       {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        weCare
-      </Link>{" "}
+      <LinkMu color="inherit">
+        <Link to="/" style={{ color: "var(--mainColor)" }}>
+          weCare
+        </Link>
+      </LinkMu>{" "}
       {new Date().getFullYear()}
       {"."}
     </Typography>
@@ -170,15 +173,29 @@ export default function SignIn() {
               </div>
 
               <Grid container>
-                <Grid item xs>
-                  <Link href="#" variant="body2">
-                    Forgot password?
-                  </Link>
-                </Grid>
-                <Grid item>
-                  <Link href="#" variant="body2">
+                <Grid item xs={12}>
+                  {/* <LinkMu href="#" variant="body2">
                     {"Don't have an account? Sign Up"}
-                  </Link>
+                  </LinkMu> */}
+                  <Typography variant="h4" textAlign="center" fullWidth>
+                    <span style={{ fontSize: "0.9rem" }}>
+                      Already have an account?
+                    </span>
+                    <LinkMu
+                      href="#"
+                      variant="body2"
+                      style={{ color: "var(--mainColor)" }}
+                      sx={{ fontWeight: "bold" }}
+                    >
+                      <Link
+                        to="/checkuser"
+                        style={{ color: "var(--mainColor)" }}
+                      >
+                        {" "}
+                        Sign Up
+                      </Link>
+                    </LinkMu>
+                  </Typography>
                 </Grid>
               </Grid>
             </Box>

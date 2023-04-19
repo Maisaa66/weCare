@@ -1,5 +1,6 @@
 import { Search } from "react-bootstrap-icons";
 import classes from "./SearchBar.module.css";
+import { Link } from "react-router-dom";
 function SearchBar() {
   return (
     <div className="container gap-5 d-flex justify-content-between align-items-center">
@@ -15,9 +16,9 @@ function SearchBar() {
           <Search></Search>
         </button>
       </form>
-      <a href="#login" className="mybtn mybtnLightSolid">
+      <Link to="/login" href="#login" className="mybtn mybtnLightSolid">
         Login/Register
-      </a>
+      </Link>
     </div>
   );
 }
