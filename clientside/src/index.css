@@ -1,12 +1,12 @@
 @import "~mdb-ui-kit/css/mdb.min.css";
 :root {
-  --mainColor:#5ca795;
+  --mainColor: #5ca795;
   --mainDark: #66b9a6;
   --mainShade: rgba(255, 255, 255, 0.5);
-  --mainColorObacity:rgb(14, 116, 82, .2);
+  --mainColorObacity: rgb(14, 116, 82, 0.2);
   --secondaryColor: #71d9c1;
   --lightText: #ffff;
-  --darkText:#000000;
+  --darkText: #000000;
   --headerFont: "Playfair Display", serif;
   --textFont: "Poppins", sans-serif;
 }
@@ -22,6 +22,7 @@ body {
   font-family: var(--textFont);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* background-image: url("../public/Images/pattern\ \(2\).svg"); */
 }
 /* 
 code {
