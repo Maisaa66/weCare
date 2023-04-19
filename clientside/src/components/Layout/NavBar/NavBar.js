@@ -1,8 +1,104 @@
 import { List } from "react-bootstrap-icons";
 import classes from "./NavBar.module.css";
 import { Link, Outlet } from "react-router-dom";
+import { Search } from "react-bootstrap-icons";
 function NavBar() {
   return (
+    <>
+      {" "}
+      <nav className="navbar navbar-expand-lg shadow-none py-3">
+        <div className="container justify-content-between">
+          <a className="navbar-brand d-lg-block d-none m-0" href="#">
+            Navbar
+          </a>
+          <button
+            className={`navbar-toggler m-lg-auto me-sm-auto   ${classes.toggler}`}
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <List></List>
+          </button>
+          <div
+            className={`collapse justify-content-end navbar-collapse ${classes.collapsed}`}
+            id="navbarSupportedContent"
+          >
+            <ul
+              className={`navbar-nav m-lg-auto me-sm-auto ${classes.navList}`}
+            >
+              <li className="nav-item">
+                <a
+                  className={`nav-link ${classes.navLink}`}
+                  aria-current="page"
+                  href="#"
+                >
+                  Nurses
+                </a>
+              </li>
+              <li className="nav-item">
+                <a
+                  className={`nav-link ${classes.navLink}`}
+                  aria-current="page"
+                  href="#"
+                >
+                  Companionship
+                </a>
+              </li>
+              <li className="nav-item">
+                <a
+                  className={`nav-link ${classes.navLink}`}
+                  aria-current="page"
+                  href="#"
+                >
+                  Physiotherapy
+                </a>
+              </li>
+              <li className="nav-item">
+                <a
+                  className={`nav-link ${classes.navLink}`}
+                  aria-current="page"
+                  href="#"
+                >
+                  Nannys
+                </a>
+              </li>
+              <li className="nav-item dropdown ">
+                <a
+                  className={`nav-link dropdown-toggle ${classes.navLink}`}
+                  href="#"
+                  id="navbarDropdown"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Special Care
+                </a>
+                <ul
+                  className={`dropdown-menu ${classes.dropdownMenu}`}
+                  aria-labelledby="navbarDropdown"
+                >
+                  <li>
+                    <a className={`dropdown-item ${classes.dropDown}`} href="#">
+                      Autism
+                    </a>
+                  </li>
+                  <li>
+                    <a className={`dropdown-item ${classes.dropDown}`} href="#">
+                      Alzheimer's and Dementia
+                    </a>
+                  </li>
+                  <li></li>
+                  <li>
+                    <a className={`dropdown-item ${classes.dropDown}`} href="#">
+                      ADHD
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              {/* <li className="nav-item">
     <>
       <nav className="navbar navbar-expand-lg shadow-none py-3">
         <div className="container justify-content-between">
@@ -109,8 +205,28 @@ function NavBar() {
           {/* <a href="#login" className="mybtn mybtnLightSolid">
           Login/Register
         </a> */}
+       <form className="flex-grow-1 d-flex py-3 me-0 justify-content-center">
+        <input
+          className={classes.search}
+          // class="form-control me-2 search shadow-none"
+          type="search"
+          placeholder="Search"
+          aria-label="Search"
+        ></input>
+        <button className={classes.searchBtn} type="submit">
+        <Search></Search>
+        </button>
+      </form>
+      <a href="#login" className="mybtn mybtnLightSolid m-auto">
+        Login/Register
+      </a>
         </div>
+       
       </nav>
+      <a className="navbar-brand d-lg-none d-block m-auto m-0" href="#">
+        Navbar
+      </a>
+      
     </>
   );
 }
