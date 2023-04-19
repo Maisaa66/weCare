@@ -5,9 +5,11 @@ import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 
 const steps = [
-  "Select master blaster campaign settings",
-  "Create an ad group",
-  "Create an ad",
+  "Basic Information",
+  "Address",
+  // "Documents",
+  // "Work Experince",
+  "Finished"
 ];
 
 export default function ProgressBar(props) {

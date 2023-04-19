@@ -3,11 +3,19 @@ import "./App.css";
 // import Signup from "./Pages/Signup/Signup";
 // import CheckUser from "./Pages/CheckUser/CheckUser";
 // import ProgressBar from "./components/UI/ProgressBar/ProgressBar";
-import StepOne from "./Pages/Signup/Step1";
+// import StepOne from "./Pages/Signup/Step1";
+// import StepTwo from "./Pages/Signup/Step2";
+// import FileUpload from "./components/UI/FileUpload.js/FileUpload";
+// import StepThree from "./Pages/Signup/Step3";
 function App() {
   return (
     <div className="App">
-      <StepOne></StepOne>
+      {/* <FileUpload></FileUpload> */}
+      {/* <Login></Login> */}
+      {/* <Signup></Signup> */}
+      {/* <StepOne></StepOne> */}
+      {/* <StepThree></StepThree> */}
+      {/* <StepTwo></StepTwo> */}
     </div>
   );
 }
