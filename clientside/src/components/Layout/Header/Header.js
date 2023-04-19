@@ -1,11 +1,11 @@
 import NavBar from "../NavBar/NavBar";
-import SearchBar from "../Search/SearchBar";
+// import SearchBar from "../Search/SearchBar";
 import classes from "./Header.module.css";
 // import Hero from "../../../assets/images/hero.png";
 function Header() {
   return (
     <div className={`${classes.header} `}>
-      <div className="d-sm-none d-lg-block">
+      <div className="d-none d-lg-block">
         <svg
           viewBox="0 0 190 100"
           className={`position-absolute ${classes.zBefore} ${classes.bgDiv}`}
@@ -17,7 +17,7 @@ function Header() {
           ></path>
         </svg>
       </div>
-      <SearchBar></SearchBar>
+      {/* <SearchBar></SearchBar> */}
       <NavBar></NavBar>
       <div className="container mt-3">
         <div className="row text-start align-items-center">
@@ -37,7 +37,7 @@ function Header() {
             <button className="mybtn mybtnLightSolid my-2">Explore More</button>
           </div>
           <div className="col-sm-12 px-5 col-lg-6 text-lg-end text-sm-center">
-            <div className={`${classes.bigger} d-sm-none d-lg-block ms-auto`}>
+            <div className={`${classes.bigger} d-none d-lg-block ms-auto`}>
               <div
                 className={`${classes.customeImg}  ${classes.headerImg} ms-auto`}
               ></div>
@@ -46,7 +46,7 @@ function Header() {
           </div>
         </div>
         <div
-          class={`${classes.bigger} d-sm-none d-md-block ${classes.smallBorder} ms-auto ${classes.zBefore} position-absolute`}
+          class={`${classes.bigger} d-none d-md-block ${classes.smallBorder} ms-auto ${classes.zBefore} position-absolute`}
         >
           <div class={`${classes.customeImg} ${classes.shape} ms-auto`}></div>
         </div>
