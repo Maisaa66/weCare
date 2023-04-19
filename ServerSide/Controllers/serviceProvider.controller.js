@@ -35,12 +35,13 @@ class ServiceProvider {
         httpOnly: true,
         maxAge: 2 * 24 * 60 * 60 * 1000,
       });
+      const {password, ...other} = sProvider._doc
       res.status(200).json({
         status: "success",
         results: 1,
         requestedAt: req.requestTime,
         data: {
-          sProvider,
+          ...other,
         },
       });
     } catch (err) {
@@ -67,15 +68,19 @@ class ServiceProvider {
   static getProviderById = async (req, res) => {
     try {
       const provider = await serviceProviderModel.findById(req.params.id);
+
       if (!provider) {
         throw new Error("There is no provider with this ID!");
       }
+
+      const {password, ...other} = provider._doc
+
       res.status(200).json({
         status: "success",
         results: 1,
         requestedAt: req.requestTime,
         data: {
-          provider,
+          ...other,
         },
       });
     } catch (err) {
@@ -99,12 +104,14 @@ class ServiceProvider {
       if (!provider) {
         throw new Error("There is no provider with this ID!");
       }
+      const {password, ...other} = provider._doc
+
       res.status(200).json({
         status: "success",
         results: 1,
         requestedAt: req.requestTime,
         data: {
-          provider,
+          ...other,
         },
       });
     } catch (err) {

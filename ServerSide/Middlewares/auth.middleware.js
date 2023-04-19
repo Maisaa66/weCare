@@ -25,7 +25,7 @@ class Auth {
       if (req.userToken.id === req.params.id || req.userToken.isAdmin) {
         next();
       } else {
-        res.status(403).json("You are not Authorized to do that!");
+        res.status(403).json("You are not authorized to do that!");
       }
     });
   };
@@ -35,7 +35,7 @@ class Auth {
       if (req.userToken.isAdmin) {
         next();
       } else {
-        res.status(403).json("You are not alowed to do that!");
+        res.status(403).json("You are not allowed to do that!");
       }
     });
   };

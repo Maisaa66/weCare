@@ -26,12 +26,13 @@ class User {
         httpOnly: true,
         maxAge: 2 * 24 * 60 * 60 * 1000,
       });
+      const {password, ...other} = user._doc;
       res.status(200).json({
         status: "success",
         results: 1,
         requestedAt: req.requestTime,
         data: {
-          user,
+          ...other,
         },
       });
     } catch (err) {
@@ -45,12 +46,14 @@ class User {
       if (!user) {
         throw new Error("There is no user with this ID!");
       }
+      const {password, ...other} = user._doc;
+
       res.status(200).json({
         status: "success",
         results: 1,
         requestedAt: req.requestTime,
         data: {
-          user,
+          ...other,
         },
       });
     } catch (err) {
@@ -70,12 +73,14 @@ class User {
       if (!user) {
         throw new Error("There is no user with this ID!");
       }
+      const {password, ...other} = user._doc;
+
       res.status(200).json({
         status: "success",
         results: 1,
         requestedAt: req.requestTime,
         data: {
-          user,
+          ...other,
         },
       });
     } catch (err) {
@@ -108,9 +113,11 @@ class User {
     try {
       const { email, password } = req.body;
       const user = await userModel.findOne({ email });
+
       if (!user) {
         throw new Error("Invalid email or password");
       }
+
       const auth = await bcrypt.compare(password, user.password);
       if (!auth) {
         throw new Error("Invalid email or password");
@@ -122,7 +129,7 @@ class User {
       });
       res.status(200).json({
         status: "success",
-        message: "User Loged in successfuly",
+        message: "User Logged in successfully",
       });
     } catch (err) {
       res.status(401).send(err.message);
