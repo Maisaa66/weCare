@@ -5,12 +5,13 @@ import { CheckCircle } from "react-bootstrap-icons";
 const BetterLiving = () => {
 
   return (
+    <div className={`${classes.betterLiving}`}>
     <div className="container">
     <div className="row py-5 align-items-center">
         <div className={`col-lg-6 overflow-hidden ${classes.betterLivingInfo}`}>
             
         </div>
-        <div className="col-lg-6 text-start ps-4">
+        <div className="col-lg-6 text-start ps-4 py-3">
             <h3 className="fs-1 py-2 fw-bolder">
             First Step Towards<span className={`${classes.spanHeading}`}>Better Living</span>{" "}
             </h3>
@@ -44,7 +45,7 @@ const BetterLiving = () => {
     </div>
     </div>
 
-    
+    </div>    
   );
 };
 
