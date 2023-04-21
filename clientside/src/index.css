@@ -4,6 +4,7 @@
   --mainDark: #66b9a6;
   --mainShade: rgba(255, 255, 255, 0.5);
   --mainColorObacity: rgb(14, 116, 82, 0.2);
+  --mainColorShade: rgb(14, 116, 82, 0.03);
   --secondaryColor: #71d9c1;
   --lightText: #ffff;
   --darkText: #000000;
@@ -77,4 +78,7 @@ input:focus {
   border: 1px solid var(--lightText);
   background-color: transparent;
   color: var(--lightText);
+} */
+/* *{
+  border: 1px solid red;
 } */

@@ -9,8 +9,8 @@ const Footer = () => {
             <span className="text-dark">
               Get connected with us on social networks:
             </span>
-          </div>
-          <div>
+          </div >
+          <div className={`${classes.connected}`}>
             <a href="" className="me-4 link-light">
               <i className="fab fa-facebook-f"></i>
             </a>
@@ -72,19 +72,19 @@ const Footer = () => {
               <div className="offset-md-1 col-md-3 mx-auto mb-md-0 mb-4 text-dark">
                 <h6 className="text-uppercase fw-bold mb-4">Contact</h6>
                 <p>
-                  <i className="fas fa-home  link-light"></i> 6th October,
+                  <i className="fas fa-home  link-light pe-1"></i> 6th October,
                   Giza, Egypt
                 </p>
                 <p>
-                  <i className="fas fa-envelope  link-light"></i>
+                  <i className="fas fa-envelope  link-light pe-2"></i>
                   info@example.com
                 </p>
                 <p>
-                  <i className="fas fa-phone  link-light"></i> + 01 234 567
+                  <i className="fas fa-phone  link-light pe-1"></i> + 01 234 567
                   88
                 </p>
                 <p>
-                  <i className="fas fa-print  link-light"></i> + 01 234 567
+                  <i className="fas fa-print  link-light pe-1"></i> + 01 234 567
                   89
                 </p>
               </div>

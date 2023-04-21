@@ -6,3 +6,9 @@
     background-color: var(--mainDark);
     color: white;
 }
+i{
+    color: white;
+}
+.connected a i:hover{
+    color: gray !important;
+}

@@ -13,3 +13,6 @@ background-size: cover;
 display: block;
 color: var(--mainColor);
 }
+.betterLiving{
+background-color: var(--mainColorShade);
+}

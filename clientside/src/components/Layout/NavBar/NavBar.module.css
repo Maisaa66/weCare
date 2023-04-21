@@ -3,7 +3,7 @@
 }
 .navLink {
     color: var(--darkText) !important;
-    font-size: 1.1rem !important;
+    font-size: 1rem !important;
 }
 .navLink:hover, .navLink:focus, .navLink:active {
     color: var(--lightText) !important;
