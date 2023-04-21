@@ -1,4 +1,5 @@
 const userModel = require("../Models/users.model");
+const hireRequestModel = require("../Models/hireRequest.model");
 const bcrypt = require("bcrypt");
 
 class User {
@@ -26,7 +27,7 @@ class User {
         httpOnly: true,
         maxAge: 2 * 24 * 60 * 60 * 1000,
       });
-      const {password, ...other} = user._doc;
+      const { password, ...other } = user._doc;
       res.status(200).json({
         status: "success",
         results: 1,
@@ -46,7 +47,7 @@ class User {
       if (!user) {
         throw new Error("There is no user with this ID!");
       }
-      const {password, ...other} = user._doc;
+      const { password, ...other } = user._doc;
 
       res.status(200).json({
         status: "success",
@@ -73,7 +74,7 @@ class User {
       if (!user) {
         throw new Error("There is no user with this ID!");
       }
-      const {password, ...other} = user._doc;
+      const { password, ...other } = user._doc;
 
       res.status(200).json({
         status: "success",
@@ -108,7 +109,21 @@ class User {
       });
     }
   };
-
+  static getAllRequests = async (req, res) => {
+    try {
+      const requests = await hireRequestModel.find({});
+      res.status(200).json({
+        status: "success",
+        results: requestslength,
+        requestedAt: req.requestTime,
+        data: {
+          requests,
+        },
+      });
+    } catch (err) {
+      res.status(400).json({ message: err.message });
+    }
+  };
   static login = async (req, res) => {
     try {
       const { email, password } = req.body;

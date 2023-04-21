@@ -61,6 +61,13 @@ const ServiceProviderSchema = new mongoose.Schema(
     hourlyRate: { type: Number, required: true },
     nightShift: { type: Boolean, required: true },
     dateOfBirth: { type: Date, required: true },
+    totalEarnings: {
+      type: Number,
+      default: 0,
+    },
+    requests: {
+      type: [Number],
+    },
   },
   { timestamps: true }
 );

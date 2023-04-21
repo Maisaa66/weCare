@@ -46,6 +46,9 @@ const UserSchema = new mongoose.Schema(
     },
     nationalID: { type: String, required: [true, "nationalId is required"] },
     profileImg: { type: String },
+    requests: {
+      type: [Number],
+    },
   },
   { timestamps: true }
 );
