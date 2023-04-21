@@ -23,11 +23,6 @@ router.delete(
   authMiddleware.verifyTokenAndAuthorization,
   userControllers.deleteUserById
 );
-router.get(
-  "/requests",
-  authMiddleware.verifyTokenAndAdmin,
-  userControllers.getAllRequests
-);
 
 //User Routes
 router.post("/signup", userControllers.addNewUser);

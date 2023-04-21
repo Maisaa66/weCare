@@ -48,4 +48,4 @@ HireRequestSchema.virtual("totalPrice").get(function () {
 });
 
 const hireRequestModel = mongoose.model("hirerequests", HireRequestSchema);
-module.exports = { hireRequestModel };
+module.exports = hireRequestModel;

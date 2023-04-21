@@ -48,6 +48,7 @@ const UserSchema = new mongoose.Schema(
     profileImg: { type: String },
     requests: {
       type: [Number],
+      default: [],
     },
   },
   { timestamps: true }

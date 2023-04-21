@@ -5,6 +5,7 @@ const bcrypt = require("bcrypt");
 class User {
   static getAllUsers = async (req, res) => {
     try {
+      console.log(userModel);
       const users = await userModel.find({});
       res.status(200).json({
         status: "success",
@@ -111,10 +112,11 @@ class User {
   };
   static getAllRequests = async (req, res) => {
     try {
+      console.log(hireRequestModel);
       const requests = await hireRequestModel.find({});
       res.status(200).json({
         status: "success",
-        results: requestslength,
+        results: requests.length,
         requestedAt: req.requestTime,
         data: {
           requests,
