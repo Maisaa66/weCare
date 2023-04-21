@@ -12,7 +12,8 @@ const ServiceProviderSchema = new mongoose.Schema(
       type: String,
       trim: true,
       validate(value) {
-        if (!isMobilePhone(value, "ar-EG")) throw new Error("Invalid Mobile Number");
+        if (!isMobilePhone(value, "ar-EG"))
+          throw new Error("Invalid Mobile Number");
       },
     },
     email: {
@@ -38,7 +39,13 @@ const ServiceProviderSchema = new mongoose.Schema(
     serviceType: [
       {
         type: String,
-        enum: ["nurse", "companion", "nanny", "physiotherapist", "special-care:autism"],
+        enum: [
+          "nurse",
+          "companion",
+          "nanny",
+          "physiotherapist",
+          "special-care:autism",
+        ],
         required: true,
       },
     ],
@@ -85,6 +92,9 @@ ServiceProviderSchema.methods.createToken = async function () {
   return accessToken;
 };
 
-const serviceProviderModel = mongoose.model("serviceProviders", ServiceProviderSchema);
+const serviceProviderModel = mongoose.model(
+  "serviceProviders",
+  ServiceProviderSchema
+);
 
 module.exports = serviceProviderModel;
