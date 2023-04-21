@@ -5,6 +5,7 @@ const dotenv = require("dotenv");
 const usersRoutes = require("./Routes/users.routes");
 const providersRoutes = require("./Routes/serviceProviders.routes");
 const requestsRoutes = require("./Routes/requests.routes");
+const reviewsRoutes = require("./Routes/reviews.routes");
 const cookieParser = require("cookie-parser");
 const { addTimeOfRequest } = require("./Middlewares/helpers.middleware");
 
@@ -30,6 +31,7 @@ app.use(addTimeOfRequest);
 app.use("/api/v1/users", usersRoutes);
 app.use("/api/v1/providers", providersRoutes);
 app.use("/api/v1/requests", requestsRoutes);
+app.use("/api/v1/reviews", reviewsRoutes);
 
 app.listen(PORT, () => console.log("http://localhost:" + PORT));
 

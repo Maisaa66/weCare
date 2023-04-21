@@ -50,6 +50,19 @@ const UserSchema = new mongoose.Schema(
       type: [Number],
       default: [],
     },
+    ratings: {
+      type: Number,
+      require: true,
+      default: 5,
+    },
+    reviewsMade: {
+      type: [Number],
+      default: [],
+    },
+    reviewsGiven: {
+      type: [Number],
+      default: [],
+    },
   },
   { timestamps: true }
 );

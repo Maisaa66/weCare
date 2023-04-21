@@ -1,0 +1,42 @@
+[
+  {
+    "reqId": 1111,
+    "reqStatus": "pending",
+    "startDate": "2023-04-01",
+    "endDate": "2023-04-03",
+    "customerId": "6442b00148f55dabfb11cfbb",
+    "providerId": "6442af6248f55dabfb11cfb1",
+    "totalHrs": 10,
+    "hourlyRate": 35
+  },
+  {
+    "reqId": 2222,
+    "reqStatus": "pending",
+    "startDate": "2023-04-01",
+    "endDate": "2023-04-03",
+    "customerId": "6442b00148f55dabfb11cfbc",
+    "providerId": "6442af6248f55dabfb11cfb3",
+    "totalHrs": 10,
+    "hourlyRate": 35
+  },
+  {
+    "reqId": 3333,
+    "reqStatus": "pending",
+    "startDate": "2023-04-01",
+    "endDate": "2023-04-03",
+    "customerId": "6442b00148f55dabfb11cfbb",
+    "providerId": "6442af6248f55dabfb11cfb3",
+    "totalHrs": 10,
+    "hourlyRate": 35
+  },
+  {
+    "reqId": 4444,
+    "reqStatus": "pending",
+    "startDate": "2023-04-01",
+    "endDate": "2023-04-03",
+    "customerId": "6442b00148f55dabfb11cfbe",
+    "providerId": "6442af6248f55dabfb11cfb1",
+    "totalHrs": 10,
+    "hourlyRate": 35
+  }
+]

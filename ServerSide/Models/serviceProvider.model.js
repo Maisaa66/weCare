@@ -67,6 +67,15 @@ const ServiceProviderSchema = new mongoose.Schema(
     },
     requests: {
       type: [Number],
+      default: [],
+    },
+    reviewsMade: {
+      type: [Number],
+      default: [],
+    },
+    requestsGiven: {
+      type: [Number],
+      default: [],
     },
   },
   { timestamps: true }

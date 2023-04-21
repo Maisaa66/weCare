@@ -1,0 +1,34 @@
+[
+    {
+        "reviewId": 1111,
+        "postDate": "2023-04-05",
+        "reviewerId": "6442b00148f55dabfb11cfbb",
+        "providerId": "6442af6248f55dabfb11cfb1",
+        "rate": 4.5,
+        "comment": "Really good service"
+    },
+    {
+        "reviewId": 2222,
+        "postDate": "2023-04-05",
+        "reviewerId": "6442b00148f55dabfb11cfbc",
+        "providerId": "6442af6248f55dabfb11cfb3",
+        "rate": 4.5,
+        "comment": "Really good service"
+    },
+    {
+        "reviewId": 3333,
+        "postDate": "2023-04-05",
+        "reviewerId": "6442b00148f55dabfb11cfbb",
+        "providerId": "6442af6248f55dabfb11cfb3",
+        "rate": 4.5,
+        "comment": "Really good service"
+    },
+    {
+        "reviewId": 4444,
+        "postDate": "2023-04-05",
+        "reviewerId": "6442b00148f55dabfb11cfbe",
+        "providerId": "6442af6248f55dabfb11cfb1",
+        "rate": 4.5,
+        "comment": "Really good service"
+    }
+]

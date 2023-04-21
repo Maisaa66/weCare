@@ -1,5 +1,6 @@
 const userModel = require("../Models/users.model");
 const hireRequestModel = require("../Models/hireRequest.model");
+const reviewModel = require("../Models/review.model");
 const bcrypt = require("bcrypt");
 
 class User {
@@ -120,6 +121,21 @@ class User {
         requestedAt: req.requestTime,
         data: {
           requests,
+        },
+      });
+    } catch (err) {
+      res.status(400).json({ message: err.message });
+    }
+  };
+  static getAllReviews = async (req, res) => {
+    try {
+      const reviews = await reviewModel.find({});
+      res.status(200).json({
+        status: "success",
+        results: reviews.length,
+        requestedAt: req.requestTime,
+        data: {
+          reviews,
         },
       });
     } catch (err) {
