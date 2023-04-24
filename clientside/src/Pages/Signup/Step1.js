@@ -2,7 +2,7 @@ import * as React from "react";
 import Avatar from "@mui/material/Avatar";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import Link from "@mui/material/Link";
+import { Link } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
@@ -22,7 +22,7 @@ function Copyright(props) {
       {...props}
     >
       {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
+      <Link color="inherit" to="/">
         weCare
       </Link>{" "}
       {new Date().getFullYear()}
@@ -161,7 +161,7 @@ export default function StepOne() {
               />
 
               <div>
-                <a href="http://marcel-pirnay.be/" className={`${classes.btn}`}>
+              <Link to="/signup/steptwo" className={`${classes.btn}`}>
                   <svg width="277" height="62">
                     <defs>
                       <linearGradient id="grad1">
@@ -179,8 +179,8 @@ export default function StepOne() {
                       height="50"
                     ></rect>
                   </svg>
-                  <span>next</span>
-                </a>
+                  <span>Next</span>
+                </Link>
               </div>
             </Box>
           </Box>

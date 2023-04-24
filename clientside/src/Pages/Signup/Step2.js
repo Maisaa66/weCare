@@ -2,7 +2,6 @@ import * as React from "react";
 import Avatar from "@mui/material/Avatar";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
@@ -12,6 +11,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import classes from "./signup.module.css";
 import ProgressBar from "../../components/UI/ProgressBar/ProgressBar";
 import DropDown from "../../components/UI/DropDown/DropDown";
+import { Link } from "react-router-dom";
 
 function Copyright(props) {
   return (
@@ -22,7 +22,7 @@ function Copyright(props) {
       {...props}
     >
       {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
+      <Link color="inherit" to="/">
         weCare
       </Link>{" "}
       {new Date().getFullYear()}
@@ -205,7 +205,7 @@ export default function StepTwo() {
                 </Grid>
               </Grid>
               <div>
-                <a href="http://marcel-pirnay.be/" className={`${classes.btn}`}>
+              <Link to="/signup/stepthree" className={`${classes.btn}`}>
                   <svg width="277" height="62">
                     <defs>
                       <linearGradient id="grad1">
@@ -223,8 +223,8 @@ export default function StepTwo() {
                       height="50"
                     ></rect>
                   </svg>
-                  <span>next</span>
-                </a>
+                  <span>Next</span>
+                </Link>
               </div>
             </Box>
           </Box>

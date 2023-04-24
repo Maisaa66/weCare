@@ -202,7 +202,7 @@ export default function SignUp() {
                 label="Remember me"
               />
               <div>
-                <a href="http://marcel-pirnay.be/" className={`${classes.btn}`}>
+                <Link to="/signup/stepone" className={`${classes.btn}`}>
                   <svg width="277" height="62">
                     <defs>
                       <linearGradient id="grad1">
@@ -221,12 +221,12 @@ export default function SignUp() {
                     ></rect>
                   </svg>
                   <span>Sign Up</span>
-                </a>
+                </Link>
               </div>
 
               <Grid container>
                 <Grid item xs={12}>
-                  <Typography variant="h4" textAlign="center" fullWidth>
+                  <Typography variant="h4" textAlign="center">
                     <span style={{ fontSize: "0.9rem" }}>
                       Already have an account?
                     </span>

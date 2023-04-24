@@ -101,6 +101,7 @@ ServiceProviderSchema.methods.createToken = async function () {
   const accessToken = jwt.sign(
     {
       id: provider._id,
+      userType:"serviceProvider"
     },
     process.env.JWT_SEC,
     { expiresIn: "2d" }

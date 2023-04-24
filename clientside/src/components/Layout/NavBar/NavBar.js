@@ -8,9 +8,9 @@ function NavBar() {
       {" "}
       <nav className="navbar navbar-expand-lg shadow-none py-3">
         <div className="container justify-content-between">
-          <a className="navbar-brand d-lg-block d-none m-0" href="#">
+          <Link to="/" className="navbar-brand d-lg-block d-none m-0">
             Navbar
-          </a>
+          </Link>
           <button
             className={`navbar-toggler m-lg-auto me-sm-auto   ${classes.toggler}`}
             type="button"
@@ -126,34 +126,31 @@ function NavBar() {
                 About
               </a>
             </li> */}
-          
             </ul>
           </div>
           {/* <a href="#login" className="mybtn mybtnLightSolid">
           Login/Register
         </a> */}
-       <form className="flex-grow-1 d-flex py-3 me-0 justify-content-center">
-        <input
-          className={classes.search}
-          // class="form-control me-2 search shadow-none"
-          type="search"
-          placeholder="Search"
-          aria-label="Search"
-        ></input>
-        <button className={classes.searchBtn} type="submit">
-        <Search></Search>
-        </button>
-      </form>
-      <a href="#login" className="mybtn mybtnLightSolid m-auto">
-        Login/Register
-      </a>
+          <form className="flex-grow-1 d-flex py-3 me-0 justify-content-center">
+            <input
+              className={classes.search}
+              // class="form-control me-2 search shadow-none"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+            ></input>
+            <button className={classes.searchBtn} type="submit">
+              <Search></Search>
+            </button>
+          </form>
+          <Link to="/login" className="mybtn mybtnLightSolid m-auto">
+            Login/Register
+          </Link>
         </div>
-       
       </nav>
-      <a className="navbar-brand d-lg-none d-block m-auto m-0" href="#">
+      <Link to="/" className="navbar-brand d-lg-none d-block m-auto m-0">
         Navbar
-      </a>
-      
+      </Link>
     </>
   );
 }
