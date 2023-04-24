@@ -21,6 +21,7 @@ class ServiceProvider {
       res.status(200).json({
         status: "success",
         message: "SProvider Loged in successfuly",
+        cookie: sProviderToken,
       });
     } catch (err) {
       res.status(401).send(err.message);
@@ -35,7 +36,7 @@ class ServiceProvider {
         httpOnly: true,
         maxAge: 2 * 24 * 60 * 60 * 1000,
       });
-      const {password, ...other} = sProvider._doc
+      const { password, ...other } = sProvider._doc;
       res.status(200).json({
         status: "success",
         results: 1,
@@ -73,7 +74,7 @@ class ServiceProvider {
         throw new Error("There is no provider with this ID!");
       }
 
-      const {password, ...other} = provider._doc
+      const { password, ...other } = provider._doc;
 
       res.status(200).json({
         status: "success",
@@ -104,7 +105,7 @@ class ServiceProvider {
       if (!provider) {
         throw new Error("There is no provider with this ID!");
       }
-      const {password, ...other} = provider._doc
+      const { password, ...other } = provider._doc;
 
       res.status(200).json({
         status: "success",

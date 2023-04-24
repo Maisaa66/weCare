@@ -2,6 +2,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
+const cors = require("cors");
 const usersRoutes = require("./Routes/users.routes");
 const providersRoutes = require("./Routes/serviceProviders.routes");
 const requestsRoutes = require("./Routes/requests.routes");
@@ -11,6 +12,7 @@ const { addTimeOfRequest } = require("./Middlewares/helpers.middleware");
 
 dotenv.config();
 const app = express();
+app.use(cors());
 const PORT = process.env.PORT || 3000;
 const DBURL = process.env.DATABASE_URL.replace(
   "<password>",

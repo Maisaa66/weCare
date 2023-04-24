@@ -2,7 +2,22 @@ import { List } from "react-bootstrap-icons";
 import classes from "./NavBar.module.css";
 import { Link, Outlet } from "react-router-dom";
 import { Search } from "react-bootstrap-icons";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 function NavBar() {
+  const navigate = useNavigate();
+  const [isLogged, setIsLogged] = useState(false);
+  useEffect(() => {
+    if (document.cookie.includes("jwt")) {
+      setIsLogged(true);
+    }
+  }, []);
+  // Delete Cookie
+  const deleteCookie = () => {
+    document.cookie = "jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    setIsLogged(false);
+  };
   return (
     <>
       {" "}
@@ -143,9 +158,19 @@ function NavBar() {
               <Search></Search>
             </button>
           </form>
-          <Link to="/login" className="mybtn mybtnLightSolid m-auto">
-            Login/Register
-          </Link>
+          {isLogged ? (
+            <Link
+              to="/"
+              className="mybtn mybtnLightSolid m-auto"
+              onClick={deleteCookie}
+            >
+              Logout
+            </Link>
+          ) : (
+            <Link to="/login" className="mybtn mybtnLightSolid m-auto">
+              Login
+            </Link>
+          )}
         </div>
       </nav>
       <Link to="/" className="navbar-brand d-lg-none d-block m-auto m-0">

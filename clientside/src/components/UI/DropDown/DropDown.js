@@ -3,18 +3,26 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import { useMediaQuery } from '@mui/material';
+import { useMediaQuery } from "@mui/material";
 
 export default function DropDown(props) {
   const [gender, setGender] = React.useState("");
-  const isSmallScreen = useMediaQuery(theme => theme.breakpoints.down('sm'));
+  const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down("sm"));
 
   const handleChange = (event) => {
     setGender(event.target.value);
+    props.handleDropDownChange(event.target.value);
   };
 
   return (
-    <FormControl variant="standard" sx={{ mt: 2,minWidth: 200, ...(isSmallScreen && { width: '100%', mt:0 }) }}>
+    <FormControl
+      variant="standard"
+      sx={{
+        mt: 2,
+        minWidth: 200,
+        ...(isSmallScreen && { width: "100%", mt: 0 }),
+      }}
+    >
       <InputLabel id="demo-simple-select-standard-label">
         {props.dropDownObj.title}
       </InputLabel>
