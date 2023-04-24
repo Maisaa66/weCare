@@ -2,9 +2,7 @@ import * as React from "react";
 import Avatar from "@mui/material/Avatar";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import LinkMu from "@mui/material/Link";
+import { Link, useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
@@ -12,9 +10,14 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import classes from "./signup.module.css";
-import { Link } from "react-router-dom";
+import ProgressBar from "../../components/UI/ProgressBar/ProgressBar";
+import DropDown from "../../components/UI/DropDown/DropDown";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {setUserDetails} from "../../Redux Store/slices/userInfo";
 
 function Copyright(props) {
+  
   return (
     <Typography
       variant="body2"
@@ -23,11 +26,9 @@ function Copyright(props) {
       {...props}
     >
       {"Copyright © "}
-      <LinkMu color="inherit">
-        <Link to="/" style={{ color: "var(--mainColor)" }}>
-          weCare
-        </Link>
-      </LinkMu>{" "}
+      <Link color="inherit" to="/">
+        weCare
+      </Link>{" "}
       {new Date().getFullYear()}
       {"."}
     </Typography>
@@ -66,23 +67,33 @@ const theme = createTheme({
     },
   },
 });
-// const useStyles = makeStyles((theme) => ({
-//   smallScreenPadding: {
-//     [theme.breakpoints.down("sm")]: {
-//       padding: "16px",
-//     },
-//   },
-// }));
-export default function SignUp() {
-  //   const styles = useStyles();
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
-  };
+
+export default function StepOne() {
+ //states
+ const [userData, setUserData] = useState({
+  firstName: "",
+  lastName: "",
+  email: "",
+  password: "",
+});
+
+const userType = useSelector((state) => state.userInfo.type);
+
+const dispatch = useDispatch();
+const navigate = useNavigate();
+//   const styles = useStyles();
+const handleSubmit = (event) => {
+  event.preventDefault();
+
+  dispatch(setUserDetails(userData));
+  navigate("/signup/stepone");
+};
+
+const handleChange = (event) => {
+  const { name, value } = event.target;
+  setUserData({ ...userData, [name]: value });
+};
+
 
   return (
     <ThemeProvider theme={theme}>
@@ -97,7 +108,7 @@ export default function SignUp() {
       >
         <Container
           component="main"
-          maxWidth="xs"
+          maxWidth="md"
           sx={{
             boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px;",
             borderRadius: "20px",
@@ -120,9 +131,16 @@ export default function SignUp() {
             <Avatar sx={{ m: 1, bgcolor: "var(--mainColor)" }}>
               <LockOutlinedIcon />
             </Avatar>
-            <Typography component="h1" variant="h5">
-              Sign Up
+            <Typography component="h1" variant="h5" sx={{ m: 2 }}>
+              Welcome {userType}! 
             </Typography>
+            <Typography component="h1" variant="h6" sx={{ m: 2 }}>
+            First things first...
+            </Typography>
+            <Box sx={{ m: 3 }}>
+              <ProgressBar stepNum={0}></ProgressBar>
+            </Box>
+
             <Box
               component="form"
               onSubmit={handleSubmit}
@@ -140,12 +158,13 @@ export default function SignUp() {
                     label="First Name"
                     name="firstName"
                     autoComplete="firstName"
-                    autoFocus
                     sx={{ textAlign: "left" }}
+                    value={userData.firstName}
+                    onChange={handleChange}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                  <TextField
+                <TextField
                     variant="standard"
                     margin="normal"
                     required
@@ -155,6 +174,8 @@ export default function SignUp() {
                     name="lastName"
                     autoComplete="lastName"
                     sx={{ textAlign: "left" }}
+                    value={userData.lastName}
+                    onChange={handleChange}
                   />
                 </Grid>
               </Grid>
@@ -164,11 +185,15 @@ export default function SignUp() {
                 margin="normal"
                 required
                 fullWidth
-                id="email"
-                label="Email Address"
                 name="email"
+                label="Email"
+                type="text"
+                id="email"
                 autoComplete="email"
+                color="primary"
                 sx={{ textAlign: "left" }}
+                value={userData.email}
+                onChange={handleChange}
               />
               <TextField
                 variant="standard"
@@ -179,30 +204,14 @@ export default function SignUp() {
                 label="Password"
                 type="password"
                 id="password"
-                autoComplete="current-password"
+                autoComplete="password"
                 color="primary"
                 sx={{ textAlign: "left" }}
-              />
-              <TextField
-                variant="standard"
-                margin="normal"
-                required
-                fullWidth
-                name="confpassword"
-                label="Confirm Password"
-                type="password"
-                id="confpassword"
-                autoComplete="current-password"
-                color="primary"
-                sx={{ textAlign: "left" }}
-              />
-              <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                sx={{ mt: 2 }}
-                label="Remember me"
+                value={userData.password}
+                onChange={handleChange}
               />
               <div>
-                <Link to="/signup/stepone" className={`${classes.btn}`}>
+                <button type="submit" className={`${classes.btn}`}>
                   <svg width="277" height="62">
                     <defs>
                       <linearGradient id="grad1">
@@ -220,29 +229,9 @@ export default function SignUp() {
                       height="50"
                     ></rect>
                   </svg>
-                  <span>Sign Up</span>
-                </Link>
+                  <span>Next</span>
+                </button>
               </div>
-
-              <Grid container>
-                <Grid item xs={12}>
-                  <Typography variant="h4" textAlign="center">
-                    <span style={{ fontSize: "0.9rem" }}>
-                      Already have an account?
-                    </span>
-                    <LinkMu
-                      href="#"
-                      variant="body2"
-                      style={{ color: "var(--mainColor)" }}
-                      sx={{ fontWeight: "bold" }}
-                    >
-                      <Link to="/login" style={{ color: "var(--mainColor)" }}>
-                        Log In
-                      </Link>
-                    </LinkMu>
-                  </Typography>
-                </Grid>
-              </Grid>
             </Box>
           </Box>
           <Copyright sx={{ mt: 2, mb: 5 }} />

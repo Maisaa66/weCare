@@ -6,6 +6,7 @@ import StepLabel from "@mui/material/StepLabel";
 
 const steps = [
   "Basic Information",
+  "Personal Information",
   "Address",
   // "Documents",
   // "Work Experince",

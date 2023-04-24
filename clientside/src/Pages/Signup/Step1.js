@@ -2,7 +2,7 @@ import * as React from "react";
 import Avatar from "@mui/material/Avatar";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
@@ -12,8 +12,13 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import classes from "./signup.module.css";
 import ProgressBar from "../../components/UI/ProgressBar/ProgressBar";
 import DropDown from "../../components/UI/DropDown/DropDown";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import {setUserDetails} from "../../Redux Store/slices/userInfo";
 
 function Copyright(props) {
+  
+  
   return (
     <Typography
       variant="body2"
@@ -67,8 +72,21 @@ const theme = createTheme({
 export default function StepOne() {
   const dropDownObj = {
     title: "Gender",
-    options: ["Female", "Male"],
+    options: ["female", "male"],
   };
+  //states
+  const [userData, setUserData] = useState(
+    {
+      phoneNum: "",
+      nationalID: "",
+      gender: "",
+    }
+   );
+
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  //   const styles = useStyles();
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -76,7 +94,19 @@ export default function StepOne() {
       email: data.get("email"),
       password: data.get("password"),
     });
+
+    dispatch(setUserDetails(userData));
+    navigate("/signup/steptwo");
   };
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setUserData({ ...userData, [name]: value });
+  };
+
+  const handleDropDownChange = (value) => {
+    setUserData({ ...userData, gender: value });
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -115,10 +145,10 @@ export default function StepOne() {
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5" sx={{ m: 2 }}>
-              Welcome! First things first...
+              Lets get to know you
             </Typography>
             <Box sx={{ m: 3 }}>
-              <ProgressBar stepNum={0}></ProgressBar>
+              <ProgressBar stepNum={1}></ProgressBar>
             </Box>
 
             <Box
@@ -134,15 +164,17 @@ export default function StepOne() {
                     margin="normal"
                     required
                     fullWidth
-                    id="phone"
+                    id="phoneNum"
                     label="Phone Number"
-                    name="phone"
-                    autoComplete="phone"
+                    name="phoneNum"
+                    autoComplete="phoneNum"
                     sx={{ textAlign: "left" }}
+                    value={userData.phoneNum}
+                    onChange={handleChange}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                  <DropDown dropDownObj={dropDownObj}></DropDown>
+                  <DropDown dropDownObj={dropDownObj} handleDropDownChange={handleDropDownChange}></DropDown>
                 </Grid>
               </Grid>
 
@@ -151,17 +183,19 @@ export default function StepOne() {
                 margin="normal"
                 required
                 fullWidth
-                name="ID"
+                name="nationalID"
                 label="National ID"
                 type="text"
-                id="ID"
-                autoComplete="id"
+                id="nationalID"
+                autoComplete="nationalID"
                 color="primary"
                 sx={{ textAlign: "left" }}
+                value={userData.nationalID}
+                onChange={handleChange}
               />
 
               <div>
-              <Link to="/signup/steptwo" className={`${classes.btn}`}>
+                <button type="submit" className={`${classes.btn}`}>
                   <svg width="277" height="62">
                     <defs>
                       <linearGradient id="grad1">
@@ -180,7 +214,7 @@ export default function StepOne() {
                     ></rect>
                   </svg>
                   <span>Next</span>
-                </Link>
+                </button>
               </div>
             </Box>
           </Box>

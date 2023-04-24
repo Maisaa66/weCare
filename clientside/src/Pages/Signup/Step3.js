@@ -118,7 +118,7 @@ export default function StepThree() {
               Congratulations! ❤
             </Typography>
             <Box sx={{ m: 3 }}>
-              <ProgressBar stepNum={2}></ProgressBar>
+              <ProgressBar stepNum={3}></ProgressBar>
             </Box>
 
             <Box
