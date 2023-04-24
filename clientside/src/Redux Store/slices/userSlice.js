@@ -1,11 +1,12 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
-import {useNavigate } from 'react-router-dom';
 
 export const addUser = createAsyncThunk("user/addUser", async (userData)=>{
 try{
   const response = await axios.post("http://localhost:7000/api/v1/users/signup", userData);
-  console.log ("response data ", response.data);
+
+  // console.log ("response data ", response.data);
+  return response.data;
 }
 catch(error){
   console.log("error", error);
@@ -15,7 +16,7 @@ catch(error){
 export const userSlice = createSlice({
 
   name: 'userSlice',
-  initialState:{user: []},
+  initialState:{},
   reducers: {
 
   },
@@ -26,8 +27,12 @@ export const userSlice = createSlice({
       // Add user to the state array
       // const navigate = useNavigate();
       // navigate("/signup/stepthree");
-      state.user.push(action.payload);
-      return action.payload;
+      const expires = new Date(
+        Date.now() + 2 * 24 * 60 * 60 * 1000
+      ).toUTCString(); // 2 days from now
+      document.cookie = `jwt=${action.payload.cookie}; expires=${expires};`;
+      // state.user.push(action.payload.data);
+      return action.payload.data;
     });
   }
 })

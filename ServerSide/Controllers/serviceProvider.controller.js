@@ -44,6 +44,8 @@ class ServiceProvider {
         data: {
           ...other,
         },
+        cookie: providerToken,
+
       });
     } catch (err) {
       res.status(400).json({ message: err.message });

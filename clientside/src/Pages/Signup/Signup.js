@@ -77,6 +77,8 @@ export default function StepOne() {
   password: "",
 });
 
+const [isError, setIsError] = useState({ status: false, message: "" });
+
 const userType = useSelector((state) => state.userInfo.type);
 
 const dispatch = useDispatch();
