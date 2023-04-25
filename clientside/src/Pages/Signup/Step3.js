@@ -1,9 +1,7 @@
 import * as React from "react";
 import Avatar from "@mui/material/Avatar";
 import CssBaseline from "@mui/material/CssBaseline";
-// import TextField from "@mui/material/TextField";
 import { Link } from "react-router-dom";
-// import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
@@ -11,7 +9,7 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import classes from "./signup.module.css";
 import ProgressBar from "../../components/UI/ProgressBar/ProgressBar";
-// import DropDown from "../../components/UI/DropDown/DropDown";
+import { useDispatch, useSelector } from "react-redux";
 
 function Copyright(props) {
   return (
@@ -65,18 +63,10 @@ const theme = createTheme({
 });
 
 export default function StepThree() {
-//   const dropDownObj = {
-//     title: "Country",
-//     options: ["Egypt", "Canada"],
-//   };
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
   };
+  const userType = useSelector((state) => state.userInfo.type);
 
   return (
     <ThemeProvider theme={theme}>
@@ -118,7 +108,11 @@ export default function StepThree() {
               Congratulations! ❤
             </Typography>
             <Box sx={{ m: 3 }}>
-              <ProgressBar stepNum={3}></ProgressBar>
+              {userType === "Care giver" ? (
+                <ProgressBar stepNum={5}></ProgressBar>
+              ) : (
+                <ProgressBar stepNum={3}></ProgressBar>
+              )}
             </Box>
 
             <Box
@@ -127,7 +121,6 @@ export default function StepThree() {
               noValidate
               sx={{ mt: 1 }}
             >
-
               <div>
                 <a href="http://marcel-pirnay.be/" className={`${classes.btn}`}>
                   <svg width="277" height="62">

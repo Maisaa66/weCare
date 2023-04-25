@@ -1,27 +1,25 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import axios from 'axios'
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
 
-export const addUser = createAsyncThunk("user/addUser", async (userData)=>{
-try{
-  const response = await axios.post("http://localhost:7000/api/v1/users/signup", userData);
+export const addUser = createAsyncThunk("user/addUser", async (userData) => {
+  try {
+    const response = await axios.post(
+      "http://localhost:7000/api/v1/users/signup",
+      userData
+    );
 
-  // console.log ("response data ", response.data);
-  return response.data;
-}
-catch(error){
-  console.log("error", error);
-}
-})
+    // console.log ("response data ", response);
+    return response.data;
+  } catch (error) {
+    console.log("error", error);
+  }
+});
 
 export const userSlice = createSlice({
-
-  name: 'userSlice',
-  initialState:{},
-  reducers: {
-
-  },
+  name: "userSlice",
+  initialState: {},
+  reducers: {},
   extraReducers: (builder) => {
-
     // Add reducers for additional action types here, and handle loading state as needed
     builder.addCase(addUser.fulfilled, (state, action) => {
       // Add user to the state array
@@ -33,11 +31,12 @@ export const userSlice = createSlice({
       document.cookie = `jwt=${action.payload.cookie}; expires=${expires};`;
       // state.user.push(action.payload.data);
       return action.payload.data;
+      // console.log(action.payload);
     });
-  }
-})
+  },
+});
 
 // Action creators are generated for each case reducer function
 // export const {} = userSlice.actions
 
-export default userSlice.reducer
+export default userSlice.reducer;

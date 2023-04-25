@@ -21,11 +21,6 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-// import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-// import { DatePicker } from "@mui/x-date-picker";
-// import { DatePicker } from "@mui/x-date-picker/DatePicker";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -84,7 +79,7 @@ export default function StepFour() {
   const [userData, setUserData] = useState({
     serviceType: "",
     title: "",
-    expertise: "",
+    experties: "",
     hourlyRate: "",
     nightShift: false,
     dateOfBirth: "",
@@ -106,12 +101,13 @@ export default function StepFour() {
   const dropDownObj = {
     title: "Service Type",
     options: [
-      "Companion",
-      "Nanny",
-      "Physiotherapist",
-      "Special-Care:Autism",
-      "Special-Care:ADHD",
-      "Special-Care:Alzheimer's and Dementia",
+      "nurse",
+      "companion",
+      "nanny",
+      "physiotherapist",
+      "special-care:autism",
+      "special-care:ADHD",
+      "special-care:Alzheimer's and Dementia",
     ],
   };
   const handleDropDownChange = (value) => {
@@ -197,12 +193,12 @@ export default function StepFour() {
                     margin="normal"
                     required
                     fullWidth
-                    id="expertise"
+                    id="experties"
                     label="Expertise"
-                    name="expertise"
-                    autoComplete="expertise"
+                    name="experties"
+                    autoComplete="experties"
                     sx={{ textAlign: "left" }}
-                    value={userData.expertise}
+                    value={userData.experties}
                     onChange={handleChange}
                   />
                 </Grid>

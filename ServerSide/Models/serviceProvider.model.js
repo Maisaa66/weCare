@@ -59,7 +59,7 @@ const ServiceProviderSchema = new mongoose.Schema(
     },
     title: { type: String, required: true },
     experties: { type: String, required: true },
-    rating: { type: Number, required: true },
+    rating: { type: Number },
     hourlyRate: { type: Number, required: true },
     nightShift: { type: Boolean, required: true },
     dateOfBirth: { type: Date, required: true },
