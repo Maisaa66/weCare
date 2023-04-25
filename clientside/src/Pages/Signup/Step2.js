@@ -73,27 +73,40 @@ export default function StepTwo() {
     title: "Country",
     options: ["Egypt", "Canada"],
   };
+  const navigate = useNavigate();
+  const userType = useSelector((state) => state.userInfo.type);
+
   //states
   const [userData, setUserData] = useState({});
 
-  const [address, setAddress] = useState({
-    country: "",
-    governate: "",
-    area: "",
-    street: "",
-    buildingNum: "",
-    apartmentNum: "",
-  });
+  const [address, setAddress] = useState(
+    userType === "Care Beneficiary"
+      ? {
+          country: "",
+          governate: "",
+          area: "",
+          street: "",
+          buildingNum: "",
+          apartmentNum: "",
+        }
+      : {
+          country: "",
+          governate: "",
+        }
+  );
 
   const dispatch = useDispatch();
   const userDetails = useSelector((state) => state.userInfo.userDetails);
+
   //   const styles = useStyles();
   const handleSubmit = (event) => {
     event.preventDefault();
     setUserData({ ...userData, address });
     dispatch(setUserDetails(userData));
     dispatch(addUser(userDetails));
-    // navigate("/signup/stepthree");
+    if (userType === "Care giver") {
+      navigate("/signup/stepfour");
+    }
   };
 
   const handleChange = (event) => {
@@ -177,72 +190,76 @@ export default function StepTwo() {
                   />
                 </Grid>
               </Grid>
+              {userType === "Care Beneficiary" && (
+                <Box>
+                  <Grid container spacing={2}>
+                    <Grid item xs={12} sm={6}>
+                      <TextField
+                        variant="standard"
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="area"
+                        label="Area"
+                        name="area"
+                        autoComplete="area"
+                        sx={{ textAlign: "left" }}
+                        value={address.area}
+                        onChange={handleChange}
+                      />
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                      <TextField
+                        variant="standard"
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="street"
+                        label="Street"
+                        name="street"
+                        autoComplete="street"
+                        sx={{ textAlign: "left" }}
+                        value={address.street}
+                        onChange={handleChange}
+                      />
+                    </Grid>
+                  </Grid>
 
-              <Grid container spacing={2}>
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    variant="standard"
-                    margin="normal"
-                    required
-                    fullWidth
-                    id="area"
-                    label="Area"
-                    name="area"
-                    autoComplete="area"
-                    sx={{ textAlign: "left" }}
-                    value={address.area}
-                    onChange={handleChange}
-                  />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    variant="standard"
-                    margin="normal"
-                    required
-                    fullWidth
-                    id="street"
-                    label="Street"
-                    name="street"
-                    autoComplete="street"
-                    sx={{ textAlign: "left" }}
-                    value={address.street}
-                    onChange={handleChange}
-                  />
-                </Grid>
-              </Grid>
+                  <Grid container spacing={2}>
+                    <Grid item xs={12} sm={6}>
+                      <TextField
+                        variant="standard"
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="buildingNum"
+                        label="Builiding Number"
+                        name="buildingNum"
+                        autoComplete="buildingNum"
+                        sx={{ textAlign: "left" }}
+                        value={address.buildingNum}
+                        onChange={handleChange}
+                      />
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                      <TextField
+                        variant="standard"
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="apartmentNum"
+                        label="Apartment Number"
+                        name="apartmentNum"
+                        autoComplete="apartmentNum"
+                        sx={{ textAlign: "left" }}
+                        value={address.apartmentNum}
+                        onChange={handleChange}
+                      />
+                    </Grid>
+                  </Grid>
+                </Box>
+              )}
 
-              <Grid container spacing={2}>
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    variant="standard"
-                    margin="normal"
-                    required
-                    fullWidth
-                    id="buildingNum"
-                    label="Builiding Number"
-                    name="buildingNum"
-                    autoComplete="buildingNum"
-                    sx={{ textAlign: "left" }}
-                    value={address.buildingNum}
-                    onChange={handleChange}
-                  />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    variant="standard"
-                    margin="normal"
-                    required
-                    fullWidth
-                    id="apartmentNum"
-                    label="Apartment Number"
-                    name="apartmentNum"
-                    autoComplete="apartmentNum"
-                    sx={{ textAlign: "left" }}
-                    value={address.apartmentNum}
-                    onChange={handleChange}
-                  />
-                </Grid>
-              </Grid>
               <div>
                 <button type="submit" className={`${classes.btn}`}>
                   <svg width="277" height="62">

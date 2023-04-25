@@ -45,6 +45,8 @@ const ServiceProviderSchema = new mongoose.Schema(
           "nanny",
           "physiotherapist",
           "special-care:autism",
+          "special-care:ADHD",
+          "special-care:Alzheimer's and Dementia",
         ],
         required: true,
       },
@@ -101,7 +103,7 @@ ServiceProviderSchema.methods.createToken = async function () {
   const accessToken = jwt.sign(
     {
       id: provider._id,
-      userType:"serviceProvider"
+      userType: "serviceProvider",
     },
     process.env.JWT_SEC,
     { expiresIn: "2d" }

@@ -3,17 +3,29 @@ import Box from "@mui/material/Box";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
-
-const steps = [
-  "Basic Information",
-  "Personal Information",
-  "Address",
-  // "Documents",
-  // "Work Experince",
-  "Finished"
-];
+import { useSelector } from "react-redux";
 
 export default function ProgressBar(props) {
+  const userType = useSelector((state) => state.userInfo.type);
+  let steps;
+  if (userType === "Care Beneficiary") {
+    steps = [
+      "Basic Information",
+      "Personal Information",
+      "Address",
+      "Finished",
+    ];
+  } else if (userType === "Care giver") {
+    steps = [
+      "Basic Information",
+      "Personal Information",
+      "Address",
+      "Work Experince",
+      "Documents",
+      "Finished",
+    ];
+  }
+
   return (
     <Box sx={{ width: "100%" }}>
       <Stepper activeStep={props.stepNum} alternativeLabel>

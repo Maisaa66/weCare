@@ -6,6 +6,8 @@ import CheckUser from "./Pages/CheckUser/CheckUser";
 import StepOne from "./Pages/Signup/Step1";
 import StepTwo from "./Pages/Signup/Step2";
 import StepThree from "./Pages/Signup/Step3";
+import StepFour from "./Pages/Signup/Step4";
+import StepFive from "./Pages/Signup/Step5";
 import * as React from "react";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 
@@ -36,6 +38,14 @@ const router = createBrowserRouter([
     element: <StepThree />,
   },
   {
+    path: "/signup/stepfour",
+    element: <StepFour />,
+  },
+  {
+    path: "/signup/stepfive",
+    element: <StepFive />,
+  },
+  {
     path: "/checkuser",
     element: <CheckUser />,
   },
@@ -43,20 +53,20 @@ const router = createBrowserRouter([
 
 function App() {
   return (
-      <div className="App">
-        <RouterProvider router={router}>
-          <Outlet />
-        </RouterProvider>
-        {/* <Home></Home> */}
-        {/* <FileUpload></FileUpload> */}
-        {/* <Login></Login> */}
-        {/* <Signup></Signup> */}
-        {/* <StepOne></StepOne> */}
-        {/* <StepThree></StepThree> */}
-        {/* <StepTwo></StepTwo> */}
-        {/* <Footer></Footer> */}
-        {/* <TextField id="filled-basic" label="Filled" variant="filled" /> */}
-      </div>
+    <div className="App">
+      <RouterProvider router={router}>
+        <Outlet />
+      </RouterProvider>
+      {/* <Home></Home> */}
+      {/* <FileUpload></FileUpload> */}
+      {/* <Login></Login> */}
+      {/* <Signup></Signup> */}
+      {/* <StepOne></StepOne> */}
+      {/* <StepThree></StepThree> */}
+      {/* <StepTwo></StepTwo> */}
+      {/* <Footer></Footer> */}
+      {/* <TextField id="filled-basic" label="Filled" variant="filled" /> */}
+    </div>
   );
 }
 

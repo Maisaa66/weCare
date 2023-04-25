@@ -2,7 +2,6 @@ import * as React from "react";
 import Avatar from "@mui/material/Avatar";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import { Link, useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
@@ -12,9 +11,24 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import classes from "./signup.module.css";
 import ProgressBar from "../../components/UI/ProgressBar/ProgressBar";
 import DropDown from "../../components/UI/DropDown/DropDown";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setUserDetails } from "../../Redux Store/slices/userInfo";
+import { addUser } from "../../Redux Store/slices/userSlice";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormControl from "@mui/material/FormControl";
+import FormLabel from "@mui/material/FormLabel";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+// import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+// import { DatePicker } from "@mui/x-date-picker";
+// import { DatePicker } from "@mui/x-date-picker/DatePicker";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { DropzoneArea } from "material-ui-dropzone";
 
 function Copyright(props) {
   return (
@@ -67,35 +81,42 @@ const theme = createTheme({
   },
 });
 
-export default function StepOne() {
-  const dropDownObj = {
-    title: "Gender",
-    options: ["female", "male"],
-  };
-  //states
+export default function StepFive() {
   const [userData, setUserData] = useState({
-    phoneNum: "",
-    nationalID: "",
-    gender: "",
+    serviceType: "",
+    title: "",
+    expertise: "",
+    hourlyRate: "",
+    nightShift: false,
+    dateOfBirth: "",
   });
-
+  const [startDate, setStartDate] = useState(new Date());
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  //   const styles = useStyles();
+
   const handleSubmit = (event) => {
     event.preventDefault();
-
+    setUserData({ ...userData, dateOfBirth: startDate });
     dispatch(setUserDetails(userData));
     navigate("/signup/steptwo");
   };
-
   const handleChange = (event) => {
     const { name, value } = event.target;
     setUserData({ ...userData, [name]: value });
   };
-
+  const dropDownObj = {
+    title: "Service Type",
+    options: [
+      "Companion",
+      "Nanny",
+      "Physiotherapist",
+      "Special-Care:Autism",
+      "Special-Care:ADHD",
+      "Special-Care:Alzheimer's and Dementia",
+    ],
+  };
   const handleDropDownChange = (value) => {
-    setUserData({ ...userData, gender: value });
+    setUserData({ ...userData, serviceType: value });
   };
 
   return (
@@ -135,81 +156,12 @@ export default function StepOne() {
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5" sx={{ m: 2 }}>
-              Lets get to know you
+              Share your experience with us!
             </Typography>
             <Box sx={{ m: 3 }}>
-              <ProgressBar stepNum={1}></ProgressBar>
+              <ProgressBar stepNum={4}></ProgressBar>
             </Box>
-
-            <Box
-              component="form"
-              onSubmit={handleSubmit}
-              noValidate
-              sx={{ mt: 1 }}
-            >
-              <Grid container spacing={2}>
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    variant="standard"
-                    margin="normal"
-                    required
-                    fullWidth
-                    id="phoneNum"
-                    label="Phone Number"
-                    name="phoneNum"
-                    autoComplete="phoneNum"
-                    sx={{ textAlign: "left" }}
-                    value={userData.phoneNum}
-                    onChange={handleChange}
-                  />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <DropDown
-                    dropDownObj={dropDownObj}
-                    handleDropDownChange={handleDropDownChange}
-                  ></DropDown>
-                </Grid>
-              </Grid>
-
-              <TextField
-                variant="standard"
-                margin="normal"
-                required
-                fullWidth
-                name="nationalID"
-                label="National ID"
-                type="text"
-                id="nationalID"
-                autoComplete="nationalID"
-                color="primary"
-                sx={{ textAlign: "left" }}
-                value={userData.nationalID}
-                onChange={handleChange}
-              />
-
-              <div>
-                <button type="submit" className={`${classes.btn}`}>
-                  <svg width="277" height="62">
-                    <defs>
-                      <linearGradient id="grad1">
-                        <stop offset="0%" stopColor="#66b9a6" />
-                        <stop offset="100%" stopColor="#5fe4c5" />
-                      </linearGradient>
-                    </defs>
-                    <rect
-                      x="5"
-                      y="5"
-                      rx="25"
-                      fill="none"
-                      stroke="url(#grad1)"
-                      width="266"
-                      height="50"
-                    ></rect>
-                  </svg>
-                  <span>Next</span>
-                </button>
-              </div>
-            </Box>
+            <DropzoneArea onChange={(files) => console.log("Files:", files)} />
           </Box>
           <Copyright sx={{ mt: 2, mb: 5 }} />
         </Container>
