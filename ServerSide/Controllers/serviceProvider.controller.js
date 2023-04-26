@@ -1,6 +1,43 @@
 const serviceProviderModel = require("../Models/serviceProvider.model");
 const bcrypt = require("bcrypt");
+class APIFeatures {
+  constructor(query, queryStr) {
+    this.query = query;
+    this.queryStr = queryStr;
+  }
 
+  filter() {
+    console.log("filtering");
+    const queryObj = { ...this.queryStr };
+    const queryFields = ["limit", "sort", "page", "fields"];
+    queryFields.forEach((field) => delete queryObj[field]);
+    //Advanced query
+    let queryStr = JSON.stringify(queryObj);
+    queryStr = queryStr.replace(
+      /\b(gt|gte|lt|lte)\b/g,
+      (matched) => `$${matched}`
+    );
+    console.log(queryStr);
+    this.query = this.query.find(JSON.parse(queryStr));
+    return this;
+  }
+  sort() {
+    // console.log('sorting');
+    if (this.queryStr.sort) {
+      const sorting = this.queryStr.sort.split(",").join(" ");
+      this.query = this.query.sort(sorting);
+    } else {
+      this.query = this.query.sort("_id");
+    }
+    return this;
+  }
+  limit() {
+    if (this.queryStr.limit) {
+      this.query = this.query.limit(5);
+    }
+    return this;
+  }
+}
 class ServiceProvider {
   static login = async (req, res) => {
     try {
@@ -35,7 +72,7 @@ class ServiceProvider {
         httpOnly: true,
         maxAge: 2 * 24 * 60 * 60 * 1000,
       });
-      const {password, ...other} = sProvider._doc
+      const { password, ...other } = sProvider._doc;
       res.status(200).json({
         status: "success",
         results: 1,
@@ -51,7 +88,9 @@ class ServiceProvider {
 
   static getProviders = async (req, res) => {
     try {
-      const providers = await serviceProviderModel.find({});
+      const features = new APIFeatures(serviceProviderModel.find(), req.query);
+      features.filter().sort().limit();
+      const providers = await features.query;
       res.status(200).json({
         status: "success",
         results: providers.length,
@@ -73,7 +112,7 @@ class ServiceProvider {
         throw new Error("There is no provider with this ID!");
       }
 
-      const {password, ...other} = provider._doc
+      const { password, ...other } = provider._doc;
 
       res.status(200).json({
         status: "success",
@@ -104,7 +143,7 @@ class ServiceProvider {
       if (!provider) {
         throw new Error("There is no provider with this ID!");
       }
-      const {password, ...other} = provider._doc
+      const { password, ...other } = provider._doc;
 
       res.status(200).json({
         status: "success",
