@@ -1,7 +1,6 @@
 import * as React from "react";
 import Avatar from "@mui/material/Avatar";
 import CssBaseline from "@mui/material/CssBaseline";
-import { Link } from "react-router-dom";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
@@ -9,7 +8,13 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import classes from "./signup.module.css";
 import ProgressBar from "../../components/UI/ProgressBar/ProgressBar";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { setUserDetails } from "../../Redux Store/slices/userInfo";
+import "react-datepicker/dist/react-datepicker.css";
+import { useDropzone } from "react-dropzone";
+import { addProvider } from "../../Redux Store/slices/providerSlice";
 
 function Copyright(props) {
   return (
@@ -62,11 +67,29 @@ const theme = createTheme({
   },
 });
 
-export default function StepThree() {
-  const handleSubmit = (event) => {
+export default function StepFive() {
+  const [userData, setUserData] = useState({
+    documents: "",
+  });
+  const { acceptedFiles, getRootProps, getInputProps } = useDropzone();
+
+  const files = acceptedFiles.map((file) => (
+    <li key={file.path}>
+      {file.path} - {file.size} bytes
+    </li>
+  ));
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const userDetails = useSelector((state) => state.userInfo.userDetails);
+
+  const handleClick = (event) => {
     event.preventDefault();
+    setUserData({ ...userData, documents: files });
+    dispatch(setUserDetails(userData));
+    dispatch(addProvider(userDetails));
+    navigate("/signup/stepthree");
   };
-  const userType = useSelector((state) => state.userInfo.type);
 
   return (
     <ThemeProvider theme={theme}>
@@ -105,46 +128,55 @@ export default function StepThree() {
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5" sx={{ m: 2 }}>
-              Congratulations! ❤
+              Gain our trust with your credentials!
             </Typography>
             <Box sx={{ m: 3 }}>
-              {userType === "Care giver" ? (
-                <ProgressBar stepNum={5}></ProgressBar>
-              ) : (
-                <ProgressBar stepNum={3}></ProgressBar>
-              )}
+              <ProgressBar stepNum={4}></ProgressBar>
             </Box>
-
-            <Box
-              component="form"
-              onSubmit={handleSubmit}
-              noValidate
-              sx={{ mt: 1 }}
-            >
-              <div>
-                <a href="http://marcel-pirnay.be/" className={`${classes.btn}`}>
-                  <svg width="277" height="62">
-                    <defs>
-                      <linearGradient id="grad1">
-                        <stop offset="0%" stopColor="#66b9a6" />
-                        <stop offset="100%" stopColor="#5fe4c5" />
-                      </linearGradient>
-                    </defs>
-                    <rect
-                      x="5"
-                      y="5"
-                      rx="25"
-                      fill="none"
-                      stroke="url(#grad1)"
-                      width="266"
-                      height="50"
-                    ></rect>
-                  </svg>
-                  <span>Go To Profile</span>
-                </a>
-              </div>
+            <Box>
+              <section className="container">
+                <div {...getRootProps({ className: "dropzone" })}>
+                  <input {...getInputProps()} />
+                  <p
+                    style={{
+                      backgroundColor: "#daefea",
+                      padding: "50px",
+                      borderRadius: "10px",
+                    }}
+                  >
+                    Drag 'n' drop some files here, or click to select files
+                  </p>
+                </div>
+                <aside>
+                  {files.length !== 0 && <h4>Uploaded Files</h4>}
+                  <ul>{files}</ul>
+                </aside>
+              </section>
             </Box>
+            <div>
+              <button onClick={handleClick} className={`${classes.btn}`}>
+                <svg width="277" height="62">
+                  <defs>
+                    <linearGradient id="grad1">
+                      <stop offset="0%" stopColor="#66b9a6" />
+                      <stop offset="100%" stopColor="#5fe4c5" />
+                    </linearGradient>
+                  </defs>
+                  <rect
+                    x="5"
+                    y="5"
+                    rx="25"
+                    fill="none"
+                    stroke="url(#grad1)"
+                    width="266"
+                    height="50"
+                  ></rect>
+                </svg>
+                <span>Next</span>
+              </button>
+            </div>
           </Box>
+
           <Copyright sx={{ mt: 2, mb: 5 }} />
         </Container>
       </Box>

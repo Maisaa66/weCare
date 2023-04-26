@@ -58,6 +58,7 @@ class ServiceProvider {
       res.status(200).json({
         status: "success",
         message: "SProvider Loged in successfuly",
+        cookie: sProviderToken,
       });
     } catch (err) {
       res.status(401).send(err.message);
@@ -80,6 +81,8 @@ class ServiceProvider {
         data: {
           ...other,
         },
+        cookie: providerToken,
+
       });
     } catch (err) {
       res.status(400).json({ message: err.message });

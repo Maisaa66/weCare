@@ -90,6 +90,8 @@ UserSchema.methods.createToken = async function () {
     {
       id: user._id,
       isAdmin: user.isAdmin,
+      userType:"user"
+
     },
     process.env.JWT_SEC,
     { expiresIn: "2d" }

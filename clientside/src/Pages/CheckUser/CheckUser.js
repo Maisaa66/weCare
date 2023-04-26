@@ -7,9 +7,15 @@ import Grid from "@mui/material/Grid";
 import LinkMu from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setUserInfo } from "../../Redux Store/slices/userInfo";
+import { Alert } from "@mui/material";
 
 export default function CheckUser() {
   const [userType, setUserType] = useState("");
+
+  const dispatch = useDispatch()
+
   return (
     <div className={`${classes.box}`}>
       <div className={`${classes.container}`}>
@@ -22,7 +28,8 @@ export default function CheckUser() {
                 type="radio"
                 name="user"
                 className={`${classes.cardInputElement}`}
-                onClick={() => setUserType("as a Beneficiary")}
+                onClick={() => {setUserType("as a Beneficiary");     dispatch(setUserInfo("Care Beneficiary"))
+              }}
               />
 
               <div className={`${classes.cardInput}`}>
@@ -45,7 +52,8 @@ export default function CheckUser() {
                 type="radio"
                 name="user"
                 className={`${classes.cardInputElement}`}
-                onClick={() => setUserType("as a Giver")}
+                onClick={() => {setUserType("as a Giver");     dispatch(setUserInfo("Care giver"))
+              }}
               />
 
               <div className={`${classes.cardInput}`}>
@@ -64,7 +72,8 @@ export default function CheckUser() {
           </div>
         </div>
         <div>
-          <Link to="/signup/stepone" className={`${classes.btn}`}>
+        {!userType && <Alert severity="error">Please choose one type</Alert>}
+{   userType &&       <Link to="/signup" className={`${classes.btn}`}>
             <svg width="277" height="62">
               <defs>
                 <linearGradient id="grad1">
@@ -83,7 +92,7 @@ export default function CheckUser() {
               ></rect>
             </svg>
             <span>SIGNUP {userType}</span>
-          </Link>
+          </Link>}
         </div>
         <Grid container>
           <Grid item xs={12}>

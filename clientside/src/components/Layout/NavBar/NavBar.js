@@ -2,15 +2,30 @@ import { List } from "react-bootstrap-icons";
 import classes from "./NavBar.module.css";
 import { Link, Outlet } from "react-router-dom";
 import { Search } from "react-bootstrap-icons";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 function NavBar() {
+  const navigate = useNavigate();
+  const [isLogged, setIsLogged] = useState(false);
+  useEffect(() => {
+    if (document.cookie.includes("jwt")) {
+      setIsLogged(true);
+    }
+  }, []);
+  // Delete Cookie
+  const deleteCookie = () => {
+    document.cookie = "jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    setIsLogged(false);
+  };
   return (
     <>
       {" "}
       <nav className="navbar navbar-expand-lg shadow-none py-3">
         <div className="container justify-content-between">
-          <a className="navbar-brand d-lg-block d-none m-0" href="#">
+          <Link to="/" className="navbar-brand d-lg-block d-none m-0">
             Navbar
-          </a>
+          </Link>
           <button
             className={`navbar-toggler m-lg-auto me-sm-auto   ${classes.toggler}`}
             type="button"
@@ -126,34 +141,41 @@ function NavBar() {
                 About
               </a>
             </li> */}
-          
             </ul>
           </div>
           {/* <a href="#login" className="mybtn mybtnLightSolid">
           Login/Register
         </a> */}
-       <form className="flex-grow-1 d-flex py-3 me-0 justify-content-center">
-        <input
-          className={classes.search}
-          // class="form-control me-2 search shadow-none"
-          type="search"
-          placeholder="Search"
-          aria-label="Search"
-        ></input>
-        <button className={classes.searchBtn} type="submit">
-        <Search></Search>
-        </button>
-      </form>
-      <a href="#login" className="mybtn mybtnLightSolid m-auto">
-        Login/Register
-      </a>
+          <form className="flex-grow-1 d-flex py-3 me-0 justify-content-center">
+            <input
+              className={classes.search}
+              // class="form-control me-2 search shadow-none"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+            ></input>
+            <button className={classes.searchBtn} type="submit">
+              <Search></Search>
+            </button>
+          </form>
+          {isLogged ? (
+            <Link
+              to="/"
+              className="mybtn mybtnLightSolid m-auto"
+              onClick={deleteCookie}
+            >
+              Logout
+            </Link>
+          ) : (
+            <Link to="/login" className="mybtn mybtnLightSolid m-auto">
+              Login
+            </Link>
+          )}
         </div>
-       
       </nav>
-      <a className="navbar-brand d-lg-none d-block m-auto m-0" href="#">
+      <Link to="/" className="navbar-brand d-lg-none d-block m-auto m-0">
         Navbar
-      </a>
-      
+      </Link>
     </>
   );
 }

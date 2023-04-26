@@ -2,7 +2,6 @@ import * as React from "react";
 import Avatar from "@mui/material/Avatar";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
@@ -12,6 +11,11 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import classes from "./signup.module.css";
 import ProgressBar from "../../components/UI/ProgressBar/ProgressBar";
 import DropDown from "../../components/UI/DropDown/DropDown";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setUserDetails } from "../../Redux Store/slices/userInfo";
+import { addUser } from "../../Redux Store/slices/userSlice";
 
 function Copyright(props) {
   return (
@@ -22,7 +26,7 @@ function Copyright(props) {
       {...props}
     >
       {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
+      <Link color="inherit" to="/">
         weCare
       </Link>{" "}
       {new Date().getFullYear()}
@@ -69,13 +73,55 @@ export default function StepTwo() {
     title: "Country",
     options: ["Egypt", "Canada"],
   };
+  const navigate = useNavigate();
+  const userType = useSelector((state) => state.userInfo.type);
+
+  //states
+  const [userData, setUserData] = useState({});
+
+  const [address, setAddress] = useState(
+    userType === "Care Beneficiary"
+      ? {
+          country: "",
+          governate: "",
+          area: "",
+          street: "",
+          buildingNum: "",
+          apartmentNum: "",
+        }
+      : {
+          country: "",
+          governate: "",
+        }
+  );
+
+  const dispatch = useDispatch();
+  const userDetails = useSelector((state) => state.userInfo.userDetails);
+
+  //   const styles = useStyles();
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    setUserData({ ...userData, address });
+    // console.log(userDetails);
+    // console.log(userData)
+    dispatch(setUserDetails(userData));
+    console.log(userDetails);
+
+    if (userType === "Care giver") {
+      navigate("/signup/stepfour");
+    } else if (userType === "Care Beneficiary") {
+      dispatch(addUser(userDetails));
+    }
+  };
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setAddress({ ...address, [name]: value });
+    setUserData({ ...userData, address: { ...address, [name]: value } });
+  };
+
+  const handleDropDownChange = (value) => {
+    setAddress({ ...address, country: value });
   };
 
   return (
@@ -118,7 +164,7 @@ export default function StepTwo() {
               One Step Closer ...
             </Typography>
             <Box sx={{ m: 3 }}>
-              <ProgressBar stepNum={1}></ProgressBar>
+              <ProgressBar stepNum={2}></ProgressBar>
             </Box>
 
             <Box
@@ -127,9 +173,12 @@ export default function StepTwo() {
               noValidate
               sx={{ mt: 1 }}
             >
-              <Grid container spacing={2} >
+              <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
-                  <DropDown dropDownObj={dropDownObj}></DropDown>
+                  <DropDown
+                    dropDownObj={dropDownObj}
+                    handleDropDownChange={handleDropDownChange}
+                  ></DropDown>
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <TextField
@@ -142,70 +191,83 @@ export default function StepTwo() {
                     name="governate"
                     autoComplete="governate"
                     sx={{ textAlign: "left" }}
+                    value={address.governate}
+                    onChange={handleChange}
                   />
                 </Grid>
+              </Grid>
+              {userType === "Care Beneficiary" && (
+                <Box>
+                  <Grid container spacing={2}>
+                    <Grid item xs={12} sm={6}>
+                      <TextField
+                        variant="standard"
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="area"
+                        label="Area"
+                        name="area"
+                        autoComplete="area"
+                        sx={{ textAlign: "left" }}
+                        value={address.area}
+                        onChange={handleChange}
+                      />
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                      <TextField
+                        variant="standard"
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="street"
+                        label="Street"
+                        name="street"
+                        autoComplete="street"
+                        sx={{ textAlign: "left" }}
+                        value={address.street}
+                        onChange={handleChange}
+                      />
+                    </Grid>
+                  </Grid>
 
-              </Grid>
+                  <Grid container spacing={2}>
+                    <Grid item xs={12} sm={6}>
+                      <TextField
+                        variant="standard"
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="buildingNum"
+                        label="Builiding Number"
+                        name="buildingNum"
+                        autoComplete="buildingNum"
+                        sx={{ textAlign: "left" }}
+                        value={address.buildingNum}
+                        onChange={handleChange}
+                      />
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                      <TextField
+                        variant="standard"
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="apartmentNum"
+                        label="Apartment Number"
+                        name="apartmentNum"
+                        autoComplete="apartmentNum"
+                        sx={{ textAlign: "left" }}
+                        value={address.apartmentNum}
+                        onChange={handleChange}
+                      />
+                    </Grid>
+                  </Grid>
+                </Box>
+              )}
 
-              <Grid container spacing={2} >
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    variant="standard"
-                    margin="normal"
-                    required
-                    fullWidth
-                    id="area"
-                    label="Area"
-                    name="area"
-                    autoComplete="area"
-                    sx={{ textAlign: "left" }}
-                  />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    variant="standard"
-                    margin="normal"
-                    required
-                    fullWidth
-                    id="street"
-                    label="Street"
-                    name="street"
-                    autoComplete="street"
-                    sx={{ textAlign: "left" }}
-                  />
-                </Grid>
-              </Grid>
-             
-              <Grid container spacing={2} >
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    variant="standard"
-                    margin="normal"
-                    required
-                    fullWidth
-                    id="builidingNum"
-                    label="Builiding Number"
-                    name="BuilidingNum"
-                    autoComplete="builidingNum"
-                    sx={{ textAlign: "left" }}
-                  />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    variant="standard"
-                    margin="normal"
-                    required
-                    fullWidth
-                    id="apartmentNum"
-                    label="Apartment Number"
-                    name="apartmentNum"
-                    autoComplete="apartmentNum"
-                    sx={{ textAlign: "left" }}
-                  />
-                </Grid>
-              </Grid>
               <div>
-                <a href="http://marcel-pirnay.be/" className={`${classes.btn}`}>
+                <button type="submit" className={`${classes.btn}`}>
                   <svg width="277" height="62">
                     <defs>
                       <linearGradient id="grad1">
@@ -223,8 +285,8 @@ export default function StepTwo() {
                       height="50"
                     ></rect>
                   </svg>
-                  <span>next</span>
-                </a>
+                  <span>Next</span>
+                </button>
               </div>
             </Box>
           </Box>

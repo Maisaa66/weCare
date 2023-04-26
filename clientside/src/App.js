@@ -1,20 +1,14 @@
 import "./App.css";
-import Button from "./components/UI/Buttons/Button";
-// import Login from "./Pages/Login";
-import NavBar from "./components/Layout/NavBar/NavBar";
-import Footer from "./components/Layout/Footer/Footer";
 import Home from "./components/Pages/Home/Home";
 import Login from "./Pages/Login/Login";
 import Signup from "./Pages/Signup/Signup";
 import CheckUser from "./Pages/CheckUser/CheckUser";
-// import ProgressBar from "./components/UI/ProgressBar/ProgressBar";
 import StepOne from "./Pages/Signup/Step1";
 import StepTwo from "./Pages/Signup/Step2";
-// import FileUpload from "./components/UI/FileUpload.js/FileUpload";
 import StepThree from "./Pages/Signup/Step3";
-import TextField from "@mui/material/TextField";
+import StepFour from "./Pages/Signup/Step4";
+import StepFive from "./Pages/Signup/Step5";
 import * as React from "react";
-import * as ReactDOM from "react-dom";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 
 const router = createBrowserRouter([
@@ -25,16 +19,31 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />,
+    children: [{ path: "home", element: <Home></Home> }],
   },
   {
     path: "/signup",
     element: <Signup />,
-    children: [
-      {
-        path: "stepone",
-        element: <StepOne />,
-      },
-    ],
+  },
+  {
+    path: "/signup/stepone",
+    element: <StepOne />,
+  },
+  {
+    path: "/signup/steptwo",
+    element: <StepTwo />,
+  },
+  {
+    path: "/signup/stepthree",
+    element: <StepThree />,
+  },
+  {
+    path: "/signup/stepfour",
+    element: <StepFour />,
+  },
+  {
+    path: "/signup/stepfive",
+    element: <StepFive />,
   },
   {
     path: "/checkuser",
@@ -45,8 +54,9 @@ const router = createBrowserRouter([
 function App() {
   return (
     <div className="App">
-      <RouterProvider router={router} />
-      <Outlet />
+      <RouterProvider router={router}>
+        <Outlet />
+      </RouterProvider>
       {/* <Home></Home> */}
       {/* <FileUpload></FileUpload> */}
       {/* <Login></Login> */}

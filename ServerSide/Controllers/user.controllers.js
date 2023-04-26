@@ -41,6 +41,8 @@ class User {
         data: {
           ...other,
         },
+        cookie: userToken,
+
       });
     } catch (err) {
       res.status(400).json({ message: err.message });
@@ -167,6 +169,7 @@ class User {
       res.status(200).json({
         status: "success",
         message: "User Logged in successfully",
+        cookie: userToken,
       });
     } catch (err) {
       res.status(401).send(err.message);
