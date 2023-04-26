@@ -6,8 +6,12 @@ const bcrypt = require("bcrypt");
 class User {
   static getAllUsers = async (req, res) => {
     try {
-      console.log(userModel);
-      const users = await userModel.find({});
+      let queryStr = JSON.stringify(req.query);
+      queryStr = queryStr.replace(
+        /\b(gt|gte|lt|lte)\b/g,
+        (matched) => `$${matched}`
+      );
+      const users = await userModel.find(JSON.parse(queryStr));
       res.status(200).json({
         status: "success",
         results: users.length,
