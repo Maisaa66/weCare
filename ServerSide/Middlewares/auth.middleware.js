@@ -19,6 +19,7 @@ class Auth {
       console.log(error);
     }
   };
+
   static verifyTokenAndAuthorization = (req, res, next) => {
     this.verifyToken(req, res, () => {
       // console.log(req.userToken.id, req.params.id);

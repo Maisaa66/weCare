@@ -41,44 +41,38 @@ function NavBar() {
             className={`collapse justify-content-end navbar-collapse ${classes.collapsed}`}
             id="navbarSupportedContent"
           >
-            <ul
-              className={`navbar-nav m-lg-auto me-sm-auto ${classes.navList}`}
-            >
+            <ul className={`navbar-nav m-lg-auto me-sm-auto ${classes.navList}`}>
               <li className="nav-item">
-                <a
+                <Link
                   className={`nav-link ${classes.navLink}`}
                   aria-current="page"
-                  href="#"
+                  to="/provider?provider=Nurses"
                 >
                   Nurses
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a
+                <Link
                   className={`nav-link ${classes.navLink}`}
                   aria-current="page"
-                  href="#"
+                  to="/provider?provider=Companionship"
                 >
                   Companionship
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a
+                <Link
                   className={`nav-link ${classes.navLink}`}
                   aria-current="page"
-                  href="#"
+                  to="/provider?provider=Physiotherapy"
                 >
                   Physiotherapy
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a
-                  className={`nav-link ${classes.navLink}`}
-                  aria-current="page"
-                  href="#"
-                >
+                <Link className={`nav-link ${classes.navLink}`} aria-current="page" to="/provider">
                   Nannys
-                </a>
+                </Link>
               </li>
               <li className="nav-item dropdown ">
                 <a
@@ -159,11 +153,7 @@ function NavBar() {
             </button>
           </form>
           {isLogged ? (
-            <Link
-              to="/"
-              className="mybtn mybtnLightSolid m-auto"
-              onClick={deleteCookie}
-            >
+            <Link to="/" className="mybtn mybtnLightSolid m-auto" onClick={deleteCookie}>
               Logout
             </Link>
           ) : (

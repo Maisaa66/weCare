@@ -2,16 +2,18 @@ import React from "react";
 
 import classes from "./Service.module.css";
 
-const Service = () => {
+const Service = ({ ico, provider, sDesc }) => {
   return (
-    <div className={`${classes.card} d-flex flex-column justify-content-around`}>
-      <div className="icon">
-        <div className={`${classes.icon_container}`}>
-          <i className={`fa-solid fa-user-nurse ${classes.icon_size}`}></i>
+    <div className="col-4">
+      <div className={`${classes.card} d-flex flex-column justify-content-around m-auto mt-5 px-3`}>
+        <div className="icon">
+          <div className={`${classes.icon_container}`}>
+            <i className={`${ico} ${classes.icon_size}`}></i>
+          </div>
         </div>
+        <h3 className={classes.header}>{provider}</h3>
+        <p>{sDesc}</p>
       </div>
-      <h3 className={classes.header}>Senior Care</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
     </div>
   );
 };

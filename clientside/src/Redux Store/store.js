@@ -4,8 +4,8 @@ import providerSlice from "./slices/providerSlice";
 import userInfo from "./slices/userInfo";
 import storage from "redux-persist/lib/storage";
 import { persistReducer, persistStore } from "redux-persist";
-import logger from 'redux-logger';
-import thunk from 'redux-thunk';
+import logger from "redux-logger";
+import thunk from "redux-thunk";
 // create a persisted reducer, and pass it to the store
 // this will persist the state in the local storage
 const persistConfig = {
@@ -23,7 +23,7 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const store = configureStore({
   reducer: persistedReducer,
-    middleware: [thunk, logger],
+  middleware: [thunk, logger],
 });
 
 const persistor = persistStore(store);
