@@ -41,6 +41,20 @@ const Provider = () => {
       </div>
     );
 
+  if (!data.length) {
+    return (
+      <>
+        <h1 className="text-center mt-5">{provider}</h1>
+        <Filter />
+        <div className="container">
+          <div className="row mt-5">
+            <h1 className="text-center">No Providers Found</h1>
+          </div>
+        </div>
+      </>
+    );
+  }
+  
   if (data) {
     return (
       <>

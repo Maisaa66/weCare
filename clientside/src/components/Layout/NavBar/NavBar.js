@@ -64,7 +64,7 @@ function NavBar() {
                 <Link
                   className={`nav-link ${classes.navLink}`}
                   aria-current="page"
-                  to="/provider?provider=Physiotherapy"
+                  to="/provider?provider=Physiotherapist"
                 >
                   Physiotherapy
                 </Link>
@@ -96,7 +96,7 @@ function NavBar() {
                   <li>
                     <Link
                       className={`dropdown-item ${classes.dropDown}`}
-                      to="/provider?provider=Autism"
+                      to="/provider?provider=Special-Care:Autism"
                     >
                       Autism
                     </Link>
@@ -104,7 +104,7 @@ function NavBar() {
                   <li>
                     <Link
                       className={`dropdown-item ${classes.dropDown}`}
-                      to="/provider?provider=Autism"
+                      to="/provider?provider=Special-Care:Alzheimer's and Dementia"
                     >
                       Alzheimer's and Dementia
                     </Link>
@@ -113,7 +113,7 @@ function NavBar() {
                   <li>
                     <Link
                       className={`dropdown-item ${classes.dropDown}`}
-                      to="/provider?provider=ADHD"
+                      to="/provider?provider=Special-Care:ADHD"
                     >
                       ADHD
                     </Link>

@@ -14,7 +14,7 @@ const Select = ({ size, values, defaultText, onChange }) => {
         </option>
         {values.map((value) => {
           return (
-            <option value={value} key={Math.random()}>
+            <option value={value} key={value}>
               {value}
             </option>
           );
