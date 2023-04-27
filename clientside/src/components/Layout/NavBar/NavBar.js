@@ -21,7 +21,7 @@ function NavBar() {
   return (
     <>
       {" "}
-      <nav className="navbar navbar-expand-lg shadow-none py-3">
+      <nav className="navbar navbar-expand-lg shadow-none py-1">
         <div className="container justify-content-between">
           <Link to="/" className="navbar-brand d-lg-block d-none m-0">
             Navbar
