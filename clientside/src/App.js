@@ -8,7 +8,11 @@ import StepTwo from "./Pages/Signup/Step2";
 import StepThree from "./Pages/Signup/Step3";
 import StepFour from "./Pages/Signup/Step4";
 import StepFive from "./Pages/Signup/Step5";
+
+
 import Filter from "./Pages/Filter/Filter";
+import UserDashBoard from "./Pages/userDashBoard/userDashBoard";
+import NavBar from "./components/Layout/NavBar/NavBar";
 import * as React from "react";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import Provider from "./Pages/Provider/Provider";
@@ -58,6 +62,8 @@ const router = createBrowserRouter([
   {
     path: "/provider",
     element: <Provider />,
+    path: "/userDashBoard",
+    element: <UserDashBoard />,
   },
 ]);
 

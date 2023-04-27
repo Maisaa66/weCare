@@ -21,7 +21,7 @@ function NavBar() {
   return (
     <>
       {" "}
-      <nav className="navbar navbar-expand-lg shadow-none py-3">
+      <nav className="navbar navbar-expand-lg shadow-none py-1">
         <div className="container justify-content-between">
           <Link to="/" className="navbar-brand d-lg-block d-none m-0">
             Navbar
@@ -176,9 +176,9 @@ function NavBar() {
           )}
         </div>
       </nav>
-      <Link to="/" className="navbar-brand d-lg-none d-block m-auto m-0">
+      {/* <Link to="/" className="navbar-brand d-lg-none d-block m-auto m-0">
         Navbar
-      </Link>
+      </Link> */}
     </>
   );
 }
