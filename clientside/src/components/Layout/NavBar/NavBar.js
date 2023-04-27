@@ -173,9 +173,9 @@ function NavBar() {
           )}
         </div>
       </nav>
-      <Link to="/" className="navbar-brand d-lg-none d-block m-auto m-0">
+      {/* <Link to="/" className="navbar-brand d-lg-none d-block m-auto m-0">
         Navbar
-      </Link>
+      </Link> */}
     </>
   );
 }
