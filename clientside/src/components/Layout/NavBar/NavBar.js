@@ -46,7 +46,7 @@ function NavBar() {
                 <Link
                   className={`nav-link ${classes.navLink}`}
                   aria-current="page"
-                  to="/provider?provider=Nurses"
+                  to="/provider?provider=Nurse"
                 >
                   Nurses
                 </Link>
@@ -55,7 +55,7 @@ function NavBar() {
                 <Link
                   className={`nav-link ${classes.navLink}`}
                   aria-current="page"
-                  to="/provider?provider=Companionship"
+                  to="/provider?provider=Companion"
                 >
                   Companionship
                 </Link>
@@ -70,7 +70,11 @@ function NavBar() {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className={`nav-link ${classes.navLink}`} aria-current="page" to="/provider">
+                <Link
+                  className={`nav-link ${classes.navLink}`}
+                  aria-current="page"
+                  to="/provider?provider=Nanny"
+                >
                   Nannys
                 </Link>
               </li>
@@ -90,20 +94,29 @@ function NavBar() {
                   aria-labelledby="navbarDropdown"
                 >
                   <li>
-                    <a className={`dropdown-item ${classes.dropDown}`} href="#">
+                    <Link
+                      className={`dropdown-item ${classes.dropDown}`}
+                      to="/provider?provider=Autism"
+                    >
                       Autism
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a className={`dropdown-item ${classes.dropDown}`} href="#">
+                    <Link
+                      className={`dropdown-item ${classes.dropDown}`}
+                      to="/provider?provider=Autism"
+                    >
                       Alzheimer's and Dementia
-                    </a>
+                    </Link>
                   </li>
                   <li></li>
                   <li>
-                    <a className={`dropdown-item ${classes.dropDown}`} href="#">
+                    <Link
+                      className={`dropdown-item ${classes.dropDown}`}
+                      to="/provider?provider=ADHD"
+                    >
                       ADHD
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </li>

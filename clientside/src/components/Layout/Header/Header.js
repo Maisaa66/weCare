@@ -46,9 +46,9 @@ function Header() {
           </div>
         </div>
         <div
-          class={`${classes.bigger} d-none d-md-block ${classes.smallBorder} ms-auto ${classes.zBefore} position-absolute`}
+          className={`${classes.bigger} d-none d-md-block ${classes.smallBorder} ms-auto ${classes.zBefore} position-absolute`}
         >
-          <div class={`${classes.customeImg} ${classes.shape} ms-auto`}></div>
+          <div className={`${classes.customeImg} ${classes.shape} ms-auto`}></div>
         </div>
       </div>
     </div>

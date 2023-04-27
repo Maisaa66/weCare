@@ -1,7 +1,6 @@
 import React from "react";
 
 const Select = ({ size, values, defaultText, onChange }) => {
-  // console.log(values);
   return (
     <div className={`${size} m-auto mt-4`}>
       <select

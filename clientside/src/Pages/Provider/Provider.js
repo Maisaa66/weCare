@@ -12,42 +12,61 @@ const Provider = () => {
   const query = new URLSearchParams(location.search);
   const provider = query.get("provider");
 
-  // state for checking
+  // state for checking if the data is loaded or not
   const [loading, setLoading] = useState(true);
 
+  // Redux
   const dispatch = useDispatch();
-
-  let providerType = useSelector((state) => state.provider.type);
-  // console.log("providerType ", providerType);
+  const data = useSelector((state) => state.provider.providersData);
+  // console.log("data", data);
 
   useEffect(() => {
-    dispatch(setProviderType(provider));
-    if (providerType) {
-      axios.get("http://localhost:7000/api/v1/providers/").then((res) => {
-        console.log("res.data ", res.data.data.providers);
+    axios
+      .get(`http://localhost:7000/api/v1/providers?serviceType=${provider.toLowerCase()}`)
+      .then((res) => {
+        // setData(res.data.data.providers);
+
+        // set the provider type and data in the redux store to be used in the filter component
+        dispatch(setProviderType(provider));
         dispatch(setProviderData(res.data.data.providers));
         setLoading(false);
       });
-    }
   }, []);
 
   // if provider data is not loaded yet, show a spinner
   if (loading)
     return (
-      <div class="spinner-grow text-success mt-5" role="status">
-        <span class="sr-only">Loading...</span>
+      <div className="spinner-grow text-success mt-5" role="status">
+        <span className="sr-only">Loading...</span>
       </div>
     );
 
-  return (
-    <>
-      <h1 className="text-center mt-5">{providerType}</h1>
-      <Filter />
-      <div className="container">
-        <ProviderCard />
-      </div>
-    </>
-  );
+  if (data) {
+    return (
+      <>
+        <h1 className="text-center mt-5">{provider}</h1>
+        <Filter />
+        <div className="container">
+          <div className="row mt-5">
+            {data.map((provider) => {
+              return (
+                <ProviderCard
+                  key={provider._id}
+                  fname={provider.firstName}
+                  lname={provider.lastName}
+                  title={provider.title}
+                  image={provider.profileImg}
+                  experties={provider.experties}
+                  hourlyRate={provider.hourlyRate}
+                  rating={provider.rating}
+                />
+              );
+            })}
+          </div>
+        </div>
+      </>
+    );
+  }
 };
 
 export default Provider;

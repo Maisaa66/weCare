@@ -17,7 +17,7 @@ export const providerSlice = createSlice({
   name: "providerSlice",
   initialState: {
     type: "",
-    nursesData: [],
+    providersData: [],
   },
   reducers: {
     //set user type
@@ -26,7 +26,7 @@ export const providerSlice = createSlice({
       // console.log("state.type ", state.type, "action.payload ", action.payload);
     },
     setProviderData: (state, action) => {
-      state.nursesData = action.payload;
+      state.providersData = action.payload;
       // console.log("state.nursesData ", state.nursesData, "action.payload ", action.payload);
     },
   },
