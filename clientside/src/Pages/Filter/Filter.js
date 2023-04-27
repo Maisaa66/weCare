@@ -28,22 +28,18 @@ const Filter = () => {
   };
 
   const priceHandler = (e) => {
-    console.log(e.target.value);
-    // if (e.target.value === "High-to-Low") {
-    //   axios
-    //     .get(`http://localhost:7000/api/v1/providers?sort=-price`)
-    //     .then((res) => {
-    //       console.log(res.data.data.providers);
-    //       dispatch(setProviderData(res.data.data.providers));
-    //     });
-    // } else if (e.target.value === "Low-to-High") {
-    //   axios
-    //     .get(`http://localhost:7000/api/v1/providers?sort=price`)
-    //     .then((res) => {
-    //       console.log(res.data.data.providers);
-    //       dispatch(setProviderData(res.data.data.providers));
-    //     });
-    // }
+    // console.log(e.target.value);
+    if (e.target.value === "High-to-Low") {
+      axios.get(`http://localhost:7000/api/v1/providers?sort=-hourlyRate`).then((res) => {
+        // console.log(res.data.data.providers);
+        dispatch(setProviderData(res.data.data.providers));
+      });
+    } else if (e.target.value === "Low-to-High") {
+      axios.get(`http://localhost:7000/api/v1/providers?sort=hourlyRate`).then((res) => {
+        // console.log(res.data.data.providers);
+        dispatch(setProviderData(res.data.data.providers));
+      });
+    }
   };
 
   const genderHandler = (e) => {
