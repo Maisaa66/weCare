@@ -41,44 +41,42 @@ function NavBar() {
             className={`collapse justify-content-end navbar-collapse ${classes.collapsed}`}
             id="navbarSupportedContent"
           >
-            <ul
-              className={`navbar-nav m-lg-auto me-sm-auto ${classes.navList}`}
-            >
+            <ul className={`navbar-nav m-lg-auto me-sm-auto ${classes.navList}`}>
               <li className="nav-item">
-                <a
+                <Link
                   className={`nav-link ${classes.navLink}`}
                   aria-current="page"
-                  href="#"
+                  to="/provider?provider=Nurse"
                 >
                   Nurses
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a
+                <Link
                   className={`nav-link ${classes.navLink}`}
                   aria-current="page"
-                  href="#"
+                  to="/provider?provider=Companion"
                 >
                   Companionship
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a
+                <Link
                   className={`nav-link ${classes.navLink}`}
                   aria-current="page"
-                  href="#"
+                  to="/provider?provider=Physiotherapist"
                 >
                   Physiotherapy
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a
+                <Link
                   className={`nav-link ${classes.navLink}`}
                   aria-current="page"
-                  href="#"
+                  to="/provider?provider=Nanny"
                 >
                   Nannys
-                </a>
+                </Link>
               </li>
               <li className="nav-item dropdown ">
                 <a
@@ -96,20 +94,29 @@ function NavBar() {
                   aria-labelledby="navbarDropdown"
                 >
                   <li>
-                    <a className={`dropdown-item ${classes.dropDown}`} href="#">
+                    <Link
+                      className={`dropdown-item ${classes.dropDown}`}
+                      to="/provider?provider=Special-Care:Autism"
+                    >
                       Autism
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a className={`dropdown-item ${classes.dropDown}`} href="#">
+                    <Link
+                      className={`dropdown-item ${classes.dropDown}`}
+                      to="/provider?provider=Special-Care:Alzheimer's and Dementia"
+                    >
                       Alzheimer's and Dementia
-                    </a>
+                    </Link>
                   </li>
                   <li></li>
                   <li>
-                    <a className={`dropdown-item ${classes.dropDown}`} href="#">
+                    <Link
+                      className={`dropdown-item ${classes.dropDown}`}
+                      to="/provider?provider=Special-Care:ADHD"
+                    >
                       ADHD
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </li>
@@ -159,11 +166,7 @@ function NavBar() {
             </button>
           </form>
           {isLogged ? (
-            <Link
-              to="/"
-              className="mybtn mybtnLightSolid m-auto"
-              onClick={deleteCookie}
-            >
+            <Link to="/" className="mybtn mybtnLightSolid m-auto" onClick={deleteCookie}>
               Logout
             </Link>
           ) : (

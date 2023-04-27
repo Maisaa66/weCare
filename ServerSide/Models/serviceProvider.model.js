@@ -89,6 +89,7 @@ ServiceProviderSchema.pre("save", async function (next) {
   this.password = await bcrypt.hash(this.password, salt);
   next();
 });
+
 ServiceProviderSchema.pre("findOneAndUpdate", async function (next) {
   if (this._update.password) {
     const salt = await bcrypt.genSalt();
