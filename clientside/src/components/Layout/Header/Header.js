@@ -2,7 +2,9 @@ import NavBar from "../NavBar/NavBar";
 // import SearchBar from "../Search/SearchBar";
 import classes from "./Header.module.css";
 // import Hero from "../../../assets/images/hero.png";
+import { useTranslation } from "react-i18next";
 function Header() {
+  const { t } = useTranslation();
   return (
     <div className={`${classes.header} `}>
       <div className="d-none d-lg-block">
@@ -23,8 +25,8 @@ function Header() {
         <div className="row text-start align-items-center">
           <div className="col-sm-12 col-lg-6">
             <h1 className="h1 my-2">
-              <span className={classes.span}>WeCare</span> is there to help you
-              at your home!
+              <span className={classes.span}>{t("slogan")}</span> is there to
+              help you at your home!
             </h1>
             <p className="lead my-4">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -46,9 +48,11 @@ function Header() {
           </div>
         </div>
         <div
-          class={`${classes.bigger} d-none d-md-block ${classes.smallBorder} ms-auto ${classes.zBefore} position-absolute`}
+          className={`${classes.bigger} d-none d-md-block ${classes.smallBorder} ms-auto ${classes.zBefore} position-absolute`}
         >
-          <div class={`${classes.customeImg} ${classes.shape} ms-auto`}></div>
+          <div
+            className={`${classes.customeImg} ${classes.shape} ms-auto`}
+          ></div>
         </div>
       </div>
     </div>
