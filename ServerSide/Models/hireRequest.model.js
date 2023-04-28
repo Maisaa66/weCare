@@ -23,11 +23,11 @@ const HireRequestSchema = new mongoose.Schema(
       required: [true, "Request must have an end date"],
     },
     customerId: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: String,
       required: [true, "Request must have a customer"],
     },
     providerId: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: String,
       required: [true, "Request must have a provider"],
     },
     totalHrs: {

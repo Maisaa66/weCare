@@ -2,7 +2,8 @@ const userModel = require("../Models/users.model");
 const hireRequestModel = require("../Models/hireRequest.model");
 const reviewModel = require("../Models/review.model");
 const bcrypt = require("bcrypt");
-
+const { default: mongoose } = require("mongoose");
+const ObjectId = mongoose.Types.ObjectId;
 class User {
   static getAllUsers = async (req, res) => {
     try {
@@ -132,6 +133,24 @@ class User {
     try {
       console.log(hireRequestModel);
       const requests = await hireRequestModel.find({});
+      res.status(200).json({
+        status: "success",
+        results: requests.length,
+        requestedAt: req.requestTime,
+        data: {
+          requests,
+        },
+      });
+    } catch (err) {
+      res.status(400).json({ message: err.message });
+    }
+  };
+  static getRequestById = async (req, res) => {
+    try {
+      console.log("req by id ",req.params.userId);
+      // const id = new mongoose.Types.ObjectId(req.params.userId);
+      // get all requests for a specific user
+      const requests = await hireRequestModel.find({customerId:req.params.userId});
       res.status(200).json({
         status: "success",
         results: requests.length,
