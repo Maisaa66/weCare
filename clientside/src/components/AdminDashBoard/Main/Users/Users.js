@@ -32,7 +32,6 @@ function Users() {
       .catch(err => console.log(err))
   }
   useEffect(() => {
-console.log('1');
   getAllUsers()
 
     axios.get(`http://localhost:7000/api/v1/${urlType}?ratings[gte]=4.8`, {
@@ -63,7 +62,7 @@ console.log('1');
   })
       .catch(err => console.log(err))
 
-  }, [])
+  }, [urlType])
 
   const handleDelete = (id) => {
     axios.delete(`http://localhost:7000/api/v1/${urlType}/${id}`, {

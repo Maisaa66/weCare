@@ -12,19 +12,12 @@ const { addTimeOfRequest } = require("./Middlewares/helpers.middleware");
 
 dotenv.config();
 const app = express();
-<<<<<<< Updated upstream
 app.use(
   cors({
     origin: "http://localhost:3000",
     credentials: true,
   })
 );
-=======
-app.use(cors({
-  origin: 'http://localhost:3000',
-  credentials: true,
-}));
->>>>>>> Stashed changes
 const PORT = process.env.PORT || 3000;
 const DBURL = process.env.DATABASE_URL.replace(
   "<password>",

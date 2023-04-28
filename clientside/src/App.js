@@ -18,17 +18,14 @@ import Users from "./components/AdminDashBoard/Main/Users/Users";
 import AllRequests from "./components/AdminDashBoard/Main/AllRequests/AllRequests";
 import SP from "./components/AdminDashBoard/Main/SP/SP";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
-<<<<<<< Updated upstream
 import Provider from "./Pages/Provider/Provider";
 import { useSelector } from "react-redux";
-
-// const authenticated = useSelector((state) => state.user.isAdmin);
-
-=======
 import AllDetails from "./components/AdminDashBoard/Main/AllDetails/AllDetails";
 import Update from "./components/AdminDashBoard/Main/Update/Update";
 import ReqDetails from "./components/AdminDashBoard/Main/AllRequests/ReqDetails";
->>>>>>> Stashed changes
+// const authenticated = useSelector((state) => state.user.isAdmin);
+
+
 const router = createBrowserRouter([
   {path:"/admin",element:<AdmindashBoard/>,children:[
     {path:'users',element:<Users></Users>},
