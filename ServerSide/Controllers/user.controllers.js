@@ -192,21 +192,13 @@ class User {
       res.status(400).json({ message: err.message });
     }
   };
+  
   static getRequestById = async (req, res) => {
     try {
-<<<<<<< Updated upstream
-      console.log("req by id ", req.params.id);
-      // const id = new mongoose.Types.ObjectId(req.params.userId);
-      // get all requests for a specific user
-      const requests = await hireRequestModel.find({
-        customerId: req.params.id,
-      });
-=======
       console.log("req by id ",req.params.id);
       // const id = new mongoose.Types.ObjectId(req.params.userId);
       // get all requests for a specific user
       const requests = await hireRequestModel.find({customerId:req.params.id});
->>>>>>> Stashed changes
       res.status(200).json({
         status: "success",
         results: requests.length,
