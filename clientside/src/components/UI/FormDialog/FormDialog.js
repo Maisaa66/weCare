@@ -6,10 +6,14 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import DialogTitle from "@mui/material/DialogTitle";
+import axios from "axios";
+import { useSelector } from "react-redux";
 
-export default function FormDialog({ data }) {
+export default function FormDialog({ data, updateData }) {
   const [open, setOpen] = React.useState(false);
 
+  const [updatedData, setUpdatedData] = React.useState(data.value);
+  const id = useSelector((state) => state.user.id);
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -17,6 +21,22 @@ export default function FormDialog({ data }) {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const handleUpdate = async () => {
+    await axios.patch(`http://localhost:7000/api/v1/users/${id}`, {[data.name]: updatedData},     {
+      withCredentials: true,
+      headers: {
+        "Access-Control-Allow-Origin": "http://localhost:3000",
+        "Content-Type": "application/json",
+      },
+    } )
+    .then((res)=>{
+      console.log(res);
+      updateData({[data.name]: updatedData});
+      setOpen(false);
+    }).catch((err)=>{console.log(err)})
+  }
+
 
   const theme = createTheme({
     palette: {
@@ -62,15 +82,16 @@ export default function FormDialog({ data }) {
               margin="dense"
               id={data.name}
               label={data.label}
-              value={data.value}
+              value={updatedData}
               type="text"
               fullWidth
               variant="standard"
+              onChange={(e) => setUpdatedData(e.target.value)}
             />
           </DialogContent>
           <DialogActions>
             <Button onClick={handleClose}>Cancel</Button>
-            <Button onClick={handleClose}>Update</Button>
+            <Button onClick={handleUpdate}>Update</Button>
           </DialogActions>
         </Dialog>
       </div>

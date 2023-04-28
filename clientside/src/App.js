@@ -8,13 +8,16 @@ import StepTwo from "./Pages/Signup/Step2";
 import StepThree from "./Pages/Signup/Step3";
 import StepFour from "./Pages/Signup/Step4";
 import StepFive from "./Pages/Signup/Step5";
-
+import PrivateRoute from "./Pages/PrivateRoute"
 import Filter from "./Pages/Filter/Filter";
 import UserDashBoard from "./Pages/userDashBoard/userDashBoard";
 import NavBar from "./components/Layout/NavBar/NavBar";
 import * as React from "react";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import Provider from "./Pages/Provider/Provider";
+import { useSelector } from "react-redux";
+
+// const authenticated = useSelector((state) => state.user.isAdmin);
 
 const router = createBrowserRouter([
   {
@@ -66,12 +69,21 @@ const router = createBrowserRouter([
     path: "/userDashBoard",
     element: <UserDashBoard />,
   },
+  {
+    path: "/private",
+    element: <PrivateRoute />,
+  }
 ]);
 
 function App() {
   return (
     <div className="App">
       <RouterProvider router={router}>
+      {/* <PrivateRoute
+          path="/userDashBoard"
+          component={UserDashBoard}
+          authenticated={authenticated}
+        /> */}
         <Outlet />
       </RouterProvider>
       {/* <Home></Home> */}

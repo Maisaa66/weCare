@@ -4,10 +4,14 @@ import { Link, Outlet } from "react-router-dom";
 import { Search } from "react-bootstrap-icons";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function NavBar() {
   const navigate = useNavigate();
   const [isLogged, setIsLogged] = useState(false);
+  const userInfo = useSelector((state) => state.user.info);
+  const isAdmin = useSelector((state) => state.user.isAdmin);
+
   useEffect(() => {
     if (document.cookie.includes("jwt")) {
       setIsLogged(true);
@@ -41,7 +45,9 @@ function NavBar() {
             className={`collapse justify-content-end navbar-collapse ${classes.collapsed}`}
             id="navbarSupportedContent"
           >
-            <ul className={`navbar-nav m-lg-auto me-sm-auto ${classes.navList}`}>
+            <ul
+              className={`navbar-nav m-lg-auto me-sm-auto ${classes.navList}`}
+            >
               <li className="nav-item">
                 <Link
                   className={`nav-link ${classes.navLink}`}
@@ -166,9 +172,49 @@ function NavBar() {
             </button>
           </form>
           {isLogged ? (
-            <Link to="/" className="mybtn mybtnLightSolid m-auto" onClick={deleteCookie}>
-              Logout
-            </Link>
+            <div class="dropdown me-5">
+              <button
+                class="btn btn-none border-0 shadow-0 d-flex flex-md-row flex-sm-column-reverse align-items-center justify-content-center"
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <div className="me-md-2">
+                  {userInfo && userInfo.firstName + " " + userInfo.lastName}
+                </div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 512 512"
+                  style={{ width: "2.5rem", fill: `${window.location.pathname === "/" ? "#000" : "var(--mainColor)"}`}}
+                >
+                  <path d="M399 384.2C376.9 345.8 335.4 320 288 320H224c-47.4 0-88.9 25.8-111 64.2c35.2 39.2 86.2 63.8 143 63.8s107.8-24.7 143-63.8zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm256 16a72 72 0 1 0 0-144 72 72 0 1 0 0 144z" />
+                </svg>
+              </button>
+              <ul class="dropdown-menu">
+                {isAdmin ? (
+                  <li>
+                    <Link to="/userDashboard" className="mybtn mybtnLightSolid m-auto">
+                      Dashboard
+                    </Link>
+                  </li>
+                ) : (
+                  <li>
+                    <Link to="/userDashboard" className="mybtn mybtnLightSolid m-auto">
+                      Profile
+                    </Link>
+                  </li>
+                )}
+                <li>
+                  <Link
+                    to="/"
+                    className="mybtn mybtnLightSolid m-auto"
+                    onClick={deleteCookie}
+                  >
+                    Logout
+                  </Link>
+                </li>
+              </ul>
+            </div>
           ) : (
             <Link to="/login" className="mybtn mybtnLightSolid m-auto">
               Login
