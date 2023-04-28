@@ -86,6 +86,9 @@ input:focus {
 .h-500{
   height: 500px;
 }
+.h-400{
+  height: 400px;
+}
 
 .text-main{
   color: var(--mainColor);

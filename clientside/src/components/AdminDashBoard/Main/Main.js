@@ -3,7 +3,6 @@ import Users from "./Users/Users";
 import SP from "./SP/SP";
 import Update from "./Update/Update";
 import AllDetails from "./AllDetails/AllDetails";
-import AllRequests from "./AllRequests/AllRequests";
 import * as ReactDOM from "react-dom";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import Nav from "../Nav/Nav";

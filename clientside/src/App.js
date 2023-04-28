@@ -15,7 +15,6 @@ import NavBar from "./components/Layout/NavBar/NavBar";
 import * as React from "react";
 import AdmindashBoard from "./components/AdminDashBoard/AdmindashBoard";
 import Users from "./components/AdminDashBoard/Main/Users/Users";
-import AllRequests from "./components/AdminDashBoard/Main/AllRequests/AllRequests";
 import SP from "./components/AdminDashBoard/Main/SP/SP";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import Provider from "./Pages/Provider/Provider";
@@ -23,6 +22,7 @@ import { useSelector } from "react-redux";
 import AllDetails from "./components/AdminDashBoard/Main/AllDetails/AllDetails";
 import Update from "./components/AdminDashBoard/Main/Update/Update";
 import ReqDetails from "./components/AdminDashBoard/Main/AllRequests/ReqDetails";
+import Requests from "./components/AdminDashBoard/Main/AllRequests/Requests";
 // const authenticated = useSelector((state) => state.user.isAdmin);
 
 
@@ -34,7 +34,7 @@ const router = createBrowserRouter([
     {path:'providers/:id',element:<AllDetails/>},
     {path:'users/update/:id',element:<Update></Update>},
     {path:'providers/update/:id',element:<Update></Update>},
-    {path:'requests',element:<AllRequests/>},
+    {path:'requests',element:<Requests/>},
     {path:'requests/:id',element:<ReqDetails/>},
     // {path:'providers',element:<SP/>}
   ]},
