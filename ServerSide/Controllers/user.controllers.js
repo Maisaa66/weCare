@@ -2,7 +2,8 @@ const userModel = require("../Models/users.model");
 const hireRequestModel = require("../Models/hireRequest.model");
 const reviewModel = require("../Models/review.model");
 const bcrypt = require("bcrypt");
-
+const { default: mongoose } = require("mongoose");
+const ObjectId = mongoose.Types.ObjectId;
 class User {
   static getAllUsers = async (req, res) => {
     try {
@@ -12,6 +13,8 @@ class User {
         (matched) => `$${matched}`
       );
       const users = await userModel.find(JSON.parse(queryStr));
+      res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+      res.setHeader('Access-Control-Allow-Credentials', 'true');
       res.status(200).json({
         status: "success",
         results: users.length,
@@ -42,7 +45,6 @@ class User {
           ...other,
         },
         cookie: userToken,
-
       });
     } catch (err) {
       res.status(400).json({ message: err.message });
@@ -55,6 +57,18 @@ class User {
       if (!user) {
         throw new Error("There is no user with this ID!");
       }
+      // res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+      // res.setHeader("Access-Control-Allow-Credentials", "true");
+      res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+      res.setHeader("Access-Control-Allow-Credentials", "true");
+      res.setHeader(
+        "Access-Control-Allow-Methods",
+        "GET, POST, PUT, DELETE, OPTIONS"
+      );
+      res.setHeader(
+        "Access-Control-Allow-Headers",
+        "Origin, Content-Type, X-Requested-With, Accept"
+      );
       const { password, ...other } = user._doc;
 
       res.status(200).json({
@@ -103,6 +117,8 @@ class User {
   static deleteUserById = async (req, res) => {
     try {
       const user = await userModel.findByIdAndDelete(req.params.id);
+      // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+      // res.setHeader('Access-Control-Allow-Credentials', 'true');
       if (!user) {
         throw new Error("There is no user with this ID!");
       }
@@ -121,6 +137,24 @@ class User {
     try {
       console.log(hireRequestModel);
       const requests = await hireRequestModel.find({});
+      res.status(200).json({
+        status: "success",
+        results: requests.length,
+        requestedAt: req.requestTime,
+        data: {
+          requests,
+        },
+      });
+    } catch (err) {
+      res.status(400).json({ message: err.message });
+    }
+  };
+  static getRequestById = async (req, res) => {
+    try {
+      console.log("req by id ",req.params.userId);
+      // const id = new mongoose.Types.ObjectId(req.params.userId);
+      // get all requests for a specific user
+      const requests = await hireRequestModel.find({customerId:req.params.userId});
       res.status(200).json({
         status: "success",
         results: requests.length,

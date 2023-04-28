@@ -3,19 +3,11 @@ const serviceProviderControllers = require("../Controllers/serviceProvider.contr
 const authMiddleware = require("../Middlewares/auth.middleware");
 
 // router.get("/", authMiddleware.verifyTokenAndAdmin, serviceProviderControllers.getProviders);
-router.get(
-  "/",
-  authMiddleware.verifyTokenAndAuthorization,
-  serviceProviderControllers.getProviders
-);
+router.get("/", serviceProviderControllers.getProviders);
 router.post("/login", serviceProviderControllers.login);
 router.post("/signup", serviceProviderControllers.addNewProvider);
 
-router.get(
-  "/:id",
-  authMiddleware.verifyTokenAndAdmin,
-  serviceProviderControllers.getProviderById
-);
+router.get("/:id", authMiddleware.verifyTokenAndAdmin, serviceProviderControllers.getProviderById);
 router.patch(
   "/:id",
   authMiddleware.verifyTokenAndAuthorization,

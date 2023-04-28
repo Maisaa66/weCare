@@ -6,6 +6,7 @@
   --mainColorObacity: rgb(14, 116, 82, 0.2);
   --mainColorShade: rgb(14, 116, 82, 0.03);
   --secondaryColor: #71d9c1;
+  --thirdColor: #90e4d05e;
   --lightText: #ffff;
   --darkText: #000000;
   --headerFont: "Playfair Display", serif;
@@ -56,7 +57,7 @@ input:focus {
   background-color: var(--lightText);
   color: var(--mainColor);
 }
-/* .mybtnLightOutlined {
+.mybtnLightOutlined {
   border: 1px solid var(--lightText);
   background-color: var(--mainColor);
   color: var(--lightText);
@@ -78,7 +79,14 @@ input:focus {
   border: 1px solid var(--lightText);
   background-color: transparent;
   color: var(--lightText);
-} */
+}
 /* *{
   border: 1px solid red;
 } */
+.h-500{
+  height: 500px;
+}
+
+.text-main{
+  color: var(--mainColor);
+}

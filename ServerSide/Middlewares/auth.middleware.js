@@ -4,6 +4,7 @@ class Auth {
   static verifyToken = (req, res, next) => {
     try {
       const token = req.cookies.jwt;
+      console.log(req.cookies.jwt)
       if (token) {
         jwt.verify(token, process.env.JWT_SEC, (err, userToken) => {
           if (err) {
@@ -13,15 +14,16 @@ class Auth {
           next();
         });
       } else {
-        res.status(401).send("you need to login");
+        res.status(400).send("you need to login");
       }
     } catch (error) {
       console.log(error);
     }
   };
+
   static verifyTokenAndAuthorization = (req, res, next) => {
     this.verifyToken(req, res, () => {
-      // console.log(req.userToken.id, req.params.id);
+      console.log("from server!!  ",req.userToken.id, req.params.id);
       if (req.userToken.id === req.params.id || req.userToken.isAdmin) {
         next();
       } else {

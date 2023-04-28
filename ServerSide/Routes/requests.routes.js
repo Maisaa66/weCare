@@ -6,4 +6,10 @@ router.get(
   authMiddleware.verifyTokenAndAdmin,
   userControllers.getAllRequests
 );
+
+router.get(
+  "/:id",
+  authMiddleware.verifyTokenAndAuthorization,
+  userControllers.getRequestById
+);
 module.exports = router;

@@ -12,7 +12,12 @@ const { addTimeOfRequest } = require("./Middlewares/helpers.middleware");
 
 dotenv.config();
 const app = express();
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+  })
+);
 const PORT = process.env.PORT || 3000;
 const DBURL = process.env.DATABASE_URL.replace(
   "<password>",
