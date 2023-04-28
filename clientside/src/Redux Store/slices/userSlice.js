@@ -4,7 +4,10 @@ import { isExpired, decodeToken } from "react-jwt";
 
 export const addUser = createAsyncThunk("user/addUser", async (userData) => {
   try {
-    const response = await axios.post("http://localhost:7000/api/v1/users/signup", userData);
+    const response = await axios.post(
+      "http://localhost:7000/api/v1/users/signup",
+      userData
+    );
 
     // console.log ("response data ", response);
     return response.data;
@@ -28,7 +31,7 @@ export const addUser = createAsyncThunk("user/addUser", async (userData) => {
 
 export const userSlice = createSlice({
   name: "userSlice",
-  initialState: { id: "", isAdmin: false, info: {} },
+  initialState: { id: "", isAdmin: false, info: {}, profileID: "" },
   reducers: {
     setToken: (state) => {
       console.log(state);
@@ -43,6 +46,9 @@ export const userSlice = createSlice({
     setInfo: (state, action) => {
       state.info = action.payload;
     },
+    setProfileId: (state, action) => {
+      state.profileID = action.payload;
+    },
   },
   extraReducers: (builder) => {
     // Add reducers for additional action types here, and handle loading state as needed
@@ -50,7 +56,9 @@ export const userSlice = createSlice({
       // Add user to the state array
       // const navigate = useNavigate();
       // navigate("/signup/stepthree");
-      const expires = new Date(Date.now() + 2 * 24 * 60 * 60 * 1000).toUTCString(); // 2 days from now
+      const expires = new Date(
+        Date.now() + 2 * 24 * 60 * 60 * 1000
+      ).toUTCString(); // 2 days from now
       document.cookie = `jwt=${action.payload.cookie}; expires=${expires};`;
       // state.user.push(action.payload.data);
       return action.payload.data;
@@ -61,5 +69,5 @@ export const userSlice = createSlice({
 
 // Action creators are generated for each case reducer function
 
-export const { setToken, setInfo } = userSlice.actions;
+export const { setToken, setInfo, setProfileId } = userSlice.actions;
 export default userSlice.reducer;

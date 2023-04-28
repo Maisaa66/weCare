@@ -73,6 +73,7 @@ const Provider = () => {
                   experties={provider.experties}
                   hourlyRate={provider.hourlyRate}
                   rating={provider.rating}
+                  id={provider._id}
                 />
               );
             })}

@@ -6,7 +6,12 @@ import styled from "@emotion/styled";
 import ReviewCard from "../../components/UI/reviewCard/ReviewCard";
 import RequestCard from "../../components/UI/RequestCard/RequestCard";
 import { useDispatch, useSelector } from "react-redux";
-import { setToken, setInfo } from "../../Redux Store/slices/userSlice";
+import {
+  setToken,
+  setInfo,
+  setProfileId,
+} from "../../Redux Store/slices/userSlice";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 const UserDashBoard = () => {
@@ -54,11 +59,12 @@ const UserDashBoard = () => {
   };
 
   useEffect(() => {
+    // console.log(state);
     getUserById(state);
     getUserRequest(state);
   }, []);
 
-  console.log(user);
+  console.log(requests);
   // console.log(requests.requests[0].reqStatus);
 
   return (
@@ -132,9 +138,13 @@ const UserDashBoard = () => {
                       </div>
                     </div>
                   </div>
-                  <div className={`h-50 p-2 rounded-pill ${classes.button}`}>
+                  <Link
+                    to="/userProfile"
+                    className={`h-50 p-2 rounded-pill ${classes.button}`}
+                    onClick={() => dispatch(setProfileId(state))}
+                  >
                     See Public View
-                  </div>
+                  </Link>
                 </div>
               </div>
               <div className="d-flex flex-lg-row flex-sm-column justify-content-evenly">
@@ -150,9 +160,8 @@ const UserDashBoard = () => {
                             label: "Phone Number",
                             name: "phoneNum",
                             value: user.phoneNum,
-                           
                           }}
-                          updateData= {updateData}
+                          updateData={updateData}
                         />
                       </div>
                     </div>
@@ -165,9 +174,8 @@ const UserDashBoard = () => {
                             label: "Email",
                             name: "email",
                             value: user.email,
-                           
                           }}
-                          updateData= {updateData}
+                          updateData={updateData}
                         />
                       </div>
                     </div>
@@ -184,7 +192,7 @@ const UserDashBoard = () => {
                             name: "address.country",
                             value: user.address.country,
                           }}
-                          updateData= {updateData}
+                          updateData={updateData}
                         />
                       </div>
                     </div>
@@ -198,7 +206,7 @@ const UserDashBoard = () => {
                             name: "address.governate",
                             value: user.address.governate,
                           }}
-                          updateData= {updateData}
+                          updateData={updateData}
                         />
                       </div>
                     </div>
@@ -212,7 +220,7 @@ const UserDashBoard = () => {
                             name: "address.area",
                             value: user.address.area,
                           }}
-                          updateData= {updateData}
+                          updateData={updateData}
                         />
                       </div>
                     </div>
@@ -226,7 +234,7 @@ const UserDashBoard = () => {
                             name: "address.street",
                             value: user.address.street,
                           }}
-                          updateData= {updateData}
+                          updateData={updateData}
                         />
                       </div>
                     </div>
@@ -240,7 +248,7 @@ const UserDashBoard = () => {
                             name: "address.buildingNum",
                             value: user.address.buildingNum,
                           }}
-                          updateData= {updateData}
+                          updateData={updateData}
                         />
                       </div>
                     </div>
@@ -254,7 +262,7 @@ const UserDashBoard = () => {
                             name: "address.apartmentNum",
                             value: user.address.apartmentNum,
                           }}
-                          updateData= {updateData}
+                          updateData={updateData}
                         />
                       </div>
                     </div>
@@ -267,7 +275,7 @@ const UserDashBoard = () => {
                     className={`card overflow-y-scroll w-100 ${classes.scrollbarMalinka} `}
                     style={{ height: "400px" }}
                   >
-                    {requests ? (
+                    {!requests ? (
                       <div className="fs-3 m-auto text-secondary">
                         No Requests Made Yet
                       </div>

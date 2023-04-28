@@ -13,6 +13,11 @@ router.get(
   authMiddleware.verifyTokenAndAuthorization,
   userControllers.getUserById
 );
+router.get(
+  "/profile/:id",
+  authMiddleware.verifyToken,
+  userControllers.getUserProfile
+);
 router.patch(
   "/:id",
   authMiddleware.verifyTokenAndAuthorization,
