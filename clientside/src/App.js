@@ -21,29 +21,29 @@ import SP from "./components/AdminDashBoard/Main/SP/SP";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import Provider from "./Pages/Provider/Provider";
 import { useSelector } from "react-redux";
-<<<<<<< Updated upstream
 import AllDetails from "./components/AdminDashBoard/Main/AllDetails/AllDetails";
 import Update from "./components/AdminDashBoard/Main/Update/Update";
 import ReqDetails from "./components/AdminDashBoard/Main/AllRequests/ReqDetails";
-=======
 import RequestTest from "./Pages/requestTest";
 
->>>>>>> Stashed changes
 // const authenticated = useSelector((state) => state.user.isAdmin);
 
-
 const router = createBrowserRouter([
-  {path:"/admin",element:<AdmindashBoard/>,children:[
-    {path:'users',element:<Users></Users>},
-    {path:'providers',element:<Users></Users>},
-    {path:'users/:id',element:<AllDetails/>},
-    {path:'providers/:id',element:<AllDetails/>},
-    {path:'users/update/:id',element:<Update></Update>},
-    {path:'providers/update/:id',element:<Update></Update>},
-    {path:'requests',element:<AllRequests/>},
-    {path:'requests/:id',element:<ReqDetails/>},
-    // {path:'providers',element:<SP/>}
-  ]},
+  {
+    path: "/admin",
+    element: <AdmindashBoard />,
+    children: [
+      { path: "users", element: <Users></Users> },
+      { path: "providers", element: <Users></Users> },
+      { path: "users/:id", element: <AllDetails /> },
+      { path: "providers/:id", element: <AllDetails /> },
+      { path: "users/update/:id", element: <Update></Update> },
+      { path: "providers/update/:id", element: <Update></Update> },
+      { path: "requests", element: <AllRequests /> },
+      { path: "requests/:id", element: <ReqDetails /> },
+      // {path:'providers',element:<SP/>}
+    ],
+  },
   {
     path: "/",
     element: <Home />,
