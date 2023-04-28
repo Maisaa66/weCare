@@ -59,11 +59,12 @@ const UserDashBoard = () => {
   };
 
   useEffect(() => {
+    // console.log(state);
     getUserById(state);
     getUserRequest(state);
   }, []);
 
-  console.log(user);
+  console.log(requests);
   // console.log(requests.requests[0].reqStatus);
 
   return (

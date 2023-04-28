@@ -1,7 +1,8 @@
 import React from "react";
 import classes from "./ProviderCard.module.css";
+import RequestForm from "../../../components/UI/RequestForm/RequestForm";
 
-const ProviderCard = ({ fname, lname, title, image, experties, hourlyRate, rating }) => {
+const ProviderCard = ({ fname, lname, title, image, experties, hourlyRate, rating, id }) => {
   return (
     <div className="col-lg-3 p-0 mt-2">
       <div className={`text-center ${classes.card_box}`}>
@@ -20,12 +21,16 @@ const ProviderCard = ({ fname, lname, title, image, experties, hourlyRate, ratin
           </div>
           {/* </div> */}
 
-          <button
+          {/* <button
             type="button"
             className={`btn btn-rounded waves-effect w-md waves-light ${classes.button_color}`}
           >
             Order Now
-          </button>
+          </button> */}
+          <RequestForm
+            providerId={id}
+            hourlyRate= {hourlyRate}
+          ></RequestForm>
           {/* </div> */}
 
           <hr className="mb-0" />
