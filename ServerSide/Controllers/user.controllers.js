@@ -42,7 +42,6 @@ class User {
           ...other,
         },
         cookie: userToken,
-
       });
     } catch (err) {
       res.status(400).json({ message: err.message });
@@ -55,6 +54,18 @@ class User {
       if (!user) {
         throw new Error("There is no user with this ID!");
       }
+      // res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+      // res.setHeader("Access-Control-Allow-Credentials", "true");
+      res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+      res.setHeader("Access-Control-Allow-Credentials", "true");
+      res.setHeader(
+        "Access-Control-Allow-Methods",
+        "GET, POST, PUT, DELETE, OPTIONS"
+      );
+      res.setHeader(
+        "Access-Control-Allow-Headers",
+        "Origin, Content-Type, X-Requested-With, Accept"
+      );
       const { password, ...other } = user._doc;
 
       res.status(200).json({

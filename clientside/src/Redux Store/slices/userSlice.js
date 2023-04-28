@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { isExpired, decodeToken } from "react-jwt";
 
 export const addUser = createAsyncThunk("user/addUser", async (userData) => {
   try {
@@ -12,10 +13,37 @@ export const addUser = createAsyncThunk("user/addUser", async (userData) => {
   }
 });
 
+// export const getUser = createAsyncThunk("user/getUser", async (id) => {
+//   try {
+//     const response = await axios.get(
+//       `http://localhost:7000/api/v1/users/${id}`,
+//     );
+
+//     // console.log ("response data ", response);
+//     return response.data;
+//   } catch (error) {
+//     console.log("error", error);
+//   }
+// });
+
 export const userSlice = createSlice({
   name: "userSlice",
-  initialState: {},
-  reducers: {},
+  initialState: { id: "", isAdmin: false, info: {} },
+  reducers: {
+    setToken: (state) => {
+      console.log(state);
+      // get cookie from browser and get the token
+      const token = document.cookie.split("=")[1];
+      // decode JWT
+      const decodedToken = decodeToken(token);
+      state.id = decodedToken.id;
+      state.isAdmin = decodedToken.isAdmin;
+      console.log(state.id);
+    },
+    setInfo: (state, action) => {
+      state.info = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     // Add reducers for additional action types here, and handle loading state as needed
     builder.addCase(addUser.fulfilled, (state, action) => {
@@ -32,6 +60,6 @@ export const userSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-// export const {} = userSlice.actions
 
+export const { setToken, setInfo } = userSlice.actions;
 export default userSlice.reducer;

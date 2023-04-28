@@ -10,7 +10,7 @@ router.get(
 );
 router.get(
   "/:id",
-  authMiddleware.verifyTokenAndAdmin,
+  authMiddleware.verifyTokenAndAuthorization,
   userControllers.getUserById
 );
 router.patch(

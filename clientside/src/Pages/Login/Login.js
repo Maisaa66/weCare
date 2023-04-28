@@ -16,6 +16,8 @@ import { useState } from "react";
 import axios from "axios";
 import { Alert } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { setToken } from "../../Redux Store/slices/userSlice";
 
 function Copyright(props) {
   return (
@@ -77,6 +79,7 @@ export default function SignIn() {
   const [isError, setIsError] = useState({ status: false, message: "" });
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const dropDownObj = {
     title: "I am",
@@ -105,13 +108,13 @@ export default function SignIn() {
     } else if (!userData.password) {
       setIsError({ status: true, message: "Please enter your password" });
     } else {
-      console.log("ay 7aga");
       if (userType === "Care Giver") {
         console.log("giver");
         await axios
           .post("http://localhost:7000/api/v1/providers/login", userData)
           .then((res) => {
             document.cookie = `jwt=${res.data.cookie}; expires=${expires}`;
+            dispatch(setToken());
             navigate("/");
           })
           .catch((error) =>
@@ -122,6 +125,7 @@ export default function SignIn() {
           .post("http://localhost:7000/api/v1/users/login", userData)
           .then((res) => {
             document.cookie = `jwt=${res.data.cookie}; expires=${expires}`;
+            dispatch(setToken());
             navigate("/");
           })
           .catch((error) =>
