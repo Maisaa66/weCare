@@ -57,7 +57,7 @@ input:focus {
   background-color: var(--lightText);
   color: var(--mainColor);
 }
-/* .mybtnLightOutlined {
+.mybtnLightOutlined {
   border: 1px solid var(--lightText);
   background-color: var(--mainColor);
   color: var(--lightText);
@@ -79,7 +79,14 @@ input:focus {
   border: 1px solid var(--lightText);
   background-color: transparent;
   color: var(--lightText);
-} */
+}
 /* *{
   border: 1px solid red;
 } */
+.h-500{
+  height: 500px;
+}
+
+.text-main{
+  color: var(--mainColor);
+}

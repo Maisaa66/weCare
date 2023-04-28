@@ -4,7 +4,11 @@ class Auth {
   static verifyToken = (req, res, next) => {
     try {
       const token = req.cookies.jwt;
+<<<<<<< Updated upstream
       // console.log(token);
+=======
+      console.log(req.cookies.jwt)
+>>>>>>> Stashed changes
       if (token) {
         jwt.verify(token, process.env.JWT_SEC, (err, userToken) => {
           if (err) {
@@ -14,7 +18,7 @@ class Auth {
           next();
         });
       } else {
-        res.status(401).send("you need to login");
+        res.status(400).send("you need to login");
       }
     } catch (error) {
       console.log(error);
