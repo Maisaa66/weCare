@@ -8,9 +8,10 @@ import StepTwo from "./Pages/Signup/Step2";
 import StepThree from "./Pages/Signup/Step3";
 import StepFour from "./Pages/Signup/Step4";
 import StepFive from "./Pages/Signup/Step5";
-import PrivateRoute from "./Pages/PrivateRoute"
+import PrivateRoute from "./Pages/PrivateRoute";
 import Filter from "./Pages/Filter/Filter";
 import UserDashBoard from "./Pages/userDashBoard/userDashBoard";
+import UserProfile from "./Pages/userDashBoard/userProfile";
 import NavBar from "./components/Layout/NavBar/NavBar";
 import * as React from "react";
 import AdmindashBoard from "./components/AdminDashBoard/AdmindashBoard";
@@ -20,9 +21,14 @@ import SP from "./components/AdminDashBoard/Main/SP/SP";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import Provider from "./Pages/Provider/Provider";
 import { useSelector } from "react-redux";
+<<<<<<< Updated upstream
 import AllDetails from "./components/AdminDashBoard/Main/AllDetails/AllDetails";
 import Update from "./components/AdminDashBoard/Main/Update/Update";
 import ReqDetails from "./components/AdminDashBoard/Main/AllRequests/ReqDetails";
+=======
+import RequestTest from "./Pages/requestTest";
+
+>>>>>>> Stashed changes
 // const authenticated = useSelector((state) => state.user.isAdmin);
 
 
@@ -88,16 +94,20 @@ const router = createBrowserRouter([
     element: <UserDashBoard />,
   },
   {
+    path: "/userProfile",
+    element: <UserProfile />,
+  },
+  {
     path: "/private",
-    element: <PrivateRoute />,
-  }
+    element: <RequestTest />,
+  },
 ]);
 
 function App() {
   return (
     <div className="App">
       <RouterProvider router={router}>
-      {/* <PrivateRoute
+        {/* <PrivateRoute
           path="/userDashBoard"
           component={UserDashBoard}
           authenticated={authenticated}
