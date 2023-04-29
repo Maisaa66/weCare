@@ -50,7 +50,7 @@ const UserSchema = new mongoose.Schema(
       type: [Number],
       default: [],
     },
-    ratings: {
+    rating: {
       type: Number,
       require: true,
       default: 5,
@@ -90,8 +90,7 @@ UserSchema.methods.createToken = async function () {
     {
       id: user._id,
       isAdmin: user.isAdmin,
-      userType:"user"
-
+      userType: "user",
     },
     process.env.JWT_SEC,
     { expiresIn: "2d" }
