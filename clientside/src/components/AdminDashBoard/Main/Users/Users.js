@@ -82,13 +82,13 @@ function Users() {
     <div>
       <div className="row">
         <div className="col-2 h-500  overflow-y-auto">
-          <ul class="nav nav-tabs ">
-            <li class="nav-item col-5">
+          <ul className="nav nav-tabs ">
+            <li className="nav-item col-5">
               <a className={flag ? 'text-main shadow-sm rounded-pill px-2' : 'text-muted'} onClick={() => { setflag(true) }}>
                 Top 5
               </a>
             </li>
-            <li class="nav-item col-6">
+            <li className="nav-item col-6">
               <a className={flag ? 'text-muted' : 'text-main shadow-sm rounded-pill px-2'} onClick={() => {
                 setflag(false)
               }}>
@@ -137,7 +137,7 @@ function Users() {
         <div className="col-10">
           <h6 className="text-main text-start">All {urlType}</h6>
           <div className="h-500 overflow-y-scroll shadow">
-            <table class="table bg-white  rounded-5 text-start w-75 shadow-sm  my-2 ">
+            <table className="table bg-white  rounded-5 text-start w-75 shadow-sm  my-2 ">
               <thead>
                 <tr>
                   <th className='col-1'>Profile</th>

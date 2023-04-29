@@ -42,13 +42,33 @@ export default function () {
 
   return (
     <div>
-      <form onSubmit={handleUpdate} class="py-3 d-flex flex-column"  >
-        <input type="text" class="my-2 form-control" value={user.firstName} onChange={(e) => setUser({...user, firstName: e.target.value})} />
-        <input type="text" class="my-2 form-control" value={user.lastName} onChange={(e) => setUser({...user, lastName: e.target.value})} />
-        <input type="text" class="my-2 form-control" value={user.phoneNum} onChange={(e) => setUser({...user, phoneNum: e.target.value})} />
-        <input type="email" class="my-2 form-control" value={user.email} onChange={(e) => setUser({...user, email: e.target.value})} />
-        <input type="submit" class="my-2" value="Update" className="btn btn-success"/>
+      <form onSubmit={handleUpdate} className="py-3 d-flex flex-column">
+        <input
+          type="text"
+          className="my-2 form-control"
+          value={user.firstName}
+          onChange={(e) => setUser({ ...user, firstName: e.target.value })}
+        />
+        <input
+          type="text"
+          className="my-2 form-control"
+          value={user.lastName}
+          onChange={(e) => setUser({ ...user, lastName: e.target.value })}
+        />
+        <input
+          type="text"
+          className="my-2 form-control"
+          value={user.phoneNum}
+          onChange={(e) => setUser({ ...user, phoneNum: e.target.value })}
+        />
+        <input
+          type="email"
+          className="my-2 form-control"
+          value={user.email}
+          onChange={(e) => setUser({ ...user, email: e.target.value })}
+        />
+        <input type="submit" className="btn btn-success my-2" value="Update"/>
       </form>
     </div>
-  )
+  );
 }

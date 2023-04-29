@@ -4,14 +4,14 @@ export default function Aside() {
   return (
     <>
     
-      <ul class="nav nav-tabs ">
-        <li class="nav-item  col-5">
-          <a class="nav-link " href="#">
+      <ul className="nav nav-tabs ">
+        <li className="nav-item  col-5">
+          <a className="nav-link " href="#">
             Top 5
           </a>
         </li>
-        <li class="nav-item col-6">
-          <a class="nav-link " href="#">
+        <li className="nav-item col-6">
+          <a className="nav-link " href="#">
             Worst 5
           </a>
         </li>
