@@ -6,12 +6,20 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 
 const UserProfile = () => {
+  // here we get the id of the user from the redux store
   const state = useSelector((state) => state.user.profileID);
+  // here we get the type of the user from the redux store, to know which profile we are going to fetch
+  const userType = useSelector((state) => state.user.userType);
+
   const [user, setUserDetails] = useState(null);
 
+  // here we set the url type to know which profile we are going to fetch
+  let urlType = (userType === "serviceProvider" ? "provider" : "user");
+
   const getUserById = async (id) => {
+    
     const response = await axios.get(
-      `http://localhost:7000/api/v1/users/profile/${id}`,
+      `http://localhost:7000/api/v1/${urlType}/profile/${id}`,
       {
         withCredentials: true,
         headers: {
@@ -60,7 +68,7 @@ const UserProfile = () => {
                           backgroundColor: "#e8e6e6",
                         }}
                       >
-                        <div style={{ fontSize: "1rem" }}>{user.ratings}</div>
+                        <div style={{ fontSize: "1rem" }}>{user.rating}</div>
 
                         <svg
                           xmlns="http://www.w3.org/2000/svg"

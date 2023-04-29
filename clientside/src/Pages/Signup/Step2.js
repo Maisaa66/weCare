@@ -111,6 +111,7 @@ export default function StepTwo() {
       navigate("/signup/stepfour");
     } else if (userType === "Care Beneficiary") {
       dispatch(addUser(userDetails));
+      navigate("/signup/stepthree")
     }
   };
 
