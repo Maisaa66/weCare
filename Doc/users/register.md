@@ -61,10 +61,10 @@ Used to create a User.
 
 ```json
 {
-  status: "success",
-  results: 1,
-  requestedAt: Date,
-  data: {
+  "status": "success",
+  "results": 1,
+  "requestedAt": "[Date]",
+  "data": {
     "email": "ziadeleraky@weCare.com",
     "firstName": "Ziad",
     "lastName": "Eleraky",
@@ -81,7 +81,7 @@ Used to create a User.
     "nationalID": "./data/id.png",
     "profileImg": "https://randomuser.me/api/portraits/men/1.jpg"
   },
-  cookie: "[User Token]",
+  "cookie": "[User Token]",
 }
 ```
 
