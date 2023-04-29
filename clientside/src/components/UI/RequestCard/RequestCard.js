@@ -4,10 +4,26 @@ import axios from "axios";
 const RequestCard = ({ request }) => {
   // get provider name
   const [providerName, setProviderName] = useState(null);
+  const [userName, setUserName] = useState(null);
 
-  const getProviderById = async (id) => {
+  // const getProviderById = async (id) => {
+  //   const response = await axios.get(
+  //     `http://localhost:7000/api/v1/providers/${id}`,
+  //     {
+  //       withCredentials: true,
+  //       headers: {
+  //         "Access-Control-Allow-Origin": "http://localhost:3000",
+  //         "Content-Type": "application/json",
+  //       },
+  //     }
+  //   );
+  //   // console.log(info);
+  //   setProviderName(response.data.data);
+  // };
+
+  const getUserById = async (id) => {
     const response = await axios.get(
-      `http://localhost:7000/api/v1/providers/${id}`,
+      `http://localhost:7000/api/v1/users/profile/${id}`,
       {
         withCredentials: true,
         headers: {
@@ -17,32 +33,39 @@ const RequestCard = ({ request }) => {
       }
     );
     // console.log(info);
-    setProviderName(response.data.data);
+    setUserName(response.data.data);
   };
 
   useEffect(() => {
-    getProviderById(request.providerId);
-  }
-  , []);
-  
+    getUserById(request.customerId);
+  }, []);
+
   return (
     <div className="card mb-2">
       <div className="card-body d-flex justify-content-between">
         <div className="fs-5">
           <h5 className="card-title">Request Title</h5>
           <p className="card-text" style={{ fontSize: "0.8rem" }}>
-            Request Status: <span             className={
-              request.reqStatus=== "rejected"
-                ? "badge bg-danger  card-text"
-                : request.reqStatus=== "pending"
-                ? "badge bg-warning text-dark card-text"
-                : "badge bg-success  card-text"
-            }>{request.reqStatus}</span>
+            Request Status:{" "}
+            <span
+              className={
+                request.reqStatus === "rejected"
+                  ? "badge bg-danger  card-text"
+                  : request.reqStatus === "pending"
+                  ? "badge bg-warning text-dark card-text"
+                  : "badge bg-success  card-text"
+              }
+            >
+              {request.reqStatus}
+            </span>
           </p>
- 
-           {providerName && <p             className="card-text text-muted"
-            style={{ fontSize: "0.8rem" }}> Provider Name: {providerName.firstName + " " + providerName.lastName}</p>}
-       
+
+          {userName && (
+            <p className="card-text text-muted" style={{ fontSize: "0.8rem" }}>
+              {" "}
+              Customer Name: {userName.firstName + " " + userName.lastName}
+            </p>
+          )}
         </div>
         <div className="d-flex ">
           <svg

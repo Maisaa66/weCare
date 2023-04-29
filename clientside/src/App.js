@@ -23,6 +23,7 @@ import Update from "./components/AdminDashBoard/Main/Update/Update";
 import ReqDetails from "./components/AdminDashBoard/Main/AllRequests/ReqDetails";
 import RequestTest from "./Pages/requestTest";
 import Requests from "./components/AdminDashBoard/Main/AllRequests/Requests";
+import ProviderDashBoard from "./Pages/providerDashBoard/providerDashBoard";
 
 // const authenticated = useSelector((state) => state.user.isAdmin);
 
@@ -90,6 +91,10 @@ const router = createBrowserRouter([
   {
     path: "/userDashBoard",
     element: <UserDashBoard />,
+  },
+  {
+    path: "/providerDashBoard",
+    element: <ProviderDashBoard />,
   },
   {
     path: "/userProfile",

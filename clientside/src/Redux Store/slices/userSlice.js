@@ -31,7 +31,13 @@ export const addUser = createAsyncThunk("user/addUser", async (userData) => {
 
 export const userSlice = createSlice({
   name: "userSlice",
-  initialState: { id: "", isAdmin: false, info: {}, profileID: "" },
+  initialState: {
+    id: "",
+    isAdmin: false,
+    info: {},
+    profileID: "",
+    userType: "",
+  },
   reducers: {
     setToken: (state) => {
       console.log(state);
@@ -41,7 +47,7 @@ export const userSlice = createSlice({
       const decodedToken = decodeToken(token);
       state.id = decodedToken.id;
       state.isAdmin = decodedToken.isAdmin;
-      console.log(state.id);
+      state.userType = decodedToken.userType;
     },
     setInfo: (state, action) => {
       state.info = action.payload;

@@ -1,31 +1,26 @@
 import React, { useEffect, useState } from "react";
-import classes from "./userDashBoard.module.css";
+import classes from "./providerDashBoard.module.css";
 import FormDialog from "../../components/UI/FormDialog/FormDialog";
 import NavBar from "../../components/Layout/NavBar/NavBar";
-import styled from "@emotion/styled";
 import ReviewCard from "../../components/UI/reviewCard/ReviewCard";
 import RequestCard from "../../components/UI/RequestCard/RequestCard";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  setToken,
-  setInfo,
-  setProfileId,
-} from "../../Redux Store/slices/userSlice";
+import { setInfo, setProfileId } from "../../Redux Store/slices/userSlice";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-const UserDashBoard = () => {
+const ProviderDashBoard = () => {
   const state = useSelector((state) => state.user.id);
-  const info = useSelector((state) => state.user.info);
+  //   const info = useSelector((state) => state.user.info);
 
-  const [user, setUserDetails] = useState(null);
+  const [provider, setProviderDetails] = useState(null);
   const [requests, setRequests] = useState(null);
 
   const dispatch = useDispatch();
 
-  const getUserById = async (id) => {
+  const getProviderById = async (id) => {
     const response = await axios.get(
-      `http://localhost:7000/api/v1/users/${id}`,
+      `http://localhost:7000/api/v1/providers/${id}`,
       {
         withCredentials: true,
         headers: {
@@ -34,14 +29,13 @@ const UserDashBoard = () => {
         },
       }
     );
-    // console.log(info);
     dispatch(setInfo(response.data.data));
-    setUserDetails(response.data.data);
+    setProviderDetails(response.data.data);
   };
 
-  const getUserRequest = async (id) => {
+  const getProviderRequest = async (id) => {
     const response = await axios.get(
-      `http://localhost:7000/api/v1/requests/user/${id}`,
+      `http://localhost:7000/api/v1/requests/provider/${id}`,
       {
         withCredentials: true,
         headers: {
@@ -50,18 +44,18 @@ const UserDashBoard = () => {
         },
       }
     );
-    // console.log(info);
+    console.log(response.data.data);
     setRequests(response.data.data);
   };
 
   const updateData = (data) => {
-    setUserDetails({ ...user, ...data });
+    setProviderDetails({ ...provider, ...data });
   };
 
   useEffect(() => {
     // console.log(state);
-    getUserById(state);
-    getUserRequest(state);
+    getProviderById(state);
+    getProviderRequest(state);
   }, []);
 
   console.log(requests);
@@ -69,7 +63,7 @@ const UserDashBoard = () => {
 
   return (
     <>
-      {user && (
+      {provider && (
         <div className={`d-flex flex-column w-100  ${classes.mainBox}`}>
           <div className="shadow">
             <NavBar />
@@ -86,14 +80,13 @@ const UserDashBoard = () => {
                       data={{
                         label: "Image url",
                         name: "profileImg",
-                        value:
-                          "https://mdbcdn.b-cdn.net/img/new/avatars/2.webp",
+                        value: provider.profileImg,
                       }}
                     />
                   </div>
 
                   <img
-                    src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+                    src={provider.profileImg}
                     className="rounded-circle"
                     style={{ width: "100px" }}
                     alt="Avatar"
@@ -104,7 +97,7 @@ const UserDashBoard = () => {
                   <div className="ms-3">
                     <div className="d-flex align-items-center justify-content-between">
                       <div className="fs-3">
-                        {user.firstName} {user.lastName}
+                        {provider.firstName} {provider.lastName}
                       </div>
                       <div
                         className="d-flex ms-3 rounded-pill px-2"
@@ -113,7 +106,9 @@ const UserDashBoard = () => {
                           backgroundColor: "#e8e6e6",
                         }}
                       >
-                        <div style={{ fontSize: "1rem" }}>{user.ratings}</div>
+                        <div style={{ fontSize: "1rem" }}>
+                          {provider.rating}
+                        </div>
 
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -125,6 +120,16 @@ const UserDashBoard = () => {
                         </svg>
                       </div>
                     </div>
+                    {/* <div className="d-flex m">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 576 512"
+                        style={{ width: "20px" }}
+                      >
+                        <path d="M7.8 207.7c-13.1-17.8-9.3-42.8 8.5-55.9L142.9 58.5C166.2 41.3 194.5 32 223.5 32H384 544c17.7 0 32 14.3 32 32v64c0 17.7-14.3 32-32 32H507.2l-44.9 36c-22.7 18.2-50.9 28-80 28H304 288 224c-17.7 0-32-14.3-32-32s14.3-32 32-32h64 16c8.8 0 16-7.2 16-16s-7.2-16-16-16H183.4L63.7 216.2c-17.8 13.1-42.8 9.3-55.9-8.5zM382.4 160l0 0 .9 0c-.3 0-.6 0-.9 0zM568.2 304.3c13.1 17.8 9.3 42.8-8.5 55.9L433.1 453.5c-23.4 17.2-51.6 26.5-80.7 26.5H192 32c-17.7 0-32-14.3-32-32V384c0-17.7 14.3-32 32-32H68.8l44.9-36c22.7-18.2 50.9-28 80-28H272h16 64c17.7 0 32 14.3 32 32s-14.3 32-32 32H288 272c-8.8 0-16 7.2-16 16s7.2 16 16 16H392.6l119.7-88.2c17.8-13.1 42.8-9.3 55.9 8.5zM193.6 352l0 0-.9 0c.3 0 .6 0 .9 0z" />
+                      </svg>
+                      <div className="ms-2">{provider.serviceType}</div>
+                    </div> */}
                     <div className="d-flex">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -134,12 +139,12 @@ const UserDashBoard = () => {
                         <path d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z" />
                       </svg>
                       <div className="ms-2">
-                        {user.address.governate}, {user.address.country}
+                        {provider.address.governate}, {provider.address.country}
                       </div>
                     </div>
                   </div>
                   <Link
-                    to="/userProfile"
+                    to="/providerProfile"
                     className={`h-50 p-2 rounded-pill ${classes.button}`}
                     onClick={() => dispatch(setProfileId(state))}
                   >
@@ -149,17 +154,91 @@ const UserDashBoard = () => {
               </div>
               <div className="d-flex flex-lg-row flex-sm-column justify-content-evenly">
                 <div className="col-lg-6 col-sm-12 p-4 text-start">
+                  <div className="expertise m-4">
+                    <div className="d-flex justify-content-between align-items-center">
+                      <div className="d-flex">
+                        <div
+                          className="fw-bold fs-5"
+                          style={{ textTransform: "capitalize" }}
+                        >
+                          {provider.serviceType}{" "}
+                        </div>
+                      </div>
+                      <div className="d-flex align-items-center">
+                        <div>${provider.hourlyRate}/hr</div>
+                        <FormDialog
+                          data={{
+                            label: "Hourly Rate",
+                            name: "hourlyRate",
+                            value: provider.hourlyRate,
+                          }}
+                          updateData={updateData}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="">
+                      {/* <div>Expertise: </div> */}
+                      <div className="d-flex align-items-center">
+                        <div>{provider.experties}</div>
+                        <FormDialog
+                          data={{
+                            label: "Expertise",
+                            name: "experties",
+                            value: provider.experties,
+                          }}
+                          updateData={updateData}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="generalInfo m-4">
+                    <div className="d-flex justify-content-between align-items-center">
+                      <div className="d-flex">
+                        <div
+                          className="fw-bold fs-5"
+                          style={{ textTransform: "capitalize" }}
+                        >
+                          General Info:
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="d-flex justify-content-between align-items-center">
+                      <div>Gender: </div>
+                      <div className="d-flex align-items-center">
+                        <div>{provider.gender}</div>
+                        <FormDialog
+                          data={{
+                            label: "Gender",
+                            name: "gender",
+                            value: provider.gender,
+                          }}
+                          updateData={updateData}
+                        />
+                      </div>
+                    </div>
+                    <div className="d-flex justify-content-between align-items-center">
+                      <div>Date of birth: </div>
+                      <div
+                        className="d-flex align-items-center"
+                        style={{ marginRight: "63px" }}
+                      >
+                        <div>{provider.dateOfBirth.split("T")[0]}</div>
+                      </div>
+                    </div>
+                  </div>
                   <div className="contact m-4">
                     <div className="fw-bold fs-5">Contact Details: </div>
                     <div className="d-flex justify-content-between align-items-center">
                       <div>Phone Number: </div>
                       <div className="d-flex align-items-center">
-                        <div>{user.phoneNum}</div>
+                        <div>{provider.phoneNum}</div>
                         <FormDialog
                           data={{
                             label: "Phone Number",
                             name: "phoneNum",
-                            value: user.phoneNum,
+                            value: provider.phoneNum,
                           }}
                           updateData={updateData}
                         />
@@ -168,12 +247,12 @@ const UserDashBoard = () => {
                     <div className="d-flex justify-content-between align-items-center">
                       <div>Email: </div>
                       <div className="d-flex align-items-center">
-                        <div>{user.email}</div>
+                        <div>{provider.email}</div>
                         <FormDialog
                           data={{
                             label: "Email",
                             name: "email",
-                            value: user.email,
+                            value: provider.email,
                           }}
                           updateData={updateData}
                         />
@@ -185,12 +264,12 @@ const UserDashBoard = () => {
                     <div className="d-flex justify-content-between align-items-center">
                       <div>Country: </div>
                       <div className="d-flex align-items-center">
-                        <div>{user.address.country}</div>
+                        <div>{provider.address.country}</div>
                         <FormDialog
                           data={{
                             label: "Country",
                             name: "address.country",
-                            value: user.address.country,
+                            value: provider.address.country,
                           }}
                           updateData={updateData}
                         />
@@ -199,68 +278,12 @@ const UserDashBoard = () => {
                     <div className="d-flex justify-content-between align-items-center">
                       <div>Governate: </div>
                       <div className="d-flex align-items-center">
-                        <div>{user.address.governate}</div>
+                        <div>{provider.address.governate}</div>
                         <FormDialog
                           data={{
                             label: "Governate",
                             name: "address.governate",
-                            value: user.address.governate,
-                          }}
-                          updateData={updateData}
-                        />
-                      </div>
-                    </div>
-                    <div className="d-flex justify-content-between align-items-center">
-                      <div>Area: </div>
-                      <div className="d-flex align-items-center">
-                        <div>{user.address.area}</div>
-                        <FormDialog
-                          data={{
-                            label: "Area",
-                            name: "address.area",
-                            value: user.address.area,
-                          }}
-                          updateData={updateData}
-                        />
-                      </div>
-                    </div>
-                    <div className="d-flex justify-content-between align-items-center">
-                      <div>Street: </div>
-                      <div className="d-flex align-items-center">
-                        <div>{user.address.street}</div>
-                        <FormDialog
-                          data={{
-                            label: "Street",
-                            name: "address.street",
-                            value: user.address.street,
-                          }}
-                          updateData={updateData}
-                        />
-                      </div>
-                    </div>
-                    <div className="d-flex justify-content-between align-items-center">
-                      <div>Building Number: </div>
-                      <div className="d-flex align-items-center">
-                        <div>{user.address.buildingNum}</div>
-                        <FormDialog
-                          data={{
-                            label: "Building Number",
-                            name: "address.buildingNum",
-                            value: user.address.buildingNum,
-                          }}
-                          updateData={updateData}
-                        />
-                      </div>
-                    </div>
-                    <div className="d-flex justify-content-between align-items-center">
-                      <div>Apartment Number: </div>
-                      <div className="d-flex align-items-center">
-                        <div>{user.address.apartmentNum}</div>
-                        <FormDialog
-                          data={{
-                            label: "Apartment Number",
-                            name: "address.apartmentNum",
-                            value: user.address.apartmentNum,
+                            value: provider.address.governate,
                           }}
                           updateData={updateData}
                         />
@@ -269,7 +292,6 @@ const UserDashBoard = () => {
                   </div>
                 </div>
                 <div className="col-lg-6 col-sm-12 p-4 text-start">
-                  {/* req bar */}
                   <div className="fw-bold fs-5 mt-4">Requests</div>
                   <div
                     className={`card overflow-y-scroll w-100 ${classes.scrollbarMalinka} `}
@@ -387,4 +409,4 @@ const UserDashBoard = () => {
   );
 };
 
-export default UserDashBoard;
+export default ProviderDashBoard;

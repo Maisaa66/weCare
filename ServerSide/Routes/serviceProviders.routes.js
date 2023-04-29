@@ -7,7 +7,11 @@ router.get("/", serviceProviderControllers.getProviders);
 router.post("/login", serviceProviderControllers.login);
 router.post("/signup", serviceProviderControllers.addNewProvider);
 
-router.get("/:id", authMiddleware.verifyTokenAndAdmin, serviceProviderControllers.getProviderById);
+router.get(
+  "/:id",
+  authMiddleware.verifyTokenAndAuthorization,
+  serviceProviderControllers.getProviderById
+);
 router.patch(
   "/:id",
   authMiddleware.verifyTokenAndAuthorization,

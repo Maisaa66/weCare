@@ -1,4 +1,6 @@
 const serviceProviderModel = require("../Models/serviceProvider.model");
+const hireRequestModel = require("../Models/hireRequest.model");
+
 const bcrypt = require("bcrypt");
 class APIFeatures {
   constructor(query, queryStr) {
@@ -65,6 +67,27 @@ class ServiceProvider {
     }
   };
 
+  static getRequestById = async (req, res) => {
+    try {
+      console.log("req by id ", req.params.id);
+      // const id = new mongoose.Types.ObjectId(req.params.userId);
+      // get all requests for a specific user
+      const requests = await hireRequestModel.find({
+        providerId: req.params.id,
+      });
+      res.status(200).json({
+        status: "success",
+        results: requests.length,
+        requestedAt: req.requestTime,
+        data: {
+          requests,
+        },
+      });
+    } catch (err) {
+      res.status(400).json({ message: err.message });
+    }
+  };
+
   static addNewProvider = async (req, res) => {
     try {
       const sProvider = await serviceProviderModel.create(req.body);
@@ -82,7 +105,6 @@ class ServiceProvider {
           ...other,
         },
         cookie: providerToken,
-
       });
     } catch (err) {
       res.status(400).json({ message: err.message });
@@ -92,8 +114,8 @@ class ServiceProvider {
   static getProviders = async (req, res) => {
     try {
       const features = new APIFeatures(serviceProviderModel.find(), req.query);
-      res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
-      res.setHeader('Access-Control-Allow-Credentials', 'true');
+      res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+      res.setHeader("Access-Control-Allow-Credentials", "true");
       features.filter().sort().limit();
       const providers = await features.query;
       res.status(200).json({
