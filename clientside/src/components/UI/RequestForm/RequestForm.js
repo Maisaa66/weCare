@@ -16,6 +16,7 @@ import TextareaAutosize from "@mui/base/TextareaAutosize";
 import AntSwitch from "../ToggleButton/ToggleButton";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import axios from "axios";
 
 export default function RequestForm({ providerId, hourlyRate }) {
 
@@ -25,8 +26,8 @@ export default function RequestForm({ providerId, hourlyRate }) {
   // req schema, this will be sent to backend to create a new request
   const reqSchema = {
     totalHrs: "",
-    startDate: new Date(),
-    endDate: new Date(),
+    startDate: "",
+    endDate: "",
     providerId: providerId,
     hourlyRate: hourlyRate,
     customerId: customerId,
@@ -36,9 +37,18 @@ export default function RequestForm({ providerId, hourlyRate }) {
 
   // state to store request data
   const [open, setOpen] = React.useState(false);
-  const [startDate, setStartDate] = React.useState(new Date());
-  const [endDate, setEndDate] = React.useState(new Date());
-  const [reqData, setReqData] = React.useState(reqSchema);
+  const [sDate, setStartDate] = React.useState(new Date());
+  const [eDate, setEndDate] = React.useState(new Date());
+  const [reqData, setReqData] = React.useState({
+    totalHrs: "",
+    startDate: "",
+    endDate: "",
+    providerId: providerId,
+    hourlyRate: hourlyRate,
+    customerId: customerId,
+    reqDescription: "",
+    recurring: false,
+  });
 
   // handle open and close of dialog
   const handleClickOpen = () => {
@@ -50,12 +60,23 @@ export default function RequestForm({ providerId, hourlyRate }) {
   };
 
   // handle request
-  const handleRequest = () => {
-    setReqData({ ...reqData, startDate: startDate, endDate: endDate });
-    console.log(reqData);
+  const handleRequest = async() => {
+    axios.post("http://localhost:7000/api/v1/requests",reqData, {
+      withCredentials: true,
+      headers: {
+        "Access-Control-Allow-Origin": "http://localhost:3000",
+        "Content-Type": "application/json",
+      },
+    })
+    .then((res)=> console.log(res.status))
+    .catch(err => console.log(err))
+
     setReqData({...reqSchema});
     setOpen(false);
   };
+
+
+
 
   const theme = createTheme({
     palette: {
@@ -105,12 +126,14 @@ export default function RequestForm({ providerId, hourlyRate }) {
                   Please enter start date
                 </FormLabel>
                 <DatePicker
-                  selected={startDate}
+                  selected={sDate}
                   onChange={(date) => {
                     setStartDate(date);
-                    console.log(startDate);
+                    setReqData({ ...reqData, startDate: sDate});
+                    console.log(sDate);
                   }}
                   className="form-control"
+  
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -121,14 +144,15 @@ export default function RequestForm({ providerId, hourlyRate }) {
                   Please enter end date
                 </FormLabel>
                 <DatePicker
-                  selected={endDate}
+                  selected={eDate}
                   onChange={(date) => {
                     setEndDate(date);
-                    console.log(endDate);
+                    setReqData({ ...reqData, endDate: eDate});
+                    console.log(eDate);
                   }}
                   className="form-control z-3"
-                  
-                  
+
+
                 />
               </Grid>
             </Grid>
