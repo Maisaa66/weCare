@@ -1,29 +1,20 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 const RequestCard = ({ request }) => {
   // get provider name
-  const [providerName, setProviderName] = useState(null);
+  // const [providerName, setProviderName] = useState(null);
   const [userName, setUserName] = useState(null);
-
-  // const getProviderById = async (id) => {
-  //   const response = await axios.get(
-  //     `http://localhost:7000/api/v1/providers/${id}`,
-  //     {
-  //       withCredentials: true,
-  //       headers: {
-  //         "Access-Control-Allow-Origin": "http://localhost:3000",
-  //         "Content-Type": "application/json",
-  //       },
-  //     }
-  //   );
-  //   // console.log(info);
-  //   setProviderName(response.data.data);
-  // };
+  // here we get the type of the user from the redux store, to know which profile we are going to fetch
+  const userType = useSelector((state) => state.user.userType);
+  // here we set the url type to know which profile we are going to fetch
+  // if the user is a service provider, we will fetch the user profile
+  let urlType = userType === "serviceProvider" ? "users" : "providers";
 
   const getUserById = async (id) => {
     const response = await axios.get(
-      `http://localhost:7000/api/v1/users/profile/${id}`,
+      `http://localhost:7000/api/v1/${urlType}/profile/${id}`,
       {
         withCredentials: true,
         headers: {
@@ -37,7 +28,11 @@ const RequestCard = ({ request }) => {
   };
 
   useEffect(() => {
-    getUserById(request.customerId);
+    userType === "serviceProvider"
+      ? getUserById(request.customerId)
+      : getUserById(request.providerId);
+
+      console.log(request);
   }, []);
 
   return (
@@ -63,7 +58,7 @@ const RequestCard = ({ request }) => {
           {userName && (
             <p className="card-text text-muted" style={{ fontSize: "0.8rem" }}>
               {" "}
-              Customer Name: {userName.firstName + " " + userName.lastName}
+             {userType === "serviceProvider" ? "Customer Name:": "Provider Name:"} {userName.firstName + " " + userName.lastName}
             </p>
           )}
         </div>
