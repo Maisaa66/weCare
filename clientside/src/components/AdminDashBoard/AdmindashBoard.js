@@ -4,7 +4,6 @@ import Main from "./Main/Main";
 import Nav from "./Nav/Nav";
 import SP from "./Main/SP/SP";
 import Users from "./Main/Users/Users";
-import AllRequests from "./Main/AllRequests/AllRequests";
 import * as ReactDOM from "react-dom";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import AllDetails from "./Main/AllDetails/AllDetails";

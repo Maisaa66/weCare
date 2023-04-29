@@ -87,6 +87,49 @@ class User {
     }
   };
 
+  static getUserProfile = async (req, res, next) => {
+    try {
+      const user = await userModel.findById(req.params.id);
+      if (!user) {
+        throw new Error("There is no user with this ID!");
+      }
+      res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+      res.setHeader("Access-Control-Allow-Credentials", "true");
+      res.setHeader(
+        "Access-Control-Allow-Methods",
+        "GET, POST, PUT, DELETE, OPTIONS"
+      );
+      res.setHeader(
+        "Access-Control-Allow-Headers",
+        "Origin, Content-Type, X-Requested-With, Accept"
+      );
+      const {
+        password,
+        email,
+        phoneNum,
+        isAdmin,
+        reviewsMade,
+        nationalID,
+        requests,
+        ...other
+      } = user._doc;
+
+      res.status(200).json({
+        status: "success",
+        results: 1,
+        requestedAt: req.requestTime,
+        data: {
+          ...other,
+        },
+      });
+    } catch (err) {
+      res.status(404).json({
+        status: "fail",
+        message: err.message,
+      });
+    }
+  };
+
   static updateUserById = async (req, res, next) => {
     try {
       const user = await userModel.findByIdAndUpdate(req.params.id, req.body, {
@@ -149,12 +192,13 @@ class User {
       res.status(400).json({ message: err.message });
     }
   };
+  
   static getRequestById = async (req, res) => {
     try {
-      console.log("req by id ",req.params.userId);
+      console.log("req by id ",req.params.id);
       // const id = new mongoose.Types.ObjectId(req.params.userId);
       // get all requests for a specific user
-      const requests = await hireRequestModel.find({customerId:req.params.userId});
+      const requests = await hireRequestModel.find({customerId:req.params.id});
       res.status(200).json({
         status: "success",
         results: requests.length,

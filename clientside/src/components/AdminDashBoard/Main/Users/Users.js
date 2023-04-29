@@ -143,7 +143,7 @@ function Users() {
                   <th className='col-1'>Profile</th>
                   <th className='col-1'>First</th>
                   <th className='col-1'>Last</th>
-                  <th className='bg-danger'>Email</th>
+                  <th className=''>Email</th>
                   <th className='col-1'> Details</th>
                   <th className='col-1'>Update</th>
                   <th className='col-1'>Delete</th>

@@ -38,6 +38,15 @@ const HireRequestSchema = new mongoose.Schema(
       type: Number,
       required: [true, "Request must have an hourly rate"],
     },
+    reqDescription: {
+      type: String,
+      required: [true, "Request must have a description"],
+    },
+    recurring: {
+      type: Boolean,
+      required: [true, "Request must have a recurring value"],
+      default:false
+  },
   },
   { timestamps: true }
 );
