@@ -36,46 +36,46 @@ useEffect(()=>{
         <h6 className="d-block">{user.title?user.title:null}</h6>
         </div>
       </div>
-      <ul class="list-group text-start w-75 m-auto overflow-y-scroll h-400 shadow">
-        <li class="list-group-item">
+      <ul className="list-group text-start w-75 m-auto overflow-y-scroll h-400 shadow">
+        <li className="list-group-item">
           <span className="text-main pe-2">ID: </span>{id}
         </li>
-        <li class="list-group-item">
+        <li className="list-group-item">
           <span className="text-main pe-2">Phone number: </span>{user.phoneNum}
         </li>
-        <li class="list-group-item">
+        <li className="list-group-item">
           <span className="text-main pe-2">Email: </span>{user.email}
         </li>
-        <li class="list-group-item">
+        <li className="list-group-item">
           <span className="text-main pe-2">Gender: </span>{user.gender}
         </li>
-        <li class="list-group-item">
+        <li className="list-group-item">
           <span className="text-main pe-2">Rating : </span>{user.ratings}
         </li>
-        <li class="list-group-item">
+        <li className="list-group-item">
           <span className="text-main pe-2">NationalID: </span>{user.nationalID}
         </li>
-        <li class="list-group-item">
+        <li className="list-group-item">
           <span className="text-main pe-2">Number of requests: </span>{user.requests?.length}
         </li>
         {urlType == 'providers'? 
         <>
-        <li class="list-group-item">
+        <li className="list-group-item">
           <span className="text-main pe-2">Service type</span>{user.serviceType}
         </li>
-        <li class="list-group-item">
+        <li className="list-group-item">
           <span className="text-main pe-2">Status: </span>{user.status}
         </li>
-        <li class="list-group-item">
+        <li className="list-group-item">
           <span className="text-main pe-2">Hourly rate: </span>{user.hourlyRate}
         </li>
-        <li class="list-group-item">
+        <li className="list-group-item">
           <span className="text-main pe-2">Night shift: </span>{user.nightShift?'Yes':'No'}
         </li>
-        <li class="list-group-item">
+        <li className="list-group-item">
           <span className="text-main pe-2">Total earnings: </span>{user.totalEarnings}
         </li>
-        <li class="list-group-item">
+        <li className="list-group-item">
           <span className="text-main pe-2">Experiance: </span>{user.experties}
         </li>
         </>

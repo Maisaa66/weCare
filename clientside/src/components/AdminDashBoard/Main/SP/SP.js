@@ -48,15 +48,15 @@ export default function SP() {
     <div>
       <div className="row">
         <div className="col-2">
-          <ul class="nav nav-tabs ">
-            <li class="nav-item  col-5">
+          <ul className="nav nav-tabs ">
+            <li className="nav-item  col-5">
               <a className={flag ? 'text-main shadow-sm rounded-pill px-2' : 'text-muted'} onClick={() => {
                 setflag(true)
               }}>
                 Top 5
               </a>
             </li>
-            <li class="nav-item col-6">
+            <li className="nav-item col-6">
               <a className={flag ? 'text-muted' : 'text-main shadow-sm rounded-pill px-2'} onClick={() => {
                 setflag(false)
               }}>
@@ -105,7 +105,7 @@ export default function SP() {
         <div className="col-10">
           <h6 className="text-main text-start">All Service providers</h6>
           <div className="h-500 overflow-scroll shadow">
-            <table class="table bg-white table-responsive rounded-5 text-start w-75 shadow-sm p-1 my-2 ">
+            <table className="table bg-white table-responsive rounded-5 text-start w-75 shadow-sm p-1 my-2 ">
               <thead>
                 <tr>
                   <th>Profile</th>

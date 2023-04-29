@@ -173,9 +173,9 @@ function NavBar() {
             </button>
           </form>
           {isLogged ? (
-            <div class="dropdown me-5">
+            <div className="dropdown me-5">
               <button
-                class="btn btn-none border-0 shadow-0 d-flex flex-md-row flex-sm-column-reverse align-items-center justify-content-center"
+                className="btn btn-none border-0 shadow-0 d-flex flex-md-row flex-sm-column-reverse align-items-center justify-content-center"
                 type="button"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
@@ -198,7 +198,7 @@ function NavBar() {
                   <path d="M399 384.2C376.9 345.8 335.4 320 288 320H224c-47.4 0-88.9 25.8-111 64.2c35.2 39.2 86.2 63.8 143 63.8s107.8-24.7 143-63.8zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm256 16a72 72 0 1 0 0-144 72 72 0 1 0 0 144z" />
                 </svg>
               </button>
-              <ul class="dropdown-menu">
+              <ul className="dropdown-menu">
                 {isAdmin ? (
                   <li>
                     <Link to="/admin" className="mybtn mybtnLightSolid m-auto">
