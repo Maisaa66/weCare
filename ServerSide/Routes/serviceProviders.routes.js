@@ -23,4 +23,10 @@ router.delete(
   serviceProviderControllers.deleteProviderById
 );
 
+router.get(
+  "/profile/:id",
+  authMiddleware.verifyToken,
+  serviceProviderControllers.getUserProfile
+);
+
 module.exports = router;
