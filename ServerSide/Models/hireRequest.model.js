@@ -3,14 +3,9 @@ const mongoose = require("mongoose");
 //create hire request schema
 const HireRequestSchema = new mongoose.Schema(
   {
-    reqId: {
-      type: Number,
-      required: [true, "You need to provide a request Id"],
-      unique: true,
-    },
     reqStatus: {
       type: String,
-      enum: ["pending", "ongoing", "finished"],
+      enum: ["pending", "approved", "rejected"],
       required: [true, "Request must have a status"],
       default: "pending",
     },
