@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { isExpired, decodeToken } from "react-jwt";
+import { useDispatch } from "react-redux";
 
 export const addUser = createAsyncThunk("user/addUser", async (userData) => {
   try {
@@ -11,6 +12,31 @@ export const addUser = createAsyncThunk("user/addUser", async (userData) => {
 
     // console.log ("response data ", response);
     return response.data;
+  } catch (error) {
+    console.log("error", error);
+  }
+});
+
+export const getUserData = createAsyncThunk("user/getUserData", async (id, {getState}) => {
+  // console.log("from async id1", id);
+  const { user } = getState();
+  console.log("user from getState()", user);
+  let urlType = user.userType ==="serviceProvider" ? "providers" : "users"
+  try {
+    // console.log("id", id);
+    const response = await axios.get(
+      `http://localhost:7000/api/v1/${urlType}/${id}`,
+      {
+        withCredentials: true,
+        headers: {
+          "Access-Control-Allow-Origin": "http://localhost:3000",
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    return response.data;
+    
   } catch (error) {
     console.log("error", error);
   }
@@ -28,7 +54,6 @@ export const addUser = createAsyncThunk("user/addUser", async (userData) => {
 //     console.log("error", error);
 //   }
 // });
-
 export const userSlice = createSlice({
   name: "userSlice",
   initialState: {
@@ -48,6 +73,7 @@ export const userSlice = createSlice({
       state.id = decodedToken.id;
       state.isAdmin = decodedToken.isAdmin;
       state.userType = decodedToken.userType;
+      
     },
     setInfo: (state, action) => {
       state.info = action.payload;
@@ -68,6 +94,16 @@ export const userSlice = createSlice({
       document.cookie = `jwt=${action.payload.cookie}; expires=${expires};`;
       // state.user.push(action.payload.data);
       return action.payload.data;
+      // console.log(action.payload);
+    });
+    builder.addCase(getUserData.fulfilled, (state, action) => {
+      // Add user to the state array
+      // const navigate = useNavigate();
+      // navigate("/signup/stepthree");
+      console.log("action.payload.data", action.payload.data);
+      state.info = action.payload.data;
+      // state.user.push(action.payload.data);
+      // return action.payload.data;
       // console.log(action.payload);
     });
   },
