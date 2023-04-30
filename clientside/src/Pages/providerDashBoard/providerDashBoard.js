@@ -49,7 +49,17 @@ const ProviderDashBoard = () => {
   };
 
   const updateData = (data) => {
-    setProviderDetails({ ...provider, ...data });
+    if (Object.keys(data)[0].includes("address")) {
+      setProviderDetails({
+        ...provider,
+        address: {
+          ...provider.address,
+          [Object.keys(data)[0].split(".")[1]]: data[Object.keys(data)[0]],
+        },
+      });
+    } else {
+      setProviderDetails({ ...provider, ...data });
+    }
   };
 
   useEffect(() => {
@@ -82,6 +92,7 @@ const ProviderDashBoard = () => {
                         name: "profileImg",
                         value: provider.profileImg,
                       }}
+                      updateData={updateData}
                     />
                   </div>
 
