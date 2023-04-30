@@ -14,10 +14,9 @@ const UserProfile = () => {
   const [user, setUserDetails] = useState(null);
 
   // here we set the url type to know which profile we are going to fetch
-  let urlType = (userType === "serviceProvider" ? "provider" : "user");
+  let urlType = userType === "serviceProvider" ? "providers" : "users";
 
   const getUserById = async (id) => {
-    
     const response = await axios.get(
       `http://localhost:7000/api/v1/${urlType}/profile/${id}`,
       {
@@ -48,7 +47,7 @@ const UserProfile = () => {
               <div className="d-flex align-items-center pb-4 border-bottom">
                 <div className="position-relative">
                   <img
-                    src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+                    src={user.profileImg}
                     className="rounded-circle"
                     style={{ width: "100px" }}
                     alt="Avatar"

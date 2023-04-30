@@ -294,7 +294,7 @@ const UserDashBoard = () => {
                     className={`card overflow-y-scroll w-100 ${classes.scrollbarMalinka} `}
                     style={{ height: "400px" }}
                   >
-                    {!requests ? (
+                    {requests && requests.requests.length === 0 ? (
                       <div className="fs-3 m-auto text-secondary">
                         No Requests Made Yet
                       </div>
@@ -307,6 +307,8 @@ const UserDashBoard = () => {
                               key={request._id}
                               ind={index}
                               deleteRequest={deleteRequest}
+                              requests={requests}
+                              setRequests={setRequests}
                             ></RequestCard>
                           ))}
                       </div>
