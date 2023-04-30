@@ -4,7 +4,7 @@ import classes from "./Service.module.css";
 
 const Service = ({ ico, provider, sDesc }) => {
   return (
-    <div className="col-4">
+    <div className="col-8 col-md-6 col-lg-4">
       <div className={`${classes.card} d-flex flex-column justify-content-around m-auto mt-5 px-3`}>
         <div className="icon">
           <div className={`${classes.icon_container}`}>
