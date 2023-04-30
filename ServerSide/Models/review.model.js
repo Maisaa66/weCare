@@ -3,22 +3,17 @@ const mongoose = require("mongoose");
 //create hire request schema
 const ReviewSchema = new mongoose.Schema(
   {
-    reviewId: {
-      type: Number,
-      required: [true, "You need to provide a review Id"],
-      unique: true,
-    },
     postDate: {
       type: Date,
       required: [true, "Request must have a post date"],
     },
     reviewerId: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: String,
       required: [true, "Review must have a reviewer"],
     },
-    providerId: {
-      type: mongoose.Schema.Types.ObjectId,
-      required: [true, "Review must have a provider"],
+    revieweeId: {
+      type: String,
+      required: [true, "Review must have a reviewee"],
     },
     rate: {
       type: Number,
