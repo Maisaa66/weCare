@@ -5,8 +5,9 @@ import { Search } from "react-bootstrap-icons";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-
+import { useTranslation } from "react-i18next";
 function NavBar() {
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const [isLogged, setIsLogged] = useState(false);
   const userInfo = useSelector((state) => state.user.info);
@@ -23,13 +24,17 @@ function NavBar() {
     document.cookie = "jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     setIsLogged(false);
   };
+  const changeLanguage = function () {
+    if (i18n.language === "ar") i18n.changeLanguage("en");
+    else i18n.changeLanguage("ar");
+  };
   return (
     <>
       {" "}
       <nav className="navbar navbar-expand-lg shadow-none py-1">
         <div className="container justify-content-between">
           <Link to="/" className="navbar-brand d-lg-block d-none m-0">
-            Navbar
+            {t("slogan")}
           </Link>
           <button
             className={`navbar-toggler m-lg-auto me-sm-auto   ${classes.toggler}`}
@@ -55,7 +60,7 @@ function NavBar() {
                   aria-current="page"
                   to="/provider?provider=Nurse"
                 >
-                  Nurses
+                  {t("navNurse")}
                 </Link>
               </li>
               <li className="nav-item">
@@ -64,7 +69,7 @@ function NavBar() {
                   aria-current="page"
                   to="/provider?provider=Companion"
                 >
-                  Companionship
+                  {t("navCompanion")}
                 </Link>
               </li>
               <li className="nav-item">
@@ -73,7 +78,7 @@ function NavBar() {
                   aria-current="page"
                   to="/provider?provider=Physiotherapist"
                 >
-                  Physiotherapy
+                  {t("navPhysio")}
                 </Link>
               </li>
               <li className="nav-item">
@@ -82,7 +87,7 @@ function NavBar() {
                   aria-current="page"
                   to="/provider?provider=Nanny"
                 >
-                  Nannys
+                  {t("navNanny")}
                 </Link>
               </li>
               <li className="nav-item dropdown ">
@@ -94,7 +99,7 @@ function NavBar() {
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  Special Care
+                  {t("navSpecialCare")}
                 </a>
                 <ul
                   className={`dropdown-menu ${classes.dropdownMenu}`}
@@ -105,7 +110,7 @@ function NavBar() {
                       className={`dropdown-item ${classes.dropDown}`}
                       to="/provider?provider=Special-Care:Autism"
                     >
-                      Autism
+                      {t("specialAutism")}
                     </Link>
                   </li>
                   <li>
@@ -113,7 +118,7 @@ function NavBar() {
                       className={`dropdown-item ${classes.dropDown}`}
                       to="/provider?provider=Special-Care:Alzheimer's and Dementia"
                     >
-                      Alzheimer's and Dementia
+                      {t("specialAlzheimer")}
                     </Link>
                   </li>
                   <li></li>
@@ -122,7 +127,7 @@ function NavBar() {
                       className={`dropdown-item ${classes.dropDown}`}
                       to="/provider?provider=Special-Care:ADHD"
                     >
-                      ADHD
+                      {t("specialADHD")}
                     </Link>
                   </li>
                 </ul>
@@ -165,13 +170,16 @@ function NavBar() {
               className={classes.search}
               // class="form-control me-2 search shadow-none"
               type="search"
-              placeholder="Search"
+              placeholder={t("navSearch")}
               aria-label="Search"
             ></input>
             <button className={classes.searchBtn} type="submit">
               <Search></Search>
             </button>
           </form>
+          <button className="btn me-3" onClick={changeLanguage}>
+            {i18n.language}
+          </button>
           {isLogged ? (
             <div className="dropdown me-5">
               <button
@@ -232,7 +240,7 @@ function NavBar() {
             </div>
           ) : (
             <Link to="/login" className="mybtn mybtnLightSolid m-auto">
-              Login
+              {t("loginTitle")}
             </Link>
           )}
         </div>
