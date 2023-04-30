@@ -5,6 +5,7 @@ import { useLocation } from "react-router-dom";
 import axios from "axios";
 import Filter from "../Filter/Filter";
 import ProviderCard from "./ProviderCard/ProviderCard";
+import NavBar from "../../components/Layout/NavBar/NavBar";
 
 const Provider = () => {
   // Get the provider type from the URL

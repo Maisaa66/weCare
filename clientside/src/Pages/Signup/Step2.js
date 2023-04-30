@@ -111,7 +111,7 @@ export default function StepTwo() {
       navigate("/signup/stepfour");
     } else if (userType === "Care Beneficiary") {
       dispatch(addUser(userDetails));
-      navigate("/signup/stepthree")
+      navigate("/signup/stepthree");
     }
   };
 
@@ -123,6 +123,7 @@ export default function StepTwo() {
 
   const handleDropDownChange = (value) => {
     setAddress({ ...address, country: value });
+    setUserData({ ...userData, address });
   };
 
   return (

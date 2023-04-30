@@ -4,6 +4,7 @@ import axios from "axios";
 import classes from "./Filter.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { setProviderData } from "../../Redux Store/slices/providerSlice";
+import NavBar from "../../components/Layout/NavBar/NavBar";
 
 const Filter = () => {
   const dispatch = useDispatch();
@@ -86,49 +87,52 @@ const Filter = () => {
   };
 
   return (
-    <div className={`mt-5 container  py-4 ${classes.filter} shadow`}>
-      <h1>Filter</h1>
-      <div className="row d-flex flex-column flex-md-row">
-        <Select
-          size="col-6 col-md-3"
-          defaultText="Rate"
-          values={["+4", "+3", "+2", "+1"]}
-          onChange={rateHandler}
-        ></Select>
-        <Select
-          size="col-6 col-md-3"
-          defaultText="Price"
-          values={["High-to-Low", "Low-to-High"]}
-          onChange={priceHandler}
-        ></Select>
-        <Select
-          size="col-6 col-md-3"
-          defaultText="Gender"
-          values={["Male", "Female"]}
-          onChange={genderHandler}
-        ></Select>
-        <Select
-          size="col-6 col-md-3"
-          defaultText="Location"
-          values={["Cairo", "Alexandria"]}
-          onChange={locationHandler}
-        ></Select>
-        <div className="d-flex justify-content-center">
-          <div className="form-check">
-            <input
-              className="form-check-input"
-              type="checkbox"
-              value=""
-              id="flexCheckDefault"
-              onChange={nsHandler}
-            />
-            <label className="form-check-label" htmlFor="flexCheckDefault">
-              Night Shift
-            </label>
+    <>
+
+      <div className={`mt-5 container  py-4 ${classes.filter} shadow`}>
+        <h1>Filter</h1>
+        <div className="row d-flex flex-column flex-md-row">
+          <Select
+            size="col-6 col-md-3"
+            defaultText="Rate"
+            values={["+4", "+3", "+2", "+1"]}
+            onChange={rateHandler}
+          ></Select>
+          <Select
+            size="col-6 col-md-3"
+            defaultText="Price"
+            values={["High-to-Low", "Low-to-High"]}
+            onChange={priceHandler}
+          ></Select>
+          <Select
+            size="col-6 col-md-3"
+            defaultText="Gender"
+            values={["Male", "Female"]}
+            onChange={genderHandler}
+          ></Select>
+          <Select
+            size="col-6 col-md-3"
+            defaultText="Location"
+            values={["Cairo", "Alexandria"]}
+            onChange={locationHandler}
+          ></Select>
+          <div className="d-flex justify-content-center">
+            <div className="form-check">
+              <input
+                className="form-check-input"
+                type="checkbox"
+                value=""
+                id="flexCheckDefault"
+                onChange={nsHandler}
+              />
+              <label className="form-check-label" htmlFor="flexCheckDefault">
+                Night Shift
+              </label>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

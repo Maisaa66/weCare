@@ -1,38 +1,77 @@
-import React from 'react';
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+const ReviewCard = ({ review }) => {
+  const userType = useSelector((state) => state.user.userType);
+  let urlType = userType === "user" ? "providers" : "users";
+  const [userName, setUserName] = useState(null);
 
-const ReviewCard = () => {
-    return (
-        <div className="row d-flex justify-content-center">
-        <div className="col-lg-10 col-xl-8">
-          <div className="row">
-            <div className="col-lg-4 d-flex justify-content-center align-items-center">
-              <img
-                src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(1).webp"
-                className="rounded-circle shadow-1 mb-4 mb-lg-0"
-                alt="woman avatar"
-                width="150"
-                height="150"
-              />
-            </div>
-            <div className="col-9 col-md-9 col-lg-7 col-xl-8 text-center text-lg-start mx-auto mx-lg-0">
-              <h4 className="mb-4">
-                Maria Smantha - Web Developer
-              </h4>
-              <p className="mb-0 pb-3">
-                Lorem ipsum dolor sit amet, consectetur
-                adipisicing elit. A aliquam amet animi
-                blanditiis consequatur debitis dicta
-                distinctio, enim error eum iste libero
-                modi nam natus perferendis possimus
-                quasi sint sit tempora voluptatem. Est,
-                exercitationem id ipsa ipsum laboriosam
-                perferendis.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
+  const getUserById = async (id) => {
+    await axios
+      .get(`http://localhost:7000/api/v1/${urlType}/profile/${id}`, {
+        withCredentials: true,
+        headers: {
+          "Access-Control-Allow-Origin": "http://localhost:3000",
+          "Content-Type": "application/json",
+        },
+      })
+      .then((res) => setUserName(res.data.data))
+      .catch((err) => console.log(err));
+    // console.log(info);
+  };
+
+  useEffect(() => {
+    getUserById(review.revieweeId);
+  }, []);
+
+  return (
+    //   <div className="row d-flex justify-content-center">
+    //   <div className="col-lg-10 col-xl-8">
+    //     <div className="row">
+    //       <div className="col-lg-4 d-flex justify-content-center align-items-center">
+    //         <img
+    //           src={userName && userName.profileImg}
+    //           className="rounded-circle shadow-1 mb-4 mb-lg-0"
+    //           alt="woman avatar"
+    //           width="150"
+    //           height="150"
+    //         />
+    //       </div>
+    //       <div className="col-9 col-md-9 col-lg-7 col-xl-8 text-center text-lg-start mx-auto mx-lg-0">
+    //         <h4 className="mb-4">
+    //           {userName && userName.firstName + " "+ userName.lastName}
+    //         </h4>
+    //         <p className="mb-0 pb-3">
+    //           {review && review.comment}
+    //         </p>
+    //       </div>
+    //     </div>
+    //   </div>
+    // </div>
+    <>
+      {userName && review && (
+        <tr>
+          <td>
+            {" "}
+            <img
+              src={
+                userName.profileImg
+                  ? userName.profileImg
+                  : "https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+              }
+              className="rounded-circle"
+              style={{ width: "100px" }}
+              alt="Avatar"
+            />
+          </td>
+          <td>{userName.firstName + " " + userName.lastName}</td>
+          <td>{review.rate}</td>
+          <td>{review.comment}</td>
+          <td>{review.postDate.split("T")[0]}</td>
+        </tr>
+      )}
+    </>
+  );
 };
 
 export default ReviewCard;

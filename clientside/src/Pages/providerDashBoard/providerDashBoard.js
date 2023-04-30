@@ -334,7 +334,7 @@ const ProviderDashBoard = () => {
                 </div>
               </div>
               {/* testimonels */}
-              <section class="gradient-custom">
+              {/* <section class="gradient-custom">
                 <div class="container mx-4 p-4">
                   <div class="row d-flex justify-content-center">
                     <div class="col-md-12">
@@ -418,7 +418,7 @@ const ProviderDashBoard = () => {
                     </div>
                   </div>
                 </div>
-              </section>
+              </section> */}
             </div>
           </div>
         </div>
