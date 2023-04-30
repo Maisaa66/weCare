@@ -19,8 +19,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import axios from "axios";
 
 export default function RequestForm({ providerId, hourlyRate }) {
-
-    // get customer id from redux store
+  // get customer id from redux store
   const customerId = useSelector((state) => state.user.id);
 
   // req schema, this will be sent to backend to create a new request
@@ -33,7 +32,7 @@ export default function RequestForm({ providerId, hourlyRate }) {
     customerId: customerId,
     reqDescription: "",
     recurring: false,
-  }
+  };
 
   // state to store request data
   const [open, setOpen] = React.useState(false);
@@ -60,23 +59,21 @@ export default function RequestForm({ providerId, hourlyRate }) {
   };
 
   // handle request
-  const handleRequest = async() => {
-    axios.post("http://localhost:7000/api/v1/requests",reqData, {
-      withCredentials: true,
-      headers: {
-        "Access-Control-Allow-Origin": "http://localhost:3000",
-        "Content-Type": "application/json",
-      },
-    })
-    .then((res)=> console.log(res.status))
-    .catch(err => console.log(err))
+  const handleRequest = async () => {
+    axios
+      .post("http://localhost:7000/api/v1/requests", reqData, {
+        withCredentials: true,
+        headers: {
+          "Access-Control-Allow-Origin": "http://localhost:3000",
+          "Content-Type": "application/json",
+        },
+      })
+      .then((res) => console.log(res.data))
+      .catch((err) => console.log(err));
 
-    setReqData({...reqSchema});
+    setReqData({ ...reqSchema });
     setOpen(false);
   };
-
-
-
 
   const theme = createTheme({
     palette: {
@@ -121,7 +118,7 @@ export default function RequestForm({ providerId, hourlyRate }) {
               <Grid item xs={12} sm={6}>
                 <FormLabel
                   id="demo-row-radio-buttons-group-label mt-4"
-                  sx={{  textAlign: "left" }}
+                  sx={{ textAlign: "left" }}
                 >
                   Please enter start date
                 </FormLabel>
@@ -129,11 +126,10 @@ export default function RequestForm({ providerId, hourlyRate }) {
                   selected={sDate}
                   onChange={(date) => {
                     setStartDate(date);
-                    setReqData({ ...reqData, startDate: sDate});
+                    setReqData({ ...reqData, startDate: sDate });
                     console.log(sDate);
                   }}
                   className="form-control"
-  
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -147,12 +143,10 @@ export default function RequestForm({ providerId, hourlyRate }) {
                   selected={eDate}
                   onChange={(date) => {
                     setEndDate(date);
-                    setReqData({ ...reqData, endDate: eDate});
+                    setReqData({ ...reqData, endDate: eDate });
                     console.log(eDate);
                   }}
                   className="form-control z-3"
-
-
                 />
               </Grid>
             </Grid>
@@ -165,7 +159,9 @@ export default function RequestForm({ providerId, hourlyRate }) {
                   <AntSwitch
                     // defaultChecked
                     checked={reqData.recurring}
-                    onChange={(e) => {setReqData({...reqData, recurring: e.target.checked})}}
+                    onChange={(e) => {
+                      setReqData({ ...reqData, recurring: e.target.checked });
+                    }}
                     inputProps={{ "aria-label": "ant design" }}
                     sx={{ mr: 2 }}
                   />
@@ -191,7 +187,7 @@ export default function RequestForm({ providerId, hourlyRate }) {
                   InputLabelProps={{
                     style: {
                       fontSize: "0.8rem",
-                    zIndex:0
+                      zIndex: 0,
                     },
                   }}
                 />
@@ -202,7 +198,6 @@ export default function RequestForm({ providerId, hourlyRate }) {
               maxRows={4}
               aria-label="maximum height"
               placeholder="If you have special requests, please enter here."
-             
               variant="standard"
               className="form-control mt-3 w-100"
               value={reqData.reqDescription}
