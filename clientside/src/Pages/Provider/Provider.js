@@ -25,10 +25,13 @@ const Provider = () => {
       .get(`http://localhost:7000/api/v1/providers?serviceType=${provider.toLowerCase()}`)
       .then((res) => {
         // setData(res.data.data.providers);
-
+        console.log(res.data.data.providers);
+        const data = res.data.data.providers.filter((provider) => {
+          return provider.status === "approved";
+        });
         // set the provider type and data in the redux store to be used in the filter component
         dispatch(setProviderType(provider));
-        dispatch(setProviderData(res.data.data.providers));
+        dispatch(setProviderData(data));
         setLoading(false);
       });
   }, []);
@@ -54,7 +57,7 @@ const Provider = () => {
       </>
     );
   }
-  
+
   if (data) {
     return (
       <>
