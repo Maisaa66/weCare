@@ -6,9 +6,11 @@ Full URLs are provided in responses they will be rendered as if service is runni
 
 Open endpoints require no Authentication.
 
-- [Login](users/login.md) : `POST /api/v1/users/login`
-- [Register](users/register.md) : `POST /api/v1/users/signup`
-- [Get All Providers](providers/getAllProviders.md) : `GET /api/v1/providers`
+- [Login](users/login.md) : `POST /api/v1/users/login/`
+- [Register](users/register.md) : `POST /api/v1/users/signup/`
+- [Get All Providers](providers/getAllProviders.md) : `GET /api/v1/providers/`
+
+<br/>
 
 ## Endpoints that require Authentication
 
@@ -17,4 +19,7 @@ request. A Token can be acquired from the Login view above.
 
 ### Users Related
 
-- [Get All Users](users/getAllUsers.md) : `GET /api/v1/users`
+- [Get All Users](users/getAllUsers.md) : `GET /api/v1/users/`
+- [Get User By ID](users/getUserById.md) : `GET /api/v1/users/:id/`
+
+
