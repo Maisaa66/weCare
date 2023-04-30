@@ -10,6 +10,11 @@ Open endpoints require no Authentication.
 - [Register](users/register.md) : `POST /api/v1/users/signup`
 - [Get All Providers](providers/getAllProviders.md) : `GET /api/v1/providers`
 
-Endpoints that require Authentication
+## Endpoints that require Authentication
+
+Closed endpoints require a valid Token to be included in the header of the
+request. A Token can be acquired from the Login view above.
+
+### Users Related
 
 - [Get All Users](users/getAllUsers.md) : `GET /api/v1/users`
