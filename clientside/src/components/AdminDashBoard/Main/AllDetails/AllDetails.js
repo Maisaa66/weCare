@@ -36,7 +36,7 @@ useEffect(()=>{
         <h6 className="d-block">{user.title?user.title:null}</h6>
         </div>
       </div>
-      <ul className="list-group text-start w-75 m-auto overflow-y-scroll h-400 shadow">
+      <ul className={`list-group text-start w-75 m-auto  shadow ${urlType !== 'users'?'overflow-y-scroll h-400':null}`}>
         <li className="list-group-item">
           <span className="text-main pe-2">ID: </span>{id}
         </li>

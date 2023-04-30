@@ -34,7 +34,7 @@ function Users() {
   useEffect(() => {
   getAllUsers()
 
-    axios.get(`http://localhost:7000/api/v1/${urlType}?ratings[gte]=4.8`, {
+    axios.get(`http://localhost:7000/api/v1/${urlType}?rating[gte]=4.8`, {
       withCredentials: true,
       headers: {
         'Access-Control-Allow-Origin': 'http://localhost:3000',
@@ -48,7 +48,7 @@ function Users() {
         setTopusr(res.data.data.providers)}
   })
       .catch(err => console.log(err))
-    axios.get(`http://localhost:7000/api/v1/${urlType}?ratings[lte]=2`, {
+    axios.get(`http://localhost:7000/api/v1/${urlType}?rating[lte]=2`, {
       withCredentials: true,
       headers: {
         'Access-Control-Allow-Origin': 'http://localhost:3000',
@@ -85,14 +85,14 @@ function Users() {
           <ul className="nav nav-tabs ">
             <li className="nav-item col-5">
               <a className={flag ? 'text-main shadow-sm rounded-pill px-2' : 'text-muted'} onClick={() => { setflag(true) }}>
-                Top 5
+                Top 
               </a>
             </li>
             <li className="nav-item col-6">
               <a className={flag ? 'text-muted' : 'text-main shadow-sm rounded-pill px-2'} onClick={() => {
                 setflag(false)
               }}>
-                Worst 5
+                Worst 
               </a>
             </li>
           </ul>
@@ -105,7 +105,7 @@ function Users() {
                     <h6 className="fs-12">{tUsr.firstName}</h6>
                     <div className="ratingBox">
                       <p>
-                        {tUsr.ratings}
+                        {tUsr.rating}
                         <i className=" ps-1 text-warning fa-solid fa-star"></i>
                       </p>
                     </div>
@@ -124,7 +124,7 @@ function Users() {
                     <h6 className="fs-12">{wUsr.firstName}</h6>
                     <div className="ratingBox">
                       <p>
-                        {wUsr.ratings}
+                        {wUsr.rating}
                         <i className=" ps-1 text-warning fa-solid fa-star"></i>
                       </p>
                     </div>
@@ -136,7 +136,7 @@ function Users() {
         </div>
         <div className="col-10">
           <h6 className="text-main text-start">All {urlType}</h6>
-          <div className="h-500 overflow-y-scroll shadow">
+          <div className={`h-500 shadow overflow-y-scroll`}>
             <table className="table bg-white  rounded-5 text-start w-75 shadow-sm  my-2 ">
               <thead>
                 <tr>
