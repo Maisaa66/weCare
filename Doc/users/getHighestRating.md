@@ -1,17 +1,17 @@
-# Get All Providers
+# Get Five Highest Rating
 
-Used to get service providers in our system.
+Used to get the highest five rating users.
 
-**URL** : `/api/v1/providers/`
+**URL** : `/api/v1/users?rating[gte]=4.8/`
 
 **Method** : `GET`
 
-**Auth required** : NO
+**Auth required** : YES
 
 **Data constraints**
 
 ```json
-No constraints
+Must be an admin.
 ```
 
 ## Success Response
@@ -23,10 +23,10 @@ No constraints
 ```json
 {
   "status": "success",
-  "results": 44,
+  "results": 5,
   "requestedAt": "Date",
   "data": {
-    "[providers]",
+    "[users]",
   },
 }
 ```

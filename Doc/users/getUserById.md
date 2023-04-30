@@ -1,6 +1,6 @@
-# Get All Users
+# Get User By ID
 
-Used to get all users in our system.
+Used to get a user.
 
 **URL** : `/api/v1/users/:id`
 

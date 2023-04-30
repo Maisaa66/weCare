@@ -1,6 +1,6 @@
-# Get All Users
+# Update User By ID
 
-Used to get all users in our system.
+Used to update user.
 
 **URL** : `/api/v1/users/:id`
 

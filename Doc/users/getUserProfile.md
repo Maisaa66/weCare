@@ -1,17 +1,17 @@
-# Get All Providers
+# Get User Profile
 
-Used to get service providers in our system.
+Used to get a user profile.
 
-**URL** : `/api/v1/providers/`
+**URL** : `/api/v1/profile/:id/`
 
 **Method** : `GET`
 
-**Auth required** : NO
+**Auth required** : YES
 
 **Data constraints**
 
 ```json
-No constraints
+Must be authenticated
 ```
 
 ## Success Response
@@ -23,10 +23,10 @@ No constraints
 ```json
 {
   "status": "success",
-  "results": 44,
+  "results": 1,
   "requestedAt": "Date",
   "data": {
-    "[providers]",
+    "[user]",
   },
 }
 ```

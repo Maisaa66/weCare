@@ -1,8 +1,8 @@
-# Delete User By ID
+# Delete Provider By ID
 
-Used to delete a user.
+Used to delete a provider.
 
-**URL** : `/api/v1/users/:id`
+**URL** : `/api/v1/providers/:id/`
 
 **Method** : `DELETE`
 
@@ -33,7 +33,5 @@ Must be authenticated
 **Content** :
 
 ```json
-{
-  "message": "[Error Message]",
-}
+{ "message": "Error message" }
 ```

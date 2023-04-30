@@ -1,17 +1,26 @@
-# Get All Providers
+# Update Provider By ID
 
-Used to get service providers in our system.
+Used to update a provider.
 
-**URL** : `/api/v1/providers/`
+**URL** : `/api/v1/providers/:id/`
 
-**Method** : `GET`
+**Method** : `PATCH`
 
-**Auth required** : NO
+**Auth required** : YES
 
 **Data constraints**
 
 ```json
-No constraints
+Must be authenticated
+```
+
+**Data example**
+
+```json
+{
+  "firstName": "Ziad",
+  "lastName": "Eleraky"
+}
 ```
 
 ## Success Response
@@ -23,10 +32,10 @@ No constraints
 ```json
 {
   "status": "success",
-  "results": 44,
+  "results": 1,
   "requestedAt": "Date",
   "data": {
-    "[providers]",
+    "[provider]",
   },
 }
 ```
