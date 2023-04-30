@@ -2,15 +2,17 @@ import React from "react";
 
 import classes from "./AlbumSection.module.css";
 import Photo from "../Photo/Photo";
-
+import { useTranslation } from "react-i18next";
 const AlbumSection = () => {
+  const { t } = useTranslation();
   return (
     // className={`${classes.background}`}
     <div>
       <div className="container p-5">
         <div className={classes.style}></div>
         <h1>
-          View Our Beautiful <span className={classes.colorized}>Moments</span>
+          {t("beatifulMomentTitle")}
+          <span className={classes.colorized}>{t("moments")}</span>
         </h1>
         <div className="d-flex flex-column flex-md-row align-items-center justify-content-center mt-4">
           <div className="d-flex flex-column">

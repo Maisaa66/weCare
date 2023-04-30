@@ -1,7 +1,5 @@
 import NavBar from "../NavBar/NavBar";
-// import SearchBar from "../Search/SearchBar";
 import classes from "./Header.module.css";
-// import Hero from "../../../assets/images/hero.png";
 import { useTranslation } from "react-i18next";
 function Header() {
   const { t } = useTranslation();
@@ -25,18 +23,13 @@ function Header() {
         <div className="row text-start align-items-center">
           <div className="col-sm-12 col-lg-6">
             <h1 className="h1 my-2">
-              <span className={classes.span}>{t("slogan")}</span> is there to
-              help you at your home!
+              <span className={classes.span}>{t("slogan")}</span>
+              {t("homeHeaderTitle")}
             </h1>
-            <p className="lead my-4">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur.
-            </p>
-            <button className="mybtn mybtnLightSolid my-2">Explore More</button>
+            <p className="lead my-4">{t("headerIntro")}</p>
+            <button className="mybtn mybtnLightSolid my-2">
+              {t("homeHeaderBtn")}
+            </button>
           </div>
           <div className="col-sm-12 px-5 col-lg-6 text-lg-end text-sm-center">
             <div className={`${classes.bigger} d-none d-lg-block ms-auto`}>
@@ -44,7 +37,6 @@ function Header() {
                 className={`${classes.customeImg}  ${classes.headerImg} ms-auto`}
               ></div>
             </div>
-            {/* <img width="400px" src={Hero} alt="hero image" /> */}
           </div>
         </div>
         <div

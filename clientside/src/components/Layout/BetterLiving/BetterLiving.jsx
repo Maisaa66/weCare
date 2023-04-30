@@ -2,8 +2,9 @@ import * as React from "react";
 import classes from "./BetterLiving.module.css";
 import BTImg from "../../../assets/images/patient.jpg";
 import { CheckCircle } from "react-bootstrap-icons";
+import { useTranslation } from "react-i18next";
 const BetterLiving = () => {
-
+    const { t } = useTranslation();
   return (
     <div className={`${classes.betterLiving}`}>
     <div className="container">
@@ -13,33 +14,31 @@ const BetterLiving = () => {
         </div>
         <div className="col-lg-6 text-start ps-4 py-3">
             <h3 className="fs-1 py-2 fw-bolder">
-            First Step Towards<span className={`${classes.spanHeading}`}>Better Living</span>{" "}
+            {t("betterLivingTitle")}<span className={`${classes.spanHeading}`}>{t("betterLiving")}</span>{" "}
             </h3>
             <p className="py-2">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Odio,
-            nostrum! Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-            Odio, nostrum!
+            {t("betterLivingDesc")}
             </p>
             <ul className="py-2 list-unstyled">
             <li>
                 <CheckCircle className={`${classes.CheckCircle} fs-3 pe-2`}></CheckCircle>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sequi.
+                {t("benefitOne")}
             </li>
             <li>
             <CheckCircle className={`${classes.CheckCircle} fs-3 pe-2`}></CheckCircle>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sequi.
+            {t("benefitTwo")}
             </li>
             <li>
             <CheckCircle className={`${classes.CheckCircle} fs-3 pe-2`}></CheckCircle>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sequi.
+            {t("benefitThree")}
             </li>
             <li>
             <CheckCircle className={`${classes.CheckCircle} fs-3 pe-2`}></CheckCircle>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sequi.
+            {t("benefitFour")}
             </li>
             </ul>
             <button className=" mybtn mybtnMainSolid">
-            See more
+            {t("homeHeaderBtn")}
             </button>
         </div>
     </div>

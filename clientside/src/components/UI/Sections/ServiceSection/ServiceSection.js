@@ -2,12 +2,14 @@ import React from "react";
 
 import Service from "../Service/Service";
 import classes from "./ServiceSection.module.css";
-
+import { useTranslation } from "react-i18next";
 const ServiceSection = () => {
+  const { t } = useTranslation();
   return (
     <div className="container">
       <h1 className={`${classes.head_width}`}>
-        Everything Is <span className={classes.colorized}>Do Driven</span> By Services
+        {t("serviceSecTitle")}{" "}
+        <span className={classes.colorized}>{t("qualityCare")}</span>
       </h1>
       <div
         className={`d-flex flex-column flex-md-row align-items-center justify-content-md-around mt-5`}
@@ -15,38 +17,38 @@ const ServiceSection = () => {
         <div className={`row justify-content-center`}>
           <Service
             ico="fa-solid fa-user-nurse"
-            provider="Nurses"
-            sDesc="Our team of qualified nurses offers compassionate care, medical advice, and support to."
+            provider={t("nurseCardTitle")}
+            sDesc={t("nurseCardDescrip")}
           />
           <Service
             ico="fa-solid fa-user-nurse"
-            provider="Companionship"
-            sDesc="We believe in the power of human connection. Explore our Companionship section for tips."
+            provider={t("companionCardTitle")}
+            sDesc={t("companionCardDescrip")}
           />
           <Service
             ico="fa-solid fa-user-doctor"
-            provider="Physiotherapy"
-            sDesc="Hands-on treatment approach that helps people recover from injuries, manage chronic pain."
+            provider={t("physioCardTitle")}
+            sDesc={t("physioCardDescrip")}
           />
           <Service
             ico="fa-solid fa-user-nurse"
-            provider="Nannys"
-            sDesc="Personalized childcare services, creating a safe and nurturing environment for children."
+            provider={t("nannyCardTitle")}
+            sDesc={t("nannyCardDescrip")}
           />
           <Service
             ico="fa-solid fa-shield-virus"
-            provider="Autism"
-            sDesc="Autism is a neurodevelopmental disorder that affects social communication, behavior."
+            provider={t("autismCardTitle")}
+            sDesc={t("autismCardDescrip")}
           />
           <Service
             ico="fa-solid fa-shield-virus"
-            provider="Alzheimer's and Dementia"
-            sDesc="Alzheimer's and Dementia are neurodegenerative diseases that cause progressive decline."
+            provider={t("alzheimerCardTitle")}
+            sDesc={t("alzheimerCardDescrip")}
           />
           <Service
             ico="fa-solid fa-shield-virus"
-            provider="ADHD"
-            sDesc="ADHD is a common neurodevelopmental disorder that affects attention, impulsivity."
+            provider={t("adhdCardTitle")}
+            sDesc={t("adhdCardDescrip")}
           />
         </div>
       </div>
