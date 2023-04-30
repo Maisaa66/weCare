@@ -126,8 +126,8 @@ export default function RequestForm({ providerId, hourlyRate }) {
                   selected={sDate}
                   onChange={(date) => {
                     setStartDate(date);
-                    setReqData({ ...reqData, startDate: sDate });
-                    console.log(sDate);
+                    setReqData({ ...reqData, startDate: date });
+                    console.log(date);
                   }}
                   className="form-control"
                 />
@@ -143,8 +143,8 @@ export default function RequestForm({ providerId, hourlyRate }) {
                   selected={eDate}
                   onChange={(date) => {
                     setEndDate(date);
-                    setReqData({ ...reqData, endDate: eDate });
-                    console.log(eDate);
+                    setReqData({ ...reqData, endDate: date });
+                    console.log(date);
                   }}
                   className="form-control z-3"
                 />
