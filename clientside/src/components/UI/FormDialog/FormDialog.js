@@ -14,6 +14,11 @@ export default function FormDialog({ data, updateData }) {
 
   const [updatedData, setUpdatedData] = React.useState(data.value);
   const id = useSelector((state) => state.user.id);
+  const userType = useSelector((state) => state.user.userType);
+
+  // here we set the url type to know which profile we are going to fetch
+  let urlType = userType === "serviceProvider" ? "providers" : "users";
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -23,20 +28,26 @@ export default function FormDialog({ data, updateData }) {
   };
 
   const handleUpdate = async () => {
-    await axios.patch(`http://localhost:7000/api/v1/users/${id}`, {[data.name]: updatedData},     {
-      withCredentials: true,
-      headers: {
-        "Access-Control-Allow-Origin": "http://localhost:3000",
-        "Content-Type": "application/json",
-      },
-    } )
-    .then((res)=>{
-      console.log(res);
-      updateData({[data.name]: updatedData});
-      setOpen(false);
-    }).catch((err)=>{console.log(err)})
-  }
-
+    await axios
+      .patch(
+        `http://localhost:7000/api/v1/${urlType}/${id}`,
+        { [data.name]: updatedData },
+        {
+          withCredentials: true,
+          headers: {
+            "Access-Control-Allow-Origin": "http://localhost:3000",
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then((res) => {
+        updateData({ [data.name]: updatedData });
+        setOpen(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const theme = createTheme({
     palette: {

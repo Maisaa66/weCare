@@ -56,7 +56,19 @@ const UserDashBoard = () => {
 
   const updateData = (data) => {
     setUserDetails({ ...user, ...data });
+    if (Object.keys(data)[0].includes("address")) {
+      setUserDetails({
+        ...user,
+        address: {
+          ...user.address,
+          [Object.keys(data)[0].split(".")[1]]: data[Object.keys(data)[0]],
+        },
+      });
+    } else {
+      setUserDetails({ ...user, ...data });
+    }
   };
+
   const deleteRequest = (id) => {
     axios
       .delete(`http://localhost:7000/api/v1/requests/${id}`, {
