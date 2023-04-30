@@ -23,5 +23,6 @@ request. A Token can be acquired from the Login view above.
 - [Get User By ID](users/getUserById.md) : `GET /api/v1/users/:id/`
 - [Update User By ID](users/updateUserById.md) : `PATCH /api/v1/users/:id/`
 - [Delete User By ID](users/deleteUserById.md) : `DELETE /api/v1/users/:id/`
+- [Get All Requests](users/getAllRequests.md) : `GET /api/v1/request/`
 
 
