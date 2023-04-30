@@ -9,3 +9,7 @@ Open endpoints require no Authentication.
 - [Login](users/login.md) : `POST /api/v1/users/login`
 - [Register](users/register.md) : `POST /api/v1/users/signup`
 - [Get All Providers](providers/getAllProviders.md) : `GET /api/v1/providers`
+
+Endpoints that require Authentication
+
+- [Get All Users](users/getAllUsers.md) : `GET /api/v1/users`
