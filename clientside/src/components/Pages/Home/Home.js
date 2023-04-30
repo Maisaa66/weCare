@@ -3,8 +3,20 @@ import BetterLiving from "../../Layout/BetterLiving/BetterLiving";
 import ServiceSection from "../../UI/Sections/ServiceSection/ServiceSection";
 import AlbumSection from "../../UI/Sections/AlbumSection/AlbumSection";
 import Footer from "../../Layout/Footer/Footer";
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { getUserData } from "../../../Redux Store/slices/userSlice";
 
 function Home() {
+  const userId = useSelector((state) => state.user.id);
+  const dispatch = useDispatch();
+
+
+  useEffect(()=>{
+    if (document.cookie.includes("jwt")) {
+      dispatch(getUserData(userId));
+    }
+  }, [dispatch, userId])
   return (
     <>
       <Header></Header>

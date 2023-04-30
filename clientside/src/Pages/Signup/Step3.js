@@ -1,7 +1,7 @@
 import * as React from "react";
 import Avatar from "@mui/material/Avatar";
 import CssBaseline from "@mui/material/CssBaseline";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
@@ -63,8 +63,10 @@ const theme = createTheme({
 });
 
 export default function StepThree() {
+  const navigate = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
+    navigate("/login")
   };
   const userType = useSelector((state) => state.userInfo.type);
 
@@ -122,7 +124,7 @@ export default function StepThree() {
               sx={{ mt: 1 }}
             >
               <div>
-                <a href="http://marcel-pirnay.be/" className={`${classes.btn}`}>
+                <button onClick={handleSubmit}  className={`${classes.btn}`}>
                   <svg width="277" height="62">
                     <defs>
                       <linearGradient id="grad1">
@@ -140,8 +142,8 @@ export default function StepThree() {
                       height="50"
                     ></rect>
                   </svg>
-                  <span>Go To Profile</span>
-                </a>
+                  <span>Login</span>
+                </button>
               </div>
             </Box>
           </Box>

@@ -17,7 +17,8 @@ import axios from "axios";
 import { Alert } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { setToken } from "../../Redux Store/slices/userSlice";
+import { getUserData, setToken } from "../../Redux Store/slices/userSlice";
+import { useEffect } from "react";
 
 function Copyright(props) {
   return (
@@ -77,7 +78,7 @@ export default function SignIn() {
   const [userType, setUserType] = useState("");
   const [userData, setUserData] = useState({ email: "", password: "" });
   const [isError, setIsError] = useState({ status: false, message: "" });
-
+  // const userId = useSelector((state) => state.user.id);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -85,6 +86,8 @@ export default function SignIn() {
     title: "I am",
     options: ["Care Giver", "Care Beneficiary"],
   };
+
+
 
   // Functions
   const onSubmit = async (event) => {
@@ -125,8 +128,11 @@ export default function SignIn() {
           .post("http://localhost:7000/api/v1/users/login", userData)
           .then((res) => {
             document.cookie = `jwt=${res.data.cookie}; expires=${expires}`;
-            dispatch(setToken());
+           dispatch(setToken());
+            
+
             navigate("/");
+            
           })
           .catch((error) =>
             setIsError({ status: true, message: error.response.data })

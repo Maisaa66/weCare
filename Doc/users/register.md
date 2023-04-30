@@ -63,7 +63,7 @@ Used to create a User.
 {
   "status": "success",
   "results": 1,
-  "requestedAt": "[Date]",
+  "requestedAt": "Date",
   "data": {
     "email": "ziadeleraky@weCare.com",
     "firstName": "Ziad",

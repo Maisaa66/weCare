@@ -156,6 +156,49 @@ class ServiceProvider {
       });
     }
   };
+  static getUserProfile = async (req, res, next) => {
+    try {
+      const user = await serviceProviderModel.findById(req.params.id);
+      if (!user) {
+        throw new Error("There is no user with this ID!");
+      }
+      res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+      res.setHeader("Access-Control-Allow-Credentials", "true");
+      res.setHeader(
+        "Access-Control-Allow-Methods",
+        "GET, POST, PUT, DELETE, OPTIONS"
+      );
+      res.setHeader(
+        "Access-Control-Allow-Headers",
+        "Origin, Content-Type, X-Requested-With, Accept"
+      );
+      const {
+        password,
+        email,
+        phoneNum,
+        reviewsMade,
+        nationalID,
+        requests,
+        documents,
+        status,
+        ...other
+      } = user._doc;
+
+      res.status(200).json({
+        status: "success",
+        results: 1,
+        requestedAt: req.requestTime,
+        data: {
+          ...other,
+        },
+      });
+    } catch (err) {
+      res.status(404).json({
+        status: "fail",
+        message: err.message,
+      });
+    }
+  };
 
   static updateProviderById = async (req, res) => {
     try {

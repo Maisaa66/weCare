@@ -16,29 +16,38 @@ import TextareaAutosize from "@mui/base/TextareaAutosize";
 import AntSwitch from "../ToggleButton/ToggleButton";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import axios from "axios";
 
 export default function RequestForm({ providerId, hourlyRate }) {
-
-    // get customer id from redux store
+  // get customer id from redux store
   const customerId = useSelector((state) => state.user.id);
 
   // req schema, this will be sent to backend to create a new request
   const reqSchema = {
     totalHrs: "",
-    startDate: new Date(),
-    endDate: new Date(),
+    startDate: "",
+    endDate: "",
     providerId: providerId,
     hourlyRate: hourlyRate,
     customerId: customerId,
     reqDescription: "",
     recurring: false,
-  }
+  };
 
   // state to store request data
   const [open, setOpen] = React.useState(false);
-  const [startDate, setStartDate] = React.useState(new Date());
-  const [endDate, setEndDate] = React.useState(new Date());
-  const [reqData, setReqData] = React.useState(reqSchema);
+  const [sDate, setStartDate] = React.useState(new Date());
+  const [eDate, setEndDate] = React.useState(new Date());
+  const [reqData, setReqData] = React.useState({
+    totalHrs: "",
+    startDate: "",
+    endDate: "",
+    providerId: providerId,
+    hourlyRate: hourlyRate,
+    customerId: customerId,
+    reqDescription: "",
+    recurring: false,
+  });
 
   // handle open and close of dialog
   const handleClickOpen = () => {
@@ -50,10 +59,19 @@ export default function RequestForm({ providerId, hourlyRate }) {
   };
 
   // handle request
-  const handleRequest = () => {
-    setReqData({ ...reqData, startDate: startDate, endDate: endDate });
-    console.log(reqData);
-    setReqData({...reqSchema});
+  const handleRequest = async () => {
+    axios
+      .post("http://localhost:7000/api/v1/requests", reqData, {
+        withCredentials: true,
+        headers: {
+          "Access-Control-Allow-Origin": "http://localhost:3000",
+          "Content-Type": "application/json",
+        },
+      })
+      .then((res) => console.log(res.data))
+      .catch((err) => console.log(err));
+
+    setReqData({ ...reqSchema });
     setOpen(false);
   };
 
@@ -100,15 +118,16 @@ export default function RequestForm({ providerId, hourlyRate }) {
               <Grid item xs={12} sm={6}>
                 <FormLabel
                   id="demo-row-radio-buttons-group-label mt-4"
-                  sx={{  textAlign: "left" }}
+                  sx={{ textAlign: "left" }}
                 >
                   Please enter start date
                 </FormLabel>
                 <DatePicker
-                  selected={startDate}
+                  selected={sDate}
                   onChange={(date) => {
                     setStartDate(date);
-                    console.log(startDate);
+                    setReqData({ ...reqData, startDate: date });
+                    console.log(date);
                   }}
                   className="form-control"
                 />
@@ -121,14 +140,13 @@ export default function RequestForm({ providerId, hourlyRate }) {
                   Please enter end date
                 </FormLabel>
                 <DatePicker
-                  selected={endDate}
+                  selected={eDate}
                   onChange={(date) => {
                     setEndDate(date);
-                    console.log(endDate);
+                    setReqData({ ...reqData, endDate: date });
+                    console.log(date);
                   }}
                   className="form-control z-3"
-                  
-                  
                 />
               </Grid>
             </Grid>
@@ -141,7 +159,9 @@ export default function RequestForm({ providerId, hourlyRate }) {
                   <AntSwitch
                     // defaultChecked
                     checked={reqData.recurring}
-                    onChange={(e) => {setReqData({...reqData, recurring: e.target.checked})}}
+                    onChange={(e) => {
+                      setReqData({ ...reqData, recurring: e.target.checked });
+                    }}
                     inputProps={{ "aria-label": "ant design" }}
                     sx={{ mr: 2 }}
                   />
@@ -167,7 +187,7 @@ export default function RequestForm({ providerId, hourlyRate }) {
                   InputLabelProps={{
                     style: {
                       fontSize: "0.8rem",
-                    zIndex:0
+                      zIndex: 0,
                     },
                   }}
                 />
@@ -178,7 +198,6 @@ export default function RequestForm({ providerId, hourlyRate }) {
               maxRows={4}
               aria-label="maximum height"
               placeholder="If you have special requests, please enter here."
-             
               variant="standard"
               className="form-control mt-3 w-100"
               value={reqData.reqDescription}
