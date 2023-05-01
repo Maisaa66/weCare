@@ -102,15 +102,11 @@ export default function StepTwo() {
   const handleSubmit = (event) => {
     event.preventDefault();
     setUserData({ ...userData, address });
-    // console.log(userDetails);
-    // console.log(userData)
-    dispatch(setUserDetails(userData));
-    console.log(userDetails);
-
+    dispatch(setUserDetails({ ...userData, address }));
     if (userType === "Care giver") {
       navigate("/signup/stepfour");
     } else if (userType === "Care Beneficiary") {
-      dispatch(addUser(userDetails));
+      dispatch(addUser({...userDetails, address:address}));
       navigate("/signup/stepthree");
     }
   };
@@ -123,7 +119,7 @@ export default function StepTwo() {
 
   const handleDropDownChange = (value) => {
     setAddress({ ...address, country: value });
-    setUserData({ ...userData, address });
+    setUserData({ ...userData, address:{ ...address, country: value } });
   };
 
   return (

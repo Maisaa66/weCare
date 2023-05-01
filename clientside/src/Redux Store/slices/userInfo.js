@@ -14,7 +14,7 @@ export const userInfo = createSlice({
     },
     setUserDetails: (state, action) => {
       state.userDetails = { ...state.userDetails, ...action.payload };
-      console.log(state.userDetails, action.payload);
+      console.log("from redux: ", state.userDetails, action.payload);
     },
   },
 });
