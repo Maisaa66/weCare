@@ -11,13 +11,12 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import classes from "./signup.module.css";
 import ProgressBar from "../../components/UI/ProgressBar/ProgressBar";
-import DropDown from "../../components/UI/DropDown/DropDown";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {setUserDetails} from "../../Redux Store/slices/userInfo";
+import { setUserDetails } from "../../Redux Store/slices/userInfo";
+import { useForm } from "react-hook-form";
 
 function Copyright(props) {
-  
   return (
     <Typography
       variant="body2"
@@ -69,33 +68,42 @@ const theme = createTheme({
 });
 
 export default function StepOne() {
- //states
- const [userData, setUserData] = useState({
-  firstName: "",
-  lastName: "",
-  email: "",
-  password: "",
-});
+  //states
+  const [userData, setUserData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+  });
 
-const [isError, setIsError] = useState({ status: false, message: "" });
+  const userType = useSelector((state) => state.userInfo.type);
 
-const userType = useSelector((state) => state.userInfo.type);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  //   const styles = useStyles();
+  // const handleSubmit = (event) => {
+  //   console.log(userData);
+  //   event.preventDefault();
 
-const dispatch = useDispatch();
-const navigate = useNavigate();
-//   const styles = useStyles();
-const handleSubmit = (event) => {
-  event.preventDefault();
+  //   dispatch(setUserDetails(userData));
+  //   navigate("/signup/stepone");
+  // };
 
-  dispatch(setUserDetails(userData));
-  navigate("/signup/stepone");
-};
+  // const handleChange = (event) => {
+  //   const { name, value } = event.target;
+  //   setUserData({ ...userData, [name]: value });
+  // };
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ userData });
 
-const handleChange = (event) => {
-  const { name, value } = event.target;
-  setUserData({ ...userData, [name]: value });
-};
-
+  const onSubmit = (data) => {
+    // console.log(data);
+    dispatch(setUserDetails(data));
+    navigate("/signup/stepone");
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -134,10 +142,10 @@ const handleChange = (event) => {
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5" sx={{ m: 2 }}>
-              Welcome {userType}! 
+              Welcome {userType}!
             </Typography>
             <Typography component="h1" variant="h6" sx={{ m: 2 }}>
-            First things first...
+              First things first...
             </Typography>
             <Box sx={{ m: 3 }}>
               <ProgressBar stepNum={0}></ProgressBar>
@@ -145,73 +153,74 @@ const handleChange = (event) => {
 
             <Box
               component="form"
-              onSubmit={handleSubmit}
+              onSubmit={handleSubmit(onSubmit)}
               noValidate
               sx={{ mt: 1 }}
             >
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
-                  <TextField
+                <TextField
                     variant="standard"
                     margin="normal"
-                    required
                     fullWidth
                     id="firstName"
                     label="First Name"
-                    name="firstName"
-                    autoComplete="firstName"
                     sx={{ textAlign: "left" }}
-                    value={userData.firstName}
-                    onChange={handleChange}
+                    {...register("firstName", {
+                      required: "Please enter your first name",
+                    })}
+                    error={Boolean(errors.firstName)}
+                    helperText={errors.firstName && errors.firstName.message}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
                 <TextField
                     variant="standard"
                     margin="normal"
-                    required
                     fullWidth
                     id="lastName"
                     label="Last Name"
-                    name="lastName"
-                    autoComplete="lastName"
                     sx={{ textAlign: "left" }}
-                    value={userData.lastName}
-                    onChange={handleChange}
+                    {...register("lastName", {
+                      required: "Please enter your last name",
+                    })}
+                    error={Boolean(errors.lastName)}
+                    helperText={errors.lastName && errors.lastName.message}
                   />
                 </Grid>
               </Grid>
 
               <TextField
-                variant="standard"
-                margin="normal"
-                required
-                fullWidth
-                name="email"
-                label="Email"
-                type="text"
-                id="email"
-                autoComplete="email"
-                color="primary"
-                sx={{ textAlign: "left" }}
-                value={userData.email}
-                onChange={handleChange}
-              />
-              <TextField
-                variant="standard"
-                margin="normal"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="password"
-                color="primary"
-                sx={{ textAlign: "left" }}
-                value={userData.password}
-                onChange={handleChange}
-              />
+                    variant="standard"
+                    margin="normal"
+                    fullWidth
+                    id="email"
+                    label="Email Address"
+                    sx={{ textAlign: "left" }}
+                    {...register("email", {
+                      required: "Please enter your first name",
+                      pattern: {
+                        value: /\S+@\S+\.\S+/,
+                        message: "Entered value does not match email format"
+                      }
+                    })}
+                    error={Boolean(errors.email)}
+                    helperText={errors.email && errors.email.message}
+                  />
+             <TextField
+                    variant="standard"
+                    margin="normal"
+                    fullWidth
+                    id="password"
+                    label="Password"
+                    type="password"
+                    sx={{ textAlign: "left" }}
+                    {...register("password", {
+                      required: "Please enter your password"
+                    })}
+                    error={Boolean(errors.password)}
+                    helperText={errors.password && errors.password.message}
+                  />
               <div>
                 <button type="submit" className={`${classes.btn}`}>
                   <svg width="277" height="62">

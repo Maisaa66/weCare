@@ -15,6 +15,7 @@ import DropDown from "../../components/UI/DropDown/DropDown";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { setUserDetails } from "../../Redux Store/slices/userInfo";
+import { useForm } from "react-hook-form";
 
 function Copyright(props) {
   return (
@@ -72,29 +73,59 @@ export default function StepOne() {
     title: "Gender",
     options: ["female", "male"],
   };
+  
+
   //states
   const [userData, setUserData] = useState({
     phoneNum: "",
     nationalID: "",
     gender: "",
   });
+  const [drowpdownError, setDropdownError] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ userData });
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
   //   const styles = useStyles();
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
 
-    dispatch(setUserDetails(userData));
-    navigate("/signup/steptwo");
+  //   dispatch(setUserDetails(userData));
+
+  // };
+  const onSubmit = (data) => {
+    console.log("1", data);
+    if(userData.gender === ""){
+      console.log("2", data);
+
+       setDropdownError(true);
+       console.log(drowpdownError);
+    }
+    else{
+      console.log("3", data);
+
+      data.gender = userData.gender
+      console.log("4",  data);
+      dispatch(setUserDetails(data));
+      navigate("/signup/steptwo")
+    }
+
   };
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setUserData({ ...userData, [name]: value });
-  };
+  // const handleChange = (event) => {
+  //   const { name, value } = event.target;
+  //   setUserData({ ...userData, [name]: value });
+  // };
 
   const handleDropDownChange = (value) => {
+    if (value ) {
+      setDropdownError(false);
+    }
+
     setUserData({ ...userData, gender: value });
   };
 
@@ -143,7 +174,11 @@ export default function StepOne() {
 
             <Box
               component="form"
-              onSubmit={handleSubmit}
+              onSubmit={(e) => {
+                handleSubmit(onSubmit)(e);
+                userData.gender === "" ? setDropdownError(true) : setDropdownError(false);
+              }}
+              
               noValidate
               sx={{ mt: 1 }}
             >
@@ -152,21 +187,28 @@ export default function StepOne() {
                   <TextField
                     variant="standard"
                     margin="normal"
-                    required
                     fullWidth
                     id="phoneNum"
                     label="Phone Number"
-                    name="phoneNum"
-                    autoComplete="phoneNum"
                     sx={{ textAlign: "left" }}
-                    value={userData.phoneNum}
-                    onChange={handleChange}
+                    {...register("phoneNum", {
+                      required: "Please enter your phone number",
+                      minLength: {
+                        value: 11,
+                        message: "Phone number must be at least 11 digits",
+                      },
+                    })}
+                    error={Boolean(errors.phoneNum)}
+                    helperText={errors.phoneNum && errors.phoneNum.message}
+                    
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <DropDown
                     dropDownObj={dropDownObj}
                     handleDropDownChange={handleDropDownChange}
+                    error={drowpdownError}
+     
                   ></DropDown>
                 </Grid>
               </Grid>
@@ -174,19 +216,19 @@ export default function StepOne() {
               <TextField
                 variant="standard"
                 margin="normal"
-                required
                 fullWidth
-                name="nationalID"
-                label="National ID"
-                type="text"
                 id="nationalID"
-                autoComplete="nationalID"
-                color="primary"
+                label="National ID"
                 sx={{ textAlign: "left" }}
-                value={userData.nationalID}
-                onChange={handleChange}
+                {...register("nationalID", {
+                  required: "Please enter your national ID",
+ 
+                })}
+                error={Boolean(errors.nationalID)}
+                helperText={errors.nationalID && errors.nationalID.message}
+                // value={userData.nationalID}
+                // onChange={handleChange}
               />
-
               <div>
                 <button type="submit" className={`${classes.btn}`}>
                   <svg width="277" height="62">
