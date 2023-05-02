@@ -110,10 +110,65 @@ const ProviderProfile = () => {
                   </div>
                 </div>
               </div>
-              <div className="d-flex flex-lg-row flex-sm-column justify-content-evenly"></div>
+              <div className="d-flex flex-md-row flex-column-reverse  justify-content-evenly m-4 p-4">
+                <div className=" col-md-4 col-12">
+                  <div className=" d-flex flex-column align-items-start px-3 py-2">
+                    <h6 style={{ margin: "0" }}>Service Type</h6>
+                    <div
+                      style={{
+                        fontSize: "0.9rem",
+                        textTransform: "capitalize",
+                      }}
+                    >
+                      {user.serviceType}
+                    </div>
+                  </div>
+                  <div className=" d-flex flex-column align-items-start px-3 py-2">
+                    <h6 style={{ margin: "0" }}>Gender</h6>
+                    <div
+                      style={{
+                        fontSize: "0.9rem",
+                        textTransform: "capitalize",
+                      }}
+                    >
+                      {user.gender}
+                    </div>
+                  </div>
+                  <div className=" d-flex flex-column align-items-start px-3 py-2">
+                    <h6 style={{ margin: "0" }}>Date of Birth</h6>
+                    <div
+                      style={{
+                        fontSize: "0.9rem",
+                      }}
+                    >
+                      {user.dateOfBirth.split("T")[0]}
+                    </div>
+                  </div>
+                  <div className=" d-flex flex-column align-items-start px-3 py-2">
+                    <h6 style={{ margin: "0" }}>
+                      Availability for night shift{" "}
+                    </h6>
+                    <div
+                      style={{
+                        fontSize: "0.9rem",
+                      }}
+                    >
+                      {user.nightShift ? "Yes" : "No"}
+                    </div>
+                  </div>
+                </div>
+                <div className=" col-md-8 col-sm-12 px-3 py-2 d-flex flex-column align-items-start">
+                  <div className="d-flex justify-content-between w-100">
+                    <h4 style={{ margin: "0" }}>{user.title}</h4>
+                    <div className="fw-bold">${user.hourlyRate}/h</div>
+                  </div>
+                  <div className="mt-3 text-start">{user.experties}</div>
+                </div>
+              </div>
+
               {/* testimonels */}
-              <section class="gradient-custom">
-                <div class="container mx-4 p-4">
+              <section class="gradient-custom" style={{ width: "100%" }}>
+                <div class="container">
                   <div class="row d-flex justify-content-center">
                     <div class="col-md-12">
                       <div class="text-start">
@@ -128,26 +183,6 @@ const ProviderProfile = () => {
                             class="carousel slide carousel-dark"
                             data-mdb-ride="carousel"
                           >
-                            <div class="carousel-indicators mb-0">
-                              <button
-                                data-mdb-target="#carouselDarkVariant"
-                                data-mdb-slide-to="0"
-                                class="active"
-                                aria-current="true"
-                                aria-label="Slide 1"
-                              ></button>
-                              <button
-                                data-mdb-target="#carouselDarkVariant"
-                                data-mdb-slide-to="1"
-                                aria-label="Slide 1"
-                              ></button>
-                              <button
-                                data-mdb-target="#carouselDarkVariant"
-                                data-mdb-slide-to="2"
-                                aria-label="Slide 1"
-                              ></button>
-                            </div>
-
                             <div class="carousel-inner pb-5">
                               {reviewsGiven && reviewsGiven.length === 0
                                 ? "No reviews made"
