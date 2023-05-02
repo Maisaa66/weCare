@@ -15,6 +15,7 @@ const ProviderDashBoard = () => {
 
   const [provider, setProviderDetails] = useState(null);
   const [requests, setRequests] = useState(null);
+  const [reviewsMade, setReviewsMade] = useState(null);
 
   const dispatch = useDispatch();
 
@@ -61,11 +62,23 @@ const ProviderDashBoard = () => {
       setProviderDetails({ ...provider, ...data });
     }
   };
-
+  const getReviewsMade = async (id) => {
+    await axios
+      .get(`http://localhost:7000/api/v1/reviews/reviewer/${id}`, {
+        withCredentials: true,
+        headers: {
+          "Access-Control-Allow-Origin": "http://localhost:3000",
+          "Content-Type": "application/json",
+        },
+      })
+      .then((res) => setReviewsMade(res.data.data.reviews))
+      .catch((err) => console.log(err));
+  };
   useEffect(() => {
     // console.log(state);
     getProviderById(state);
     getProviderRequest(state);
+    getReviewsMade(state);
   }, []);
 
   console.log(requests);
@@ -334,16 +347,37 @@ const ProviderDashBoard = () => {
                 </div>
               </div>
               {/* testimonels */}
-              {/* <section class="gradient-custom">
+              <section class="gradient-custom">
                 <div class="container mx-4 p-4">
                   <div class="row d-flex justify-content-center">
                     <div class="col-md-12">
                       <div class="text-start">
-                        <div className="fw-bold fs-5">Reviews: </div>
+                        <div className="fw-bold fs-5">Reviews Made By Me: </div>
                         <i class="fas fa-quote-left fa-3x text-white"></i>
                       </div>
-
-                      <div class="card">
+                      <table className="table bg-white  rounded-5 text-start w-100 shadow-sm  my-2 ">
+                        <thead>
+                          <tr>
+                            <th className="col-1">ProfileImg</th>
+                            <th className="col-1">Provider Name</th>
+                            <th className="col-1">Rating</th>
+                            <th className="col-1">Comment</th>
+                            <th className="col-1"> Date</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {reviewsMade && reviewsMade.length === 0
+                            ? "No reviews made"
+                            : reviewsMade &&
+                              reviewsMade.map((review, index) => (
+                                <ReviewCard
+                                  review={review}
+                                  key={review._id}
+                                ></ReviewCard>
+                              ))}
+                        </tbody>
+                      </table>
+                      {/* <div class="card">
                         <div class="card-body">
                           <div
                             id="carouselDarkVariant"
@@ -371,17 +405,14 @@ const ProviderDashBoard = () => {
                             </div>
 
                             <div class="carousel-inner pb-5">
-                              <div class="carousel-item active">
-                                <ReviewCard></ReviewCard>
-                              </div>
-
-                              <div class="carousel-item">
-                                <ReviewCard></ReviewCard>
-                              </div>
-
-                              <div class="carousel-item">
-                                <ReviewCard></ReviewCard>
-                              </div>
+                              {reviewsMade && reviewsMade.length === 0
+                                ? "No reviews made"
+                                : reviewsMade &&
+                                  reviewsMade.map((review, index) => (
+                                    <div class={`carousel-item ${index===0?"active":""}`}>
+                                      <ReviewCard review={review}></ReviewCard>
+                                    </div>
+                                  ))}
                             </div>
 
                             <button
@@ -414,11 +445,11 @@ const ProviderDashBoard = () => {
 
                       <div class="text-center mt-4 pt-2">
                         <i class="fas fa-quote-right fa-3x text-white"></i>
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 </div>
-              </section> */}
+              </section>
             </div>
           </div>
         </div>

@@ -71,7 +71,7 @@ const ReviewCard = ({ review }) => {
           </td>
           <td>
             <Link
-              to="/providerProfile"
+              to={userType === "user" ? "/providerProfile" : "/userProfile"}
               onClick={() => dispatch(setProfileId(userName._id))}
             >
               {userName.firstName + " " + userName.lastName}

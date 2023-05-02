@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import classes from "./providerDashBoard";
 import NavBar from "../../components/Layout/NavBar/NavBar";
-import ReviewCard from "../../components/UI/reviewCard/ReviewCard";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import ReviewGiven from "../../components/UI/reviewCard/ReviewGiven";
@@ -167,31 +166,32 @@ const ProviderProfile = () => {
               </div>
 
               {/* testimonels */}
-              <section class="gradient-custom" style={{ width: "100%" }}>
-                <div class="container">
-                  <div class="row d-flex justify-content-center">
-                    <div class="col-md-12">
-                      <div class="text-start">
+              <section className="gradient-custom" style={{ width: "100%" }}>
+                <div className="container mt-4">
+                  <div className="row d-flex justify-content-center">
+                    <div className="col-md-12">
+                      <div className="text-start">
                         <div className="fw-bold fs-5">Reviews: </div>
-                        <i class="fas fa-quote-left fa-3x text-white"></i>
+                        <i className="fas fa-quote-left fa-3x text-white"></i>
                       </div>
 
-                      <div class="card">
-                        <div class="card-body">
+                      <div className="card">
+                        <div className="card-body">
                           <div
                             id="carouselDarkVariant"
-                            class="carousel slide carousel-dark"
+                            className="carousel slide carousel-dark"
                             data-mdb-ride="carousel"
                           >
-                            <div class="carousel-inner pb-5">
+                            <div className="carousel-inner pb-5">
                               {reviewsGiven && reviewsGiven.length === 0
-                                ? "No reviews made"
+                                ? <div className="fs-2">No reviews made</div>
                                 : reviewsGiven &&
                                   reviewsGiven.map((review, index) => (
                                     <div
-                                      class={`carousel-item ${
+                                      className={`carousel-item ${
                                         index === 0 ? "active" : ""
                                       }`}
+                                      key={review._id}
                                     >
                                       <ReviewGiven
                                         review={review}
@@ -202,39 +202,39 @@ const ProviderProfile = () => {
                             </div>
 
                             <button
-                              class="carousel-control-prev"
+                              className="carousel-control-prev"
                               type="button"
                               data-mdb-target="#carouselDarkVariant"
                               data-mdb-slide="prev"
                             >
                               <span
-                                class="carousel-control-prev-icon"
+                                className="carousel-control-prev-icon"
                                 aria-hidden="true"
                               ></span>
-                              <span class="visually-hidden">Previous</span>
+                              <span className="visually-hidden">Previous</span>
                             </button>
                             <button
-                              class="carousel-control-next"
+                              className="carousel-control-next"
                               type="button"
                               data-mdb-target="#carouselDarkVariant"
                               data-mdb-slide="next"
                             >
                               <span
-                                class="carousel-control-next-icon"
+                                className="carousel-control-next-icon"
                                 aria-hidden="true"
                               ></span>
-                              <span class="visually-hidden">Next</span>
+                              <span className="visually-hidden">Next</span>
                             </button>
                           </div>
                         </div>
                       </div>
 
-                      <div class="text-center mt-4 pt-2">
-                        <i class="fas fa-quote-right fa-3x text-white"></i>
+                      <div className="text-center mt-4 pt-2">
+                        <i className="fas fa-quote-right fa-3x text-white"></i>
                       </div>
 
-                      <div class="text-center mt-4 pt-2">
-                        <i class="fas fa-quote-right fa-3x text-white"></i>
+                      <div className="text-center mt-4 pt-2">
+                        <i className="fas fa-quote-right fa-3x text-white"></i>
                       </div>
                     </div>
                   </div>

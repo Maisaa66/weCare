@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import classes from "./userDashBoard.module.css";
 import NavBar from "../../components/Layout/NavBar/NavBar";
-import ReviewCard from "../../components/UI/reviewCard/ReviewCard";
+import ReviewGiven from "../../components/UI/reviewCard/ReviewGiven";
 import { useSelector } from "react-redux";
 import axios from "axios";
 
@@ -9,14 +9,15 @@ const UserProfile = () => {
   // here we get the id of the user from the redux store
   const state = useSelector((state) => state.user.profileID);
   // here we get the type of the user from the redux store, to know which profile we are going to fetch
-  const userType = useSelector((state) => state.user.userType);
+  // const userType = useSelector((state) => state.user.userType);
 
   const [user, setUserDetails] = useState(null);
+  const [reviewsGiven, setReviewsGiven] = useState(null);
 
   // here we set the url type to know which profile we are going to fetch
-  let urlType = userType === "serviceProvider" ? "providers" : "users";
 
   const getUserById = async (id) => {
+    console.log(id)
     const response = await axios.get(
       `http://localhost:7000/api/v1/users/profile/${id}`,
       {
@@ -31,8 +32,23 @@ const UserProfile = () => {
     setUserDetails(response.data.data);
   };
 
+  const getReviewsGiven = async (id) => {
+    console.log(id)
+    await axios
+      .get(`http://localhost:7000/api/v1/reviews/reviewee/${id}`, {
+        withCredentials: true,
+        headers: {
+          "Access-Control-Allow-Origin": "http://localhost:3000",
+          "Content-Type": "application/json",
+        },
+      })
+      .then((res) => setReviewsGiven(res.data.data.reviews))
+      .catch((err) => console.log(err));
+  };
+
   useEffect(() => {
     getUserById(state);
+    getReviewsGiven(state);
   }, []);
 
   return (
@@ -96,86 +112,75 @@ const UserProfile = () => {
               </div>
               <div className="d-flex flex-lg-row flex-sm-column justify-content-evenly"></div>
               {/* testimonels */}
-              <section class="gradient-custom">
-                <div class="container mx-4 p-4">
-                  <div class="row d-flex justify-content-center">
-                    <div class="col-md-12">
-                      <div class="text-start">
+              <section className="gradient-custom" style={{ width: "100%" }}>
+                <div className="container mt-4">
+                  <div className="row d-flex justify-content-center">
+                    <div className="col-md-12">
+                      <div className="text-start">
                         <div className="fw-bold fs-5">Reviews: </div>
-                        <i class="fas fa-quote-left fa-3x text-white"></i>
+                        <i className="fas fa-quote-left fa-3x text-white"></i>
                       </div>
 
-                      <div class="card">
-                        <div class="card-body">
+                      <div className="card">
+                        <div className="card-body">
                           <div
                             id="carouselDarkVariant"
-                            class="carousel slide carousel-dark"
+                            className="carousel slide carousel-dark"
                             data-mdb-ride="carousel"
                           >
-                            <div class="carousel-indicators mb-0">
-                              <button
-                                data-mdb-target="#carouselDarkVariant"
-                                data-mdb-slide-to="0"
-                                class="active"
-                                aria-current="true"
-                                aria-label="Slide 1"
-                              ></button>
-                              <button
-                                data-mdb-target="#carouselDarkVariant"
-                                data-mdb-slide-to="1"
-                                aria-label="Slide 1"
-                              ></button>
-                              <button
-                                data-mdb-target="#carouselDarkVariant"
-                                data-mdb-slide-to="2"
-                                aria-label="Slide 1"
-                              ></button>
-                            </div>
-
-                            <div class="carousel-inner pb-5">
-                              <div class="carousel-item active">
-                                <ReviewCard></ReviewCard>
-                              </div>
-
-                              <div class="carousel-item">
-                                <ReviewCard></ReviewCard>
-                              </div>
-
-                              <div class="carousel-item">
-                                <ReviewCard></ReviewCard>
-                              </div>
+                            <div className="carousel-inner pb-5">
+                              {reviewsGiven && reviewsGiven.length === 0
+                                ? <div className="fs-2">No reviews made</div>
+                                : reviewsGiven &&
+                                  reviewsGiven.map((review, index) => (
+                                    <div
+                                      className={`carousel-item ${
+                                        index === 0 ? "active" : ""
+                                      }`}
+                                      key={review._id}
+                                    >
+                                      <ReviewGiven
+                                        review={review}
+                                        key={review._id}
+                                      ></ReviewGiven>
+                                    </div>
+                                  ))}
                             </div>
 
                             <button
-                              class="carousel-control-prev"
+                              className="carousel-control-prev"
                               type="button"
                               data-mdb-target="#carouselDarkVariant"
                               data-mdb-slide="prev"
                             >
                               <span
-                                class="carousel-control-prev-icon"
+                                className="carousel-control-prev-icon"
                                 aria-hidden="true"
                               ></span>
-                              <span class="visually-hidden">Previous</span>
+                              <span className="visually-hidden">Previous</span>
                             </button>
                             <button
-                              class="carousel-control-next"
+                              className="carousel-control-next"
                               type="button"
                               data-mdb-target="#carouselDarkVariant"
                               data-mdb-slide="next"
                             >
                               <span
-                                class="carousel-control-next-icon"
+                                className="carousel-control-next-icon"
                                 aria-hidden="true"
                               ></span>
-                              <span class="visually-hidden">Next</span>
+                              <span className="visually-hidden">Next</span>
                             </button>
                           </div>
                         </div>
                       </div>
 
-                      <div class="text-center mt-4 pt-2">
-                        <i class="fas fa-quote-right fa-3x text-white"></i>
+                      <div className="text-center mt-4 pt-2">
+                        <i className="fas fa-quote-right fa-3x text-white"></i>
+                      </div>
+
+                      <div className="text-center mt-4 pt-2">
+                        <i className="fas fa-quote-right fa-3x text-white"></i>
                       </div>
                     </div>
                   </div>

@@ -5,11 +5,21 @@ import Rating from "@mui/material/Rating";
 
 const ReviewGiven = ({ review }) => {
   const userType = useSelector((state) => state.user.userType);
-  let urlType = userType === "user" ? "users" : "providers";
+  // we get the profile id from the redux store because we need it to fetch the user profile data
+  // the profile id is the id of the user that we want to see his profile
+  const profileId = useSelector((state)=> state.user.id);
+  let urlType =""
   const [userName, setUserName] = useState(null);
 
   const getUserById = async (id) => {
-    console.log(id);
+    console.log("profile id from review card: ", profileId);
+    console.log("from feview gived card: ",id);
+    if(id === profileId){
+      urlType = userType === "user" ? "users" : "providers"
+    }
+    else{
+      urlType = userType === "user" ? "providers" : "users"
+      }
     await axios
       .get(`http://localhost:7000/api/v1/${urlType}/profile/${id}`, {
         withCredentials: true,

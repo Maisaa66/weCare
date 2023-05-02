@@ -165,18 +165,7 @@ function NavBar() {
           {/* <a href="#login" className="mybtn mybtnLightSolid">
           Login/Register
         </a> */}
-          <form className="flex-grow-1 d-flex py-3 me-0 justify-content-center">
-            <input
-              className={classes.search}
-              // class="form-control me-2 search shadow-none"
-              type="search"
-              placeholder={t("navSearch")}
-              aria-label="Search"
-            ></input>
-            <button className={classes.searchBtn} type="submit">
-              <Search></Search>
-            </button>
-          </form>
+
           <button className="btn me-3" onClick={changeLanguage}>
             {i18n.language}
           </button>
