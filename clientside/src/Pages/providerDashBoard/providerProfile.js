@@ -1,24 +1,26 @@
 import React, { useEffect, useState } from "react";
-import classes from "./userDashBoard.module.css";
+import classes from "./providerDashBoard";
 import NavBar from "../../components/Layout/NavBar/NavBar";
 import ReviewCard from "../../components/UI/reviewCard/ReviewCard";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import ReviewGiven from "../../components/UI/reviewCard/ReviewGiven";
 
-const UserProfile = () => {
+const ProviderProfile = () => {
   // here we get the id of the user from the redux store
   const state = useSelector((state) => state.user.profileID);
   // here we get the type of the user from the redux store, to know which profile we are going to fetch
   const userType = useSelector((state) => state.user.userType);
 
   const [user, setUserDetails] = useState(null);
+  const [reviewsGiven, setReviewsGiven] = useState(null);
 
   // here we set the url type to know which profile we are going to fetch
   let urlType = userType === "serviceProvider" ? "providers" : "users";
 
   const getUserById = async (id) => {
     const response = await axios.get(
-      `http://localhost:7000/api/v1/users/profile/${id}`,
+      `http://localhost:7000/api/v1/providers/profile/${id}`,
       {
         withCredentials: true,
         headers: {
@@ -31,8 +33,22 @@ const UserProfile = () => {
     setUserDetails(response.data.data);
   };
 
+  const getReviewsGiven = async (id) => {
+    await axios
+      .get(`http://localhost:7000/api/v1/reviews/reviewee/${id}`, {
+        withCredentials: true,
+        headers: {
+          "Access-Control-Allow-Origin": "http://localhost:3000",
+          "Content-Type": "application/json",
+        },
+      })
+      .then((res) => setReviewsGiven(res.data.data.reviews))
+      .catch((err) => console.log(err));
+  };
+
   useEffect(() => {
     getUserById(state);
+    getReviewsGiven(state);
   }, []);
 
   return (
@@ -133,17 +149,21 @@ const UserProfile = () => {
                             </div>
 
                             <div class="carousel-inner pb-5">
-                              <div class="carousel-item active">
-                                <ReviewCard></ReviewCard>
-                              </div>
-
-                              <div class="carousel-item">
-                                <ReviewCard></ReviewCard>
-                              </div>
-
-                              <div class="carousel-item">
-                                <ReviewCard></ReviewCard>
-                              </div>
+                              {reviewsGiven && reviewsGiven.length === 0
+                                ? "No reviews made"
+                                : reviewsGiven &&
+                                  reviewsGiven.map((review, index) => (
+                                    <div
+                                      class={`carousel-item ${
+                                        index === 0 ? "active" : ""
+                                      }`}
+                                    >
+                                      <ReviewGiven
+                                        review={review}
+                                        key={review._id}
+                                      ></ReviewGiven>
+                                    </div>
+                                  ))}
                             </div>
 
                             <button
@@ -177,6 +197,10 @@ const UserProfile = () => {
                       <div class="text-center mt-4 pt-2">
                         <i class="fas fa-quote-right fa-3x text-white"></i>
                       </div>
+
+                      <div class="text-center mt-4 pt-2">
+                        <i class="fas fa-quote-right fa-3x text-white"></i>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -189,4 +213,4 @@ const UserProfile = () => {
   );
 };
 
-export default UserProfile;
+export default ProviderProfile;
