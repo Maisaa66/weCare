@@ -366,7 +366,10 @@ const UserDashBoard = () => {
                             ? "No reviews made"
                             : reviewsMade &&
                               reviewsMade.map((review, index) => (
-                                <ReviewCard review={review}></ReviewCard>
+                                <ReviewCard
+                                  review={review}
+                                  key={review._id}
+                                ></ReviewCard>
                               ))}
                         </tbody>
                       </table>

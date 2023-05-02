@@ -12,6 +12,7 @@ import PrivateRoute from "./Pages/PrivateRoute";
 import Filter from "./Pages/Filter/Filter";
 import UserDashBoard from "./Pages/userDashBoard/userDashBoard";
 import UserProfile from "./Pages/userDashBoard/userProfile";
+import ProviderProfile from "./Pages/providerDashBoard/providerProfile";
 import NavBar from "./components/Layout/NavBar/NavBar";
 import * as React from "react";
 import AdmindashBoard from "./components/AdminDashBoard/AdmindashBoard";
@@ -99,6 +100,10 @@ const router = createBrowserRouter([
   {
     path: "/userProfile",
     element: <UserProfile />,
+  },
+  {
+    path: "/providerProfile",
+    element: <ProviderProfile />,
   },
   {
     path: "/private",

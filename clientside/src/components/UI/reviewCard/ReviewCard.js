@@ -7,6 +7,7 @@ const ReviewCard = ({ review }) => {
   const [userName, setUserName] = useState(null);
 
   const getUserById = async (id) => {
+    console.log(id);
     await axios
       .get(`http://localhost:7000/api/v1/${urlType}/profile/${id}`, {
         withCredentials: true,
@@ -60,7 +61,7 @@ const ReviewCard = ({ review }) => {
                   : "https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
               }
               className="rounded-circle"
-              style={{ width: "100px" }}
+              style={{ width: "50px" }}
               alt="Avatar"
             />
           </td>
