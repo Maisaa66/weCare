@@ -17,6 +17,7 @@ import AntSwitch from "../ToggleButton/ToggleButton";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import axios from "axios";
+import PayButton from "../Checkout/PayButton/PayButton";
 
 export default function RequestForm({ providerId, hourlyRate }) {
   // get customer id from redux store
@@ -208,7 +209,8 @@ export default function RequestForm({ providerId, hourlyRate }) {
           </DialogContent>
           <DialogActions>
             <Button onClick={handleClose}>Cancel</Button>
-            <Button onClick={handleRequest}>Request</Button>
+            {/* <Button onClick={handleRequest}>Request</Button> */}
+            <PayButton requestDetails={{sDate, eDate, reqData}}/>
           </DialogActions>
         </Dialog>
       </div>
