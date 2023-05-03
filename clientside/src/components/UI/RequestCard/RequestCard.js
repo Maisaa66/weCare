@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import RequestDetail from "../RequestDetails/RequestDetail";
+import { setProfileId } from "../../../Redux Store/slices/userSlice";
+import { Link } from "react-router-dom";
 
 const RequestCard = ({
   request,
@@ -25,6 +27,7 @@ const RequestCard = ({
   const handleUpdateStatus = (value) => {
     setReqStatus(value);
   };
+  const dispatch = useDispatch();
 
   const getUserById = async (id) => {
     const response = await axios.get(
@@ -70,13 +73,24 @@ const RequestCard = ({
           </p>
 
           {userName && (
-            <p className="card-text text-muted" style={{ fontSize: "0.8rem" }}>
+            <Link
+              to={
+                userType === "serviceProvider"
+                  ? "/userProfile"
+                  : "/providerProfile"
+              }
+              className="card-text text-muted"
+              style={{ fontSize: "0.8rem" }}
+              onClick={() => dispatch(setProfileId(userName._id))}
+            >
               {" "}
               {userType === "serviceProvider"
                 ? "Customer Name:"
                 : "Provider Name:"}{" "}
-              {userName.firstName + " " + userName.lastName}
-            </p>
+              <span className="text-decoration-underline">
+                {userName.firstName + " " + userName.lastName}
+              </span>
+            </Link>
           )}
         </div>
         <div className="d-flex align-items-center">

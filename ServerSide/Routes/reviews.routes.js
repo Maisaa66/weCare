@@ -19,7 +19,7 @@ router.get(
 // get all requests for reviewee
 router.get(
   "/reviewee/:id",
-  authMiddleware.verifyTokenAndAuthorization,
+  authMiddleware.verifyToken,
   reviewsControllers.getReviewsGiven
 );
 

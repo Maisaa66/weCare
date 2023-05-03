@@ -25,7 +25,6 @@ const Provider = () => {
     axios
       .get(`http://localhost:7000/api/v1/providers?serviceType=${provider.toLowerCase()}`)
       .then((res) => {
-        // setData(res.data.data.providers);
         console.log(res.data.data.providers);
         const data = res.data.data.providers.filter((provider) => {
           return provider.status === "approved";

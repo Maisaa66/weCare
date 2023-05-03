@@ -1,25 +1,25 @@
 import React, { useEffect, useState } from "react";
-import classes from "./userDashBoard.module.css";
+import classes from "./providerDashBoard";
 import NavBar from "../../components/Layout/NavBar/NavBar";
-import ReviewGiven from "../../components/UI/reviewCard/ReviewGiven";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import ReviewGiven from "../../components/UI/reviewCard/ReviewGiven";
 
-const UserProfile = () => {
+const ProviderProfile = () => {
   // here we get the id of the user from the redux store
   const state = useSelector((state) => state.user.profileID);
   // here we get the type of the user from the redux store, to know which profile we are going to fetch
-  // const userType = useSelector((state) => state.user.userType);
+  const userType = useSelector((state) => state.user.userType);
 
   const [user, setUserDetails] = useState(null);
   const [reviewsGiven, setReviewsGiven] = useState(null);
 
   // here we set the url type to know which profile we are going to fetch
+  let urlType = userType === "serviceProvider" ? "providers" : "users";
 
   const getUserById = async (id) => {
-    console.log(id)
     const response = await axios.get(
-      `http://localhost:7000/api/v1/users/profile/${id}`,
+      `http://localhost:7000/api/v1/providers/profile/${id}`,
       {
         withCredentials: true,
         headers: {
@@ -33,7 +33,6 @@ const UserProfile = () => {
   };
 
   const getReviewsGiven = async (id) => {
-    console.log(id)
     await axios
       .get(`http://localhost:7000/api/v1/reviews/reviewee/${id}`, {
         withCredentials: true,
@@ -110,7 +109,62 @@ const UserProfile = () => {
                   </div>
                 </div>
               </div>
-              <div className="d-flex flex-lg-row flex-sm-column justify-content-evenly"></div>
+              <div className="d-flex flex-md-row flex-column-reverse  justify-content-evenly m-4 p-4">
+                <div className=" col-md-4 col-12">
+                  <div className=" d-flex flex-column align-items-start px-3 py-2">
+                    <h6 style={{ margin: "0" }}>Service Type</h6>
+                    <div
+                      style={{
+                        fontSize: "0.9rem",
+                        textTransform: "capitalize",
+                      }}
+                    >
+                      {user.serviceType}
+                    </div>
+                  </div>
+                  <div className=" d-flex flex-column align-items-start px-3 py-2">
+                    <h6 style={{ margin: "0" }}>Gender</h6>
+                    <div
+                      style={{
+                        fontSize: "0.9rem",
+                        textTransform: "capitalize",
+                      }}
+                    >
+                      {user.gender}
+                    </div>
+                  </div>
+                  <div className=" d-flex flex-column align-items-start px-3 py-2">
+                    <h6 style={{ margin: "0" }}>Date of Birth</h6>
+                    <div
+                      style={{
+                        fontSize: "0.9rem",
+                      }}
+                    >
+                      {user.dateOfBirth.split("T")[0]}
+                    </div>
+                  </div>
+                  <div className=" d-flex flex-column align-items-start px-3 py-2">
+                    <h6 style={{ margin: "0" }}>
+                      Availability for night shift{" "}
+                    </h6>
+                    <div
+                      style={{
+                        fontSize: "0.9rem",
+                      }}
+                    >
+                      {user.nightShift ? "Yes" : "No"}
+                    </div>
+                  </div>
+                </div>
+                <div className=" col-md-8 col-sm-12 px-3 py-2 d-flex flex-column align-items-start">
+                  <div className="d-flex justify-content-between w-100">
+                    <h4 style={{ margin: "0" }}>{user.title}</h4>
+                    <div className="fw-bold">${user.hourlyRate}/h</div>
+                  </div>
+                  <div className="mt-3 text-start">{user.experties}</div>
+                </div>
+              </div>
+
               {/* testimonels */}
               <section className="gradient-custom" style={{ width: "100%" }}>
                 <div className="container mt-4">
@@ -194,4 +248,4 @@ const UserProfile = () => {
   );
 };
 
-export default UserProfile;
+export default ProviderProfile;

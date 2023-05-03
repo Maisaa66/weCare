@@ -4,7 +4,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { useMediaQuery } from "@mui/material";
-
+import FormHelperText from "@mui/material/FormHelperText";
 export default function DropDown(props) {
   const [gender, setGender] = React.useState("");
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down("sm"));
@@ -23,7 +23,12 @@ export default function DropDown(props) {
         ...(isSmallScreen && { width: "100%", mt: 0 }),
       }}
     >
-      <InputLabel id="demo-simple-select-standard-label">
+
+      <InputLabel
+        id="demo-simple-select-standard-label"
+        className={`text-start ${props.error ? "text-danger" : ""}`}
+        shrink
+      >
         {props.dropDownObj.title}
       </InputLabel>
       <Select
@@ -32,6 +37,8 @@ export default function DropDown(props) {
         value={gender}
         onChange={handleChange}
         label={props.dropDownObj.title}
+        error={props.error ? true : false}
+        
       >
         {props.dropDownObj.options.map((option) => (
           <MenuItem value={option} key={option}>
@@ -39,6 +46,11 @@ export default function DropDown(props) {
           </MenuItem>
         ))}
       </Select>
+      {props.error && (
+        <FormHelperText className="text-danger">
+          Please select an option
+        </FormHelperText>
+      )}
     </FormControl>
   );
 }

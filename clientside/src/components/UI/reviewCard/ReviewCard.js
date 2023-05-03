@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
+import { Link } from "react-router-dom";
+import { setProfileId } from "../../../Redux Store/slices/userSlice";
+
 const ReviewCard = ({ review }) => {
   const userType = useSelector((state) => state.user.userType);
   let urlType = userType === "user" ? "providers" : "users";
   const [userName, setUserName] = useState(null);
+  const dispatch = useDispatch();
 
   const getUserById = async (id) => {
+    console.log(id);
     await axios
       .get(`http://localhost:7000/api/v1/${urlType}/profile/${id}`, {
         withCredentials: true,
@@ -60,11 +65,18 @@ const ReviewCard = ({ review }) => {
                   : "https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
               }
               className="rounded-circle"
-              style={{ width: "100px" }}
+              style={{ width: "50px" }}
               alt="Avatar"
             />
           </td>
-          <td>{userName.firstName + " " + userName.lastName}</td>
+          <td>
+            <Link
+              to={userType === "user" ? "/providerProfile" : "/userProfile"}
+              onClick={() => dispatch(setProfileId(userName._id))}
+            >
+              {userName.firstName + " " + userName.lastName}
+            </Link>
+          </td>
           <td>{review.rate}</td>
           <td>{review.comment}</td>
           <td>{review.postDate.split("T")[0]}</td>

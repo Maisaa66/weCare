@@ -1,3 +1,7 @@
+.containeer {
+  max-width: 100%;
+}
+
 .colorized {
   color: var(--mainColor);
 }

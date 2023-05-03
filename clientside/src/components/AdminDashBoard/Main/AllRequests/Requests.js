@@ -6,6 +6,20 @@ import img from '../../../../assets/images/user.jpg'
 
 export default function Requests() {
   let [provs,setProvs] = useState([])
+  const handleUpdateStatus = async (id,newStatus) => {
+    console.log(id);
+      await axios.patch(`http://localhost:7000/api/v1/providers/${id}`,{status:newStatus},{withCredentials: true, headers: {
+        'Access-Control-Allow-Origin': 'http://localhost:3000',
+        'Content-Type': 'application/json'}
+    }
+    )
+    .then(res => {
+      console.log(res.data);
+      getProvidersReqs()
+    })
+    .catch(err => console.log(err))
+    
+  }
  const getProvidersReqs = ()=>{
   axios.get(`http://localhost:7000/api/v1/providers`, {
     withCredentials: true,
@@ -39,9 +53,9 @@ export default function Requests() {
             </div>
             <Link className="btn btn-warning w-100" to={`/admin/providers/${prov._id}`}>Show Details</Link>
             <div>
-              <button className="btn btn-success m-2 "> Accept </button>
-              <button className="btn btn-primary  m-2"> Suspend </button>
-              <button className="btn btn-danger  m-2"> Decline </button>
+              <button className="btn btn-success m-2 " onClick={()=>handleUpdateStatus(prov._id,'approved')}> Accept </button>
+              <button className="btn btn-primary  m-2" onClick={()=>handleUpdateStatus(prov._id,'suspended')}> Suspend </button>
+              <button className="btn btn-danger  m-2" onClick={()=>handleUpdateStatus(prov._id,'rejected')} > Decline </button>
             </div>
           </div>
           )

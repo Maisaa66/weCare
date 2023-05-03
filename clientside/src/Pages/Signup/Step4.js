@@ -23,6 +23,7 @@ import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { useForm } from "react-hook-form";
 
 function Copyright(props) {
   return (
@@ -88,16 +89,33 @@ export default function StepFour() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    setUserData({ ...userData, dateOfBirth: startDate });
-    dispatch(setUserDetails(userData));
-    navigate("/signup/stepfive");
+  const [drowpdownError, setDropdownError] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ userData });
+
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   setUserData({ ...userData, dateOfBirth: startDate });
+  //   dispatch(setUserDetails(userData));
+  //   navigate("/signup/stepfive");
+  // };
+
+  const onSubmit = (data) => {
+    if (userData.serviceType === "") {
+      setDropdownError(true);
+    } else {
+      data.serviceType = userData.serviceType;
+      dispatch(setUserDetails({ ...data, dateOfBirth: startDate }));
+      navigate("/signup/stepfive");
+    }
   };
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setUserData({ ...userData, [name]: value });
-  };
+  // const handleChange = (event) => {
+  //   const { name, value } = event.target;
+  //   setUserData({ ...userData, [name]: value });
+  // };
   const dropDownObj = {
     title: "Service Type",
     options: [
@@ -111,6 +129,9 @@ export default function StepFour() {
     ],
   };
   const handleDropDownChange = (value) => {
+    if (value) {
+      setDropdownError(false);
+    }
     setUserData({ ...userData, serviceType: value });
   };
 
@@ -159,7 +180,12 @@ export default function StepFour() {
 
             <Box
               component="form"
-              onSubmit={handleSubmit}
+              onSubmit={(e) => {
+                handleSubmit(onSubmit)(e);
+                userData.serviceType === ""
+                  ? setDropdownError(true)
+                  : setDropdownError(false);
+              }}
               noValidate
               sx={{ mt: 1 }}
             >
@@ -168,6 +194,7 @@ export default function StepFour() {
                   <DropDown
                     dropDownObj={dropDownObj}
                     handleDropDownChange={handleDropDownChange}
+                    error={drowpdownError}
                   ></DropDown>
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -178,11 +205,16 @@ export default function StepFour() {
                     fullWidth
                     id="title"
                     label="Title"
-                    name="title"
+                    // name="title"
                     autoComplete="title"
                     sx={{ textAlign: "left" }}
-                    value={userData.title}
-                    onChange={handleChange}
+                    {...register("title", {
+                      required: "Please enter your title",
+                    })}
+                    error={Boolean(errors.title)}
+                    helperText={errors.title && errors.title.message}
+                    // value={userData.title}
+                    // onChange={handleChange}
                   />
                 </Grid>
               </Grid>
@@ -195,11 +227,16 @@ export default function StepFour() {
                     fullWidth
                     id="experties"
                     label="Expertise"
-                    name="experties"
+                    // name="experties"
                     autoComplete="experties"
                     sx={{ textAlign: "left" }}
-                    value={userData.experties}
-                    onChange={handleChange}
+                    {...register("experties", {
+                      required: "Please enter your expertise",
+                    })}
+                    error={Boolean(errors.experties)}
+                    helperText={errors.experties && errors.experties.message}
+                    // value={userData.experties}
+                    // onChange={handleChange}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -210,11 +247,16 @@ export default function StepFour() {
                     fullWidth
                     id="hourlyRate"
                     label="Hourly Rate (e.g. 50EGP/Hour)"
-                    name="hourlyRate"
+                    // name="hourlyRate"
                     autoComplete="hourlyRate"
                     sx={{ textAlign: "left" }}
-                    value={userData.hourlyRate}
-                    onChange={handleChange}
+                    {...register("hourlyRate", {
+                      required: "Please enter your hourly rate",
+                    })}
+                    error={Boolean(errors.hourlyRate)}
+                    helperText={errors.hourlyRate && errors.hourlyRate.message}
+                    // value={userData.hourlyRate}
+                    // onChange={handleChange}
                   />
                 </Grid>
               </Grid>
@@ -231,8 +273,14 @@ export default function StepFour() {
                     row
                     aria-labelledby="demo-row-radio-buttons-group-label"
                     name="nightShift"
-                    onChange={handleChange}
-                    value={userData.nightShift}
+                    {...register("nightShift", {
+                      required:
+                        "Please enter your availability for night shift",
+                    })}
+                    // error={Boolean(errors.nightShift)}
+                    // helperText={errors.nightShift && errors.nightShift.message}
+                    // onChange={handleChange}
+                    // value={userData.nightShift}
                   >
                     <FormControlLabel
                       value="true"

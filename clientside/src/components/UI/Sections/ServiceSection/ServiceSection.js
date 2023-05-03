@@ -14,7 +14,7 @@ const ServiceSection = () => {
       <div
         className={`d-flex flex-column flex-md-row align-items-center justify-content-md-around mt-5`}
       >
-        <div className={`row justify-content-center`}>
+        <div className={`row justify-content-center ${classes.containeer}`}>
           <Service
             ico="fa-solid fa-user-nurse"
             provider={t("nurseCardTitle")}

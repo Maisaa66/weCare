@@ -2,9 +2,9 @@ import React from "react";
 import classes from "./ProviderCard.module.css";
 import RequestForm from "../../../components/UI/RequestForm/RequestForm";
 
-const ProviderCard = ({ fname, lname, title, image, experties, hourlyRate, rating, id }) => {
+const ProviderCard = ({ fname, lname, title, image, experties, hourlyRate, rating, id, key }) => {
   return (
-    <div className="col-lg-3 p-0 mt-2">
+    <div className="col-lg-3 p-0 mt-2" key={key}>
       <div className={`text-center ${classes.card_box}`}>
         <div className={`${classes.member_card} pt-2 pb-2`}>
           {/* <div className="d-flex justify-content-around align-items-center"> */}
