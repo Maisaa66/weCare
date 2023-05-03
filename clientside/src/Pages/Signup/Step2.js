@@ -16,6 +16,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserDetails } from "../../Redux Store/slices/userInfo";
 import { addUser } from "../../Redux Store/slices/userSlice";
+import { useForm } from "react-hook-form";
 
 function Copyright(props) {
   return (
@@ -95,31 +96,59 @@ export default function StepTwo() {
         }
   );
 
+  const [drowpdownError, setDropdownError] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ address });
+
   const dispatch = useDispatch();
   const userDetails = useSelector((state) => state.userInfo.userDetails);
 
   //   const styles = useStyles();
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    setUserData({ ...userData, address });
-    dispatch(setUserDetails({ ...userData, address }));
-    if (userType === "Care giver") {
-      navigate("/signup/stepfour");
-    } else if (userType === "Care Beneficiary") {
-      dispatch(addUser({...userDetails, address:address}));
-      navigate("/signup/stepthree");
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   setUserData({ ...userData, address });
+  //   dispatch(setUserDetails({ ...userData, address }));
+  //   if (userType === "Care giver") {
+  //     navigate("/signup/stepfour");
+  //   } else if (userType === "Care Beneficiary") {
+  //     dispatch(addUser({...userDetails, address:address}));
+  //     navigate("/signup/stepthree");
+  //   }
+  // };
+
+  const onSubmit = (data) => {
+    if (address.country === "") {
+      setDropdownError(true);
+      console.log(drowpdownError);
+    } else {
+      data.country = address.country;
+
+      dispatch(setUserDetails({ ...userDetails, address: data }));
+      if (userType === "Care giver") {
+        navigate("/signup/stepfour");
+      } else if (userType === "Care Beneficiary") {
+        console.log("added user: ", { ...userDetails, address: data });
+        dispatch(addUser({ ...userDetails, address: data }));
+        navigate("/signup/stepthree");
+      }
     }
   };
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setAddress({ ...address, [name]: value });
-    setUserData({ ...userData, address: { ...address, [name]: value } });
-  };
+  // const handleChange = (event) => {
+  //   const { name, value } = event.target;
+  //   setAddress({ ...address, [name]: value });
+  //   setUserData({ ...userData, address: { ...address, [name]: value } });
+  // };
 
   const handleDropDownChange = (value) => {
+    if (value) {
+      setDropdownError(false);
+    }
     setAddress({ ...address, country: value });
-    setUserData({ ...userData, address:{ ...address, country: value } });
+    // setUserData({ ...userData, address: { ...address, country: value } });
   };
 
   return (
@@ -167,7 +196,12 @@ export default function StepTwo() {
 
             <Box
               component="form"
-              onSubmit={handleSubmit}
+              onSubmit={(e) => {
+                handleSubmit(onSubmit)(e);
+                address.country === ""
+                  ? setDropdownError(true)
+                  : setDropdownError(false);
+              }}
               noValidate
               sx={{ mt: 1 }}
             >
@@ -176,6 +210,7 @@ export default function StepTwo() {
                   <DropDown
                     dropDownObj={dropDownObj}
                     handleDropDownChange={handleDropDownChange}
+                    error={drowpdownError}
                   ></DropDown>
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -186,11 +221,15 @@ export default function StepTwo() {
                     fullWidth
                     id="governate"
                     label="Governate"
-                    name="governate"
                     autoComplete="governate"
                     sx={{ textAlign: "left" }}
-                    value={address.governate}
-                    onChange={handleChange}
+                    {...register("governate", {
+                      required: "Please enter your governate",
+                    })}
+                    error={Boolean(errors.governate)}
+                    helperText={errors.governate && errors.governate.message}
+                    // value={userData.nationalID}
+                    // onChange={handleChange}
                   />
                 </Grid>
               </Grid>
@@ -205,11 +244,15 @@ export default function StepTwo() {
                         fullWidth
                         id="area"
                         label="Area"
-                        name="area"
                         autoComplete="area"
                         sx={{ textAlign: "left" }}
-                        value={address.area}
-                        onChange={handleChange}
+                        {...register("area", {
+                          required: "Please enter your area",
+                        })}
+                        error={Boolean(errors.area)}
+                        helperText={errors.area && errors.area.message}
+                        // value={address.area}
+                        // onChange={handleChange}
                       />
                     </Grid>
                     <Grid item xs={12} sm={6}>
@@ -220,11 +263,15 @@ export default function StepTwo() {
                         fullWidth
                         id="street"
                         label="Street"
-                        name="street"
                         autoComplete="street"
                         sx={{ textAlign: "left" }}
-                        value={address.street}
-                        onChange={handleChange}
+                        {...register("street", {
+                          required: "Please enter your street",
+                        })}
+                        error={Boolean(errors.street)}
+                        helperText={errors.street && errors.street.message}
+                        // value={address.street}
+                        // onChange={handleChange}
                       />
                     </Grid>
                   </Grid>
@@ -238,11 +285,18 @@ export default function StepTwo() {
                         fullWidth
                         id="buildingNum"
                         label="Builiding Number"
-                        name="buildingNum"
+                        // name="buildingNum"
                         autoComplete="buildingNum"
                         sx={{ textAlign: "left" }}
-                        value={address.buildingNum}
-                        onChange={handleChange}
+                        {...register("buildingNum", {
+                          required: "Please enter your building number",
+                        })}
+                        error={Boolean(errors.buildingNum)}
+                        helperText={
+                          errors.buildingNum && errors.buildingNum.message
+                        }
+                        // value={address.buildingNum}
+                        // onChange={handleChange}
                       />
                     </Grid>
                     <Grid item xs={12} sm={6}>
@@ -253,11 +307,18 @@ export default function StepTwo() {
                         fullWidth
                         id="apartmentNum"
                         label="Apartment Number"
-                        name="apartmentNum"
+                        // name="apartmentNum"
                         autoComplete="apartmentNum"
                         sx={{ textAlign: "left" }}
-                        value={address.apartmentNum}
-                        onChange={handleChange}
+                        {...register("apartmentNum", {
+                          required: "Please enter your apartment number",
+                        })}
+                        error={Boolean(errors.apartmentNum)}
+                        helperText={
+                          errors.apartmentNum && errors.apartmentNum.message
+                        }
+                        // value={address.apartmentNum}
+                        // onChange={handleChange}
                       />
                     </Grid>
                   </Grid>

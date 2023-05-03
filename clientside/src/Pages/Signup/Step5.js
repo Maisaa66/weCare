@@ -13,7 +13,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserDetails } from "../../Redux Store/slices/userInfo";
 import "react-datepicker/dist/react-datepicker.css";
-// import { useDropzone } from "react-dropzone";
+import { Alert } from "@mui/material";
 import axios from "axios";
 function Copyright(props) {
   return (
@@ -70,6 +70,8 @@ export default function StepFive() {
   const [userData, setUserData] = useState({
     documents: [],
   });
+  const [isError, setIsError] = useState({ status: false, message: "" });
+
   // const { acceptedFiles, getRootProps, getInputProps } = useDropzone();
 
   // const files = acceptedFiles.map((file) => (
@@ -84,35 +86,42 @@ export default function StepFive() {
 
   const handleClick = async (event) => {
     event.preventDefault();
+
     const formData = new FormData();
     // append the files to FormData
-    Object.values(file).forEach((file) => {formData.append(file.name, file);});
-    // formData.append("file", file);
-    formData.append("email", userDetails.email);
-    console.log(file);
-    // setUserData({ ...userData, documents: formData });
-    await axios
-      .post("http://localhost:7000/upload", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      })
-      .then((res) =>
-{        setUserData({
-          ...userData,
-          documents: userData.documents.push(...res.data.filePath), //res.data.filePath[0
-        });
-      
-        console.log("file paths: ",res.data.filePath);
-      }
-      ).catch((err) => console.log("from file axios: ",err));
+    if (file) {
+      Object.values(file).forEach((file) => {
+        formData.append(file.name, file);
+      });
+      // formData.append("file", file);
+      formData.append("email", userDetails.email);
+      console.log(file);
+      // setUserData({ ...userData, documents: formData });
+      await axios
+        .post("http://localhost:7000/upload", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        })
+        .then((res) => {
+          setUserData({
+            ...userData,
+            documents: userData.documents.push(...res.data.filePath), //res.data.filePath[0
+          });
 
-    console.log(userData);
-    dispatch(setUserDetails(userData));
-    navigate("/signup/stepthree");
+          console.log("file paths: ", res.data.filePath);
+        })
+        .catch((err) => console.log("from file axios: ", err));
+
+      console.log(userData);
+      dispatch(setUserDetails(userData));
+      navigate("/signup/stepthree");
+    } else {
+      setIsError({ status: true, message: "Please upload your files" });
+    }
   };
 
-  const [file, setFile] = React.useState();
+  const [file, setFile] = React.useState(null);
   const [filename, setFilename] = React.useState("Choose File");
   const onChange = (e) => {
     e.preventDefault();
@@ -183,23 +192,26 @@ export default function StepFive() {
                   <ul>{files}</ul>
                 </aside>
               </section> */}
-                <div className="custom-file mb-4">
-                  <input
-                    type="file"
-                    className="custom-file-input"
-                    id="customFile"
-                    multiple
-                    onChange={onChange}
-                  />
-                  
-                    <label className="custom-file-label" htmlFor="customFile">
-                      {filename}
-                    </label>
-           
-                </div>
+              <div className="custom-file mb-4">
+                <input
+                  type="file"
+                  className="custom-file-input"
+                  id="customFile"
+                  multiple
+                  onChange={onChange}
+                />
 
+                <label className="custom-file-label" htmlFor="customFile">
+                  {filename}
+                </label>
+              </div>
             </Box>
             <div>
+              {isError.status && (
+                <Alert severity="error" sx={{ mt: 2 }}>
+                  {isError.message}
+                </Alert>
+              )}
               <button onClick={handleClick} className={`${classes.btn}`}>
                 <svg width="277" height="62">
                   <defs>
