@@ -10,7 +10,8 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import classes from "./signup.module.css";
 import ProgressBar from "../../components/UI/ProgressBar/ProgressBar";
 import { useDispatch, useSelector } from "react-redux";
-
+import { useEffect } from "react";
+import { addProvider } from "../../Redux Store/slices/providerSlice";
 function Copyright(props) {
   return (
     <Typography
@@ -63,12 +64,23 @@ const theme = createTheme({
 });
 
 export default function StepThree() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    navigate("/login")
+    if (userType === "Care giver") {
+      console.log("from step3: ",userDetails);
+      dispatch(addProvider(userDetails));
+    }
+    navigate("/login");
   };
   const userType = useSelector((state) => state.userInfo.type);
+  const userDetails = useSelector((state) => state.userInfo.userDetails);
+
+  // useEffect(() => {
+
+  // }, []);
 
   return (
     <ThemeProvider theme={theme}>
@@ -124,7 +136,7 @@ export default function StepThree() {
               sx={{ mt: 1 }}
             >
               <div>
-                <button onClick={handleSubmit}  className={`${classes.btn}`}>
+                <button onClick={handleSubmit} className={`${classes.btn}`}>
                   <svg width="277" height="62">
                     <defs>
                       <linearGradient id="grad1">

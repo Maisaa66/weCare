@@ -14,6 +14,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { setUserDetails } from "../../Redux Store/slices/userInfo";
 import "react-datepicker/dist/react-datepicker.css";
 // import { useDropzone } from "react-dropzone";
+import { addProvider } from "../../Redux Store/slices/providerSlice";
+import { MuiFileInput } from "mui-file-input";
 import axios from "axios";
 function Copyright(props) {
   return (
@@ -100,7 +102,7 @@ export default function StepFive() {
       .then((res) =>
 {        setUserData({
           ...userData,
-          documents: userData.documents.push(...res.data.filePath), //res.data.filePath[0
+          documents: res.data.filePath,
         });
       
         console.log("file paths: ",res.data.filePath);
@@ -183,6 +185,7 @@ export default function StepFive() {
                   <ul>{files}</ul>
                 </aside>
               </section> */}
+              <form onSubmit={handleClick}>
                 <div className="custom-file mb-4">
                   <input
                     type="file"
@@ -198,6 +201,12 @@ export default function StepFive() {
            
                 </div>
 
+                <input
+                  type="submit"
+                  value="Upload"
+                  className="btn btn-primary btn-block mt-4"
+                />
+              </form>
             </Box>
             <div>
               <button onClick={handleClick} className={`${classes.btn}`}>
@@ -218,7 +227,7 @@ export default function StepFive() {
                     height="50"
                   ></rect>
                 </svg>
-                <span>Upload</span>
+                <span>Next</span>
               </button>
             </div>
           </Box>

@@ -5,7 +5,6 @@ export const addProvider = createAsyncThunk("provider/addProvider", async (userD
   try {
     console.log(userData);
     const response = await axios.post("http://localhost:7000/api/v1/providers/signup", userData);
-
     console.log("response  ", response);
     return response.data;
   } catch (error) {
@@ -69,8 +68,8 @@ export const providerSlice = createSlice({
       // Add user to the state array
       // const navigate = useNavigate();
       // navigate("/signup/stepthree");
-      const expires = new Date(Date.now() + 2 * 24 * 60 * 60 * 1000).toUTCString(); // 2 days from now
-      document.cookie = `jwt=${action.payload.cookie}; expires=${expires};`;
+      // const expires = new Date(Date.now() + 2 * 24 * 60 * 60 * 1000).toUTCString(); // 2 days from now
+      // document.cookie = `jwt=${action.payload.cookie}; expires=${expires};`;
       // state.user.push(action.payload.data);
       return action.payload.data;
       // console.log("ACTION!!!!", action.payload);
