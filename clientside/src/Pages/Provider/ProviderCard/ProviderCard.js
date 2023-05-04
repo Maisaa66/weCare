@@ -1,19 +1,26 @@
 import React from "react";
 import classes from "./ProviderCard.module.css";
 import RequestForm from "../../../components/UI/RequestForm/RequestForm";
-
+import { Link } from "react-bootstrap-icons";
+import { Link as RouterLink } from "react-router-dom";
+import { setProfileId } from "../../../Redux Store/slices/userSlice";
+import { useDispatch } from "react-redux";
 const ProviderCard = ({ fname, lname, title, image, experties, hourlyRate, rating, id, key }) => {
+  const dispatch = useDispatch();;
+  
   return (
     <div className="col-lg-3 p-0 mt-2" key={key}>
       <div className={`text-center ${classes.card_box}`}>
         <div className={`${classes.member_card} pt-2 pb-2`}>
           {/* <div className="d-flex justify-content-around align-items-center"> */}
           {/* <div className="d-flex flex-column"> */}
-          <div className={`${classes.thumb_lg} mb-2 mx-auto`}>
+            <div className={`${classes.thumb_lg} mb-2 mx-auto`}>
+            <RouterLink to="/providerProfile"  onClick={()=>{dispatch(setProfileId(id))}}>
             <img src={image} className="rounded-circle img-thumbnail" alt="profile-image" />
-          </div>
-          <div className="">
-            <h4>{fname + " " + lname}</h4>
+          </RouterLink>
+            </div>
+          <div>
+            <RouterLink to="/providerProfile" onClick={()=>{dispatch(setProfileId(id))}} className="text-dark">{fname + " " + lname}</RouterLink>
             <p className={classes.text_muted}>
               {title} <span>| </span>
               <span className={classes.text_pink}>{rating}</span>
@@ -36,7 +43,7 @@ const ProviderCard = ({ fname, lname, title, image, experties, hourlyRate, ratin
           <hr className="mb-0" />
 
           <div className="mt-4">
-            <h6>Experties: {experties}</h6>
+            <h6 className="text-truncate">Experties: {experties}</h6>
 
             <div className="row justify-content-center">
               <div className="col-4">

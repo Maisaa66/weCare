@@ -4,25 +4,29 @@ import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 export default function ProgressBar(props) {
+  // localaization
+  const { t } = useTranslation();
+
   const userType = useSelector((state) => state.userInfo.type);
   let steps;
   if (userType === "Care Beneficiary") {
     steps = [
-      "Basic Information",
-      "Personal Information",
-      "Address",
-      "Finished",
+      `${t("stepOne")}`,
+      `${t("stepTwo")}`,
+      `${t("stepThree")}`,
+      `${t("lastStep")}`,
     ];
   } else if (userType === "Care giver") {
     steps = [
-      "Basic Information",
-      "Personal Information",
-      "Address",
-      "Work Experince",
-      "Documents",
-      "Finished",
+      `${t("stepOne")}`,
+      `${t("stepTwo")}`,
+      `${t("stepThree")}`,
+      `${t("stepFour")}`,
+      `${t("stepFive")}`,
+      `${t("lastStep")}`,
     ];
   }
 

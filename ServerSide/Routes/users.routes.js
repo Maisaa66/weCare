@@ -15,7 +15,6 @@ router.get(
 );
 router.get(
   "/profile/:id",
-  authMiddleware.verifyToken,
   userControllers.getUserProfile
 );
 router.patch(

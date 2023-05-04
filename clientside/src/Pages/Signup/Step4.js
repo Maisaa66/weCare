@@ -24,8 +24,11 @@ import FormLabel from "@mui/material/FormLabel";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 
 function Copyright(props) {
+  // localaization
+  const { t } = useTranslation();
   return (
     <Typography
       variant="body2"
@@ -33,9 +36,9 @@ function Copyright(props) {
       align="center"
       {...props}
     >
-      {"Copyright © "}
+      {`${t("copyright")} © `}
       <Link color="inherit" to="/">
-        weCare
+        {t("slogan")}
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -77,6 +80,9 @@ const theme = createTheme({
 });
 
 export default function StepFour() {
+  // localaization
+  const { t } = useTranslation();
+
   const [userData, setUserData] = useState({
     serviceType: "",
     title: "",
@@ -117,7 +123,7 @@ export default function StepFour() {
   //   setUserData({ ...userData, [name]: value });
   // };
   const dropDownObj = {
-    title: "Service Type",
+    title: `${t("formServiceType")}`,
     options: [
       "nurse",
       "companion",
@@ -172,7 +178,7 @@ export default function StepFour() {
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5" sx={{ m: 2 }}>
-              Share your experience with us!
+              {t("formSubTitleFour")}
             </Typography>
             <Box sx={{ m: 3 }}>
               <ProgressBar stepNum={3}></ProgressBar>
@@ -204,7 +210,7 @@ export default function StepFour() {
                     required
                     fullWidth
                     id="title"
-                    label="Title"
+                    label={`${t("formTitle")}`}
                     // name="title"
                     autoComplete="title"
                     sx={{ textAlign: "left" }}
@@ -226,7 +232,7 @@ export default function StepFour() {
                     required
                     fullWidth
                     id="experties"
-                    label="Expertise"
+                    label={`${t("formExpertise")}`}
                     // name="experties"
                     autoComplete="experties"
                     sx={{ textAlign: "left" }}
@@ -246,7 +252,7 @@ export default function StepFour() {
                     required
                     fullWidth
                     id="hourlyRate"
-                    label="Hourly Rate (e.g. 50EGP/Hour)"
+                    label={`${t("formHourlRate")}`}
                     // name="hourlyRate"
                     autoComplete="hourlyRate"
                     sx={{ textAlign: "left" }}
@@ -267,7 +273,7 @@ export default function StepFour() {
                     id="demo-row-radio-buttons-group-label"
                     sx={{ mt: 4, textAlign: "left" }}
                   >
-                    Available for night shift?
+                    {t("formNightShift")}
                   </FormLabel>
                   <RadioGroup
                     row
@@ -285,12 +291,12 @@ export default function StepFour() {
                     <FormControlLabel
                       value="true"
                       control={<Radio />}
-                      label="Yes"
+                      label={`${t("yes")}`}
                     />
                     <FormControlLabel
                       value="false"
                       control={<Radio />}
-                      label="No"
+                      label={`${t("no")}`}
                     />
                   </RadioGroup>
                 </Grid>
@@ -299,7 +305,7 @@ export default function StepFour() {
                     id="demo-row-radio-buttons-group-label"
                     sx={{ mb: 3, mt: 4, textAlign: "left" }}
                   >
-                    Please choose your date of birth
+                    {t("formBOD")}
                   </FormLabel>
                   <DatePicker
                     selected={startDate}
@@ -330,7 +336,7 @@ export default function StepFour() {
                       height="50"
                     ></rect>
                   </svg>
-                  <span>Next</span>
+                  <span>{t("nextStep")}</span>
                 </button>
               </div>
             </Box>

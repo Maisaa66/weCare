@@ -26,8 +26,8 @@ import RequestTest from "./Pages/requestTest";
 import Requests from "./components/AdminDashBoard/Main/AllRequests/Requests";
 import ProviderDashBoard from "./Pages/providerDashBoard/providerDashBoard";
 import Charts from "./components/AdminDashBoard/Main/Charts/Charts";
-// const authenticated = useSelector((state) => state.user.isAdmin);
 
+// const authenticated = useSelector((state) => state.user.isAdmin);
 const router = createBrowserRouter([
   {
     path: "/admin",
@@ -109,6 +109,10 @@ const router = createBrowserRouter([
   {
     path: "/private",
     element: <RequestTest />,
+  },
+  {
+    path: "/checkout-success",
+    element: <CheckoutSuccess />,
   },
 ]);
 

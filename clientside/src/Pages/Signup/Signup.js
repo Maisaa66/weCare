@@ -15,8 +15,11 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserDetails } from "../../Redux Store/slices/userInfo";
 import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 
 function Copyright(props) {
+  // localaization
+  const { t } = useTranslation();
   return (
     <Typography
       variant="body2"
@@ -24,9 +27,9 @@ function Copyright(props) {
       align="center"
       {...props}
     >
-      {"Copyright © "}
+      {`${t("copyright")} © `}
       <Link color="inherit" to="/">
-        weCare
+        {t("slogan")}
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -68,6 +71,8 @@ const theme = createTheme({
 });
 
 export default function StepOne() {
+  // localaization
+  const { t } = useTranslation();
   //states
   const [userData, setUserData] = useState({
     firstName: "",
@@ -103,7 +108,7 @@ export default function StepOne() {
     // console.log(data);
     dispatch(setUserDetails(data));
     navigate("/signup/stepone");
-  }
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -142,10 +147,14 @@ export default function StepOne() {
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5" sx={{ m: 2 }}>
-              Welcome {userType}!
+              {t("welcome")}{" "}
+              {userType === "Care giver"
+                ? t("careGiver")
+                : t("careBeneficiary")}
+              !
             </Typography>
             <Typography component="h1" variant="h6" sx={{ m: 2 }}>
-              First things first...
+              {t("formSubTitleOne")}
             </Typography>
             <Box sx={{ m: 3 }}>
               <ProgressBar stepNum={0}></ProgressBar>
@@ -159,12 +168,12 @@ export default function StepOne() {
             >
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
-                <TextField
+                  <TextField
                     variant="standard"
                     margin="normal"
                     fullWidth
                     id="firstName"
-                    label="First Name"
+                    label={`${t("formFname")}`}
                     sx={{ textAlign: "left" }}
                     {...register("firstName", {
                       required: "Please enter your first name",
@@ -174,12 +183,12 @@ export default function StepOne() {
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                <TextField
+                  <TextField
                     variant="standard"
                     margin="normal"
                     fullWidth
                     id="lastName"
-                    label="Last Name"
+                    label={`${t("formLname")}`}
                     sx={{ textAlign: "left" }}
                     {...register("lastName", {
                       required: "Please enter your last name",
@@ -191,36 +200,36 @@ export default function StepOne() {
               </Grid>
 
               <TextField
-                    variant="standard"
-                    margin="normal"
-                    fullWidth
-                    id="email"
-                    label="Email Address"
-                    sx={{ textAlign: "left" }}
-                    {...register("email", {
-                      required: "Please enter your first name",
-                      pattern: {
-                        value: /\S+@\S+\.\S+/,
-                        message: "Entered value does not match email format"
-                      }
-                    })}
-                    error={Boolean(errors.email)}
-                    helperText={errors.email && errors.email.message}
-                  />
-             <TextField
-                    variant="standard"
-                    margin="normal"
-                    fullWidth
-                    id="password"
-                    label="Password"
-                    type="password"
-                    sx={{ textAlign: "left" }}
-                    {...register("password", {
-                      required: "Please enter your password"
-                    })}
-                    error={Boolean(errors.password)}
-                    helperText={errors.password && errors.password.message}
-                  />
+                variant="standard"
+                margin="normal"
+                fullWidth
+                id="email"
+                label={`${t("loginEmail")}`}
+                sx={{ textAlign: "left" }}
+                {...register("email", {
+                  required: "Please enter your first name",
+                  pattern: {
+                    value: /\S+@\S+\.\S+/,
+                    message: "Entered value does not match email format",
+                  },
+                })}
+                error={Boolean(errors.email)}
+                helperText={errors.email && errors.email.message}
+              />
+              <TextField
+                variant="standard"
+                margin="normal"
+                fullWidth
+                id="password"
+                label={`${t("password")}`}
+                type="password"
+                sx={{ textAlign: "left" }}
+                {...register("password", {
+                  required: "Please enter your password",
+                })}
+                error={Boolean(errors.password)}
+                helperText={errors.password && errors.password.message}
+              />
               <div>
                 <button type="submit" className={`${classes.btn}`}>
                   <svg width="277" height="62">
@@ -240,7 +249,7 @@ export default function StepOne() {
                       height="50"
                     ></rect>
                   </svg>
-                  <span>Next</span>
+                  <span>{t("nextStep")}</span>
                 </button>
               </div>
             </Box>
