@@ -1,59 +1,105 @@
-import axios from 'axios'
-import React, { useEffect, useState } from 'react'
-import BarChart from './BarChart'
-import { Chart } from 'chart.js'
-import  LineChart from './LineChart'
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import BarChart from "./BarChart";
+import { Chart } from "chart.js";
+import LineChart from "./LineChart";
+import Doughnut from "./Doughnut";
 export default function Charts() {
-    let [MyStats,setMyStats]=useState(null)
-    let locationsArr=[]
-    // const [serviceLocations,setServiceLocations]=useState(null)
-    // const [serviceLocations,setServiceLocations] =useState(null)
-    useEffect(()=>{
-        axios.get(
-            "http://localhost:7000/api/v1/stats?start=2023-04-30&end=2023-05-07", {
-              withCredentials: true,
-              headers: {
-                "Access-Control-Allow-Origin": "http://localhost:3000",
-                "Content-Type": "application/json"}
-              })
-            .then((res)=>{
-                setMyStats(res.data.stats)
-               return res.data.stats.serviceLocationsStats.map((obj)=>locationsArr.push(obj.label))}
-            )
+  let [MyStats, setMyStats] = useState(null);
+  useEffect(() => {
+    axios
+      .get(
+        "http://localhost:7000/api/v1/stats?start=2023-04-30&end=2023-05-07",
+        {
+          withCredentials: true,
+          headers: {
+            "Access-Control-Allow-Origin": "http://localhost:3000",
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then((res) => {
+        setMyStats(res.data.stats);
+      });
 
-            // if(MyStats){
-            //     setServiceLocations({
-            //         labels: MyStats.serviceLocationsStats.map((data)=>data.label),
-            //         datasets:[{
-            //             label:"Service Locations",
-            //             data: MyStats && MyStats.serviceLocationsStats.map((data)=>data.count),
-            //             backgroundColor:['green','blue']
-            //         }]
-            
-            //     })
-            // }
-    },[])
+    // if(MyStats){
+    //     setServiceLocations({
+    //         labels: MyStats.serviceLocationsStats.map((data)=>data.label),
+    //         datasets:[{
+    //             label:"Service Locations",
+    //             data: MyStats && MyStats.serviceLocationsStats.map((data)=>data.count),
+    //             backgroundColor:['green','blue']
+    //         }]
 
-    const [serviceLocations,setServiceLocations] =useState({
-        labels:locationsArr.map((l)=>[l.label]),
-        datasets:[{
-            label:"Service Locations",
-            data: MyStats && MyStats.serviceLocationsStats.map((d)=>[d.label]),
-            backgroundColor:['green','blue']
-        }]
-    })
+    //     })
+    // }
+  }, []);
 
-//     // const [serviceType,setServiceType]=useState([])
-//     // const [usersOverPassedWeek,setUsersOverPassedWeek]=useState([])
-//     // const [providersOverPassedWeek,setProvidersOverPassedWeek]=useState([])
+  const serviceLocations = {
+    labels: MyStats?.serviceLocationsStats?.map((l) => l.label),
+    datasets: [
+      {
+        label: "Service Locations",
+        data: MyStats?.serviceLocationsStats?.map((d) => d.count),
+        backgroundColor: ["#5ca795", "rgb(14, 116, 82, 0.2)"],
+      },
+    ],
+  };
+  const serviceType = {
+    labels: MyStats?.serviceTypeStats?.map((l) => l.label),
+    datasets: [
+      {
+        label: "Service Types",
+        data: MyStats?.serviceTypeStats?.map((d) => d.count),
+        backgroundColor: ["#5ca795", "rgb(14, 116, 82, 0.2)", "orange"],
+      },
+    ],
+  };
+  const providersOverPassedWeek = {
+    labels: MyStats?.providersOverPassedWeek?.map((l) => l.label),
+    datasets: [
+      {
+        label: "Providers over passed week",
+        data: MyStats?.providersOverPassedWeek?.map((d) => d.count),
+        backgroundColor: ["#5ca795", "rgb(14, 116, 82, 0.2)"],
+      },
+    ],
+  };
+  const usersOverPassedWeek = {
+    labels: MyStats?.usersOverPassedWeek?.map((l) => l.label),
+    datasets: [
+      {
+        label: "Users over passed week",
+        data: MyStats?.usersOverPassedWeek?.map((d) => d.count),
+        backgroundColor: ["#5ca795", "rgb(14, 116, 82, 0.2)"],
+      },
+    ],
+  };
 
   return (
-    <div style={{width:500}}>
-        klklk
-        <BarChart chartData={MyStats} />
-        <LineChart chartData={serviceLocations}></LineChart>
-        {/* {MyStats && MyStats.serviceLocationsStats.map((l)=><h1>{l.count}</h1>)} */}
- {/* {MyStats &&} */}
+    <div className="row m-auto w-75">
+      <div className="col-lg-6 col-12 p-2 ">
+        <div className="w-100 shadow rounded-5">
+          <LineChart chartData={providersOverPassedWeek}></LineChart>
+        </div>
+      </div>
+      <div className="col-lg-6 col-12 p-2 ">
+        <div className="w-100 shadow rounded-5">
+        <LineChart chartData={usersOverPassedWeek}></LineChart>
+        </div>
+      </div>
+      <div className="col-lg-6 col-12 p-2 ">
+        <div className="w-100 shadow rounded-5">
+        <BarChart chartData={serviceLocations} />
+        </div>
+      </div>
+      <div className="col-lg-6 col-12 p-2 ">
+        <div className="w-100 shadow rounded-5">
+        <div className="w-75">
+          <Doughnut chartData={serviceType} />
+        </div>
+        </div>
+      </div>
     </div>
-  )
-        }
+  );
+}

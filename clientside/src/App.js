@@ -25,7 +25,7 @@ import ReqDetails from "./components/AdminDashBoard/Main/AllRequests/ReqDetails"
 import RequestTest from "./Pages/requestTest";
 import Requests from "./components/AdminDashBoard/Main/AllRequests/Requests";
 import ProviderDashBoard from "./Pages/providerDashBoard/providerDashBoard";
-
+import Charts from "./components/AdminDashBoard/Main/Charts/Charts";
 // const authenticated = useSelector((state) => state.user.isAdmin);
 
 const router = createBrowserRouter([
@@ -34,6 +34,7 @@ const router = createBrowserRouter([
     element: <AdmindashBoard />,
     children: [
       { path: "users", element: <Users></Users> },
+      { path: "charts", element: <Charts/> },
       { path: "providers", element: <Users></Users> },
       { path: "users/:id", element: <AllDetails /> },
       { path: "providers/:id", element: <AllDetails /> },

@@ -4,63 +4,21 @@ import axios from 'axios';
 import { Link, Outlet } from 'react-router-dom'
 import { useLocation } from "react-router-dom"
 import img from '../../../../assets/images/user.jpg'
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllUsers, getTopRating, getWorstRating } from '../../../../Redux Store/slices/usersSlice';
 function Users() {
   const {pathname} = useLocation();
   const urlType=pathname.split('/')[2]
+  let dispatch=useDispatch()
   console.log(urlType);
 
   let [flag, setflag] = useState(true)
-  const [users, setUsers] = useState([]);
-  const [topUsr, setTopusr] = useState([])
-  const [wrstUsr, setWrstUsr] = useState([])
+  let {users,topUsr,wrstUsr}=useSelector((state)=>state.usersReducer)
 
-  const getAllUsers=()=>{
-    axios.get(`http://localhost:7000/api/v1/${urlType}`, {
-      withCredentials: true,
-      headers: {
-        'Access-Control-Allow-Origin': 'http://localhost:3000',
-        'Content-Type': 'application/json'
-      }
-    })
-      .then(res => {
-        console.log(res.data.data.users);
-        if(res.data.data.users){
-          setUsers(res.data.data.users)}
-        if (res.data.data.providers) {
-          setUsers(res.data.data.providers)}
-      })
-      .catch(err => console.log(err))
-  }
   useEffect(() => {
-  getAllUsers()
-
-    axios.get(`http://localhost:7000/api/v1/${urlType}?rating[gte]=4.8`, {
-      withCredentials: true,
-      headers: {
-        'Access-Control-Allow-Origin': 'http://localhost:3000',
-        'Content-Type': 'application/json'
-      }
-    }).then(res => {
-      if(res.data.data.users){
-        setTopusr(res.data.data.users)}
-      if (res.data.data.providers) {
-        console.log(res.data.data.providers);
-        setTopusr(res.data.data.providers)}
-  })
-      .catch(err => console.log(err))
-    axios.get(`http://localhost:7000/api/v1/${urlType}?rating[lte]=2`, {
-      withCredentials: true,
-      headers: {
-        'Access-Control-Allow-Origin': 'http://localhost:3000',
-        'Content-Type': 'application/json'
-      }
-    }).then(res => {
-      if(res.data.data.users){
-        setWrstUsr(res.data.data.users)}
-      if (res.data.data.providers) {
-        setWrstUsr(res.data.data.providers)}
-  })
-      .catch(err => console.log(err))
+dispatch(getAllUsers(urlType))
+dispatch(getTopRating(urlType))
+dispatch(getWorstRating(urlType))
 
   }, [urlType])
 
@@ -81,7 +39,7 @@ function Users() {
   return (
     <div>
       <div className="row">
-        <div className="col-2 h-500  overflow-y-auto">
+        <div className="col-2 h-500  overflow-y-scroll">
           <ul className="nav nav-tabs ">
             <li className="nav-item col-5">
               <a className={flag ? 'text-main shadow-sm rounded-pill px-2' : 'text-muted'} onClick={() => { setflag(true) }}>

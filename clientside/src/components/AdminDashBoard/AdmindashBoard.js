@@ -8,11 +8,6 @@ import * as ReactDOM from "react-dom";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import AllDetails from "./Main/AllDetails/AllDetails";
 import Update from "./Main/Update/Update";
-// const routers=createBrowserRouter([
-//   {path:'/admin',Component:<Nav></Nav>,children:[
-//     {path:'/allusers',Component:<Users/>}
-//   ]}
-// ])
 function AdmindashBoard() {
   return (
     <div className={`${classes.box} d-flex px-5 overflow-hidden align-items-center`}>
