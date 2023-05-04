@@ -12,6 +12,7 @@ import ProgressBar from "../../components/UI/ProgressBar/ProgressBar";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { addProvider } from "../../Redux Store/slices/providerSlice";
+import { useTranslation } from "react-i18next";
 function Copyright(props) {
   return (
     <Typography
@@ -64,6 +65,7 @@ const theme = createTheme({
 });
 
 export default function StepThree() {
+  const {t} = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -119,7 +121,7 @@ export default function StepThree() {
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5" sx={{ m: 2 }}>
-              Congratulations! ❤
+              {t("congrats")} ❤
             </Typography>
             <Box sx={{ m: 3 }}>
               {userType === "Care giver" ? (
@@ -154,7 +156,7 @@ export default function StepThree() {
                       height="50"
                     ></rect>
                   </svg>
-                  <span>Login</span>
+                  <span>{t("loginTitle")}</span>
                 </button>
               </div>
             </Box>

@@ -108,5 +108,7 @@
     "no": "No", 
     "formSubTitleFive": "Gain our trust with your credentials!",
     "formBOD": "Please choose your date of birth",
-    "formDocuments": "Drag 'n' drop some files here, or click to select files."
+    "formDocuments": "Choose File",
+    "congrats":"Congratulations!",
+    "upload":"Upload"
 }

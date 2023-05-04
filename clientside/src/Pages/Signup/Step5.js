@@ -15,6 +15,7 @@ import { setUserDetails } from "../../Redux Store/slices/userInfo";
 import "react-datepicker/dist/react-datepicker.css";
 import { Alert } from "@mui/material";
 import axios from "axios";
+import { useTranslation } from "react-i18next";
 function Copyright(props) {
   return (
     <Typography
@@ -67,6 +68,7 @@ const theme = createTheme({
 });
 
 export default function StepFive() {
+  const { t } = useTranslation();
   const [userData, setUserData] = useState({
     documents: [],
   });
@@ -122,7 +124,7 @@ export default function StepFive() {
   };
 
   const [file, setFile] = React.useState(null);
-  const [filename, setFilename] = React.useState("Choose File");
+  const [filename, setFilename] = React.useState(`${t("formDocuments")}`);
   const onChange = (e) => {
     e.preventDefault();
     // console.log(e.target.files);
@@ -168,7 +170,7 @@ export default function StepFive() {
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5" sx={{ m: 2 }}>
-              Gain our trust with your credentials!
+              {t("formSubTitleFive")}
             </Typography>
             <Box sx={{ m: 3 }}>
               <ProgressBar stepNum={4}></ProgressBar>
@@ -230,7 +232,7 @@ export default function StepFive() {
                     height="50"
                   ></rect>
                 </svg>
-                <span>Upload</span>
+                <span>{`${t("upload")}`}</span>
               </button>
             </div>
           </Box>
