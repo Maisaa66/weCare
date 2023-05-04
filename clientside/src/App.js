@@ -26,7 +26,7 @@ import RequestTest from "./Pages/requestTest";
 import Requests from "./components/AdminDashBoard/Main/AllRequests/Requests";
 import ProviderDashBoard from "./Pages/providerDashBoard/providerDashBoard";
 import Charts from "./components/AdminDashBoard/Main/Charts/Charts";
-
+import CheckoutSuccess from "./components/UI/Checkout/CheckoutSuccess/CheckoutSuccess";
 // const authenticated = useSelector((state) => state.user.isAdmin);
 const router = createBrowserRouter([
   {
