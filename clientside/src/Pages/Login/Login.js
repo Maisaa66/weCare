@@ -19,8 +19,11 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserData, setToken } from "../../Redux Store/slices/userSlice";
 import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 function Copyright(props) {
+  // localaization
+  const { t } = useTranslation();
   return (
     <Typography
       variant="body2"
@@ -28,10 +31,10 @@ function Copyright(props) {
       align="center"
       {...props}
     >
-      {"Copyright © "}
+      {`${t("copyright")} © `}
       <LinkMu color="inherit">
         <Link to="/" style={{ color: "var(--mainColor)" }}>
-          weCare
+          {t("slogan")}
         </Link>
       </LinkMu>{" "}
       {new Date().getFullYear()}
@@ -74,6 +77,9 @@ const theme = createTheme({
 });
 
 export default function SignIn() {
+  // localaization
+  const { t } = useTranslation();
+
   // states
   const [userType, setUserType] = useState("");
   const [userData, setUserData] = useState({ email: "", password: "" });
@@ -83,11 +89,9 @@ export default function SignIn() {
   const dispatch = useDispatch();
 
   const dropDownObj = {
-    title: "I am",
-    options: ["Care Giver", "Care Beneficiary"],
+    title: `${t("loginType")}`,
+    options: [`${t("careGiver")}`, `${t("careBeneficiary")}`],
   };
-
-
 
   // Functions
   const onSubmit = async (event) => {
@@ -99,7 +103,7 @@ export default function SignIn() {
     if (userType === "") {
       setIsError({
         status: true,
-        message: "Please choose user type",
+        message: `${t("choosingWarning")}`,
       });
     } else if (!userData.email && !userData.password) {
       setIsError({
@@ -128,11 +132,9 @@ export default function SignIn() {
           .post("http://localhost:7000/api/v1/users/login", userData)
           .then((res) => {
             document.cookie = `jwt=${res.data.cookie}; expires=${expires}`;
-           dispatch(setToken());
-            
+            dispatch(setToken());
 
             navigate("/");
-            
           })
           .catch((error) =>
             setIsError({ status: true, message: error.response.data })
@@ -215,7 +217,7 @@ export default function SignIn() {
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Login
+              {t("loginTitle")}
             </Typography>
             <Box component="form" onSubmit={onSubmit} noValidate sx={{ mt: 1 }}>
               <Grid container spacing={2}>
@@ -240,7 +242,7 @@ export default function SignIn() {
                 fullWidth
                 id="email"
                 name="email"
-                label="Email Address"
+                label={t("loginEmail")}
                 autoComplete="email"
                 sx={{ textAlign: "left" }}
               />
@@ -252,7 +254,7 @@ export default function SignIn() {
                 required
                 fullWidth
                 name="password"
-                label="Password"
+                label={t("password")}
                 type="password"
                 id="password"
                 autoComplete="current-password"
@@ -283,7 +285,7 @@ export default function SignIn() {
                       height="50"
                     ></rect>
                   </svg>
-                  <span>Login</span>
+                  <span>{t("loginTitle")}</span>
                 </button>
               </div>
 
@@ -291,7 +293,7 @@ export default function SignIn() {
                 <Grid item xs={12}>
                   <Typography variant="h4" textAlign="center" fullWidth>
                     <span style={{ fontSize: "0.9rem" }}>
-                      Already have an account?
+                      {t("donotHaveAccount")}
                     </span>
                     <LinkMu
                       href="#"
@@ -304,7 +306,7 @@ export default function SignIn() {
                         style={{ color: "var(--mainColor)" }}
                       >
                         {" "}
-                        Sign Up
+                        {t("signupTitle")}
                       </Link>
                     </LinkMu>
                   </Typography>

@@ -14,6 +14,8 @@ import { useEffect } from "react";
 import { addProvider } from "../../Redux Store/slices/providerSlice";
 import { useTranslation } from "react-i18next";
 function Copyright(props) {
+  // localaization
+  const { t } = useTranslation();
   return (
     <Typography
       variant="body2"
@@ -21,9 +23,9 @@ function Copyright(props) {
       align="center"
       {...props}
     >
-      {"Copyright © "}
+      {`${t("copyright")} © `}
       <Link color="inherit" to="/">
-        weCare
+        {t("slogan")}
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -65,14 +67,14 @@ const theme = createTheme({
 });
 
 export default function StepThree() {
-  const {t} = useTranslation();
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
     if (userType === "Care giver") {
-      console.log("from step3: ",userDetails);
+      console.log("from step3: ", userDetails);
       dispatch(addProvider(userDetails));
     }
     navigate("/login");

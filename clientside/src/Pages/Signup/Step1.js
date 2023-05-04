@@ -16,8 +16,11 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { setUserDetails } from "../../Redux Store/slices/userInfo";
 import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 
 function Copyright(props) {
+  // localaization
+  const { t } = useTranslation();
   return (
     <Typography
       variant="body2"
@@ -25,9 +28,9 @@ function Copyright(props) {
       align="center"
       {...props}
     >
-      {"Copyright © "}
+      {`${t("copyright")} © `}
       <Link color="inherit" to="/">
-        weCare
+        {t("slogan")}
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -69,11 +72,12 @@ const theme = createTheme({
 });
 
 export default function StepOne() {
+  // localaization
+  const { t } = useTranslation();
   const dropDownObj = {
-    title: "Gender",
+    title: `${t("formGender")}`,
     options: ["female", "male"],
   };
-  
 
   //states
   const [userData, setUserData] = useState({
@@ -99,21 +103,19 @@ export default function StepOne() {
   // };
   const onSubmit = (data) => {
     console.log("1", data);
-    if(userData.gender === ""){
+    if (userData.gender === "") {
       console.log("2", data);
 
-       setDropdownError(true);
-       console.log(drowpdownError);
-    }
-    else{
+      setDropdownError(true);
+      console.log(drowpdownError);
+    } else {
       console.log("3", data);
 
-      data.gender = userData.gender
-      console.log("4",  data);
+      data.gender = userData.gender;
+      console.log("4", data);
       dispatch(setUserDetails(data));
-      navigate("/signup/steptwo")
+      navigate("/signup/steptwo");
     }
-
   };
 
   // const handleChange = (event) => {
@@ -122,7 +124,7 @@ export default function StepOne() {
   // };
 
   const handleDropDownChange = (value) => {
-    if (value ) {
+    if (value) {
       setDropdownError(false);
     }
 
@@ -166,7 +168,7 @@ export default function StepOne() {
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5" sx={{ m: 2 }}>
-              Lets get to know you
+              {t("formSubTitleTwo")}
             </Typography>
             <Box sx={{ m: 3 }}>
               <ProgressBar stepNum={1}></ProgressBar>
@@ -176,9 +178,10 @@ export default function StepOne() {
               component="form"
               onSubmit={(e) => {
                 handleSubmit(onSubmit)(e);
-                userData.gender === "" ? setDropdownError(true) : setDropdownError(false);
+                userData.gender === ""
+                  ? setDropdownError(true)
+                  : setDropdownError(false);
               }}
-              
               noValidate
               sx={{ mt: 1 }}
             >
@@ -189,7 +192,7 @@ export default function StepOne() {
                     margin="normal"
                     fullWidth
                     id="phoneNum"
-                    label="Phone Number"
+                    label={`${t("formPhone")}`}
                     sx={{ textAlign: "left" }}
                     {...register("phoneNum", {
                       required: "Please enter your phone number",
@@ -200,7 +203,6 @@ export default function StepOne() {
                     })}
                     error={Boolean(errors.phoneNum)}
                     helperText={errors.phoneNum && errors.phoneNum.message}
-                    
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -208,7 +210,6 @@ export default function StepOne() {
                     dropDownObj={dropDownObj}
                     handleDropDownChange={handleDropDownChange}
                     error={drowpdownError}
-     
                   ></DropDown>
                 </Grid>
               </Grid>
@@ -218,11 +219,10 @@ export default function StepOne() {
                 margin="normal"
                 fullWidth
                 id="nationalID"
-                label="National ID"
+                label={`${t("NationalID")}`}
                 sx={{ textAlign: "left" }}
                 {...register("nationalID", {
                   required: "Please enter your national ID",
- 
                 })}
                 error={Boolean(errors.nationalID)}
                 helperText={errors.nationalID && errors.nationalID.message}
@@ -248,7 +248,7 @@ export default function StepOne() {
                       height="50"
                     ></rect>
                   </svg>
-                  <span>Next</span>
+                  <span>{t("nextStep")}</span>
                 </button>
               </div>
             </Box>

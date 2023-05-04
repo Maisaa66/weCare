@@ -17,6 +17,8 @@ import { Alert } from "@mui/material";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
 function Copyright(props) {
+  // localaization
+  const { t } = useTranslation();
   return (
     <Typography
       variant="body2"
@@ -24,9 +26,9 @@ function Copyright(props) {
       align="center"
       {...props}
     >
-      {"Copyright © "}
+      {`${t("copyright")} © `}
       <Link color="inherit" to="/">
-        weCare
+        {t("slogan")}
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}

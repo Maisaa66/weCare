@@ -19,6 +19,8 @@ import { addUser } from "../../Redux Store/slices/userSlice";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 function Copyright(props) {
+  // localaization
+  const { t } = useTranslation();
   return (
     <Typography
       variant="body2"
@@ -26,9 +28,9 @@ function Copyright(props) {
       align="center"
       {...props}
     >
-      {"Copyright © "}
+      {`${t("copyright")} © `}
       <Link color="inherit" to="/">
-        weCare
+        {t("slogan")}
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -70,7 +72,7 @@ const theme = createTheme({
 });
 
 export default function StepTwo() {
-  const {t} = useTranslation();
+  const { t } = useTranslation();
   const dropDownObj = {
     title: `${t("formCountry")}`,
     options: ["Egypt", "Canada"],
