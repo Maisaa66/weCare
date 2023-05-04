@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
-import classes from "./providerDashBoard";
+import classes from "./providerDashBoard.module.css";
 import NavBar from "../../components/Layout/NavBar/NavBar";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import ReviewGiven from "../../components/UI/reviewCard/ReviewGiven";
+import ReviewForm from "../../components/UI/ReviewForm/ReviewForm";
 
 const ProviderProfile = () => {
   // here we get the id of the user from the redux store
   const state = useSelector((state) => state.user.profileID);
+  const id = useSelector((state) => state.user.id);
   // here we get the type of the user from the redux store, to know which profile we are going to fetch
   const userType = useSelector((state) => state.user.userType);
 
@@ -107,6 +109,11 @@ const ProviderProfile = () => {
                       </div>
                     </div>
                   </div>
+                  {id !== state && (
+                    <ReviewForm
+                      revieweeName={`${user.firstName} ${user.lastName}`}
+                    />
+                  )}
                 </div>
               </div>
               <div className="d-flex flex-md-row flex-column-reverse  justify-content-evenly m-4 p-4">
@@ -183,22 +190,24 @@ const ProviderProfile = () => {
                             data-mdb-ride="carousel"
                           >
                             <div className="carousel-inner pb-5">
-                              {reviewsGiven && reviewsGiven.length === 0
-                                ? <div className="fs-2">No reviews made</div>
-                                : reviewsGiven &&
-                                  reviewsGiven.map((review, index) => (
-                                    <div
-                                      className={`carousel-item ${
-                                        index === 0 ? "active" : ""
-                                      }`}
+                              {reviewsGiven && reviewsGiven.length === 0 ? (
+                                <div className="fs-2">No reviews made</div>
+                              ) : (
+                                reviewsGiven &&
+                                reviewsGiven.map((review, index) => (
+                                  <div
+                                    className={`carousel-item ${
+                                      index === 0 ? "active" : ""
+                                    }`}
+                                    key={review._id}
+                                  >
+                                    <ReviewGiven
+                                      review={review}
                                       key={review._id}
-                                    >
-                                      <ReviewGiven
-                                        review={review}
-                                        key={review._id}
-                                      ></ReviewGiven>
-                                    </div>
-                                  ))}
+                                    ></ReviewGiven>
+                                  </div>
+                                ))
+                              )}
                             </div>
 
                             <button
