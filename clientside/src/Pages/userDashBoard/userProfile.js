@@ -151,6 +151,7 @@ const UserProfile = () => {
                                     <ReviewGiven
                                       review={review}
                                       key={review._id}
+                                      urlType="providers"
                                     ></ReviewGiven>
                                   </div>
                                 ))
