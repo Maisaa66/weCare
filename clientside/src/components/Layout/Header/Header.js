@@ -19,7 +19,7 @@ function Header() {
       </div>
       {/* <SearchBar></SearchBar> */}
       <NavBar></NavBar>
-      <div className="container mt-3">
+      <div className="container mt-3 mt-md-5">
         <div className="row text-start align-items-center">
           <div className="col-sm-12 col-lg-6 px-4 p-md-0">
             <h1 className="h1 my-2">

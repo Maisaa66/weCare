@@ -35,8 +35,8 @@ function NavBar({ bgColor }) {
       {" "}
       <nav className={`navbar navbar-expand-lg shadow-none py-1 bg-${bgColor}`}>
         <div className="container justify-content-between">
-          <div className={`${classes.logo}`}>
-            <Link to="/" className="navbar-brand d-lg-block d-none m-0">
+          <div className={`${classes.logo} `}>
+            <Link to="/" className="navbar-brand d-lg-block m-0">
               {/* {t("slogan")} */}
               <img className="w-100" src="./Images/logo.png" alt="Logo" />
             </Link>
@@ -135,43 +135,12 @@ function NavBar({ bgColor }) {
                   </li>
                 </ul>
               </li>
-              {/* <li className="nav-item">
-    <>
-      <nav className="navbar navbar-expand-lg shadow-none py-3">
-        <div className="container justify-content-between">
-          <Link to="/" className="navbar-brand m-0" href="#">
-            Navbar
-          </Link>
-          <button
-            className={`navbar-toggler ms-auto ${classes.toggler}`}
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <List></List>
-          </button>
-          <div
-            className={`collapse justify-content-end navbar-collapse ${classes.collapsed}`}
-            id="navbarSupportedContent"
-          >
-            <ul className={`navbar-nav mb-2 mb-lg-0 ${classes.navList}`}>
-              {/* <li className="nav-item">
-              <a className="nav-link active" aria-current="page" href="#">
-                About
-              </a>
-            </li> */}
             </ul>
+            <button className="btn me-3" onClick={changeLanguage}>
+              {i18n.language}
+            </button>
           </div>
-          {/* <a href="#login" className="mybtn mybtnLightSolid">
-          Login/Register
-        </a> */}
 
-          <button className="btn me-3" onClick={changeLanguage}>
-            {i18n.language}
-          </button>
           {isLogged ? (
             <div className="dropdown me-5">
               <button
@@ -180,7 +149,7 @@ function NavBar({ bgColor }) {
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                <div className="me-md-2">
+                <div className="d-none d-md-flex me-md-2">
                   {userInfo && userInfo.firstName + " " + userInfo.lastName}
                 </div>
                 <svg

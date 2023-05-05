@@ -6,7 +6,8 @@
     font-size: 1rem !important;
 }
 .navLink:hover, .navLink:focus, .navLink:active {
-    color: var(--lightText) !important;
+    color: rgba(9, 85, 60, 0.694) !important;
+    /* text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5); */
 }
 .toggler {
     font-size: 44px;
