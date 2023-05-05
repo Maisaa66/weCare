@@ -344,8 +344,27 @@ const ProviderDashBoard = () => {
                       </div>
                     )}
                   </div>
+                  <div>
+                    <div className="mt-5">
+                      <div className="fw-bold fs-5">Your Documents: </div>
+                      {provider.documents &&
+                        provider.documents.map((document, index) => {
+                          return (
+                            <a
+                              key={document}
+                              href={document}
+                              target="_blank"
+                              className="d-block"
+                            >
+                              document {index + 1}
+                            </a>
+                          );
+                        })}
+                    </div>
+                  </div>
                 </div>
               </div>
+
               {/* testimonels */}
               <section class="gradient-custom">
                 <div class="container mx-4 p-4">
