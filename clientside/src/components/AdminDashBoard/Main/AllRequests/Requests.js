@@ -6,17 +6,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllUsers } from "../../../../Redux Store/slices/usersSlice";
 
 export default function Requests() {
+  const token = useSelector((state) => state.user.token);
+
   const handleUpdateStatus = async (id, newStatus) => {
     console.log(id);
     await axios
       .patch(
-        `http://localhost:7000/api/v1/providers/${id}`,
+        `https://wecare-api-pzwn.onrender.com/api/v1/providers/${id}`,
         { status: newStatus },
         {
           withCredentials: true,
           headers: {
-            "Access-Control-Allow-Origin": "http://localhost:3000",
-            "Content-Type": "application/json",
+            authorization: `Bearer ${token}`,
           },
         }
       )

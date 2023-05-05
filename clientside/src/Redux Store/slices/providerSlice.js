@@ -1,16 +1,22 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const addProvider = createAsyncThunk("provider/addProvider", async (userData) => {
-  try {
-    console.log(userData);
-    const response = await axios.post("http://localhost:7000/api/v1/providers/signup", userData);
-    console.log("response  ", response);
-    return response.data;
-  } catch (error) {
-    console.log("error", error);
+export const addProvider = createAsyncThunk(
+  "provider/addProvider",
+  async (userData) => {
+    try {
+      console.log(userData);
+      const response = await axios.post(
+        "https://wecare-api-pzwn.onrender.com/api/v1/providers/signup",
+        userData
+      );
+      console.log("response  ", response);
+      return response.data;
+    } catch (error) {
+      console.log("error", error);
+    }
   }
-});
+);
 
 export const providerSlice = createSlice({
   name: "providerSlice",

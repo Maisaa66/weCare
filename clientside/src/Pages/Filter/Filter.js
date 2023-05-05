@@ -21,7 +21,10 @@ const Filter = () => {
   const priceQuery = useSelector((state) => state.provider.priceQuery);
   const ganderQuery = useSelector((state) => state.provider.genderQuery);
   const locationQuery = useSelector((state) => state.provider.locationQuery);
-  const nightShiftQuery = useSelector((state) => state.provider.nightShiftQuery);
+  const nightShiftQuery = useSelector(
+    (state) => state.provider.nightShiftQuery
+  );
+  const token = useSelector((state) => state.user.token);
 
   useEffect(() => {
     dispatch(resetQuries());
@@ -118,11 +121,18 @@ const Filter = () => {
     // console.log(nightShiftQuery);
     axios
       .get(
-        `http://localhost:7000/api/v1/providers?serviceType=${providerType.toLowerCase()}${
+        `https://wecare-api-pzwn.onrender.com/api/v1/providers?serviceType=${providerType.toLowerCase()}${
           rateQuery ? `&rating[gte]=${rateQuery}` : ""
-        }${priceQuery ? `&sort=${priceQuery}` : ""}${ganderQuery ? `&gender=${ganderQuery}` : ""}${
-          locationQuery ? `&address.governate=${locationQuery}` : ""
-        }${nightShiftQuery ? `&nightShift=${nightShiftQuery}` : ""}`
+        }${priceQuery ? `&sort=${priceQuery}` : ""}${
+          ganderQuery ? `&gender=${ganderQuery}` : ""
+        }${locationQuery ? `&address.governate=${locationQuery}` : ""}${
+          nightShiftQuery ? `&nightShift=${nightShiftQuery}` : ""
+        }`,
+        {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        }
       )
       .then((res) => {
         // console.log(res.data.data.providers);
@@ -137,7 +147,9 @@ const Filter = () => {
 
   return (
     <>
-      <div className={`mt-5 container  py-4 ${classes.filter} shadow text-light`}>
+      <div
+        className={`mt-5 container  py-4 ${classes.filter} shadow text-light`}
+      >
         <h1>Filter</h1>
         <div className="row d-flex flex-column flex-md-row">
           <Select
@@ -179,7 +191,10 @@ const Filter = () => {
             </div>
           </div>
         </div>
-        <button className={`btn mt-2 ${classes.button}`} onClick={filterHandler}>
+        <button
+          className={`btn mt-2 ${classes.button}`}
+          onClick={filterHandler}
+        >
           Apply
         </button>
       </div>

@@ -118,7 +118,10 @@ export default function SignIn() {
       if (userType === "Care Giver") {
         console.log("giver");
         await axios
-          .post("http://localhost:7000/api/v1/providers/login", userData)
+          .post(
+            "https://wecare-api-pzwn.onrender.com/api/v1/providers/login",
+            userData
+          )
           .then((res) => {
             document.cookie = `jwt=${res.data.cookie}; expires=${expires}`;
             dispatch(setToken());
@@ -129,7 +132,10 @@ export default function SignIn() {
           );
       } else if (userType === "Care Beneficiary") {
         await axios
-          .post("http://localhost:7000/api/v1/users/login", userData)
+          .post(
+            "https://wecare-api-pzwn.onrender.com/api/v1/users/login",
+            userData
+          )
           .then((res) => {
             document.cookie = `jwt=${res.data.cookie}; expires=${expires}`;
             dispatch(setToken());

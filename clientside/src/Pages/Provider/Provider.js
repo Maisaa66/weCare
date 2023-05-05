@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setProviderType, setProviderData } from "../../Redux Store/slices/providerSlice";
+import {
+  setProviderType,
+  setProviderData,
+} from "../../Redux Store/slices/providerSlice";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import Filter from "../Filter/Filter";
@@ -27,7 +30,9 @@ const Provider = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:7000/api/v1/providers?serviceType=${provider.toLowerCase()}`)
+      .get(
+        `https://wecare-api-pzwn.onrender.com/api/v1/providers?serviceType=${provider.toLowerCase()}`
+      )
       .then((res) => {
         console.log(res.data.data.providers);
         const data = res.data.data.providers.filter((provider) => {
@@ -55,7 +60,11 @@ const Provider = () => {
         <div className="position-relative">
           <h1 className={`text-center mt-3 ${classes.header}`}>{provider}</h1>
           <div className={`${classes["img-container"]}`}>
-            <img src="./Images/providerSection.jpg" alt="" className={`${classes["img-object"]}`} />
+            <img
+              src="./Images/providerSection.jpg"
+              alt=""
+              className={`${classes["img-object"]}`}
+            />
           </div>
         </div>
         <Filter />
@@ -75,7 +84,11 @@ const Provider = () => {
         <div className="position-relative">
           <h1 className={`text-center mt-3 ${classes.header}`}>{provider}</h1>
           <div className={`${classes["img-container"]}`}>
-            <img src="./Images/providerSection.jpg" alt="" className={`${classes["img-object"]}`} />
+            <img
+              src="./Images/providerSection.jpg"
+              alt=""
+              className={`${classes["img-object"]}`}
+            />
           </div>
         </div>
         <Filter />

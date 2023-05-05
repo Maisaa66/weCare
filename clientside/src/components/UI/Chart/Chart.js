@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Bar, Pie } from "react-chartjs-2";
 import { Chart as ChartJS } from "chart.js/auto";
+import { useSelector } from "react-redux";
 import axios from "axios";
 const Charts = function () {
+  const token = useSelector((state) => state.user.token);
   const [chartData, setChartData] = useState(null);
   let providersNumData, usersNumData, serviceLocationsData, serviceTypeData;
   useEffect(() => {
@@ -10,12 +12,11 @@ const Charts = function () {
       console.log("fetching");
       try {
         const response = await axios.get(
-          "http://localhost:7000/api/v1/stats?start=2023-04-30&end=2023-05-07",
+          "https://wecare-api-pzwn.onrender.com/api/v1/stats?start=2023-04-30&end=2023-05-07",
           {
             withCredentials: true,
             headers: {
-              "Access-Control-Allow-Origin": "http://localhost:3000",
-              "Content-Type": "application/json",
+              authorization: `Bearer ${token}`,
             },
           }
         );

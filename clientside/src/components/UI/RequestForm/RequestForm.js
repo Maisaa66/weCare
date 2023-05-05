@@ -21,6 +21,8 @@ import PayButton from "../Checkout/PayButton/PayButton";
 import Alert from "@mui/material/Alert";
 
 export default function RequestForm({ providerId, hourlyRate }) {
+  const token = useSelector((state) => state.user.token);
+
   // get customer id from redux store
   const customerId = useSelector((state) => state.user.id);
 
@@ -67,11 +69,10 @@ export default function RequestForm({ providerId, hourlyRate }) {
       setChecked(true);
     } else {
       axios
-        .post("http://localhost:7000/api/v1/requests", reqData, {
+        .post("https://wecare-api-pzwn.onrender.com/api/v1/requests", reqData, {
           withCredentials: true,
           headers: {
-            "Access-Control-Allow-Origin": "http://localhost:3000",
-            "Content-Type": "application/json",
+            authorization: `Bearer ${token}`,
           },
         })
         .then((res) => console.log(res.data))
@@ -119,12 +120,15 @@ export default function RequestForm({ providerId, hourlyRate }) {
           <DialogTitle>Get the care you need now</DialogTitle>
           <DialogContent>
             <DialogContentText>
-              To request a service, please enter all your request information here. We will send
-              updates
+              To request a service, please enter all your request information
+              here. We will send updates
             </DialogContentText>
             <Grid container spacing={2} className="mt-3">
               <Grid item xs={12} sm={6}>
-                <FormLabel id="demo-row-radio-buttons-group-label mt-4" sx={{ textAlign: "left" }}>
+                <FormLabel
+                  id="demo-row-radio-buttons-group-label mt-4"
+                  sx={{ textAlign: "left" }}
+                >
                   Please enter start date
                 </FormLabel>
                 <DatePicker
@@ -138,7 +142,10 @@ export default function RequestForm({ providerId, hourlyRate }) {
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
-                <FormLabel id="demo-row-radio-buttons-group-label mt-4" sx={{ textAlign: "left" }}>
+                <FormLabel
+                  id="demo-row-radio-buttons-group-label mt-4"
+                  sx={{ textAlign: "left" }}
+                >
                   Please enter end date
                 </FormLabel>
                 <DatePicker
@@ -155,7 +162,9 @@ export default function RequestForm({ providerId, hourlyRate }) {
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6} alignItems="center">
                 <div className="d-flex  mt-4 justify-content-between align-items-center">
-                  <Typography sx={{ mr: 2, fontSize: "0.9rem" }}>One Time Service</Typography>
+                  <Typography sx={{ mr: 2, fontSize: "0.9rem" }}>
+                    One Time Service
+                  </Typography>
                   <AntSwitch
                     // defaultChecked
                     checked={reqData.recurring}
@@ -215,7 +224,10 @@ export default function RequestForm({ providerId, hourlyRate }) {
             <div>
               <Button onClick={handleClose}>Cancel</Button>
               {/* <Button onClick={handleRequest}>Request</Button> */}
-              <PayButton requestDetails={{ sDate, eDate, reqData }} onClick={handleRequest} />
+              <PayButton
+                requestDetails={{ sDate, eDate, reqData }}
+                onClick={handleRequest}
+              />
             </div>
           </DialogActions>
         </Dialog>

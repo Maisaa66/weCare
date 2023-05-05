@@ -5,9 +5,12 @@ import { useState } from "react";
 const PayButton = ({ requestDetails, onClick }) => {
   const handleCheckout = () => {
     axios
-      .post("http://localhost:7000/api/v1/stripe/create-checkout-session", {
-        requestDetails,
-      })
+      .post(
+        "https://wecare-api-pzwn.onrender.com/api/v1/stripe/create-checkout-session",
+        {
+          requestDetails,
+        }
+      )
       .then((res) => {
         if (res.data.url) {
           window.location.href = res.data.url;
