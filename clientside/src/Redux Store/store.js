@@ -6,6 +6,7 @@ import storage from "redux-persist/lib/storage";
 import { persistReducer, persistStore } from "redux-persist";
 import logger from "redux-logger";
 import thunk from "redux-thunk";
+import { usersReducer } from "./slices/usersSlice";
 // create a persisted reducer, and pass it to the store
 // this will persist the state in the local storage
 const persistConfig = {
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   user: userSlice,
   provider: providerSlice,
   userInfo: userInfo,
+  usersReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

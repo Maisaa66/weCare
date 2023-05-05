@@ -107,11 +107,11 @@ const Charts = function () {
           label: "Service Locations",
           data: chartData.serviceLocationsStats.map((item) => item.count),
           backgroundColor: [
-            "#60B5FF",
-            "#F86010",
-            "#A0B0AE",
+            "#1BA494",
+            "#106259",
+            "##585858",
             "#FFBB00",
-            "#3E72FF",
+            "#CDF5F1",
             "#62E102",
             "#962B00",
           ],
@@ -123,18 +123,20 @@ const Charts = function () {
   }
   if (chartData !== null) {
     return (
-      <div className="d-flex flex-wrap">
-        <div className="w-50 p-5">
-          <Bar data={providersNumData}></Bar>
-        </div>
-        <div className="w-50 p-5">
-          <Bar data={usersNumData}></Bar>
-        </div>
-        <div className="w-50 p-5">
-          <Pie data={serviceTypeData}></Pie>
-        </div>
-        <div className="w-50 p-5">
-          <Pie data={serviceLocationsData}></Pie>
+      <div className="container">
+        <div className="row">
+          <div className="col-12 col-md-6">
+            <Bar data={providersNumData}></Bar>
+          </div>
+          <div className="col-12 col-md-6">
+            <Bar data={usersNumData}></Bar>
+          </div>
+          <div className="col-12 col-md-6">
+            <Pie data={serviceTypeData}></Pie>
+          </div>
+          <div className="col-12 col-md-6">
+            <Pie data={serviceLocationsData}></Pie>
+          </div>
         </div>
       </div>
     );

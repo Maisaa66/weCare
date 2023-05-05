@@ -25,7 +25,6 @@ router.delete(
 
 router.get(
   "/profile/:id",
-  authMiddleware.verifyToken,
   serviceProviderControllers.getUserProfile
 );
 

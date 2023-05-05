@@ -10,16 +10,19 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setUserInfo } from "../../Redux Store/slices/userInfo";
 import { Alert } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 export default function CheckUser() {
   const [userType, setUserType] = useState("");
+  const dispatch = useDispatch();
 
-  const dispatch = useDispatch()
+  // localaization
+  const { t } = useTranslation();
 
   return (
     <div className={`${classes.box}`}>
       <div className={`${classes.container}`}>
-        <h1>Join as a Care Beneficiary or Care Giver</h1>
+        <h1>{t("signupFormTitle")}</h1>
 
         <div className="row">
           <div className="col-md-6 col-lg-6 col-sm-12">
@@ -28,8 +31,10 @@ export default function CheckUser() {
                 type="radio"
                 name="user"
                 className={`${classes.cardInputElement}`}
-                onClick={() => {setUserType("as a Beneficiary");     dispatch(setUserInfo("Care Beneficiary"))
-              }}
+                onClick={() => {
+                  setUserType(`${t("signupBene")}`);
+                  dispatch(setUserInfo("Care Beneficiary"));
+                }}
               />
 
               <div className={`${classes.cardInput}`}>
@@ -41,8 +46,7 @@ export default function CheckUser() {
                     margin: "10px",
                   }}
                 />
-                <div>Care Beneficiary</div>
-                <div>I am a care beneficiary, </div>
+                <div>{t("careBeneficiary")}</div>
               </div>
             </label>
           </div>
@@ -52,8 +56,10 @@ export default function CheckUser() {
                 type="radio"
                 name="user"
                 className={`${classes.cardInputElement}`}
-                onClick={() => {setUserType("as a Giver");     dispatch(setUserInfo("Care giver"))
-              }}
+                onClick={() => {
+                  setUserType(`${t("signupGiver")}`);
+                  dispatch(setUserInfo("Care giver"));
+                }}
               />
 
               <div className={`${classes.cardInput}`}>
@@ -65,41 +71,42 @@ export default function CheckUser() {
                     margin: "10px",
                   }}
                 />
-                <div>Care Giver</div>
-                <div>I am a Care Giver, looking </div>
+                <div>{t("careGiver")}</div>
               </div>
             </label>
           </div>
         </div>
         <div>
-        {!userType && <Alert severity="error">Please choose one type</Alert>}
-{   userType &&       <Link to="/signup" className={`${classes.btn}`}>
-            <svg width="277" height="62">
-              <defs>
-                <linearGradient id="grad1">
-                  <stop offset="0%" stopColor="#66b9a6" />
-                  <stop offset="100%" stopColor="#5fe4c5" />
-                </linearGradient>
-              </defs>
-              <rect
-                x="5"
-                y="5"
-                rx="25"
-                fill="none"
-                stroke="url(#grad1)"
-                width="266"
-                height="50"
-              ></rect>
-            </svg>
-            <span>SIGNUP {userType}</span>
-          </Link>}
+          {!userType && <Alert severity="error">{t("choosingWarning")}</Alert>}
+          {userType && (
+            <Link to="/signup" className={`${classes.btn}`}>
+              <svg width="277" height="62">
+                <defs>
+                  <linearGradient id="grad1">
+                    <stop offset="0%" stopColor="#66b9a6" />
+                    <stop offset="100%" stopColor="#5fe4c5" />
+                  </linearGradient>
+                </defs>
+                <rect
+                  x="5"
+                  y="5"
+                  rx="25"
+                  fill="none"
+                  stroke="url(#grad1)"
+                  width="266"
+                  height="50"
+                ></rect>
+              </svg>
+              <span>
+                {t("signupTitle")} {userType}
+              </span>
+            </Link>
+          )}
         </div>
         <Grid container>
           <Grid item xs={12}>
             <Typography variant="h4" textAlign="center" fullWidth>
-              <span style={{ fontSize: "0.9rem" }}>
-                Already have an account?
-              </span>
+              <span style={{ fontSize: "0.9rem" }}>{t("haveAccount")}</span>
               <LinkMu
                 href="#"
                 variant="body2"
@@ -107,7 +114,7 @@ export default function CheckUser() {
                 sx={{ fontWeight: "bold" }}
               >
                 <Link to="/login" style={{ color: "var(--mainColor)" }}>
-                  Log In
+                  {t("loginTitle")}
                 </Link>
               </LinkMu>
             </Typography>

@@ -17,8 +17,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { setUserDetails } from "../../Redux Store/slices/userInfo";
 import { addUser } from "../../Redux Store/slices/userSlice";
 import { useForm } from "react-hook-form";
-
+import { useTranslation } from "react-i18next";
 function Copyright(props) {
+  // localaization
+  const { t } = useTranslation();
   return (
     <Typography
       variant="body2"
@@ -26,9 +28,9 @@ function Copyright(props) {
       align="center"
       {...props}
     >
-      {"Copyright © "}
+      {`${t("copyright")} © `}
       <Link color="inherit" to="/">
-        weCare
+        {t("slogan")}
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -70,8 +72,9 @@ const theme = createTheme({
 });
 
 export default function StepTwo() {
+  const { t } = useTranslation();
   const dropDownObj = {
-    title: "Country",
+    title: `${t("formCountry")}`,
     options: ["Egypt", "Canada"],
   };
   const navigate = useNavigate();
@@ -188,7 +191,7 @@ export default function StepTwo() {
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5" sx={{ m: 2 }}>
-              One Step Closer ...
+              {t("formSubTitleThree")}
             </Typography>
             <Box sx={{ m: 3 }}>
               <ProgressBar stepNum={2}></ProgressBar>
@@ -220,7 +223,7 @@ export default function StepTwo() {
                     required
                     fullWidth
                     id="governate"
-                    label="Governate"
+                    label={`${t("governate")}`}
                     autoComplete="governate"
                     sx={{ textAlign: "left" }}
                     {...register("governate", {
@@ -243,7 +246,7 @@ export default function StepTwo() {
                         required
                         fullWidth
                         id="area"
-                        label="Area"
+                        label={`${t("area")}`}
                         autoComplete="area"
                         sx={{ textAlign: "left" }}
                         {...register("area", {
@@ -262,7 +265,7 @@ export default function StepTwo() {
                         required
                         fullWidth
                         id="street"
-                        label="Street"
+                        label={`${t("street")}`}
                         autoComplete="street"
                         sx={{ textAlign: "left" }}
                         {...register("street", {
@@ -284,7 +287,7 @@ export default function StepTwo() {
                         required
                         fullWidth
                         id="buildingNum"
-                        label="Builiding Number"
+                        label={`${t("building")}`}
                         // name="buildingNum"
                         autoComplete="buildingNum"
                         sx={{ textAlign: "left" }}
@@ -306,7 +309,7 @@ export default function StepTwo() {
                         required
                         fullWidth
                         id="apartmentNum"
-                        label="Apartment Number"
+                        label={`${t("apartment")}`}
                         // name="apartmentNum"
                         autoComplete="apartmentNum"
                         sx={{ textAlign: "left" }}
@@ -344,7 +347,7 @@ export default function StepTwo() {
                       height="50"
                     ></rect>
                   </svg>
-                  <span>Next</span>
+                  <span>{t("nextStep")}</span>
                 </button>
               </div>
             </Box>

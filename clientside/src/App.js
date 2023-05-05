@@ -27,14 +27,16 @@ import Requests from "./components/AdminDashBoard/Main/AllRequests/Requests";
 import ProviderDashBoard from "./Pages/providerDashBoard/providerDashBoard";
 import Charts from "./components/UI/Chart/Chart";
 
+// import Charts from "./components/AdminDashBoard/Main/Charts/Charts";
+import CheckoutSuccess from "./components/UI/Checkout/CheckoutSuccess/CheckoutSuccess";
 // const authenticated = useSelector((state) => state.user.isAdmin);
-
 const router = createBrowserRouter([
   {
     path: "/admin",
     element: <AdmindashBoard />,
     children: [
       { path: "users", element: <Users></Users> },
+      { path: "charts", element: <Charts /> },
       { path: "providers", element: <Users></Users> },
       { path: "users/:id", element: <AllDetails /> },
       { path: "providers/:id", element: <AllDetails /> },
@@ -110,12 +112,16 @@ const router = createBrowserRouter([
     path: "/private",
     element: <RequestTest />,
   },
+  {
+    path: "/checkout-success",
+    element: <CheckoutSuccess />,
+  },
 ]);
 
 function App() {
   return (
     <div className="App">
-      <Charts></Charts>
+      {/* <Charts></Charts> */}
       <RouterProvider router={router}>
         {/* <PrivateRoute
           path="/userDashBoard"

@@ -17,6 +17,8 @@ import AntSwitch from "../ToggleButton/ToggleButton";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import axios from "axios";
+import PayButton from "../Checkout/PayButton/PayButton";
+import Alert from "@mui/material/Alert";
 
 export default function RequestForm({ providerId, hourlyRate }) {
   // get customer id from redux store
@@ -48,7 +50,8 @@ export default function RequestForm({ providerId, hourlyRate }) {
     reqDescription: "",
     recurring: false,
   });
-
+  const userType = useSelector((state) => state.user.userType);
+  const [checked, setChecked] = React.useState(false);
   // handle open and close of dialog
   const handleClickOpen = () => {
     setOpen(true);
@@ -60,7 +63,11 @@ export default function RequestForm({ providerId, hourlyRate }) {
 
   // handle request
   const handleRequest = async () => {
-    axios
+    if (!userType || userType === "serviceProvider") {
+      setChecked(true);
+    }
+    else{
+      axios
       .post("http://localhost:7000/api/v1/requests", reqData, {
         withCredentials: true,
         headers: {
@@ -71,8 +78,13 @@ export default function RequestForm({ providerId, hourlyRate }) {
       .then((res) => console.log(res.data))
       .catch((err) => console.log(err));
 
+    setChecked(false);
     setReqData({ ...reqSchema });
     setOpen(false);
+
+
+    }
+
   };
 
   const theme = createTheme({
@@ -206,9 +218,17 @@ export default function RequestForm({ providerId, hourlyRate }) {
               }}
             />
           </DialogContent>
-          <DialogActions>
-            <Button onClick={handleClose}>Cancel</Button>
-            <Button onClick={handleRequest}>Request</Button>
+          <DialogActions className="d-flex flex-column align-items-end">
+          { checked     &&    <div className="align-self-center w-75  mb-3">
+              <Alert severity="error">
+                Please Login !
+              </Alert>
+            </div>}
+            <div >
+              <Button onClick={handleClose}>Cancel</Button>
+              <Button onClick={handleRequest}>Request</Button>
+            </div>
+            {/* <PayButton requestDetails={{sDate, eDate, reqData}}/> */}
           </DialogActions>
         </Dialog>
       </div>

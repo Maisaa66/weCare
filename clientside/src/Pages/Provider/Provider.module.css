@@ -1,0 +1,24 @@
+.header {
+  width: fit-content;
+  padding: 15px;
+  background-color: var(--mainColorObacity);
+  color: white;
+  margin: 0 auto;
+  border-radius: 20px;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.379);
+}
+
+.img-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60vh;
+  z-index: -1;
+}
+
+.img-object {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

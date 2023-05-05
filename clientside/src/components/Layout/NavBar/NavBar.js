@@ -23,6 +23,7 @@ function NavBar() {
   const deleteCookie = () => {
     document.cookie = "jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     setIsLogged(false);
+    localStorage.clear();
   };
   const changeLanguage = function () {
     if (i18n.language === "ar") i18n.changeLanguage("en");
@@ -198,7 +199,7 @@ function NavBar() {
               <ul className="dropdown-menu">
                 {isAdmin ? (
                   <li>
-                    <Link to="/admin/users" className="mybtn mybtnLightSolid m-auto">
+                    <Link to="/admin/charts" className="mybtn mybtnLightSolid m-auto">
                       Dashboard
                     </Link>
                   </li>
