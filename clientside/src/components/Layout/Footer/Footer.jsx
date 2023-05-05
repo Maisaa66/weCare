@@ -54,19 +54,19 @@ const Footer = () => {
                   </Link>
                 </p>
                 <p>
-                  <a href="#!" className=" link-dark">
+                  <Link to="contact" className=" link-dark">
                   {t("contact")}
-                  </a>
+                  </Link>
                 </p>
                 <p>
-                  <a href="#!" className=" link-dark">
+                  <Link to="/terms" className=" link-dark">
                   {t("terms")}
-                  </a>
+                  </Link>
                 </p>
                 <p>
-                  <a href="#!" className="link-dark">
+                  <Link to="/privacy" className="link-dark">
                   {t("policy")}
-                  </a>
+                  </Link>
                 </p>
               </div>
 
