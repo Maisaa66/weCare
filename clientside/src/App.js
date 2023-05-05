@@ -25,6 +25,7 @@ import ReqDetails from "./components/AdminDashBoard/Main/AllRequests/ReqDetails"
 import RequestTest from "./Pages/requestTest";
 import Requests from "./components/AdminDashBoard/Main/AllRequests/Requests";
 import ProviderDashBoard from "./Pages/providerDashBoard/providerDashBoard";
+import Charts from "./components/UI/Chart/Chart";
 
 // const authenticated = useSelector((state) => state.user.isAdmin);
 
@@ -114,6 +115,7 @@ const router = createBrowserRouter([
 function App() {
   return (
     <div className="App">
+      <Charts></Charts>
       <RouterProvider router={router}>
         {/* <PrivateRoute
           path="/userDashBoard"
