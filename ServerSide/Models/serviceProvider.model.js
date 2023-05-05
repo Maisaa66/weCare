@@ -36,21 +36,19 @@ const ServiceProviderSchema = new mongoose.Schema(
     },
     nationalID: { type: String, required: [true, "nationalId is required"] },
     profileImg: { type: String },
-    serviceType: [
-      {
-        type: String,
-        enum: [
-          "nurse",
-          "companion",
-          "nanny",
-          "physiotherapist",
-          "special-care:autism",
-          "special-care:ADHD",
-          "special-care:Alzheimer's and Dementia",
-        ],
-        required: true,
-      },
-    ],
+    serviceType: {
+      type: String,
+      enum: [
+        "nurse",
+        "companion",
+        "nanny",
+        "physiotherapist",
+        "special-care:autism",
+        "special-care:ADHD",
+        "special-care:Alzheimer's and Dementia",
+      ],
+      required: true,
+    },
     documents: [{ type: String }],
     status: {
       type: String,
