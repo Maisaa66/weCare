@@ -1,8 +1,11 @@
 import React from "react";
 import classes from "./Privacy.module.css";
+import NavBar from "../../Layout/NavBar/NavBar";
+import Footer from "../../Layout/Footer/Footer";
 const PrivacyPolicyPage = () => {
   return (
     <div className={classes.privacy}>
+      <NavBar></NavBar>
       <div className="container my-5 text-start">
         <div className="row">
           <div className="col-12">
@@ -71,6 +74,7 @@ const PrivacyPolicyPage = () => {
           </div>
         </div>
       </div>
+      <Footer></Footer>
     </div>
   );
 };

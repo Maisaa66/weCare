@@ -8,10 +8,8 @@ const Footer = () => {
       <footer className={`text-center text-lg-start ${classes.footer}`}>
         <section className="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
           <div className="me-5 d-none d-lg-block">
-            <span className="text-dark">
-              {t("footerConnect")}
-            </span>
-          </div >
+            <span className="text-dark">{t("footerConnect")}</span>
+          </div>
           <div className={`${classes.connected}`}>
             <a href="" className="me-4 link-light">
               <i className="fab fa-facebook-f"></i>
@@ -37,13 +35,14 @@ const Footer = () => {
         <section className="">
           <div className="container text-center text-md-start mt-5">
             <div className="row mt-3">
-              <div className="col-md-4 mx-auto mb-4">
+              <div className="col-md-4 mx-auto mb-4 d-flex flex-column align-items-center text-center">
                 <h6 className="text-uppercase fw-bold mb-4">
-                  <i className="fas fa-gem text-dark"></i>{t("slogan")}
+                  <div className={`${classes.logo}`}>
+                    <img className="w-100" src="./Images/logo.png" alt="Logo" />
+                  </div>
+                  {/* {t("slogan")} */}
                 </h6>
-                <p className="text-dark">
-                  {t("footerSlogan")}
-                </p>
+                <p className="text-dark">{t("footerSlogan")}</p>
               </div>
 
               <div className="offset-md-1 col-md-3  mx-auto mb-4">
@@ -73,24 +72,27 @@ const Footer = () => {
               <div className="offset-md-1 col-md-3 mx-auto mb-md-0 mb-4 text-dark">
                 <h6 className="text-uppercase fw-bold mb-4">{t("contactInfo")}</h6>
                 <p>
-                  <i className="fas fa-home  link-light pe-1"></i>{t("contactAddress")}
+                  <i className={`fas fa-home   pe-2 ${classes.ico}`}></i>
+                  {t("contactAddress")}
                 </p>
                 <p>
-                  <i className="fas fa-envelope  link-light pe-2"></i>
+                  <i className="fas fa-envelope  pe-2 ${classes.ico}"></i>
                   {t("contactEmail")}
                 </p>
                 <p>
-                  <i className="fas fa-phone  link-light pe-1"></i>{t("phone")}
+                  <i className="fas fa-phone  pe-2 ${classes.ico}"></i>
+                  {t("phone")}
                 </p>
                 <p>
-                  <i className="fas fa-print  link-light pe-1"></i>{t("fax")}
+                  <i className="fas fa-print  pe-2 ${classes.ico}"></i>
+                  {t("fax")}
                 </p>
               </div>
             </div>
           </div>
         </section>
         <div className={`text-center p-4 ${classes.copyRight}`}>
-          © 2021 {t("copyright")}
+          © 2023 {t("copyright")}
           <a className="text-reset fw-bold" href="/">
             {t("slogan")}
           </a>
