@@ -7,6 +7,7 @@ import RequestCard from "../../components/UI/RequestCard/RequestCard";
 import { useDispatch, useSelector } from "react-redux";
 import { setInfo, setProfileId } from "../../Redux Store/slices/userSlice";
 import { Link } from "react-router-dom";
+import { Alert } from "@mui/material";
 import axios from "axios";
 
 const ProviderDashBoard = () => {
@@ -182,6 +183,15 @@ const ProviderDashBoard = () => {
                   </Link>
                 </div>
               </div>
+
+              {(provider.status === "rejected" ||
+                provider.status === "suspended") && (
+                <Alert severity="error" sx={{ mt: 2 }}>
+                  Your application has been {provider.status}, please contact
+                  info@wecare.com for more details
+                </Alert>
+              )}
+
               <div className="d-flex flex-lg-row flex-sm-column justify-content-evenly">
                 <div className="col-lg-6 col-sm-12 p-4 text-start">
                   <div className="expertise m-4">
