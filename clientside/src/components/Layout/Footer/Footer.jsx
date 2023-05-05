@@ -1,4 +1,5 @@
 import classes from "./Footer.module.css";
+import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 const Footer = () => {
   const { t } = useTranslation();
@@ -48,9 +49,9 @@ const Footer = () => {
               <div className="offset-md-1 col-md-3  mx-auto mb-4">
                 <h6 className="text-uppercase fw-bold ">{t("footerUsefulLinks")}</h6>
                 <p>
-                  <a href="#!" className=" link-dark">
+                  <Link to="/about" className=" link-dark">
                     {t("about")}
-                  </a>
+                  </Link>
                 </p>
                 <p>
                   <a href="#!" className=" link-dark">

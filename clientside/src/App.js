@@ -29,6 +29,7 @@ import Charts from "./components/UI/Chart/Chart";
 
 // import Charts from "./components/AdminDashBoard/Main/Charts/Charts";
 import CheckoutSuccess from "./components/UI/Checkout/CheckoutSuccess/CheckoutSuccess";
+import AboutPage from "./components/Pages/About/About";
 // const authenticated = useSelector((state) => state.user.isAdmin);
 const router = createBrowserRouter([
   {
@@ -115,6 +116,10 @@ const router = createBrowserRouter([
   {
     path: "/checkout-success",
     element: <CheckoutSuccess />,
+  },
+  {
+    path: "/about",
+    element: <AboutPage></AboutPage>,
   },
 ]);
 
