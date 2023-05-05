@@ -44,13 +44,13 @@ const Charts = function () {
           label: "Providers Over Passed Week",
           data: chartData.providersOverPassedWeek.map((item) => item.count),
           backgroundColor: [
-            "#60B5FF",
-            "#F86010",
-            "#A0B0AE",
-            "#FFBB00",
-            "#3E72FF",
-            "#62E102",
-            "#962B00",
+            "#1BA494",
+            "#106259",
+            "#C7E6C9",
+            "#53CCBE",
+            "#16B3B3",
+            "#048080",
+            "#C0E8E8",
           ],
           borderColor: "rgba(75, 192, 192, 1)",
           borderWidth: 1,
@@ -64,13 +64,13 @@ const Charts = function () {
           label: "Users Over Passed Week",
           data: chartData.usersOverPassedWeek.map((item) => item.count),
           backgroundColor: [
-            "#60B5FF",
-            "#F86010",
-            "#A0B0AE",
-            "#FFBB00",
-            "#3E72FF",
-            "#62E102",
-            "#962B00",
+            "#1BA494",
+            "#106259",
+            "#C7E6C9",
+            "#53CCBE",
+            "#16B3B3",
+            "#048080",
+            "#C0E8E8",
           ],
           borderColor: "rgba(75, 192, 192, 1)",
           borderWidth: 1,
@@ -84,13 +84,13 @@ const Charts = function () {
           label: "Service Types",
           data: chartData.serviceTypeStats.map((item) => item.count),
           backgroundColor: [
-            "#60B5FF",
-            "#F86010",
-            "#A0B0AE",
-            "#FFBB00",
-            "#3E72FF",
-            "#62E102",
-            "#962B00",
+            "#1BA494",
+            "#106259",
+            "#C7E6C9",
+            "#53CCBE",
+            "#16B3B3",
+            "#048080",
+            "#C0E8E8",
             "#476980",
             "#BC5090",
             "#EB5F5E",
@@ -106,15 +106,7 @@ const Charts = function () {
         {
           label: "Service Locations",
           data: chartData.serviceLocationsStats.map((item) => item.count),
-          backgroundColor: [
-            "#1BA494",
-            "#106259",
-            "##585858",
-            "#FFBB00",
-            "#CDF5F1",
-            "#62E102",
-            "#962B00",
-          ],
+          backgroundColor: ["#1BA494", "#106259", "#C7E6C9", "#53CCBE"],
           borderColor: "rgba(75, 192, 192, 1)",
           borderWidth: 1,
         },
@@ -125,16 +117,16 @@ const Charts = function () {
     return (
       <div className="container">
         <div className="row">
-          <div className="col-12 col-md-6">
+          <div className="col-12 col-md-6 col-lg-3">
             <Bar data={providersNumData}></Bar>
           </div>
-          <div className="col-12 col-md-6">
+          <div className="col-12 col-md-6 col-lg-3">
             <Bar data={usersNumData}></Bar>
           </div>
-          <div className="col-12 col-md-6">
+          <div className="col-12 col-md-6 col-lg-3">
             <Pie data={serviceTypeData}></Pie>
           </div>
-          <div className="col-12 col-md-6">
+          <div className="col-12 col-md-6 col-lg-3">
             <Pie data={serviceLocationsData}></Pie>
           </div>
         </div>
