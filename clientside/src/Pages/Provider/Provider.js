@@ -7,6 +7,8 @@ import Filter from "../Filter/Filter";
 import ProviderCard from "./ProviderCard/ProviderCard";
 import NavBar from "../../components/Layout/NavBar/NavBar";
 
+import classes from "./Provider.module.css";
+
 const Provider = () => {
   // Get the provider type from the URL
   const location = useLocation();
@@ -61,7 +63,10 @@ const Provider = () => {
   if (data) {
     return (
       <>
-        <h1 className="text-center mt-5">{provider}</h1>
+        <h1 className={`text-center mt-5 ${classes.header}`}>{provider}</h1>
+        <div className={`${classes["img-container"]}`}>
+          <img src="./Images/providerSection.jpg" alt="" className={`${classes["img-object"]}`} />
+        </div>
         <Filter />
         <div className="container">
           <div className="row mt-5">
