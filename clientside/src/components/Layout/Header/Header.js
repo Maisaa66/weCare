@@ -21,7 +21,7 @@ function Header() {
       <NavBar></NavBar>
       <div className="container mt-3">
         <div className="row text-start align-items-center">
-          <div className="col-sm-12 col-lg-6">
+          <div className="col-sm-12 col-lg-6 px-4 p-md-0">
             <h1 className="h1 my-2">
               <span className={classes.span}>{t("slogan")}</span>
               {t("homeHeaderTitle")}

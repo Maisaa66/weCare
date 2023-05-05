@@ -3,12 +3,13 @@ import classes from "./NavBar.module.css";
 import { Link, Outlet } from "react-router-dom";
 import { Search } from "react-bootstrap-icons";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-function NavBar() {
+
+function NavBar({ bgColor }) {
   const { t, i18n } = useTranslation();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [isLogged, setIsLogged] = useState(false);
   const userInfo = useSelector((state) => state.user.info);
   const isAdmin = useSelector((state) => state.user.isAdmin);
@@ -32,11 +33,14 @@ function NavBar() {
   return (
     <>
       {" "}
-      <nav className="navbar navbar-expand-lg shadow-none py-1">
+      <nav className={`navbar navbar-expand-lg shadow-none py-1 bg-${bgColor}`}>
         <div className="container justify-content-between">
-          <Link to="/" className="navbar-brand d-lg-block d-none m-0">
-            {t("slogan")}
-          </Link>
+          <div className={`${classes.logo}`}>
+            <Link to="/" className="navbar-brand d-lg-block d-none m-0">
+              {/* {t("slogan")} */}
+              <img className="w-100" src="./Images/logo.png" alt="Logo" />
+            </Link>
+          </div>
           <button
             className={`navbar-toggler m-lg-auto me-sm-auto   ${classes.toggler}`}
             type="button"
@@ -52,9 +56,7 @@ function NavBar() {
             className={`collapse justify-content-end navbar-collapse ${classes.collapsed}`}
             id="navbarSupportedContent"
           >
-            <ul
-              className={`navbar-nav m-lg-auto me-sm-auto ${classes.navList}`}
-            >
+            <ul className={`navbar-nav m-lg-auto me-sm-auto ${classes.navList}`}>
               <li className="nav-item">
                 <Link
                   className={`nav-link ${classes.navLink}`}
@@ -186,11 +188,7 @@ function NavBar() {
                   viewBox="0 0 512 512"
                   style={{
                     width: "2.5rem",
-                    fill: `${
-                      window.location.pathname === "/"
-                        ? "#000"
-                        : "var(--mainColor)"
-                    }`,
+                    fill: `${window.location.pathname === "/" ? "#000" : "var(--mainColor)"}`,
                   }}
                 >
                   <path d="M399 384.2C376.9 345.8 335.4 320 288 320H224c-47.4 0-88.9 25.8-111 64.2c35.2 39.2 86.2 63.8 143 63.8s107.8-24.7 143-63.8zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm256 16a72 72 0 1 0 0-144 72 72 0 1 0 0 144z" />
@@ -206,11 +204,7 @@ function NavBar() {
                 ) : (
                   <li>
                     <Link
-                      to={
-                        userType === "user"
-                          ? "/userDashBoard"
-                          : "/providerDashBoard"
-                      }
+                      to={userType === "user" ? "/userDashBoard" : "/providerDashBoard"}
                       className="mybtn mybtnLightSolid m-auto"
                     >
                       Profile
@@ -218,11 +212,7 @@ function NavBar() {
                   </li>
                 )}
                 <li>
-                  <Link
-                    to="/"
-                    className="mybtn mybtnLightSolid m-auto"
-                    onClick={deleteCookie}
-                  >
+                  <Link to="/" className="mybtn mybtnLightSolid m-auto" onClick={deleteCookie}>
                     Logout
                   </Link>
                 </li>

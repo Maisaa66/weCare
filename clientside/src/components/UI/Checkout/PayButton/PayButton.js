@@ -2,7 +2,7 @@ import axios from "axios";
 import classes from "./PayButton.module.css";
 import { useState } from "react";
 
-const PayButton = ({ requestDetails }) => {
+const PayButton = ({ requestDetails, onClick }) => {
   const handleCheckout = () => {
     axios
       .post("http://localhost:7000/api/v1/stripe/create-checkout-session", {
@@ -18,7 +18,13 @@ const PayButton = ({ requestDetails }) => {
 
   return (
     <>
-      <button className={classes.payBtn} onClick={handleCheckout}>
+      <button
+        className={classes.payBtn}
+        onClick={() => {
+          handleCheckout();
+          onClick();
+        }}
+      >
         CHECKOUT
       </button>
     </>

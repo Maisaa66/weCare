@@ -137,7 +137,7 @@ const Filter = () => {
 
   return (
     <>
-      <div className={`mt-5 container  py-4 ${classes.filter} shadow`}>
+      <div className={`mt-5 container  py-4 ${classes.filter} shadow text-light`}>
         <h1>Filter</h1>
         <div className="row d-flex flex-column flex-md-row">
           <Select
@@ -179,7 +179,7 @@ const Filter = () => {
             </div>
           </div>
         </div>
-        <button className="btn btn-primary mt-2" onClick={filterHandler}>
+        <button className={`btn mt-2 ${classes.button}`} onClick={filterHandler}>
           Apply
         </button>
       </div>

@@ -63,9 +63,12 @@ const Provider = () => {
   if (data) {
     return (
       <>
-        <h1 className={`text-center mt-5 ${classes.header}`}>{provider}</h1>
-        <div className={`${classes["img-container"]}`}>
-          <img src="./Images/providerSection.jpg" alt="" className={`${classes["img-object"]}`} />
+        <NavBar bgColor="white" />
+        <div className="position-relative">
+          <h1 className={`text-center mt-3 ${classes.header}`}>{provider}</h1>
+          <div className={`${classes["img-container"]}`}>
+            <img src="./Images/providerSection.jpg" alt="" className={`${classes["img-object"]}`} />
+          </div>
         </div>
         <Filter />
         <div className="container">

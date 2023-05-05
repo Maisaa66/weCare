@@ -34,7 +34,7 @@ const router = createBrowserRouter([
     element: <AdmindashBoard />,
     children: [
       { path: "users", element: <Users></Users> },
-      { path: "charts", element: <Charts/> },
+      { path: "charts", element: <Charts /> },
       { path: "providers", element: <Users></Users> },
       { path: "users/:id", element: <AllDetails /> },
       { path: "providers/:id", element: <AllDetails /> },
@@ -125,6 +125,7 @@ function App() {
           component={UserDashBoard}
           authenticated={authenticated}
         /> */}
+
         <Outlet />
       </RouterProvider>
       {/* <Home></Home> */}
