@@ -15,6 +15,8 @@ const Provider = () => {
   const query = new URLSearchParams(location.search);
   const provider = query.get("provider");
 
+  // const [provider, setProvider] = useState("");
+
   // state for checking if the data is loaded or not
   const [loading, setLoading] = useState(true);
 
@@ -36,7 +38,7 @@ const Provider = () => {
         dispatch(setProviderData(data));
         setLoading(false);
       });
-  }, []);
+  }, [provider]);
 
   // if provider data is not loaded yet, show a spinner
   if (loading)
@@ -49,7 +51,13 @@ const Provider = () => {
   if (!data.length) {
     return (
       <>
-        <h1 className="text-center mt-5">{provider}</h1>
+        <NavBar bgColor="white" />
+        <div className="position-relative">
+          <h1 className={`text-center mt-3 ${classes.header}`}>{provider}</h1>
+          <div className={`${classes["img-container"]}`}>
+            <img src="./Images/providerSection.jpg" alt="" className={`${classes["img-object"]}`} />
+          </div>
+        </div>
         <Filter />
         <div className="container">
           <div className="row mt-5">
