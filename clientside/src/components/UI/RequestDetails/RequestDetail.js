@@ -36,7 +36,7 @@ export default function RequestDetail({
   const handleUpdate = (status) => {
     axios
       .patch(
-        `https://wecare-api-pzwn.onrender.com/api/v1/${request._id}`,
+        `https://wecare-api-pzwn.onrender.com/api/v1/requests/${request._id}`,
         {
           reqStatus: status,
         },

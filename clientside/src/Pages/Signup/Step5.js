@@ -102,7 +102,7 @@ export default function StepFive() {
       console.log(file);
       // setUserData({ ...userData, documents: formData });
       await axios
-        .post("https://wecare-api-pzwn.onrender.com/api/v1/upload", formData, {
+        .post("https://wecare-api-pzwn.onrender.com/upload", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
