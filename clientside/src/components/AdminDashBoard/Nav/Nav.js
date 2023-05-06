@@ -1,9 +1,9 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+
 import { Link, useLocation } from "react-router-dom";
+import './Nav.css'
+
 export default function Nav() {
-  const { pathname } = useLocation();
-  const urlType = pathname.split("/")[2];
+ 
 
   return (
     <nav className="navbar  navbar-expand-lg bg-light rounded-5">
@@ -37,19 +37,17 @@ export default function Nav() {
                 className="nav-link active"
                 aria-current="page"
               >
-                All Requests <span className="badge ms-2 rounded-pill">14</span>
+                All Requests 
               </Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link" to="users">
                 All Users
-                <span className="badge ms-2 rounded-pill">14</span>
               </Link>
             </li>
             <li className="nav-item dropdown">
               <Link className="nav-link" to="providers">
                 All Service providers
-                <span className="badge ms-2 rounded-pill">14</span>
               </Link>
             </li>
           </ul>
@@ -58,3 +56,4 @@ export default function Nav() {
     </nav>
   );
 }
+

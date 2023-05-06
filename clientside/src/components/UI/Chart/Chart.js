@@ -117,20 +117,46 @@ const Charts = function () {
   if (chartData !== null) {
     return (
       <div className="container">
-        <div className="row">
-          <div className="col-12 col-md-6 col-lg-3">
+        {/* <div className="row">
+          <div className="col-12 col-lg-6 ">
             <Bar data={providersNumData}></Bar>
           </div>
-          <div className="col-12 col-md-6 col-lg-3">
+          <div className="col-12 col-lgmd-6 ">
             <Bar data={usersNumData}></Bar>
           </div>
-          <div className="col-12 col-md-6 col-lg-3">
+          <div className="col-12 col-lg-6 ">
             <Pie data={serviceTypeData}></Pie>
           </div>
-          <div className="col-12 col-md-6 col-lg-3">
+          <div className="col-12 col-lg-6 ">
             <Pie data={serviceLocationsData}></Pie>
           </div>
+        </div> */}
+        <div className="row m-auto w-75">
+      <div className="col-lg-6 col-12 p-2 ">
+        <div className="w-100 shadow rounded-5">
+        <Bar data={providersNumData}></Bar>
         </div>
+      </div>
+      <div className="col-lg-6 col-12 p-2 ">
+        <div className="w-100 shadow rounded-5">
+        <Bar data={usersNumData}></Bar>
+        </div>
+      </div>
+      <div className="col-lg-6 col-12 p-2 ">
+        <div className="w-100 shadow rounded-5">
+        <div className="w-75">
+        <Pie data={serviceTypeData}></Pie>
+        </div>
+        </div>
+      </div>
+      <div className="col-lg-6 col-12 p-2 ">
+        <div className="w-100 shadow rounded-5">
+        <div className="w-75">
+        <Pie data={serviceLocationsData}></Pie>
+        </div>
+        </div>
+      </div>
+    </div>
       </div>
     );
   } else {

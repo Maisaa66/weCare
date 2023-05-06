@@ -43,7 +43,7 @@ function Users() {
   return (
     <div>
       <div className="row">
-        <div className="col-2 h-500  overflow-y-scroll">
+        <div className="h-500 col-2 overflow-y-scroll">
           <ul className="nav nav-tabs ">
             <li className="nav-item col-5">
               <a
@@ -113,7 +113,10 @@ function Users() {
           )}
         </div>
         <div className="col-10">
-          <h6 className="text-main text-start">All {urlType}</h6>
+          <div className="d-flex align-items-center" style={{height:'30px'}}>
+            <h6 className="text-main text-start pt-2">All {urlType}</h6>
+            <span className="badge rounded-pill ms-2">{users.length}</span>
+          </div>
           <div className={`h-500 shadow overflow-y-scroll`}>
             <table className="table bg-white  rounded-5 text-start w-75 shadow-sm  my-2 ">
               <thead>
@@ -136,7 +139,7 @@ function Users() {
                         className="w-100 rounded-circle"
                       ></img>
                     </th>
-                    <td>{usr.firstName}</td>
+                    <td>{usr.firstName} </td>
                     <td>{usr.lastName}</td>
                     <td>{usr.email}</td>
                     <td>
