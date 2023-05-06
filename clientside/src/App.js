@@ -29,6 +29,7 @@ import CheckoutSuccess from "./components/UI/Checkout/CheckoutSuccess/CheckoutSu
 import AboutPage from "./components/Pages/About/About";
 import PrivacyPolicyPage from "./components/Pages/Privacy/Privacy";
 import TermsConditionsPage from "./components/Pages/Terms & Conditions/Terms";
+import ContactPage from "./components/Pages/Contact/Contact";
 // const authenticated = useSelector((state) => state.user.isAdmin);
 
 const router = createBrowserRouter([
@@ -124,6 +125,10 @@ const router = createBrowserRouter([
   {
     path: "/terms",
     element: <TermsConditionsPage></TermsConditionsPage>,
+  },
+  {
+    path: "/contact",
+    element: <ContactPage></ContactPage>,
   },
 ]);
 
