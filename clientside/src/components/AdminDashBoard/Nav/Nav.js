@@ -10,7 +10,11 @@ export default function Nav() {
       <div className="container-fluid">
         <div>
           <Link to="/" className="navbar-brand d-lg-block d-none m-0">
-            <img className="w-100" src="./Images/logo.png" alt="Logo" />
+            <img
+              width="75px"
+              src={process.env.PUBLIC_URL + "/Images/logo.png"}
+              alt="Logo"
+            />
           </Link>
         </div>
         <button
