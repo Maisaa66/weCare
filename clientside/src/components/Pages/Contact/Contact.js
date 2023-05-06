@@ -47,7 +47,7 @@ const ContactPage = function () {
                     action="mailto:info@wecare.com"
                     method="GET"
                     role="form"
-                    className="card p-5"
+                    className="card p-5 text-start"
                   >
                     <div className="form-group">
                       <label for="subject">Subject</label>
