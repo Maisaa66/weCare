@@ -31,94 +31,31 @@ const Filter = () => {
   }, []);
 
   const rateHandler = (e) => {
-    // console.log(e.target.value[1]);
     dispatch(setRateQuery(e.target.value[1]));
-    // axios
-    //   .get(
-    //     `http://localhost:7000/api/v1/providers?rating[gte]=${
-    //       e.target.value[1]
-    //     }&serviceType=${providerType.toLowerCase()}`
-    //   )
-    //   .then((res) => {
-    //     dispatch(setProviderData(res.data.data.providers));
-    //   });
   };
 
   const priceHandler = (e) => {
-    // console.log(e.target.value);
     if (e.target.value === "High-to-Low") {
       dispatch(setPriceQuery("-hourlyRate"));
-      // axios
-      // .get(
-      //   `http://localhost:7000/api/v1/providers?sort=-hourlyRate&serviceType=${providerType.toLowerCase()}`
-      // )
-      // .then((res) => {
-      //   // console.log(res.data.data.providers);
-      //   dispatch(setProviderData(res.data.data.providers));
-      // });
     } else if (e.target.value === "Low-to-High") {
       dispatch(setPriceQuery("hourlyRate"));
-      // axios
-      //   .get(
-      //     `http://localhost:7000/api/v1/providers?sort=hourlyRate&serviceType=${providerType.toLowerCase()}`
-      //   )
-      //   .then((res) => {
-      //     // console.log(res.data.data.providers);
-      //     dispatch(setProviderData(res.data.data.providers));
-      //   });
     }
   };
 
   const genderHandler = (e) => {
     dispatch(setGenderQuery(e.target.value.toLowerCase()));
-    // console.log(e.target.value);
-    // axios
-    //   .get(
-    //     `http://localhost:7000/api/v1/providers?gender=${e.target.value.toLowerCase()}&serviceType=${providerType.toLowerCase()}`
-    //   )
-    //   .then((res) => {
-    //     // console.log(res.data.data.providers);
-    //     dispatch(setProviderData(res.data.data.providers));
-    //   });
   };
 
   const locationHandler = (e) => {
     dispatch(setLocationQuery(e.target.value));
-    // console.log(e.target.value);
-    // axios
-    //   .get(
-    //     `http://localhost:7000/api/v1/providers?address.governate=${
-    //       e.target.value
-    //     }&serviceType=${providerType.toLowerCase()}`
-    //   )
-    //   .then((res) => {
-    //     console.log(res.data.data.providers);
-    //     dispatch(setProviderData(res.data.data.providers));
-    //   });
   };
 
   // nightshift
   const nsHandler = (e) => {
     dispatch(setNightShiftQuery(e.target.checked));
-    // console.log(e.target.checked);
-    // axios
-    //   .get(
-    //     `http://localhost:7000/api/v1/providers?nightShift=${
-    //       e.target.checked
-    //     }&serviceType=${providerType.toLowerCase()}`
-    //   )
-    //   .then((res) => {
-    //     console.log(res.data.data.providers);
-    //     dispatch(setProviderData(res.data.data.providers));
-    //   });
   };
 
   const filterHandler = () => {
-    // console.log(rateQuery);
-    // console.log(priceQuery);
-    // console.log(ganderQuery);
-    // console.log(locationQuery);
-    // console.log(nightShiftQuery);
     axios
       .get(
         `https://wecare-api-pzwn.onrender.com/api/v1/providers?serviceType=${providerType.toLowerCase()}${
@@ -135,12 +72,10 @@ const Filter = () => {
         }
       )
       .then((res) => {
-        // console.log(res.data.data.providers);
         const providers = res.data.data.providers;
         const data = providers.filter((provider) => {
           return provider.status === "approved";
         });
-        // console.log(data);
         dispatch(setProviderData(data));
       });
   };

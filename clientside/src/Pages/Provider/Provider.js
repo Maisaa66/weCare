@@ -70,7 +70,7 @@ const Provider = () => {
         <Filter />
         <div className="container">
           <div className="row mt-5">
-            <h1 className="text-center">No Providers Found</h1>
+            <h1 className="text-center mt-5">No Providers Found</h1>
           </div>
         </div>
       </>
