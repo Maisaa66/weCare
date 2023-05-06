@@ -114,14 +114,15 @@ export default function StepFour() {
       setDropdownError(true);
     } else {
       data.serviceType = userData.serviceType;
+      data.nightShift = userData.nightShift;
       dispatch(setUserDetails({ ...data, dateOfBirth: startDate }));
       navigate("/signup/stepfive");
     }
   };
-  // const handleChange = (event) => {
-  //   const { name, value } = event.target;
-  //   setUserData({ ...userData, [name]: value });
-  // };
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setUserData({ ...userData, [name]: value });
+  };
   const dropDownObj = {
     title: `${t("formServiceType")}`,
     options: [
@@ -279,14 +280,14 @@ export default function StepFour() {
                     row
                     aria-labelledby="demo-row-radio-buttons-group-label"
                     name="nightShift"
-                    {...register("nightShift", {
-                      required:
-                        "Please enter your availability for night shift",
-                    })}
+                    // {...register("nightShift", {
+                    //   required:
+                    //     "Please enter your availability for night shift",
+                    // })}
                     // error={Boolean(errors.nightShift)}
                     // helperText={errors.nightShift && errors.nightShift.message}
-                    // onChange={handleChange}
-                    // value={userData.nightShift}
+                    onChange={handleChange}
+                    value={userData.nightShift}
                   >
                     <FormControlLabel
                       value="true"
