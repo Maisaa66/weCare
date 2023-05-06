@@ -45,7 +45,7 @@ function Users() {
       <div className="row">
         <div className="h-500 col-2 overflow-y-scroll">
           <ul className="nav nav-tabs ">
-            <li className="nav-item col-5">
+            <li className="nav-item col-5 ">
               <a
                 className={
                   flag ? "text-main shadow-sm rounded-pill px-2" : "text-muted"
@@ -113,9 +113,9 @@ function Users() {
           )}
         </div>
         <div className="col-10">
-          <div className="d-flex align-items-center" style={{height:'30px'}}>
+          <div className="d-flex align-items-center" style={{ height: "30px" }}>
             <h6 className="text-main text-start pt-2">All {urlType}</h6>
-            <span className="badge rounded-pill ms-2">{users.length}</span>
+            <span className="badge rounded-pill ms-2 bg-main">{users.length}</span>
           </div>
           <div className={`h-500 shadow overflow-y-scroll`}>
             <table className="table bg-white  rounded-5 text-start w-75 shadow-sm  my-2 ">

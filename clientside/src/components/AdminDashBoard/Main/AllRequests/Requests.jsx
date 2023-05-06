@@ -31,12 +31,17 @@ export default function Requests() {
   let dispatch = useDispatch();
   let { users } = useSelector((state) => state.usersReducer);
   useEffect(() => {
-    dispatch(getAllUsers("providers"));
+    dispatch(getAllUsers("providers")).then(() => {});
   }, []);
 
   return (
     <div className="row justify-content-center ">
-      <h4 className="text-main">Pending requests</h4>
+      <h4 className="text-main">
+        Pending requests
+        <span className="badge rounded-pill ms-2  bg-main">
+          {users.filter((prov) => prov.status === "pending").length}{" "}
+        </span>
+      </h4>
       {users.map((prov) => {
         if (prov.status == "pending") {
           return (
@@ -54,12 +59,21 @@ export default function Requests() {
                   <p className="ps-3 fs-12 text-main">{prov.title}</p>
                 </div>
               </div>
-              <Link
-                className="btn btn-warning w-100"
-                to={`/admin/providers/${prov._id}`}
-              >
-                Show Details
-              </Link>
+              <div >
+                <Link
+                  className="btn btn-warning m-1"
+                  to={`/admin/providers/${prov._id}`}
+                >
+                  Show Details
+                </Link>
+                <Link
+                  className="btn btn-warning m-1 "
+                  to={`/admin/requests/${prov._id}`}
+                >
+                  Show DOCS
+                </Link>
+              </div>
+
               <div>
                 <button
                   className="btn btn-success m-2 "

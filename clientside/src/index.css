@@ -89,7 +89,15 @@ input:focus {
 .h-400{
   height: 400px;
 }
-
-.text-main{
-  color: var(--mainColor);
+.h-300{
+  height: 300px;
 }
+.text-main{
+  color: var(--mainColor) !important;
+}
+.bg-main{
+  background-color: var(--mainColor) !important;
+}
+ .lihover:hover{
+  color: var(--mainColor) !important;
+ }

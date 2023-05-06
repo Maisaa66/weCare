@@ -4,7 +4,7 @@ import img from "../../../../assets/images/user.jpg";
 
 import { useParams } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { Provider, useSelector } from "react-redux";
 
 export default function () {
   const token = useSelector((state) => state.user.token);
@@ -33,7 +33,7 @@ export default function () {
 
   return (
     <>
-      <div className="d-flex w-50 align-items-center m-auto p-3">
+      <div className="d-flex w-50 align-items-center m-auto p-2">
         <img
           src={`${user.profileImg ? user.profileImg : img}`}
           className="w-25 rounded-circle"
@@ -46,7 +46,7 @@ export default function () {
         </div>
       </div>
       <ul
-        className={`list-group text-start w-75 m-auto  shadow ${
+        className={`list-group text-start w-75 m-auto shadow ${
           urlType !== "users" ? "overflow-y-scroll h-400" : null
         }`}
       >
@@ -66,10 +66,13 @@ export default function () {
           <span className="text-main pe-2">Gender: </span>
           {user.gender}
         </li>
+        {urlType == 'providers' && user.status != 'pending'?
         <li className="list-group-item">
           <span className="text-main pe-2">Rating : </span>
-          {user.ratings}
-        </li>
+          {user.rating}
+        </li>:null
+      }
+        
         <li className="list-group-item">
           <span className="text-main pe-2">NationalID: </span>
           {user.nationalID}

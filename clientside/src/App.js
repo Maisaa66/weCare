@@ -47,6 +47,7 @@ const router = createBrowserRouter([
       { path: "providers/update/:id", element: <Update></Update> },
       { path: "requests", element: <Requests /> },
       { path: "requests/:id", element: <ReqDetails /> },
+      // { path: "requests/docs/:id", element: < /> },
       // {path:'providers',element:<SP/>}
     ],
   },

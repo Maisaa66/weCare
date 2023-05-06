@@ -117,20 +117,7 @@ const Charts = function () {
   if (chartData !== null) {
     return (
       <div className="container">
-        {/* <div className="row">
-          <div className="col-12 col-lg-6 ">
-            <Bar data={providersNumData}></Bar>
-          </div>
-          <div className="col-12 col-lgmd-6 ">
-            <Bar data={usersNumData}></Bar>
-          </div>
-          <div className="col-12 col-lg-6 ">
-            <Pie data={serviceTypeData}></Pie>
-          </div>
-          <div className="col-12 col-lg-6 ">
-            <Pie data={serviceLocationsData}></Pie>
-          </div>
-        </div> */}
+       
         <div className="row m-auto w-75">
       <div className="col-lg-6 col-12 p-2 ">
         <div className="w-100 shadow rounded-5">
@@ -160,7 +147,9 @@ const Charts = function () {
       </div>
     );
   } else {
-    return <div>No Charts</div>;
+    return <div className=" d-flex h-400 align-items-center justify-content-center">
+      <i class="fa fa-spinner fa-5x fa-spin" aria-hidden="true"></i>   
+         </div>;
   }
 };
 

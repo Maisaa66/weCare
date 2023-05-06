@@ -13,3 +13,6 @@
 table,tr,td{
   font-size: 12px;
 }
+ul li a{
+  cursor: pointer;
+}

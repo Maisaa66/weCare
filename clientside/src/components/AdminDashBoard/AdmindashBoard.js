@@ -8,16 +8,7 @@ import { Route, Redirect, useNavigate, Navigate } from "react-router-dom";
 import { getAllUsers } from "../../Redux Store/slices/usersSlice";
 
 function AdmindashBoard() {
-  // const dispatch = useDispatch();
-  // const { users } = useSelector((state) => state.usersReducer);
 
-  // useEffect(() => {
-  //   dispatch(getAllUsers("providers"));
-  // }, [dispatch]);
-
-  // useEffect(() => {
-  //   console.log(users.length);
-  // }, [users]);
   const isAuthenticated = useSelector((state) => state.user.isAdmin);
   return (
     <>
