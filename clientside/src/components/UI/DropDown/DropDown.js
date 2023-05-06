@@ -5,7 +5,9 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { useMediaQuery } from "@mui/material";
 import FormHelperText from "@mui/material/FormHelperText";
+import { useTranslation } from "react-i18next";
 export default function DropDown(props) {
+  const {t} = useTranslation();
   const [gender, setGender] = React.useState("");
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down("sm"));
 
@@ -48,7 +50,7 @@ export default function DropDown(props) {
       </Select>
       {props.error && (
         <FormHelperText className="text-danger">
-          Please select an option
+          {t("dropDownError")}
         </FormHelperText>
       )}
     </FormControl>

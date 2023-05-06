@@ -108,12 +108,12 @@ export default function SignIn() {
     } else if (!userData.email && !userData.password) {
       setIsError({
         status: true,
-        message: "Please enter your email and password",
+        message: `${t("loginEmptyError")}`,
       });
     } else if (!userData.email) {
-      setIsError({ status: true, message: "Please enter your email" });
+      setIsError({ status: true, message: `${t("emailError")}` });
     } else if (!userData.password) {
-      setIsError({ status: true, message: "Please enter your password" });
+      setIsError({ status: true, message: `${t("passwordError")}` });
     } else {
       if (userType === "Care Giver") {
         console.log("giver");
@@ -146,7 +146,7 @@ export default function SignIn() {
             setIsError({ status: true, message: error.response.data })
           );
       } else {
-        setIsError({ status: true, message: "Please choose user type" });
+        setIsError({ status: true, message: `${t("loginInvalidError")}` });
       }
     }
   };

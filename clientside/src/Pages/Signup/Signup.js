@@ -176,7 +176,7 @@ export default function StepOne() {
                     label={`${t("formFname")}`}
                     sx={{ textAlign: "left" }}
                     {...register("firstName", {
-                      required: "Please enter your first name",
+                      required: `${t("firstNameError")}`,
                     })}
                     error={Boolean(errors.firstName)}
                     helperText={errors.firstName && errors.firstName.message}
@@ -191,7 +191,7 @@ export default function StepOne() {
                     label={`${t("formLname")}`}
                     sx={{ textAlign: "left" }}
                     {...register("lastName", {
-                      required: "Please enter your last name",
+                      required: `${t("lastNameError")}`,
                     })}
                     error={Boolean(errors.lastName)}
                     helperText={errors.lastName && errors.lastName.message}
@@ -207,7 +207,7 @@ export default function StepOne() {
                 label={`${t("loginEmail")}`}
                 sx={{ textAlign: "left" }}
                 {...register("email", {
-                  required: "Please enter your first name",
+                  required: `${t("emailError")}`,
                   pattern: {
                     value: /\S+@\S+\.\S+/,
                     message: "Entered value does not match email format",
@@ -225,7 +225,7 @@ export default function StepOne() {
                 type="password"
                 sx={{ textAlign: "left" }}
                 {...register("password", {
-                  required: "Please enter your password",
+                  required:  `${t("passwordError")}`,
                 })}
                 error={Boolean(errors.password)}
                 helperText={errors.password && errors.password.message}

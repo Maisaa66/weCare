@@ -132,5 +132,6 @@
     "expertiseError": "Please enter your expertise",
     "horlyRateError": "Please enter your hourly rate",
     "nightShiftError": "Please enter your availability for night shift",
-    "filesError": "Please upload your files"
+    "filesError": "Please upload your files",
+    "dropDownError":"Please select an option"
 }

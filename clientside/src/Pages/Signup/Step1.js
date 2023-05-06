@@ -195,7 +195,7 @@ export default function StepOne() {
                     label={`${t("formPhone")}`}
                     sx={{ textAlign: "left" }}
                     {...register("phoneNum", {
-                      required: "Please enter your phone number",
+                      required: `${t("phoneError")}`,
                       minLength: {
                         value: 11,
                         message: "Phone number must be at least 11 digits",
@@ -222,7 +222,7 @@ export default function StepOne() {
                 label={`${t("NationalID")}`}
                 sx={{ textAlign: "left" }}
                 {...register("nationalID", {
-                  required: "Please enter your national ID",
+                  required: `${t("nationalIDError")}`,
                 })}
                 error={Boolean(errors.nationalID)}
                 helperText={errors.nationalID && errors.nationalID.message}

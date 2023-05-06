@@ -132,5 +132,6 @@
     "expertiseError": "من فضلك ادخل خبراتك",
     "horlyRateError": "من فضلك ادخل",
     "nightShiftError": "من فضلك ادخل امكانية الفترات الليلية",
-    "filesError": "من فضلك ارفع ملفاتك"
+    "filesError": "من فضلك ارفع ملفاتك",
+    "dropDownError":"من فضلك حدد اختيار"
 }
