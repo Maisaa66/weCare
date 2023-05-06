@@ -4,17 +4,21 @@ import BarChart from "./BarChart";
 import { Chart } from "chart.js";
 import LineChart from "./LineChart";
 import Doughnut from "./Doughnut";
+import { useSelector } from "react-redux";
+
+
 export default function Charts() {
+  const token = useSelector((state) => state.user.token);
+
   let [MyStats, setMyStats] = useState(null);
   useEffect(() => {
     axios
       .get(
-        "http://localhost:7000/api/v1/stats?start=2023-04-30&end=2023-05-07",
+        "https://wecare-api-pzwn.onrender.com/api/v1/stats?start=2023-04-30&end=2023-05-07",
         {
           withCredentials: true,
           headers: {
-            "Access-Control-Allow-Origin": "http://localhost:3000",
-            "Content-Type": "application/json",
+            authorization: `Bearer ${token}`,
           },
         }
       )

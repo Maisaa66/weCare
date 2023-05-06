@@ -12,6 +12,8 @@ const RequestCard = ({
   requests,
   setRequests,
 }) => {
+  const token = useSelector((state) => state.user.token);
+
   // get provider name
   // const [providerName, setProviderName] = useState(null);
   const [userName, setUserName] = useState(null);
@@ -31,12 +33,11 @@ const RequestCard = ({
 
   const getUserById = async (id) => {
     const response = await axios.get(
-      `http://localhost:7000/api/v1/${urlType}/profile/${id}`,
+      `https://wecare-api-pzwn.onrender.com/api/v1/${urlType}/profile/${id}`,
       {
         withCredentials: true,
         headers: {
-          "Access-Control-Allow-Origin": "http://localhost:3000",
-          "Content-Type": "application/json",
+          authorization: `Bearer ${token}`,
         },
       }
     );

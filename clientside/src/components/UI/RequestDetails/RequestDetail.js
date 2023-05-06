@@ -19,6 +19,7 @@ export default function RequestDetail({
   handleUpdateStatus,
   reqStatus,
 }) {
+  const token = useSelector((state) => state.user.token);
   const userType = useSelector((state) => state.user.userType);
 
   // state to store request data
@@ -35,15 +36,14 @@ export default function RequestDetail({
   const handleUpdate = (status) => {
     axios
       .patch(
-        `http://localhost:7000/api/v1/requests/${request._id}`,
+        `https://wecare-api-pzwn.onrender.com/api/v1/${request._id}`,
         {
           reqStatus: status,
         },
         {
           withCredentials: true,
           headers: {
-            "Access-Control-Allow-Origin": "http://localhost:3000",
-            "Content-Type": "application/json",
+            authorization: `Bearer ${token}`,
           },
         }
       )

@@ -1,44 +1,50 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import { useLocation } from "react-router-dom"
-export default function () {
-  const {pathname} = useLocation();
-  const urlType=pathname.split('/')[2]
+import { useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-  let {id}= useParams();
-  let [user,setUser]=useState({})
-// console.log(useParams());
-  useEffect(()=>{
+export default function () {
+  const token = useSelector((state) => state.user.token);
+  const { pathname } = useLocation();
+  const urlType = pathname.split("/")[2];
+
+  let { id } = useParams();
+  let [user, setUser] = useState({});
+  // console.log(useParams());
+  useEffect(() => {
     console.log(useParams);
-    axios.get(`http://localhost:7000/api/v1/${urlType}/${id}`, { 
-      withCredentials: true, 
-      headers: { 
-        'Access-Control-Allow-Origin': 'http://localhost:3000', 
-        'Content-Type': 'application/json' 
-      } 
-    })
-    .then(res => { 
-      setUser(res.data.data)
-    })
-    .catch(err => console.log(err))
-  },[])
+    axios
+      .get(`https://wecare-api-pzwn.onrender.com/api/v1/${urlType}/${id}`, {
+        withCredentials: true,
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        setUser(res.data.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   const handleUpdate = (e) => {
     e.preventDefault();
-    axios.patch(`http://localhost:7000/api/v1/${urlType}/${id}`, user, {
-      withCredentials: true,
-      headers: {
-        'Access-Control-Allow-Origin': 'http://localhost:3000',
-        'Content-Type': 'application/json'
-      }
-    })
-    .then(res => {
-      console.log(res.data);
-    })
-    .catch(err => console.log(err))
-    
-  }
+    axios
+      .patch(
+        `https://wecare-api-pzwn.onrender.com/api/v1/${urlType}/${id}`,
+        user,
+        {
+          withCredentials: true,
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <div>
@@ -67,7 +73,7 @@ export default function () {
           value={user.email}
           onChange={(e) => setUser({ ...user, email: e.target.value })}
         />
-        <input type="submit" className="btn btn-success my-2" value="Update"/>
+        <input type="submit" className="btn btn-success my-2" value="Update" />
       </form>
     </div>
   );

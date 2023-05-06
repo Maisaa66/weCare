@@ -12,7 +12,7 @@ import axios from "axios";
 
 const ProviderDashBoard = () => {
   const state = useSelector((state) => state.user.id);
-  //   const info = useSelector((state) => state.user.info);
+  const token = useSelector((state) => state.user.token);
 
   const [provider, setProviderDetails] = useState(null);
   const [requests, setRequests] = useState(null);
@@ -22,12 +22,11 @@ const ProviderDashBoard = () => {
 
   const getProviderById = async (id) => {
     const response = await axios.get(
-      `http://localhost:7000/api/v1/providers/${id}`,
+      `https://wecare-api-pzwn.onrender.com/api/v1/providers/${id}`,
       {
         withCredentials: true,
         headers: {
-          "Access-Control-Allow-Origin": "http://localhost:3000",
-          "Content-Type": "application/json",
+          authorization: `Bearer ${token}`,
         },
       }
     );
@@ -37,12 +36,11 @@ const ProviderDashBoard = () => {
 
   const getProviderRequest = async (id) => {
     const response = await axios.get(
-      `http://localhost:7000/api/v1/requests/provider/${id}`,
+      `https://wecare-api-pzwn.onrender.com/api/v1/requests/provider/${id}`,
       {
         withCredentials: true,
         headers: {
-          "Access-Control-Allow-Origin": "http://localhost:3000",
-          "Content-Type": "application/json",
+          authorization: `Bearer ${token}`,
         },
       }
     );
@@ -65,13 +63,15 @@ const ProviderDashBoard = () => {
   };
   const getReviewsMade = async (id) => {
     await axios
-      .get(`http://localhost:7000/api/v1/reviews/reviewer/${id}`, {
-        withCredentials: true,
-        headers: {
-          "Access-Control-Allow-Origin": "http://localhost:3000",
-          "Content-Type": "application/json",
-        },
-      })
+      .get(
+        `https://wecare-api-pzwn.onrender.com/api/v1/reviews/reviewer/${id}`,
+        {
+          withCredentials: true,
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        }
+      )
       .then((res) => setReviewsMade(res.data.data.reviews))
       .catch((err) => console.log(err));
   };

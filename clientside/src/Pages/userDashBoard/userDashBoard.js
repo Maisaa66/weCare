@@ -16,6 +16,7 @@ import axios from "axios";
 
 const UserDashBoard = () => {
   const state = useSelector((state) => state.user.id);
+  const token = useSelector((state) => state.user.token);
 
   const [user, setUserDetails] = useState(null);
   const [requests, setRequests] = useState(null);
@@ -25,12 +26,11 @@ const UserDashBoard = () => {
 
   const getUserById = async (id) => {
     const response = await axios.get(
-      `http://localhost:7000/api/v1/users/${id}`,
+      `https://wecare-api-pzwn.onrender.com/api/v1/users/${id}`,
       {
         withCredentials: true,
         headers: {
-          "Access-Control-Allow-Origin": "http://localhost:3000",
-          "Content-Type": "application/json",
+          authorization: `Bearer ${token}`,
         },
       }
     );
@@ -41,12 +41,11 @@ const UserDashBoard = () => {
 
   const getUserRequest = async (id) => {
     const response = await axios.get(
-      `http://localhost:7000/api/v1/requests/user/${id}`,
+      `https://wecare-api-pzwn.onrender.com/api/v1/requests/user/${id}`,
       {
         withCredentials: true,
         headers: {
-          "Access-Control-Allow-Origin": "http://localhost:3000",
-          "Content-Type": "application/json",
+          authorization: `Bearer ${token}`,
         },
       }
     );
@@ -71,11 +70,10 @@ const UserDashBoard = () => {
 
   const deleteRequest = (id) => {
     axios
-      .delete(`http://localhost:7000/api/v1/requests/${id}`, {
+      .delete(`https://wecare-api-pzwn.onrender.com/api/v1/requests/${id}`, {
         withCredentials: true,
         headers: {
-          "Access-Control-Allow-Origin": "http://localhost:3000",
-          "Content-Type": "application/json",
+          authorization: `Bearer ${token}`,
         },
       })
       .then((res) => {
@@ -86,13 +84,15 @@ const UserDashBoard = () => {
 
   const getReviewsMade = async (id) => {
     await axios
-      .get(`http://localhost:7000/api/v1/reviews/reviewer/${id}`, {
-        withCredentials: true,
-        headers: {
-          "Access-Control-Allow-Origin": "http://localhost:3000",
-          "Content-Type": "application/json",
-        },
-      })
+      .get(
+        `https://wecare-api-pzwn.onrender.com/api/v1/reviews/reviewer/${id}`,
+        {
+          withCredentials: true,
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        }
+      )
       .then((res) => setReviewsMade(res.data.data.reviews))
       .catch((err) => console.log(err));
   };

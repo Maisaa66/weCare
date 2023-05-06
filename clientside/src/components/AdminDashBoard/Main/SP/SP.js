@@ -2,64 +2,83 @@ import React, { useEffect, useState } from "react";
 import Aside from "../../Aside/Aside";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+
 export default function SP() {
-  let [flag, setflag] = useState(true)
-  let [sps, setSp] = useState([])
-  let [topSps, setTopSp] = useState([])
-  let [worstSps, setWorstSp] = useState([])
+  let token = useSelector((state) => state.user.token);
+  let [flag, setflag] = useState(true);
+  let [sps, setSp] = useState([]);
+  let [topSps, setTopSp] = useState([]);
+  let [worstSps, setWorstSp] = useState([]);
 
   useEffect(() => {
-    let token = document.cookie.split('=')[1]
-    axios.get('http://localhost:7000/api/v1/providers', {
-      withCredentials: true,
-      headers: {
-        'Access-Control-Allow-Origin': 'http://localhost:3000',
-        'Content-Type': 'application/json'
-      }
-    }).then(res => {
-      setSp(res.data.data.providers)
-    })
-      .catch(err => console.log(err))
+    axios
+      .get("https://wecare-api-pzwn.onrender.com/api/v1/providers", {
+        withCredentials: true,
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        setSp(res.data.data.providers);
+      })
+      .catch((err) => console.log(err));
 
-    axios.get('http://localhost:7000/api/v1/providers?rating[gte]=4.8', {
-      withCredentials: true,
-      headers: {
-        'Access-Control-Allow-Origin': 'http://localhost:3000',
-        'Content-Type': 'application/json'
-      }
-    }).then(res => {
-      setTopSp(res.data.data.providers)
-    })
-      .catch(err => console.log(err))
-    axios.get('http://localhost:7000/api/v1/providers?rating[lte]=2', {
-      withCredentials: true,
-      headers: {
-        'Access-Control-Allow-Origin': 'http://localhost:3000',
-        'Content-Type': 'application/json'
-      }
-    }).then(res => {
-      setWorstSp(res.data.data.providers)
-    })
-      .catch(err => console.log(err))
-
-
-  }, [])
+    axios
+      .get(
+        "https://wecare-api-pzwn.onrender.com/api/v1/providers?rating[gte]=4.8",
+        {
+          withCredentials: true,
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((res) => {
+        setTopSp(res.data.data.providers);
+      })
+      .catch((err) => console.log(err));
+    axios
+      .get(
+        "https://wecare-api-pzwn.onrender.com/api/v1/providers?rating[lte]=2",
+        {
+          withCredentials: true,
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((res) => {
+        setWorstSp(res.data.data.providers);
+      })
+      .catch((err) => console.log(err));
+  }, []);
   return (
     <div>
       <div className="row">
         <div className="col-2">
           <ul className="nav nav-tabs ">
             <li className="nav-item  col-5">
-              <a className={flag ? 'text-main shadow-sm rounded-pill px-2' : 'text-muted'} onClick={() => {
-                setflag(true)
-              }}>
+              <a
+                className={
+                  flag ? "text-main shadow-sm rounded-pill px-2" : "text-muted"
+                }
+                onClick={() => {
+                  setflag(true);
+                }}
+              >
                 Top 5
               </a>
             </li>
             <li className="nav-item col-6">
-              <a className={flag ? 'text-muted' : 'text-main shadow-sm rounded-pill px-2'} onClick={() => {
-                setflag(false)
-              }}>
+              <a
+                className={
+                  flag ? "text-muted" : "text-main shadow-sm rounded-pill px-2"
+                }
+                onClick={() => {
+                  setflag(false);
+                }}
+              >
                 Worst 5
               </a>
             </li>
@@ -68,7 +87,10 @@ export default function SP() {
             <div>
               {topSps.map((tsp) => (
                 <div className="m-3 col-12 d-flex p-2 align-items-center justify-content-evenly bg-white rounded-5 shadow-sm">
-                  <img src={`${tsp.profileImg}`} className="w-50 p-2  rounded-circle"></img>
+                  <img
+                    src={`${tsp.profileImg}`}
+                    className="w-50 p-2  rounded-circle"
+                  ></img>
                   <div className="text-start">
                     <h6 className="fs-12">{tsp.firstName}</h6>
                     <div className="ratingBox">
@@ -80,14 +102,15 @@ export default function SP() {
                   </div>
                 </div>
               ))}
-
-
             </div>
           ) : (
             <div>
               {worstSps.map((wsp) => (
                 <div className="m-3 col-12 d-flex p-2 align-items-center justify-content-evenly bg-white rounded-5 shadow-sm">
-                  <img src={`${wsp.profileImg}`} className="w-50 p-2  rounded-circle"></img>
+                  <img
+                    src={`${wsp.profileImg}`}
+                    className="w-50 p-2  rounded-circle"
+                  ></img>
                   <div className="text-start">
                     <h6 className="fs-12">{wsp.firstName}</h6>
                     <div className="ratingBox">
@@ -122,33 +145,51 @@ export default function SP() {
                 {sps.map((sp) => (
                   <tr>
                     <th scope="row">
-                      <img src={`${sp.profileImg}`} className="w-100   rounded-circle"></img>
+                      <img
+                        src={`${sp.profileImg}`}
+                        className="w-100   rounded-circle"
+                      ></img>
                     </th>
                     <td>{sp.firstName}</td>
                     <td>{sp.lastName}</td>
                     <td>{sp.phoneNum}</td>
                     <td>{sp.email}</td>
                     <td>
-                    <Link className="btn btn-warning" to={`/admin/providers/${sp._id}`}>All Details</Link>
+                      <Link
+                        className="btn btn-warning"
+                        to={`/admin/providers/${sp._id}`}
+                      >
+                        All Details
+                      </Link>
                     </td>
 
                     <td>
-                    <Link className="btn btn-success" to={`/admin/providers/update/${sp._id}`}>Update</Link>
+                      <Link
+                        className="btn btn-success"
+                        to={`/admin/providers/update/${sp._id}`}
+                      >
+                        Update
+                      </Link>
                     </td>
                     <td>
                       <button className="btn btn-danger">Delete</button>
                     </td>
                   </tr>
                 ))}
-
               </tbody>
             </table>
           </div>
           <div className="row">
             <button className="mybtn btnSecSolid col-1 fs-6 m-1">Nurses</button>
-            <button className="mybtn btnSecSolid col-1 fs-6 m-1">Autism Sp</button>
-            <button className="mybtn btnSecSolid col-1 fs-6 m-1">Companions</button>
-            <button className="mybtn btnSecSolid col-1 fs-6 m-1">Doctors</button>
+            <button className="mybtn btnSecSolid col-1 fs-6 m-1">
+              Autism Sp
+            </button>
+            <button className="mybtn btnSecSolid col-1 fs-6 m-1">
+              Companions
+            </button>
+            <button className="mybtn btnSecSolid col-1 fs-6 m-1">
+              Doctors
+            </button>
           </div>
         </div>
         {/* <div className="col-3 ">

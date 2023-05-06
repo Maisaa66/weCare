@@ -4,6 +4,8 @@ import axios from "axios";
 import Rating from "@mui/material/Rating";
 
 const ReviewGiven = ({ review, urlType }) => {
+  const token = useSelector((state) => state.user.token);
+
   // const userType = useSelector((state) => state.user.userType);
   // we get the profile id from the redux store because we need it to fetch the user profile data
   // the profile id is the id of the user that we want to see his profile
@@ -28,13 +30,15 @@ const ReviewGiven = ({ review, urlType }) => {
     //     urlType = "providers"
     //   }
     await axios
-      .get(`http://localhost:7000/api/v1/${urlType}/profile/${id}`, {
-        withCredentials: true,
-        headers: {
-          "Access-Control-Allow-Origin": "http://localhost:3000",
-          "Content-Type": "application/json",
-        },
-      })
+      .get(
+        `https://wecare-api-pzwn.onrender.com/api/v1/${urlType}/profile/${id}`,
+        {
+          withCredentials: true,
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        }
+      )
       .then((res) => setUserName(res.data.data))
       .catch((err) => console.log(err));
     // console.log(info);

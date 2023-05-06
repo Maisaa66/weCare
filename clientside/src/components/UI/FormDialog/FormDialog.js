@@ -11,6 +11,7 @@ import { useSelector } from "react-redux";
 
 export default function FormDialog({ data, updateData }) {
   const [open, setOpen] = React.useState(false);
+  const token = useSelector((state) => state.user.token);
 
   const [updatedData, setUpdatedData] = React.useState(data.value);
   const id = useSelector((state) => state.user.id);
@@ -30,13 +31,12 @@ export default function FormDialog({ data, updateData }) {
   const handleUpdate = async () => {
     await axios
       .patch(
-        `http://localhost:7000/api/v1/${urlType}/${id}`,
+        `https://wecare-api-pzwn.onrender.com/api/v1/${urlType}/${id}`,
         { [data.name]: updatedData },
         {
           withCredentials: true,
           headers: {
-            "Access-Control-Allow-Origin": "http://localhost:3000",
-            "Content-Type": "application/json",
+            authorization: `Bearer ${token}`,
           },
         }
       )

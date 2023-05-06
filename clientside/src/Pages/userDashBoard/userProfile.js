@@ -7,6 +7,8 @@ import axios from "axios";
 import ReviewForm from "../../components/UI/ReviewForm/ReviewForm";
 
 const UserProfile = () => {
+  const token = useSelector((state) => state.user.token);
+
   // here we get the id of the user from the redux store
   const state = useSelector((state) => state.user.profileID);
   const id = useSelector((state) => state.user.id);
@@ -22,12 +24,11 @@ const UserProfile = () => {
   const getUserById = async (id) => {
     console.log(id);
     const response = await axios.get(
-      `http://localhost:7000/api/v1/users/profile/${id}`,
+      `https://wecare-api-pzwn.onrender.com/api/v1/users/profile/${id}`,
       {
         withCredentials: true,
         headers: {
-          "Access-Control-Allow-Origin": "http://localhost:3000",
-          "Content-Type": "application/json",
+          authorization: `Bearer ${token}`,
         },
       }
     );
@@ -38,13 +39,15 @@ const UserProfile = () => {
   const getReviewsGiven = async (id) => {
     console.log(id);
     await axios
-      .get(`http://localhost:7000/api/v1/reviews/reviewee/${id}`, {
-        withCredentials: true,
-        headers: {
-          "Access-Control-Allow-Origin": "http://localhost:3000",
-          "Content-Type": "application/json",
-        },
-      })
+      .get(
+        `https://wecare-api-pzwn.onrender.com/api/v1/reviews/reviewee/${id}`,
+        {
+          withCredentials: true,
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        }
+      )
       .then((res) => setReviewsGiven(res.data.data.reviews))
       .catch((err) => console.log(err));
   };

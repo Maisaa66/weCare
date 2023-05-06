@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import { setProfileId } from "../../../Redux Store/slices/userSlice";
 
 const ReviewCard = ({ review }) => {
+  const token = useSelector((state) => state.user.token);
+
   const userType = useSelector((state) => state.user.userType);
   let urlType = userType === "user" ? "providers" : "users";
   const [userName, setUserName] = useState(null);
@@ -13,13 +15,15 @@ const ReviewCard = ({ review }) => {
   const getUserById = async (id) => {
     console.log(id);
     await axios
-      .get(`http://localhost:7000/api/v1/${urlType}/profile/${id}`, {
-        withCredentials: true,
-        headers: {
-          "Access-Control-Allow-Origin": "http://localhost:3000",
-          "Content-Type": "application/json",
-        },
-      })
+      .get(
+        `https://wecare-api-pzwn.onrender.com/api/v1/${urlType}/profile/${id}`,
+        {
+          withCredentials: true,
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        }
+      )
       .then((res) => setUserName(res.data.data))
       .catch((err) => console.log(err));
     // console.log(info);

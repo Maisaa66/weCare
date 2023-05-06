@@ -15,6 +15,8 @@ import axios from "axios";
 import Rating from "@mui/material/Rating";
 
 export default function ReviewForm({ revieweeName }) {
+  const token = useSelector((state) => state.user.token);
+
   // get reviewer id from redux store
   const reviewerID = useSelector((state) => state.user.id);
 
@@ -58,11 +60,10 @@ export default function ReviewForm({ revieweeName }) {
   // handle review
   const handleReview = async () => {
     axios
-      .post("http://localhost:7000/api/v1/reviews", reviewData, {
+      .post("https://wecare-api-pzwn.onrender.com/api/v1/reviews", reviewData, {
         withCredentials: true,
         headers: {
-          "Access-Control-Allow-Origin": "http://localhost:3000",
-          "Content-Type": "application/json",
+          authorization: `Bearer ${token}`,
         },
       })
       .then((res) => console.log(res.data))
