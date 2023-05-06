@@ -43,59 +43,38 @@ const ContactPage = function () {
               </div>
               <div className="col-12 col-lg-8">
                 <div className={classes.form}>
-                  <form role="form" className="card p-5">
-                    <div className="row  text-start">
-                      <div className="col-sm-6">
-                        <div className="form-group">
-                          <label for="name">Name</label>
-                          <input
-                            type="text"
-                            id="name"
-                            name="name"
-                            className="form-control input-lg"
-                            required
-                          />
-                        </div>
-                        <div className="form-group">
-                          <label for="email">Email</label>
-                          <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            className="form-control input-lg"
-                            required
-                          />
-                        </div>
-                        <div className="form-group">
-                          <label id="phone">Phone</label>
-                          <input
-                            type="tel"
-                            id="phone"
-                            name="phone"
-                            className="form-control input-lg"
-                          />
-                        </div>
-                      </div>
-                      <div className="col-sm-6">
-                        <div className="form-group">
-                          <label for="message">Message</label>
-                          <textarea
-                            id="message"
-                            name="message"
-                            className="form-control"
-                            required
-                            maxlength="1500"
-                          ></textarea>
-                        </div>
-                        <div className="form-group">
-                          <button
-                            className="mybtn mybtnMainSolid mt-3"
-                            value="Send"
-                          >
-                            Send
-                          </button>
-                        </div>
-                      </div>
+                  <form
+                    action="mailto:info@wecare.com"
+                    method="GET"
+                    role="form"
+                    className="card p-5"
+                  >
+                    <div className="form-group">
+                      <label for="subject">Subject</label>
+                      <input
+                        type="text"
+                        id="subject"
+                        name="subject"
+                        className="form-control input-lg"
+                        required
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label for="body">Message</label>
+                      <textarea
+                        id="body"
+                        name="body"
+                        className="form-control"
+                        required
+                        maxlength="1500"
+                      ></textarea>
+                    </div>
+                    <div className="form-group">
+                      <input
+                        className="mybtn mybtnMainSolid mt-3"
+                        type="submit"
+                        value="Send"
+                      />
                     </div>
                   </form>
                 </div>
