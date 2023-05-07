@@ -47,7 +47,7 @@ export default function () {
       </div>
       <ul
         className={`list-group text-start w-75 m-auto shadow ${
-          urlType !== "users" ? "overflow-y-scroll h-400" : null
+          urlType !== "users" ? "overflow-y-scroll h-300" : null
         }`}
       >
         <li className="list-group-item">

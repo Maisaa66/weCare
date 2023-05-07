@@ -78,6 +78,7 @@ const Charts = function () {
         },
       ],
     };
+    
     serviceTypeData = {
       labels: chartData.serviceTypeStats.map((item) => item.label),
       datasets: [
@@ -114,42 +115,46 @@ const Charts = function () {
       ],
     };
   }
+ 
   if (chartData !== null) {
     return (
       <div className="container">
-       
         <div className="row m-auto w-75">
-      <div className="col-lg-6 col-12 p-2 ">
-        <div className="w-100 shadow rounded-5">
-        <Bar data={providersNumData}></Bar>
+          <div className="col-lg-6 col-12 p-2 "  >
+            <div className="w-100 shadow rounded-5" >
+              <Bar data={providersNumData}></Bar>
+            </div>
+          </div>
+          <div className="col-lg-6 col-12 p-2 ">
+            <div className="w-100 shadow rounded-5">
+              <Bar data={usersNumData}></Bar>
+            </div>
+            
+          </div>
+          <div className="col-lg-6 col-12 p-2 ">
+            <div className="w-100 shadow rounded-5" >
+              <div className="w-50 m-auto ">
+                <Pie data={serviceTypeData} ></Pie>
+              </div>
+              
+            </div>
+          </div>
+          <div className="col-lg-6 col-12 p-2 ">
+            <div className="w-100 shadow rounded-5">
+              <div className="w-50 m-auto">
+                <Pie data={serviceLocationsData} ></Pie>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-      <div className="col-lg-6 col-12 p-2 ">
-        <div className="w-100 shadow rounded-5">
-        <Bar data={usersNumData}></Bar>
-        </div>
-      </div>
-      <div className="col-lg-6 col-12 p-2 ">
-        <div className="w-100 shadow rounded-5">
-        <div className="w-75">
-        <Pie data={serviceTypeData}></Pie>
-        </div>
-        </div>
-      </div>
-      <div className="col-lg-6 col-12 p-2 ">
-        <div className="w-100 shadow rounded-5">
-        <div className="w-75">
-        <Pie data={serviceLocationsData}></Pie>
-        </div>
-        </div>
-      </div>
-    </div>
       </div>
     );
   } else {
-    return <div className=" d-flex h-400 align-items-center justify-content-center">
-      <i class="fa fa-spinner fa-5x fa-spin" aria-hidden="true"></i>   
-         </div>;
+    return (
+      <div className=" d-flex h-400 align-items-center justify-content-center">
+        <i class="fa fa-spinner fa-5x fa-spin" aria-hidden="true"></i>
+      </div>
+    );
   }
 };
 
