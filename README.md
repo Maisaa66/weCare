@@ -1,2 +1,2 @@
 # weCare
-ITI GP
+ITI - Graduation Project
