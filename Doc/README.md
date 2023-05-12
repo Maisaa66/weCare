@@ -1,6 +1,6 @@
 ### weCare's APIs Documentation
 
-Full URLs are provided in responses they will be rendered as if service is running on 'http://localhost:7000/'.
+Full URLs are provided in responses they will be rendered as if service is running on 'https://wecare-api-pzwn.onrender.com/'.
 
 ## Open Endpoints
 
